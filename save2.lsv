@@ -1,0 +1,7230 @@
+45 45
+Node: 0 0
+Connection: 1 0 0 0 0
+Connection: 0 1 0 0 0
+Connection: 1 1 0 0 255
+Node: 0 1
+Connection: 0 0 0 0 0
+Connection: 0 2 0 0 0
+Connection: 1 2 0 0 255
+Node: 0 2
+Connection: 0 1 0 0 0
+Connection: 0 3 0 0 0
+Connection: 1 1 0 0 255
+Connection: 1 3 0 0 255
+Node: 0 3
+Connection: 0 2 0 0 0
+Connection: 0 4 0 0 0
+Connection: 1 2 0 0 255
+Connection: 1 4 0 0 255
+Node: 0 4
+Connection: 0 3 0 0 0
+Connection: 0 5 0 0 0
+Connection: 1 3 0 0 255
+Node: 0 5
+Connection: 0 4 0 0 0
+Connection: 0 6 0 0 0
+Connection: 1 4 0 0 255
+Node: 0 6
+Connection: 0 5 0 0 0
+Connection: 0 7 0 0 0
+Connection: 1 7 0 0 255
+Node: 0 7
+Connection: 0 6 0 0 0
+Connection: 0 8 0 0 0
+Node: 0 8
+Connection: 0 7 0 0 0
+Connection: 0 9 0 0 0
+Connection: 1 8 0 0 255
+Node: 0 9
+Connection: 0 8 0 0 0
+Connection: 0 10 0 0 0
+Connection: 1 9 0 0 255
+Node: 0 10
+Connection: 0 9 0 0 0
+Connection: 0 11 0 0 0
+Connection: 1 11 0 0 255
+Node: 0 11
+Connection: 0 10 0 0 0
+Connection: 0 12 0 0 0
+Connection: 1 10 0 0 255
+Node: 0 12
+Connection: 0 11 0 0 0
+Connection: 0 13 0 0 0
+Connection: 1 11 0 0 255
+Node: 0 13
+Connection: 0 12 0 0 0
+Connection: 0 14 0 0 0
+Connection: 1 14 0 0 255
+Connection: 1 13 0 0 255
+Node: 0 14
+Connection: 0 13 0 0 0
+Connection: 0 15 0 0 0
+Node: 0 15
+Connection: 0 14 0 0 0
+Connection: 0 16 0 0 0
+Connection: 1 15 0 0 255
+Node: 0 16
+Connection: 0 15 0 0 0
+Connection: 0 17 0 0 0
+Connection: 1 16 0 0 255
+Node: 0 17
+Connection: 0 16 0 0 0
+Connection: 0 18 0 0 0
+Connection: 1 18 0 0 255
+Node: 0 18
+Connection: 0 17 0 0 0
+Connection: 0 19 0 0 0
+Connection: 1 17 0 0 255
+Node: 0 19
+Connection: 0 18 0 0 0
+Connection: 0 20 0 0 0
+Connection: 1 18 0 0 255
+Node: 0 20
+Connection: 0 19 0 0 0
+Connection: 0 21 0 0 0
+Connection: 1 21 0 0 255
+Connection: 1 20 0 0 255
+Node: 0 21
+Connection: 0 20 0 0 0
+Connection: 0 22 0 0 0
+Node: 0 22
+Connection: 0 21 0 0 0
+Connection: 0 23 0 0 0
+Connection: 1 21 0 0 255
+Connection: 1 23 0 0 255
+Node: 0 23
+Connection: 0 22 0 0 0
+Connection: 0 24 0 0 0
+Node: 0 24
+Connection: 0 23 0 0 0
+Connection: 0 25 0 0 0
+Connection: 1 23 0 0 255
+Connection: 1 24 0 0 255
+Node: 0 25
+Connection: 0 24 0 0 0
+Connection: 0 26 0 0 0
+Connection: 1 26 0 0 255
+Node: 0 26
+Connection: 0 25 0 0 0
+Connection: 0 27 0 0 0
+Connection: 1 27 0 0 255
+Node: 0 27
+Connection: 0 26 0 0 0
+Connection: 0 28 0 0 0
+Connection: 1 26 0 0 255
+Node: 0 28
+Connection: 0 27 0 0 0
+Connection: 0 29 0 0 0
+Connection: 1 28 0 0 255
+Node: 0 29
+Connection: 0 28 0 0 0
+Connection: 0 30 0 0 0
+Connection: 1 29 0 0 255
+Node: 0 30
+Connection: 0 29 0 0 0
+Connection: 0 31 0 0 0
+Node: 0 31
+Connection: 0 30 0 0 0
+Connection: 0 32 0 0 0
+Connection: 1 30 0 0 255
+Connection: 1 31 0 0 255
+Node: 0 32
+Connection: 0 31 0 0 0
+Connection: 0 33 0 0 0
+Connection: 1 33 0 0 255
+Node: 0 33
+Connection: 0 32 0 0 0
+Connection: 0 34 0 0 0
+Connection: 1 34 0 0 255
+Node: 0 34
+Connection: 0 33 0 0 0
+Connection: 0 35 0 0 0
+Connection: 1 33 0 0 255
+Node: 0 35
+Connection: 0 34 0 0 0
+Connection: 0 36 0 0 0
+Connection: 1 35 0 0 255
+Node: 0 36
+Connection: 0 35 0 0 0
+Connection: 0 37 0 0 0
+Connection: 1 36 0 0 255
+Node: 0 37
+Connection: 0 36 0 0 0
+Connection: 0 38 0 0 0
+Node: 0 38
+Connection: 0 37 0 0 0
+Connection: 0 39 0 0 0
+Connection: 1 37 0 0 255
+Node: 0 39
+Connection: 0 38 0 0 0
+Connection: 0 40 0 0 0
+Connection: 1 40 0 0 255
+Node: 0 40
+Connection: 0 39 0 0 0
+Connection: 0 41 0 0 0
+Connection: 1 41 0 0 255
+Node: 0 41
+Connection: 0 40 0 0 0
+Connection: 0 42 0 0 0
+Connection: 1 42 0 0 255
+Connection: 1 40 0 0 255
+Node: 0 42
+Connection: 0 41 0 0 0
+Connection: 0 43 0 0 0
+Connection: 1 43 0 0 255
+Connection: 1 41 0 0 255
+Node: 0 43
+Connection: 0 42 0 0 0
+Connection: 0 44 0 0 0
+Connection: 1 42 0 0 255
+Node: 0 44
+Connection: 0 43 0 0 0
+Connection: 1 44 0 0 0
+Connection: 1 43 0 0 255
+Node: 1 0
+Connection: 0 0 0 0 0
+Connection: 2 0 0 0 0
+Node: 1 1
+Connection: 0 0 0 0 0
+Connection: 0 2 0 0 0
+Node: 1 2
+Connection: 2 2 0 0 255
+Connection: 0 1 0 0 0
+Connection: 0 3 0 0 0
+Node: 1 3
+Connection: 2 3 0 0 255
+Connection: 0 2 0 0 0
+Connection: 0 4 0 0 0
+Node: 1 4
+Connection: 2 4 0 0 255
+Connection: 0 3 0 0 0
+Connection: 0 5 0 0 0
+Node: 1 5
+Node: 1 6
+Node: 1 7
+Connection: 1 8 0 0 255
+Connection: 2 6 0 0 255
+Connection: 0 6 0 0 0
+Node: 1 8
+Connection: 2 9 0 0 255
+Connection: 1 7 0 0 255
+Connection: 0 8 0 0 0
+Node: 1 9
+Connection: 2 8 0 0 255
+Connection: 1 10 0 0 255
+Connection: 0 9 0 0 0
+Node: 1 10
+Connection: 1 9 0 0 255
+Connection: 2 11 0 0 255
+Connection: 0 11 0 0 0
+Connection: 2 9 0 0 255
+Node: 1 11
+Connection: 2 11 0 0 255
+Connection: 0 10 0 0 0
+Connection: 0 12 0 0 0
+Node: 1 12
+Node: 1 13
+Connection: 2 12 0 0 255
+Connection: 1 14 0 0 255
+Connection: 0 13 0 0 0
+Node: 1 14
+Connection: 1 15 0 0 255
+Connection: 2 13 0 0 255
+Connection: 0 13 0 0 0
+Connection: 1 13 0 0 255
+Node: 1 15
+Connection: 1 14 0 0 255
+Connection: 0 15 0 0 0
+Node: 1 16
+Connection: 2 15 0 0 255
+Connection: 1 17 0 0 255
+Connection: 0 16 0 0 0
+Node: 1 17
+Connection: 1 16 0 0 255
+Connection: 2 18 0 0 255
+Connection: 0 18 0 0 0
+Node: 1 18
+Connection: 0 17 0 0 0
+Connection: 0 19 0 0 0
+Node: 1 19
+Node: 1 20
+Connection: 2 19 0 0 255
+Connection: 1 21 0 0 255
+Connection: 0 20 0 0 0
+Connection: 2 20 0 0 255
+Node: 1 21
+Connection: 2 21 0 0 255
+Connection: 0 20 0 0 0
+Connection: 0 22 0 0 0
+Connection: 1 20 0 0 255
+Node: 1 22
+Node: 1 23
+Connection: 2 23 0 0 255
+Connection: 0 22 0 0 0
+Connection: 0 24 0 0 0
+Connection: 1 24 0 0 255
+Node: 1 24
+Connection: 2 25 0 0 255
+Connection: 1 23 0 0 255
+Connection: 0 24 0 0 0
+Connection: 2 24 0 0 255
+Node: 1 25
+Node: 1 26
+Connection: 0 25 0 0 0
+Connection: 0 27 0 0 0
+Node: 1 27
+Connection: 1 28 0 0 255
+Connection: 2 26 0 0 255
+Connection: 0 26 0 0 0
+Node: 1 28
+Connection: 2 29 0 0 255
+Connection: 1 27 0 0 255
+Connection: 0 28 0 0 0
+Node: 1 29
+Connection: 1 30 0 0 255
+Connection: 0 29 0 0 0
+Node: 1 30
+Connection: 1 29 0 0 255
+Connection: 2 31 0 0 255
+Connection: 0 31 0 0 0
+Connection: 1 31 0 0 255
+Node: 1 31
+Connection: 2 32 0 0 255
+Connection: 1 30 0 0 255
+Connection: 0 31 0 0 0
+Node: 1 32
+Node: 1 33
+Connection: 2 33 0 0 255
+Connection: 0 32 0 0 0
+Connection: 0 34 0 0 0
+Node: 1 34
+Connection: 1 35 0 0 255
+Connection: 2 33 0 0 255
+Connection: 0 33 0 0 0
+Connection: 2 35 0 0 255
+Node: 1 35
+Connection: 2 36 0 0 255
+Connection: 1 34 0 0 255
+Connection: 0 35 0 0 0
+Node: 1 36
+Connection: 2 35 0 0 255
+Connection: 1 37 0 0 255
+Connection: 0 36 0 0 0
+Node: 1 37
+Connection: 1 36 0 0 255
+Connection: 2 38 0 0 255
+Connection: 0 38 0 0 0
+Node: 1 38
+Node: 1 39
+Node: 1 40
+Connection: 2 40 0 0 255
+Connection: 0 39 0 0 0
+Connection: 0 41 0 0 0
+Node: 1 41
+Connection: 2 41 0 0 255
+Connection: 0 40 0 0 0
+Connection: 0 42 0 0 0
+Node: 1 42
+Connection: 2 42 0 0 255
+Connection: 0 41 0 0 0
+Connection: 0 43 0 0 0
+Node: 1 43
+Connection: 0 42 0 0 0
+Connection: 0 44 0 0 0
+Node: 1 44
+Connection: 0 44 0 0 0
+Connection: 2 44 0 0 0
+Node: 2 0
+Connection: 1 0 0 0 0
+Connection: 3 0 0 0 0
+Node: 2 1
+Connection: 2 2 0 0 255
+Connection: 3 2 0 0 255
+Node: 2 2
+Connection: 2 1 0 0 255
+Connection: 1 2 0 0 255
+Connection: 3 3 0 0 255
+Node: 2 3
+Connection: 3 2 0 0 255
+Connection: 2 4 0 0 255
+Connection: 1 3 0 0 255
+Node: 2 4
+Connection: 3 3 0 0 255
+Connection: 2 3 0 0 255
+Connection: 2 5 0 0 255
+Connection: 1 4 0 0 255
+Connection: 3 5 0 0 255
+Node: 2 5
+Connection: 2 6 0 0 255
+Connection: 2 4 0 0 255
+Node: 2 6
+Connection: 2 5 0 0 255
+Connection: 3 6 0 0 255
+Connection: 3 7 0 0 255
+Connection: 3 5 0 0 255
+Connection: 1 7 0 0 255
+Node: 2 7
+Node: 2 8
+Connection: 3 9 0 0 255
+Connection: 1 9 0 0 255
+Connection: 3 8 0 0 255
+Node: 2 9
+Connection: 1 8 0 0 255
+Connection: 1 10 0 0 255
+Node: 2 10
+Node: 2 11
+Connection: 2 12 0 0 255
+Connection: 1 11 0 0 255
+Connection: 3 11 0 0 255
+Connection: 1 10 0 0 255
+Node: 2 12
+Connection: 2 11 0 0 255
+Connection: 3 13 0 0 255
+Connection: 1 13 0 0 255
+Node: 2 13
+Connection: 1 14 0 0 255
+Connection: 3 12 0 0 255
+Connection: 3 14 0 0 255
+Node: 2 14
+Node: 2 15
+Connection: 3 16 0 0 255
+Connection: 1 16 0 0 255
+Connection: 3 14 0 0 255
+Connection: 3 15 0 0 255
+Node: 2 16
+Node: 2 17
+Node: 2 18
+Connection: 3 18 0 0 255
+Connection: 1 17 0 0 255
+Connection: 3 17 0 0 255
+Node: 2 19
+Connection: 3 20 0 0 255
+Connection: 1 20 0 0 255
+Node: 2 20
+Connection: 3 19 0 0 255
+Connection: 2 21 0 0 255
+Connection: 1 20 0 0 255
+Node: 2 21
+Connection: 2 22 0 0 0
+Connection: 1 21 0 0 255
+Connection: 2 20 0 0 255
+Node: 2 22
+Connection: 2 21 0 0 255
+Connection: 2 23 0 0 255
+Node: 2 23
+Connection: 2 22 0 0 0
+Connection: 1 23 0 0 255
+Connection: 2 24 0 0 255
+Node: 2 24
+Connection: 3 25 0 0 255
+Connection: 2 23 0 0 255
+Connection: 1 24 0 0 255
+Node: 2 25
+Connection: 3 24 0 0 255
+Connection: 1 24 0 0 255
+Node: 2 26
+Connection: 3 26 0 0 255
+Connection: 1 27 0 0 255
+Connection: 3 27 0 0 255
+Node: 2 27
+Node: 2 28
+Node: 2 29
+Connection: 3 28 0 0 255
+Connection: 1 28 0 0 255
+Connection: 3 30 0 0 255
+Connection: 3 29 0 0 255
+Node: 2 30
+Node: 2 31
+Connection: 1 30 0 0 255
+Connection: 3 30 0 0 255
+Connection: 3 32 0 0 255
+Node: 2 32
+Connection: 2 33 0 0 255
+Connection: 3 31 0 0 255
+Connection: 1 31 0 0 255
+Node: 2 33
+Connection: 2 32 0 0 255
+Connection: 1 33 0 0 255
+Connection: 3 33 0 0 255
+Connection: 1 34 0 0 255
+Node: 2 34
+Node: 2 35
+Connection: 1 34 0 0 255
+Connection: 1 36 0 0 255
+Node: 2 36
+Connection: 3 35 0 0 255
+Connection: 1 35 0 0 255
+Connection: 3 36 0 0 255
+Node: 2 37
+Node: 2 38
+Connection: 2 39 0 0 255
+Connection: 3 38 0 0 255
+Connection: 3 37 0 0 255
+Connection: 3 39 0 0 255
+Connection: 1 37 0 0 255
+Node: 2 39
+Connection: 2 38 0 0 255
+Connection: 2 40 0 0 255
+Node: 2 40
+Connection: 3 41 0 0 255
+Connection: 2 39 0 0 255
+Connection: 1 40 0 0 255
+Connection: 2 41 0 0 255
+Connection: 3 39 0 0 255
+Node: 2 41
+Connection: 3 42 0 0 255
+Connection: 2 40 0 0 255
+Connection: 1 41 0 0 255
+Node: 2 42
+Connection: 2 43 0 0 255
+Connection: 1 42 0 0 255
+Connection: 3 41 0 0 255
+Node: 2 43
+Connection: 2 42 0 0 255
+Connection: 3 42 0 0 255
+Node: 2 44
+Connection: 1 44 0 0 0
+Connection: 3 44 0 0 0
+Node: 3 0
+Connection: 2 0 0 0 0
+Connection: 4 0 0 0 0
+Node: 3 1
+Node: 3 2
+Connection: 4 2 0 0 255
+Connection: 2 1 0 0 255
+Connection: 2 3 0 0 255
+Node: 3 3
+Connection: 4 3 0 0 255
+Connection: 2 2 0 0 255
+Connection: 2 4 0 0 255
+Node: 3 4
+Node: 3 5
+Connection: 4 5 0 0 255
+Connection: 2 4 0 0 255
+Connection: 2 6 0 0 255
+Node: 3 6
+Connection: 2 6 0 0 255
+Connection: 4 6 0 0 255
+Node: 3 7
+Connection: 4 6 0 0 255
+Connection: 2 6 0 0 255
+Node: 3 8
+Connection: 4 7 0 0 255
+Connection: 3 9 0 0 255
+Connection: 2 8 0 0 255
+Node: 3 9
+Connection: 2 8 0 0 255
+Connection: 4 9 0 0 255
+Connection: 3 8 0 0 255
+Node: 3 10
+Node: 3 11
+Connection: 3 12 0 0 255
+Connection: 2 11 0 0 255
+Connection: 4 10 0 0 255
+Node: 3 12
+Connection: 3 11 0 0 255
+Connection: 4 13 0 0 255
+Connection: 2 13 0 0 255
+Node: 3 13
+Connection: 2 12 0 0 255
+Connection: 4 12 0 0 255
+Connection: 4 14 0 0 255
+Node: 3 14
+Connection: 2 13 0 0 255
+Connection: 2 15 0 0 255
+Node: 3 15
+Connection: 4 14 0 0 255
+Connection: 3 16 0 0 255
+Connection: 2 15 0 0 255
+Node: 3 16
+Connection: 2 15 0 0 255
+Connection: 3 15 0 0 255
+Connection: 3 17 0 0 255
+Connection: 4 16 0 0 255
+Node: 3 17
+Connection: 3 16 0 0 255
+Connection: 4 18 0 0 255
+Connection: 2 18 0 0 255
+Node: 3 18
+Connection: 3 19 0 0 255
+Connection: 2 18 0 0 255
+Node: 3 19
+Connection: 3 18 0 0 255
+Connection: 4 20 0 0 255
+Connection: 2 20 0 0 255
+Node: 3 20
+Connection: 2 19 0 0 255
+Connection: 3 21 0 0 255
+Connection: 4 20 0 0 255
+Connection: 4 19 0 0 255
+Node: 3 21
+Connection: 3 20 0 0 255
+Connection: 4 20 0 0 255
+Node: 3 22
+Connection: 4 21 0 0 255
+Connection: 4 23 0 0 255
+Node: 3 23
+Connection: 3 24 0 0 255
+Connection: 4 24 0 0 255
+Node: 3 24
+Connection: 2 25 0 0 255
+Connection: 3 23 0 0 255
+Connection: 4 24 0 0 255
+Connection: 4 25 0 0 255
+Node: 3 25
+Connection: 3 26 0 0 255
+Connection: 4 24 0 0 255
+Connection: 2 24 0 0 255
+Node: 3 26
+Connection: 3 25 0 0 255
+Connection: 2 26 0 0 255
+Node: 3 27
+Connection: 3 28 0 0 255
+Connection: 4 26 0 0 255
+Connection: 2 26 0 0 255
+Node: 3 28
+Connection: 2 29 0 0 255
+Connection: 3 27 0 0 255
+Connection: 4 28 0 0 255
+Connection: 3 29 0 0 255
+Node: 3 29
+Connection: 4 30 0 0 255
+Connection: 3 28 0 0 255
+Connection: 2 29 0 0 255
+Node: 3 30
+Connection: 2 29 0 0 255
+Connection: 2 31 0 0 255
+Node: 3 31
+Connection: 2 32 0 0 255
+Connection: 4 32 0 0 255
+Connection: 4 30 0 0 255
+Node: 3 32
+Connection: 3 33 0 0 255
+Connection: 4 31 0 0 255
+Connection: 2 31 0 0 255
+Node: 3 33
+Connection: 3 32 0 0 255
+Connection: 2 33 0 0 255
+Connection: 4 34 0 0 255
+Node: 3 34
+Node: 3 35
+Connection: 2 36 0 0 255
+Connection: 4 35 0 0 255
+Connection: 3 36 0 0 255
+Node: 3 36
+Connection: 4 37 0 0 255
+Connection: 3 35 0 0 255
+Connection: 2 36 0 0 255
+Node: 3 37
+Connection: 4 38 0 0 255
+Connection: 2 38 0 0 255
+Node: 3 38
+Connection: 2 38 0 0 255
+Connection: 4 38 0 0 255
+Node: 3 39
+Connection: 4 39 0 0 255
+Connection: 2 38 0 0 255
+Connection: 2 40 0 0 255
+Node: 3 40
+Node: 3 41
+Connection: 4 41 0 0 255
+Connection: 2 40 0 0 255
+Connection: 2 42 0 0 255
+Node: 3 42
+Connection: 4 42 0 0 255
+Connection: 2 41 0 0 255
+Connection: 2 43 0 0 255
+Node: 3 43
+Node: 3 44
+Connection: 2 44 0 0 0
+Connection: 4 44 0 0 0
+Node: 4 0
+Connection: 3 0 0 0 0
+Connection: 5 0 0 0 0
+Node: 4 1
+Connection: 5 0 0 0 0
+Connection: 5 2 0 0 255
+Connection: 4 2 0 0 255
+Connection: 5 1 0 0 255
+Node: 4 2
+Connection: 4 1 0 0 255
+Connection: 3 2 0 0 255
+Connection: 4 3 0 0 255
+Node: 4 3
+Connection: 4 2 0 0 255
+Connection: 3 3 0 0 255
+Node: 4 4
+Node: 4 5
+Connection: 4 6 0 0 255
+Connection: 3 5 0 0 255
+Connection: 5 6 0 0 255
+Node: 4 6
+Connection: 3 7 0 0 255
+Connection: 4 7 0 0 255
+Connection: 3 6 0 0 255
+Connection: 4 5 0 0 255
+Node: 4 7
+Connection: 4 6 0 0 255
+Connection: 5 8 0 0 255
+Connection: 3 8 0 0 255
+Node: 4 8
+Connection: 5 7 0 0 255
+Connection: 5 9 0 0 255
+Connection: 5 8 0 0 255
+Node: 4 9
+Connection: 4 10 0 0 255
+Connection: 3 9 0 0 255
+Node: 4 10
+Connection: 4 9 0 0 255
+Connection: 5 11 0 0 255
+Connection: 3 11 0 0 255
+Node: 4 11
+Connection: 5 12 0 0 255
+Connection: 5 10 0 0 255
+Node: 4 12
+Connection: 5 13 0 0 255
+Connection: 3 13 0 0 255
+Node: 4 13
+Connection: 3 12 0 0 255
+Connection: 5 12 0 0 255
+Node: 4 14
+Connection: 5 14 0 0 255
+Connection: 3 13 0 0 255
+Connection: 3 15 0 0 255
+Node: 4 15
+Node: 4 16
+Connection: 5 15 0 0 255
+Connection: 3 16 0 0 255
+Connection: 4 17 0 0 255
+Node: 4 17
+Connection: 5 17 0 0 255
+Connection: 4 16 0 0 255
+Node: 4 18
+Connection: 3 17 0 0 255
+Connection: 4 19 0 0 255
+Connection: 5 18 0 0 255
+Node: 4 19
+Connection: 5 20 0 0 255
+Connection: 3 20 0 0 255
+Connection: 4 18 0 0 255
+Node: 4 20
+Connection: 5 20 0 0 255
+Connection: 3 19 0 0 255
+Connection: 3 20 0 0 255
+Connection: 3 21 0 0 255
+Node: 4 21
+Connection: 5 22 0 0 0
+Connection: 3 22 0 0 0
+Connection: 5 21 0 0 255
+Node: 4 22
+Node: 4 23
+Connection: 5 22 0 0 0
+Connection: 3 22 0 0 0
+Connection: 5 23 0 0 255
+Node: 4 24
+Connection: 5 24 0 0 255
+Connection: 3 24 0 0 255
+Connection: 3 25 0 0 255
+Connection: 3 23 0 0 255
+Node: 4 25
+Connection: 5 24 0 0 255
+Connection: 3 24 0 0 255
+Connection: 4 26 0 0 255
+Node: 4 26
+Connection: 3 27 0 0 255
+Connection: 4 25 0 0 255
+Connection: 5 26 0 0 255
+Node: 4 27
+Connection: 5 27 0 0 255
+Connection: 4 28 0 0 255
+Node: 4 28
+Connection: 5 29 0 0 255
+Connection: 3 28 0 0 255
+Connection: 4 27 0 0 255
+Node: 4 29
+Node: 4 30
+Connection: 5 30 0 0 255
+Connection: 3 29 0 0 255
+Connection: 3 31 0 0 255
+Node: 4 31
+Connection: 3 32 0 0 255
+Connection: 5 32 0 0 255
+Node: 4 32
+Connection: 5 31 0 0 255
+Connection: 3 31 0 0 255
+Node: 4 33
+Connection: 5 32 0 0 255
+Connection: 5 34 0 0 255
+Node: 4 34
+Connection: 4 35 0 0 255
+Connection: 5 33 0 0 255
+Connection: 3 33 0 0 255
+Node: 4 35
+Connection: 4 34 0 0 255
+Connection: 3 35 0 0 255
+Node: 4 36
+Connection: 5 35 0 0 255
+Connection: 5 37 0 0 255
+Connection: 5 36 0 0 255
+Node: 4 37
+Connection: 4 38 0 0 255
+Connection: 5 36 0 0 255
+Connection: 3 36 0 0 255
+Node: 4 38
+Connection: 3 37 0 0 255
+Connection: 4 37 0 0 255
+Connection: 3 38 0 0 255
+Connection: 4 39 0 0 255
+Node: 4 39
+Connection: 4 38 0 0 255
+Connection: 3 39 0 0 255
+Connection: 5 38 0 0 255
+Node: 4 40
+Node: 4 41
+Connection: 4 42 0 0 255
+Connection: 3 41 0 0 255
+Node: 4 42
+Connection: 4 43 0 0 255
+Connection: 3 42 0 0 255
+Connection: 4 41 0 0 255
+Node: 4 43
+Connection: 4 42 0 0 255
+Connection: 5 42 0 0 255
+Connection: 5 44 0 0 0
+Connection: 5 43 0 0 255
+Node: 4 44
+Connection: 3 44 0 0 0
+Connection: 5 44 0 0 0
+Node: 5 0
+Connection: 4 0 0 0 0
+Connection: 6 0 0 0 0
+Connection: 4 1 0 0 255
+Connection: 5 1 0 0 255
+Node: 5 1
+Connection: 6 2 0 0 255
+Connection: 5 0 0 0 0
+Connection: 4 1 0 0 255
+Node: 5 2
+Connection: 4 1 0 0 255
+Connection: 5 3 0 0 255
+Connection: 6 2 0 0 255
+Node: 5 3
+Connection: 5 2 0 0 255
+Connection: 6 2 0 0 255
+Connection: 6 3 0 0 255
+Connection: 6 4 0 0 255
+Node: 5 4
+Node: 5 5
+Node: 5 6
+Connection: 6 5 0 0 255
+Connection: 4 5 0 0 255
+Connection: 5 7 0 0 255
+Connection: 6 6 0 0 255
+Node: 5 7
+Connection: 4 8 0 0 255
+Connection: 5 6 0 0 255
+Connection: 6 7 0 0 255
+Node: 5 8
+Connection: 5 9 0 0 255
+Connection: 4 8 0 0 255
+Connection: 4 7 0 0 255
+Node: 5 9
+Connection: 4 8 0 0 255
+Connection: 5 8 0 0 255
+Node: 5 10
+Connection: 6 11 0 0 255
+Connection: 4 11 0 0 255
+Node: 5 11
+Connection: 4 10 0 0 255
+Connection: 5 12 0 0 255
+Connection: 6 11 0 0 255
+Node: 5 12
+Connection: 4 11 0 0 255
+Connection: 4 13 0 0 255
+Connection: 6 12 0 0 255
+Connection: 5 11 0 0 255
+Node: 5 13
+Connection: 4 12 0 0 255
+Connection: 5 14 0 0 255
+Connection: 6 13 0 0 255
+Node: 5 14
+Connection: 5 13 0 0 255
+Connection: 5 15 0 0 255
+Connection: 4 14 0 0 255
+Connection: 6 14 0 0 255
+Node: 5 15
+Connection: 5 14 0 0 255
+Connection: 6 16 0 0 255
+Connection: 4 16 0 0 255
+Node: 5 16
+Connection: 5 17 0 0 255
+Connection: 6 15 0 0 255
+Node: 5 17
+Connection: 6 18 0 0 255
+Connection: 5 16 0 0 255
+Connection: 4 17 0 0 255
+Connection: 5 18 0 0 255
+Node: 5 18
+Connection: 6 19 0 0 255
+Connection: 4 18 0 0 255
+Connection: 5 17 0 0 255
+Node: 5 19
+Connection: 6 18 0 0 255
+Connection: 6 20 0 0 255
+Node: 5 20
+Connection: 6 19 0 0 255
+Connection: 5 21 0 0 255
+Connection: 4 20 0 0 255
+Connection: 4 19 0 0 255
+Node: 5 21
+Connection: 6 20 0 0 255
+Connection: 5 22 0 0 0
+Connection: 4 21 0 0 255
+Connection: 5 20 0 0 255
+Connection: 6 21 0 0 255
+Node: 5 22
+Connection: 4 21 0 0 255
+Connection: 4 23 0 0 255
+Connection: 5 21 0 0 255
+Connection: 5 23 0 0 255
+Node: 5 23
+Connection: 6 24 0 0 255
+Connection: 5 22 0 0 0
+Connection: 4 23 0 0 255
+Connection: 5 24 0 0 255
+Connection: 6 23 0 0 255
+Node: 5 24
+Connection: 6 25 0 0 255
+Connection: 5 23 0 0 255
+Connection: 4 24 0 0 255
+Connection: 4 25 0 0 255
+Node: 5 25
+Connection: 6 24 0 0 255
+Connection: 6 26 0 0 255
+Node: 5 26
+Connection: 6 25 0 0 255
+Connection: 4 26 0 0 255
+Connection: 5 27 0 0 255
+Node: 5 27
+Connection: 6 26 0 0 255
+Connection: 5 28 0 0 255
+Connection: 4 27 0 0 255
+Connection: 5 26 0 0 255
+Node: 5 28
+Connection: 5 27 0 0 255
+Connection: 6 29 0 0 255
+Node: 5 29
+Connection: 5 30 0 0 255
+Connection: 6 28 0 0 255
+Connection: 4 28 0 0 255
+Node: 5 30
+Connection: 5 29 0 0 255
+Connection: 4 30 0 0 255
+Connection: 5 31 0 0 255
+Connection: 6 30 0 0 255
+Node: 5 31
+Connection: 4 32 0 0 255
+Connection: 5 30 0 0 255
+Connection: 6 31 0 0 255
+Node: 5 32
+Connection: 4 31 0 0 255
+Connection: 4 33 0 0 255
+Connection: 6 32 0 0 255
+Connection: 5 33 0 0 255
+Node: 5 33
+Connection: 4 34 0 0 255
+Connection: 5 32 0 0 255
+Connection: 6 33 0 0 255
+Node: 5 34
+Connection: 6 33 0 0 255
+Connection: 4 33 0 0 255
+Node: 5 35
+Connection: 4 36 0 0 255
+Connection: 5 36 0 0 255
+Node: 5 36
+Connection: 5 35 0 0 255
+Connection: 4 36 0 0 255
+Connection: 4 37 0 0 255
+Node: 5 37
+Connection: 4 36 0 0 255
+Connection: 5 38 0 0 255
+Connection: 6 37 0 0 255
+Node: 5 38
+Connection: 6 39 0 0 255
+Connection: 4 39 0 0 255
+Connection: 5 37 0 0 255
+Connection: 6 38 0 0 255
+Node: 5 39
+Node: 5 40
+Node: 5 41
+Connection: 5 42 0 0 255
+Connection: 6 40 0 0 255
+Connection: 6 41 0 0 255
+Connection: 6 42 0 0 255
+Node: 5 42
+Connection: 4 43 0 0 255
+Connection: 5 41 0 0 255
+Connection: 6 42 0 0 255
+Node: 5 43
+Connection: 6 42 0 0 255
+Connection: 5 44 0 0 0
+Connection: 4 43 0 0 255
+Node: 5 44
+Connection: 4 44 0 0 0
+Connection: 6 44 0 0 0
+Connection: 4 43 0 0 255
+Connection: 5 43 0 0 255
+Node: 6 0
+Connection: 5 0 0 0 0
+Connection: 7 0 0 0 0
+Connection: 7 1 0 0 255
+Node: 6 1
+Node: 6 2
+Connection: 7 2 0 0 255
+Connection: 5 2 0 0 255
+Connection: 5 1 0 0 255
+Connection: 5 3 0 0 255
+Connection: 6 3 0 0 255
+Node: 6 3
+Connection: 6 2 0 0 255
+Connection: 5 3 0 0 255
+Node: 6 4
+Connection: 7 3 0 0 255
+Connection: 5 3 0 0 255
+Connection: 7 4 0 0 255
+Connection: 6 5 0 0 255
+Node: 6 5
+Connection: 5 6 0 0 255
+Connection: 6 4 0 0 255
+Connection: 7 5 0 0 255
+Node: 6 6
+Connection: 7 5 0 0 255
+Connection: 6 7 0 0 255
+Connection: 5 6 0 0 255
+Node: 6 7
+Connection: 5 7 0 0 255
+Connection: 6 6 0 0 255
+Connection: 7 6 0 0 255
+Connection: 7 8 0 0 255
+Node: 6 8
+Node: 6 9
+Connection: 7 8 0 0 255
+Connection: 7 10 0 0 255
+Connection: 6 10 0 0 255
+Connection: 7 9 0 0 255
+Node: 6 10
+Connection: 6 9 0 0 255
+Connection: 7 10 0 0 255
+Node: 6 11
+Connection: 5 10 0 0 255
+Connection: 6 12 0 0 255
+Connection: 7 11 0 0 255
+Connection: 5 11 0 0 255
+Node: 6 12
+Connection: 7 11 0 0 255
+Connection: 6 13 0 0 255
+Connection: 5 12 0 0 255
+Connection: 7 13 0 0 255
+Connection: 6 11 0 0 255
+Node: 6 13
+Connection: 5 13 0 0 255
+Connection: 6 12 0 0 255
+Node: 6 14
+Connection: 6 15 0 0 255
+Connection: 5 14 0 0 255
+Connection: 7 13 0 0 255
+Node: 6 15
+Connection: 6 14 0 0 255
+Connection: 7 16 0 0 255
+Connection: 5 16 0 0 255
+Node: 6 16
+Connection: 7 16 0 0 255
+Connection: 7 15 0 0 255
+Connection: 5 15 0 0 255
+Node: 6 17
+Node: 6 18
+Connection: 5 19 0 0 255
+Connection: 5 17 0 0 255
+Connection: 7 17 0 0 255
+Connection: 7 18 0 0 255
+Node: 6 19
+Connection: 7 19 0 0 255
+Connection: 5 18 0 0 255
+Connection: 5 20 0 0 255
+Node: 6 20
+Connection: 5 19 0 0 255
+Connection: 5 21 0 0 255
+Node: 6 21
+Connection: 7 20 0 0 255
+Connection: 6 22 0 0 0
+Connection: 5 21 0 0 255
+Connection: 7 21 0 0 255
+Node: 6 22
+Connection: 6 21 0 0 255
+Connection: 6 23 0 0 255
+Node: 6 23
+Connection: 7 24 0 0 255
+Connection: 6 22 0 0 0
+Connection: 5 23 0 0 255
+Connection: 7 23 0 0 255
+Node: 6 24
+Connection: 5 25 0 0 255
+Connection: 5 23 0 0 255
+Node: 6 25
+Connection: 7 25 0 0 255
+Connection: 5 24 0 0 255
+Connection: 5 26 0 0 255
+Node: 6 26
+Connection: 5 25 0 0 255
+Connection: 5 27 0 0 255
+Connection: 7 26 0 0 255
+Connection: 7 27 0 0 255
+Node: 6 27
+Node: 6 28
+Connection: 7 28 0 0 255
+Connection: 7 29 0 0 255
+Connection: 5 29 0 0 255
+Node: 6 29
+Connection: 6 30 0 0 255
+Connection: 7 28 0 0 255
+Connection: 5 28 0 0 255
+Node: 6 30
+Connection: 6 29 0 0 255
+Connection: 5 30 0 0 255
+Connection: 7 31 0 0 255
+Node: 6 31
+Connection: 5 31 0 0 255
+Connection: 6 32 0 0 255
+Node: 6 32
+Connection: 7 33 0 0 255
+Connection: 6 31 0 0 255
+Connection: 5 32 0 0 255
+Connection: 7 31 0 0 255
+Connection: 6 33 0 0 255
+Node: 6 33
+Connection: 5 34 0 0 255
+Connection: 6 32 0 0 255
+Connection: 7 33 0 0 255
+Connection: 5 33 0 0 255
+Node: 6 34
+Connection: 6 35 0 0 255
+Connection: 7 34 0 0 255
+Node: 6 35
+Connection: 6 34 0 0 255
+Connection: 7 34 0 0 255
+Connection: 7 36 0 0 255
+Connection: 7 35 0 0 255
+Node: 6 36
+Node: 6 37
+Connection: 5 37 0 0 255
+Connection: 7 36 0 0 255
+Connection: 7 38 0 0 255
+Connection: 6 38 0 0 255
+Node: 6 38
+Connection: 7 39 0 0 255
+Connection: 6 37 0 0 255
+Connection: 5 38 0 0 255
+Node: 6 39
+Connection: 5 38 0 0 255
+Connection: 6 40 0 0 255
+Connection: 7 39 0 0 255
+Node: 6 40
+Connection: 7 41 0 0 255
+Connection: 5 41 0 0 255
+Connection: 7 40 0 0 255
+Connection: 6 39 0 0 255
+Node: 6 41
+Connection: 6 42 0 0 255
+Connection: 5 41 0 0 255
+Node: 6 42
+Connection: 7 42 0 0 255
+Connection: 5 42 0 0 255
+Connection: 6 41 0 0 255
+Connection: 5 41 0 0 255
+Connection: 5 43 0 0 255
+Node: 6 43
+Node: 6 44
+Connection: 5 44 0 0 0
+Connection: 7 44 0 0 0
+Connection: 7 43 0 0 255
+Node: 7 0
+Connection: 6 0 0 0 0
+Connection: 8 0 0 0 0
+Node: 7 1
+Connection: 7 2 0 0 255
+Connection: 8 0 0 0 0
+Connection: 6 0 0 0 0
+Connection: 8 1 0 0 255
+Node: 7 2
+Connection: 8 3 0 0 255
+Connection: 7 1 0 0 255
+Connection: 6 2 0 0 255
+Connection: 7 3 0 0 255
+Node: 7 3
+Connection: 6 4 0 0 255
+Connection: 7 2 0 0 255
+Connection: 8 3 0 0 255
+Connection: 8 4 0 0 255
+Node: 7 4
+Connection: 8 3 0 0 255
+Connection: 7 5 0 0 255
+Connection: 6 4 0 0 255
+Node: 7 5
+Connection: 7 4 0 0 255
+Connection: 8 6 0 0 255
+Connection: 6 6 0 0 255
+Connection: 6 5 0 0 255
+Connection: 7 6 0 0 255
+Connection: 8 5 0 0 255
+Node: 7 6
+Connection: 6 7 0 0 255
+Connection: 7 5 0 0 255
+Connection: 8 6 0 0 255
+Node: 7 7
+Node: 7 8
+Connection: 8 9 0 0 255
+Connection: 6 9 0 0 255
+Connection: 7 9 0 0 255
+Connection: 6 7 0 0 255
+Connection: 8 8 0 0 255
+Node: 7 9
+Connection: 8 10 0 0 255
+Connection: 7 8 0 0 255
+Connection: 6 9 0 0 255
+Node: 7 10
+Connection: 8 9 0 0 255
+Connection: 6 9 0 0 255
+Connection: 6 10 0 0 255
+Node: 7 11
+Connection: 8 12 0 0 255
+Connection: 6 12 0 0 255
+Connection: 8 10 0 0 255
+Connection: 6 11 0 0 255
+Node: 7 12
+Node: 7 13
+Connection: 8 13 0 0 255
+Connection: 6 12 0 0 255
+Connection: 6 14 0 0 255
+Node: 7 14
+Connection: 7 15 0 0 255
+Connection: 8 14 0 0 255
+Node: 7 15
+Connection: 8 16 0 0 255
+Connection: 6 16 0 0 255
+Connection: 7 14 0 0 255
+Connection: 8 15 0 0 255
+Node: 7 16
+Connection: 7 17 0 0 255
+Connection: 6 16 0 0 255
+Connection: 8 16 0 0 255
+Connection: 6 15 0 0 255
+Node: 7 17
+Connection: 7 16 0 0 255
+Connection: 8 18 0 0 255
+Connection: 6 18 0 0 255
+Node: 7 18
+Connection: 8 17 0 0 255
+Connection: 7 19 0 0 255
+Connection: 6 18 0 0 255
+Node: 7 19
+Connection: 7 20 0 0 255
+Connection: 6 19 0 0 255
+Connection: 7 18 0 0 255
+Connection: 8 20 0 0 255
+Node: 7 20
+Connection: 7 19 0 0 255
+Connection: 8 21 0 0 255
+Connection: 6 21 0 0 255
+Node: 7 21
+Connection: 8 20 0 0 255
+Connection: 7 22 0 0 0
+Connection: 6 21 0 0 255
+Node: 7 22
+Connection: 7 21 0 0 255
+Connection: 7 23 0 0 255
+Node: 7 23
+Connection: 8 24 0 0 255
+Connection: 7 22 0 0 0
+Connection: 6 23 0 0 255
+Node: 7 24
+Connection: 7 25 0 0 255
+Connection: 8 23 0 0 255
+Connection: 6 23 0 0 255
+Node: 7 25
+Connection: 7 24 0 0 255
+Connection: 6 25 0 0 255
+Connection: 7 26 0 0 255
+Connection: 8 24 0 0 255
+Node: 7 26
+Connection: 8 27 0 0 255
+Connection: 7 25 0 0 255
+Connection: 6 26 0 0 255
+Node: 7 27
+Connection: 7 28 0 0 255
+Connection: 8 26 0 0 255
+Connection: 6 26 0 0 255
+Node: 7 28
+Connection: 7 27 0 0 255
+Connection: 6 28 0 0 255
+Connection: 8 28 0 0 255
+Connection: 6 29 0 0 255
+Node: 7 29
+Connection: 8 28 0 0 255
+Connection: 6 28 0 0 255
+Connection: 7 30 0 0 255
+Connection: 8 29 0 0 255
+Node: 7 30
+Connection: 7 29 0 0 255
+Connection: 8 30 0 0 255
+Node: 7 31
+Connection: 8 31 0 0 255
+Connection: 6 30 0 0 255
+Connection: 6 32 0 0 255
+Node: 7 32
+Node: 7 33
+Connection: 8 32 0 0 255
+Connection: 6 32 0 0 255
+Connection: 8 34 0 0 255
+Connection: 6 33 0 0 255
+Node: 7 34
+Connection: 8 35 0 0 255
+Connection: 6 34 0 0 255
+Connection: 6 35 0 0 255
+Node: 7 35
+Connection: 8 34 0 0 255
+Connection: 7 36 0 0 255
+Connection: 6 35 0 0 255
+Node: 7 36
+Connection: 8 35 0 0 255
+Connection: 6 35 0 0 255
+Connection: 7 35 0 0 255
+Connection: 6 37 0 0 255
+Connection: 8 36 0 0 255
+Node: 7 37
+Node: 7 38
+Connection: 6 37 0 0 255
+Connection: 7 39 0 0 255
+Connection: 8 38 0 0 255
+Node: 7 39
+Connection: 7 40 0 0 255
+Connection: 8 38 0 0 255
+Connection: 6 38 0 0 255
+Connection: 6 39 0 0 255
+Connection: 7 38 0 0 255
+Connection: 8 39 0 0 255
+Node: 7 40
+Connection: 8 41 0 0 255
+Connection: 7 39 0 0 255
+Connection: 6 40 0 0 255
+Node: 7 41
+Connection: 6 40 0 0 255
+Connection: 7 42 0 0 255
+Connection: 8 41 0 0 255
+Connection: 8 40 0 0 255
+Node: 7 42
+Connection: 8 41 0 0 255
+Connection: 7 43 0 0 255
+Connection: 6 42 0 0 255
+Connection: 7 41 0 0 255
+Node: 7 43
+Connection: 7 42 0 0 255
+Connection: 8 44 0 0 0
+Connection: 6 44 0 0 0
+Connection: 8 43 0 0 255
+Node: 7 44
+Connection: 6 44 0 0 0
+Connection: 8 44 0 0 0
+Node: 8 0
+Connection: 7 0 0 0 0
+Connection: 9 0 0 0 0
+Connection: 7 1 0 0 255
+Connection: 8 1 0 0 255
+Node: 8 1
+Connection: 9 2 0 0 255
+Connection: 8 0 0 0 0
+Connection: 7 1 0 0 255
+Node: 8 2
+Node: 8 3
+Connection: 7 2 0 0 255
+Connection: 7 4 0 0 255
+Connection: 7 3 0 0 255
+Node: 8 4
+Connection: 8 5 0 0 255
+Connection: 9 3 0 0 255
+Connection: 7 3 0 0 255
+Connection: 9 4 0 0 255
+Node: 8 5
+Connection: 9 6 0 0 255
+Connection: 8 4 0 0 255
+Connection: 7 5 0 0 255
+Node: 8 6
+Connection: 7 5 0 0 255
+Connection: 8 7 0 0 255
+Connection: 9 6 0 0 255
+Connection: 7 6 0 0 255
+Connection: 9 7 0 0 255
+Connection: 9 5 0 0 255
+Node: 8 7
+Connection: 8 6 0 0 255
+Connection: 9 6 0 0 255
+Node: 8 8
+Connection: 9 7 0 0 255
+Connection: 8 9 0 0 255
+Connection: 7 8 0 0 255
+Node: 8 9
+Connection: 9 9 0 0 255
+Connection: 7 8 0 0 255
+Connection: 7 10 0 0 255
+Connection: 8 8 0 0 255
+Node: 8 10
+Connection: 9 10 0 0 255
+Connection: 7 9 0 0 255
+Connection: 7 11 0 0 255
+Node: 8 11
+Node: 8 12
+Connection: 7 11 0 0 255
+Connection: 8 13 0 0 255
+Connection: 9 12 0 0 255
+Connection: 9 11 0 0 255
+Node: 8 13
+Connection: 9 12 0 0 255
+Connection: 8 14 0 0 255
+Connection: 7 13 0 0 255
+Connection: 8 12 0 0 255
+Node: 8 14
+Connection: 9 15 0 0 255
+Connection: 8 13 0 0 255
+Connection: 7 14 0 0 255
+Node: 8 15
+Connection: 9 14 0 0 255
+Connection: 8 16 0 0 255
+Connection: 7 15 0 0 255
+Node: 8 16
+Connection: 9 15 0 0 255
+Connection: 8 17 0 0 255
+Connection: 7 16 0 0 255
+Connection: 7 15 0 0 255
+Connection: 8 15 0 0 255
+Node: 8 17
+Connection: 8 16 0 0 255
+Connection: 9 18 0 0 255
+Connection: 7 18 0 0 255
+Node: 8 18
+Connection: 9 18 0 0 255
+Connection: 7 17 0 0 255
+Node: 8 19
+Node: 8 20
+Connection: 9 20 0 0 255
+Connection: 7 19 0 0 255
+Connection: 7 21 0 0 255
+Node: 8 21
+Connection: 7 20 0 0 255
+Connection: 8 22 0 0 0
+Connection: 9 21 0 0 255
+Node: 8 22
+Connection: 8 21 0 0 255
+Connection: 8 23 0 0 255
+Connection: 9 21 0 0 255
+Connection: 9 23 0 0 255
+Node: 8 23
+Connection: 7 24 0 0 255
+Connection: 8 22 0 0 0
+Connection: 9 23 0 0 255
+Node: 8 24
+Connection: 9 24 0 0 255
+Connection: 7 23 0 0 255
+Connection: 7 25 0 0 255
+Node: 8 25
+Node: 8 26
+Connection: 9 26 0 0 255
+Connection: 7 27 0 0 255
+Node: 8 27
+Connection: 8 28 0 0 255
+Connection: 9 26 0 0 255
+Connection: 7 26 0 0 255
+Node: 8 28
+Connection: 9 29 0 0 255
+Connection: 8 27 0 0 255
+Connection: 7 28 0 0 255
+Connection: 7 29 0 0 255
+Connection: 8 29 0 0 255
+Node: 8 29
+Connection: 9 30 0 0 255
+Connection: 8 28 0 0 255
+Connection: 7 29 0 0 255
+Node: 8 30
+Connection: 9 29 0 0 255
+Connection: 8 31 0 0 255
+Connection: 7 30 0 0 255
+Node: 8 31
+Connection: 9 32 0 0 255
+Connection: 8 30 0 0 255
+Connection: 7 31 0 0 255
+Connection: 8 32 0 0 255
+Node: 8 32
+Connection: 7 33 0 0 255
+Connection: 8 31 0 0 255
+Connection: 9 32 0 0 255
+Connection: 9 33 0 0 255
+Node: 8 33
+Node: 8 34
+Connection: 9 34 0 0 255
+Connection: 7 33 0 0 255
+Connection: 7 35 0 0 255
+Node: 8 35
+Connection: 9 35 0 0 255
+Connection: 7 34 0 0 255
+Connection: 7 36 0 0 255
+Connection: 8 36 0 0 255
+Node: 8 36
+Connection: 9 37 0 0 255
+Connection: 8 35 0 0 255
+Connection: 7 36 0 0 255
+Node: 8 37
+Connection: 8 38 0 0 255
+Connection: 9 38 0 0 255
+Node: 8 38
+Connection: 7 39 0 0 255
+Connection: 8 37 0 0 255
+Connection: 9 38 0 0 255
+Connection: 7 38 0 0 255
+Connection: 9 37 0 0 255
+Connection: 9 39 0 0 255
+Node: 8 39
+Connection: 9 38 0 0 255
+Connection: 8 40 0 0 255
+Connection: 7 39 0 0 255
+Node: 8 40
+Connection: 8 39 0 0 255
+Connection: 9 41 0 0 255
+Connection: 7 41 0 0 255
+Connection: 9 40 0 0 255
+Node: 8 41
+Connection: 7 40 0 0 255
+Connection: 7 42 0 0 255
+Connection: 7 41 0 0 255
+Node: 8 42
+Node: 8 43
+Connection: 9 42 0 0 255
+Connection: 8 44 0 0 0
+Connection: 7 43 0 0 255
+Node: 8 44
+Connection: 7 44 0 0 0
+Connection: 9 44 0 0 0
+Connection: 7 43 0 0 255
+Connection: 8 43 0 0 255
+Node: 9 0
+Connection: 8 0 0 0 0
+Connection: 10 0 0 0 0
+Node: 9 1
+Node: 9 2
+Connection: 10 1 0 0 255
+Connection: 8 1 0 0 255
+Connection: 10 3 0 0 255
+Connection: 9 3 0 0 255
+Node: 9 3
+Connection: 8 4 0 0 255
+Connection: 9 2 0 0 255
+Connection: 10 3 0 0 255
+Node: 9 4
+Connection: 10 3 0 0 255
+Connection: 9 5 0 0 255
+Connection: 8 4 0 0 255
+Node: 9 5
+Connection: 9 4 0 0 255
+Connection: 10 6 0 0 255
+Connection: 8 6 0 0 255
+Node: 9 6
+Connection: 10 6 0 0 255
+Connection: 8 6 0 0 255
+Connection: 8 5 0 0 255
+Connection: 8 7 0 0 255
+Node: 9 7
+Connection: 10 7 0 0 255
+Connection: 8 6 0 0 255
+Connection: 8 8 0 0 255
+Node: 9 8
+Connection: 10 8 0 0 255
+Connection: 9 9 0 0 255
+Node: 9 9
+Connection: 9 8 0 0 255
+Connection: 8 9 0 0 255
+Node: 9 10
+Connection: 10 9 0 0 255
+Connection: 9 11 0 0 255
+Connection: 8 10 0 0 255
+Node: 9 11
+Connection: 9 10 0 0 255
+Connection: 10 12 0 0 255
+Connection: 8 12 0 0 255
+Node: 9 12
+Connection: 10 13 0 0 255
+Connection: 8 13 0 0 255
+Connection: 8 12 0 0 255
+Node: 9 13
+Node: 9 14
+Connection: 10 15 0 0 255
+Connection: 8 15 0 0 255
+Node: 9 15
+Connection: 8 14 0 0 255
+Connection: 8 16 0 0 255
+Node: 9 16
+Node: 9 17
+Connection: 9 18 0 0 255
+Connection: 10 17 0 0 255
+Connection: 10 16 0 0 255
+Node: 9 18
+Connection: 9 17 0 0 255
+Connection: 8 18 0 0 255
+Connection: 8 17 0 0 255
+Node: 9 19
+Node: 9 20
+Connection: 10 19 0 0 255
+Connection: 9 21 0 0 255
+Connection: 8 20 0 0 255
+Connection: 10 20 0 0 255
+Node: 9 21
+Connection: 9 20 0 0 255
+Connection: 8 21 0 0 255
+Connection: 10 22 0 0 0
+Connection: 8 22 0 0 0
+Node: 9 22
+Node: 9 23
+Connection: 9 24 0 0 255
+Connection: 8 23 0 0 255
+Connection: 10 22 0 0 0
+Connection: 8 22 0 0 0
+Node: 9 24
+Connection: 10 25 0 0 255
+Connection: 9 23 0 0 255
+Connection: 8 24 0 0 255
+Connection: 10 24 0 0 255
+Node: 9 25
+Node: 9 26
+Connection: 9 27 0 0 255
+Connection: 8 26 0 0 255
+Connection: 8 27 0 0 255
+Node: 9 27
+Connection: 9 26 0 0 255
+Connection: 10 27 0 0 255
+Connection: 10 28 0 0 255
+Node: 9 28
+Node: 9 29
+Connection: 8 28 0 0 255
+Connection: 8 30 0 0 255
+Node: 9 30
+Connection: 10 29 0 0 255
+Connection: 8 29 0 0 255
+Node: 9 31
+Node: 9 32
+Connection: 10 31 0 0 255
+Connection: 8 31 0 0 255
+Connection: 8 32 0 0 255
+Node: 9 33
+Connection: 9 34 0 0 255
+Connection: 10 32 0 0 255
+Connection: 8 32 0 0 255
+Node: 9 34
+Connection: 10 35 0 0 255
+Connection: 9 33 0 0 255
+Connection: 8 34 0 0 255
+Node: 9 35
+Connection: 9 36 0 0 255
+Connection: 8 35 0 0 255
+Node: 9 36
+Connection: 10 36 0 0 255
+Connection: 9 35 0 0 255
+Node: 9 37
+Connection: 10 37 0 0 255
+Connection: 8 36 0 0 255
+Connection: 8 38 0 0 255
+Node: 9 38
+Connection: 10 38 0 0 255
+Connection: 8 38 0 0 255
+Connection: 8 37 0 0 255
+Connection: 8 39 0 0 255
+Node: 9 39
+Connection: 9 40 0 0 255
+Connection: 10 38 0 0 255
+Connection: 8 38 0 0 255
+Node: 9 40
+Connection: 10 41 0 0 255
+Connection: 9 39 0 0 255
+Connection: 8 40 0 0 255
+Node: 9 41
+Connection: 8 40 0 0 255
+Connection: 9 42 0 0 255
+Connection: 10 41 0 0 255
+Node: 9 42
+Connection: 10 43 0 0 255
+Connection: 8 43 0 0 255
+Connection: 10 41 0 0 255
+Connection: 9 41 0 0 255
+Node: 9 43
+Node: 9 44
+Connection: 8 44 0 0 0
+Connection: 10 44 0 0 0
+Node: 10 0
+Connection: 9 0 0 0 0
+Connection: 11 0 0 0 0
+Connection: 10 1 0 0 255
+Node: 10 1
+Connection: 9 2 0 0 255
+Connection: 10 0 0 0 0
+Connection: 11 1 0 0 255
+Node: 10 2
+Node: 10 3
+Connection: 11 3 0 0 255
+Connection: 9 2 0 0 255
+Connection: 9 4 0 0 255
+Connection: 9 3 0 0 255
+Node: 10 4
+Node: 10 5
+Connection: 10 6 0 0 255
+Connection: 11 5 0 0 255
+Connection: 11 4 0 0 255
+Node: 10 6
+Connection: 10 5 0 0 255
+Connection: 9 6 0 0 255
+Connection: 9 5 0 0 255
+Node: 10 7
+Connection: 11 6 0 0 255
+Connection: 10 8 0 0 255
+Connection: 9 7 0 0 255
+Connection: 11 7 0 0 255
+Connection: 11 8 0 0 255
+Node: 10 8
+Connection: 10 9 0 0 255
+Connection: 9 8 0 0 255
+Connection: 10 7 0 0 255
+Node: 10 9
+Connection: 10 8 0 0 255
+Connection: 11 10 0 0 255
+Connection: 9 10 0 0 255
+Connection: 11 8 0 0 255
+Connection: 11 9 0 0 255
+Node: 10 10
+Node: 10 11
+Connection: 11 10 0 0 255
+Connection: 11 12 0 0 255
+Connection: 11 11 0 0 255
+Node: 10 12
+Connection: 9 11 0 0 255
+Connection: 10 13 0 0 255
+Connection: 11 12 0 0 255
+Node: 10 13
+Connection: 9 12 0 0 255
+Connection: 10 12 0 0 255
+Node: 10 14
+Node: 10 15
+Connection: 9 14 0 0 255
+Connection: 10 16 0 0 255
+Connection: 11 15 0 0 255
+Node: 10 16
+Connection: 10 15 0 0 255
+Connection: 11 17 0 0 255
+Connection: 9 17 0 0 255
+Node: 10 17
+Connection: 10 18 0 0 255
+Connection: 9 17 0 0 255
+Node: 10 18
+Connection: 10 17 0 0 255
+Connection: 10 19 0 0 255
+Connection: 11 18 0 0 255
+Node: 10 19
+Connection: 10 18 0 0 255
+Connection: 11 20 0 0 255
+Connection: 9 20 0 0 255
+Connection: 10 20 0 0 255
+Node: 10 20
+Connection: 10 19 0 0 255
+Connection: 9 20 0 0 255
+Node: 10 21
+Node: 10 22
+Connection: 9 21 0 0 255
+Connection: 9 23 0 0 255
+Connection: 11 21 0 0 255
+Connection: 11 23 0 0 255
+Node: 10 23
+Node: 10 24
+Connection: 10 25 0 0 255
+Connection: 9 24 0 0 255
+Node: 10 25
+Connection: 10 26 0 0 255
+Connection: 11 24 0 0 255
+Connection: 9 24 0 0 255
+Connection: 10 24 0 0 255
+Node: 10 26
+Connection: 10 25 0 0 255
+Connection: 11 26 0 0 255
+Connection: 10 27 0 0 255
+Node: 10 27
+Connection: 10 26 0 0 255
+Connection: 9 27 0 0 255
+Node: 10 28
+Connection: 10 29 0 0 255
+Connection: 11 27 0 0 255
+Connection: 9 27 0 0 255
+Node: 10 29
+Connection: 9 30 0 0 255
+Connection: 10 28 0 0 255
+Connection: 11 29 0 0 255
+Node: 10 30
+Node: 10 31
+Connection: 9 32 0 0 255
+Connection: 10 32 0 0 255
+Node: 10 32
+Connection: 9 33 0 0 255
+Connection: 10 31 0 0 255
+Connection: 11 32 0 0 255
+Node: 10 33
+Connection: 11 32 0 0 255
+Connection: 11 34 0 0 255
+Connection: 11 33 0 0 255
+Node: 10 34
+Node: 10 35
+Connection: 10 36 0 0 255
+Connection: 11 34 0 0 255
+Connection: 9 34 0 0 255
+Connection: 11 36 0 0 255
+Connection: 11 35 0 0 255
+Node: 10 36
+Connection: 10 35 0 0 255
+Connection: 9 36 0 0 255
+Connection: 10 37 0 0 255
+Node: 10 37
+Connection: 11 38 0 0 255
+Connection: 10 36 0 0 255
+Connection: 9 37 0 0 255
+Connection: 11 36 0 0 255
+Connection: 11 37 0 0 255
+Node: 10 38
+Connection: 10 39 0 0 255
+Connection: 9 38 0 0 255
+Connection: 9 39 0 0 255
+Node: 10 39
+Connection: 10 38 0 0 255
+Connection: 11 39 0 0 255
+Connection: 11 40 0 0 255
+Node: 10 40
+Node: 10 41
+Connection: 11 41 0 0 255
+Connection: 9 40 0 0 255
+Connection: 9 42 0 0 255
+Connection: 9 41 0 0 255
+Node: 10 42
+Node: 10 43
+Connection: 9 42 0 0 255
+Connection: 10 44 0 0 0
+Connection: 11 43 0 0 255
+Node: 10 44
+Connection: 9 44 0 0 0
+Connection: 11 44 0 0 0
+Connection: 10 43 0 0 255
+Node: 11 0
+Connection: 10 0 0 0 0
+Connection: 12 0 0 0 0
+Node: 11 1
+Connection: 10 1 0 0 255
+Connection: 12 0 0 0 0
+Connection: 12 2 0 0 255
+Node: 11 2
+Node: 11 3
+Connection: 11 4 0 0 255
+Connection: 10 3 0 0 255
+Connection: 12 4 0 0 255
+Node: 11 4
+Connection: 11 3 0 0 255
+Connection: 12 5 0 0 255
+Connection: 10 5 0 0 255
+Node: 11 5
+Connection: 11 6 0 0 255
+Connection: 10 5 0 0 255
+Connection: 12 6 0 0 255
+Connection: 12 4 0 0 255
+Node: 11 6
+Connection: 11 5 0 0 255
+Connection: 12 7 0 0 255
+Connection: 10 7 0 0 255
+Node: 11 7
+Connection: 12 6 0 0 255
+Connection: 11 8 0 0 255
+Connection: 10 7 0 0 255
+Node: 11 8
+Connection: 12 8 0 0 255
+Connection: 11 7 0 0 255
+Connection: 10 7 0 0 255
+Connection: 10 9 0 0 255
+Connection: 11 9 0 0 255
+Node: 11 9
+Connection: 12 10 0 0 255
+Connection: 11 8 0 0 255
+Connection: 10 9 0 0 255
+Node: 11 10
+Connection: 12 11 0 0 255
+Connection: 10 9 0 0 255
+Connection: 10 11 0 0 255
+Connection: 12 9 0 0 255
+Node: 11 11
+Connection: 12 10 0 0 255
+Connection: 11 12 0 0 255
+Connection: 10 11 0 0 255
+Node: 11 12
+Connection: 12 11 0 0 255
+Connection: 10 11 0 0 255
+Connection: 10 12 0 0 255
+Connection: 11 13 0 0 255
+Connection: 11 11 0 0 255
+Node: 11 13
+Connection: 11 12 0 0 255
+Connection: 12 13 0 0 255
+Node: 11 14
+Connection: 11 15 0 0 255
+Connection: 12 14 0 0 255
+Connection: 12 15 0 0 255
+Node: 11 15
+Connection: 11 14 0 0 255
+Connection: 10 15 0 0 255
+Node: 11 16
+Node: 11 17
+Connection: 10 16 0 0 255
+Connection: 11 18 0 0 255
+Connection: 12 17 0 0 255
+Node: 11 18
+Connection: 10 18 0 0 255
+Connection: 11 17 0 0 255
+Connection: 12 17 0 0 255
+Connection: 12 19 0 0 255
+Node: 11 19
+Node: 11 20
+Connection: 10 19 0 0 255
+Connection: 11 21 0 0 255
+Connection: 12 20 0 0 255
+Node: 11 21
+Connection: 11 20 0 0 255
+Connection: 12 22 0 0 0
+Connection: 10 22 0 0 0
+Node: 11 22
+Node: 11 23
+Connection: 11 24 0 0 255
+Connection: 12 22 0 0 0
+Connection: 10 22 0 0 0
+Node: 11 24
+Connection: 10 25 0 0 255
+Connection: 11 23 0 0 255
+Connection: 12 24 0 0 255
+Node: 11 25
+Node: 11 26
+Connection: 10 26 0 0 255
+Connection: 12 25 0 0 255
+Connection: 12 27 0 0 255
+Connection: 11 27 0 0 255
+Node: 11 27
+Connection: 10 28 0 0 255
+Connection: 11 26 0 0 255
+Connection: 12 27 0 0 255
+Node: 11 28
+Node: 11 29
+Connection: 11 30 0 0 255
+Connection: 10 29 0 0 255
+Node: 11 30
+Connection: 11 29 0 0 255
+Connection: 12 30 0 0 255
+Connection: 12 29 0 0 255
+Node: 11 31
+Connection: 11 32 0 0 255
+Connection: 12 31 0 0 255
+Node: 11 32
+Connection: 12 33 0 0 255
+Connection: 10 33 0 0 255
+Connection: 10 32 0 0 255
+Connection: 11 31 0 0 255
+Connection: 11 33 0 0 255
+Node: 11 33
+Connection: 12 34 0 0 255
+Connection: 11 32 0 0 255
+Connection: 10 33 0 0 255
+Node: 11 34
+Connection: 12 33 0 0 255
+Connection: 10 35 0 0 255
+Connection: 10 33 0 0 255
+Connection: 12 35 0 0 255
+Node: 11 35
+Connection: 12 34 0 0 255
+Connection: 11 36 0 0 255
+Connection: 10 35 0 0 255
+Node: 11 36
+Connection: 12 36 0 0 255
+Connection: 10 35 0 0 255
+Connection: 10 37 0 0 255
+Connection: 11 37 0 0 255
+Connection: 11 35 0 0 255
+Node: 11 37
+Connection: 12 38 0 0 255
+Connection: 11 36 0 0 255
+Connection: 10 37 0 0 255
+Node: 11 38
+Connection: 11 39 0 0 255
+Connection: 12 37 0 0 255
+Connection: 10 37 0 0 255
+Node: 11 39
+Connection: 11 38 0 0 255
+Connection: 10 39 0 0 255
+Connection: 12 38 0 0 255
+Connection: 12 40 0 0 255
+Node: 11 40
+Connection: 11 41 0 0 255
+Connection: 12 39 0 0 255
+Connection: 10 39 0 0 255
+Node: 11 41
+Connection: 11 40 0 0 255
+Connection: 10 41 0 0 255
+Connection: 12 40 0 0 255
+Node: 11 42
+Node: 11 43
+Connection: 10 43 0 0 255
+Connection: 12 42 0 0 255
+Connection: 12 44 0 0 0
+Node: 11 44
+Connection: 10 44 0 0 0
+Connection: 12 44 0 0 0
+Node: 12 0
+Connection: 11 0 0 0 0
+Connection: 13 0 0 0 0
+Connection: 13 1 0 0 255
+Connection: 11 1 0 0 255
+Node: 12 1
+Node: 12 2
+Connection: 13 3 0 0 255
+Connection: 13 2 0 0 255
+Connection: 11 1 0 0 255
+Node: 12 3
+Node: 12 4
+Connection: 13 4 0 0 255
+Connection: 11 3 0 0 255
+Connection: 11 5 0 0 255
+Node: 12 5
+Connection: 11 4 0 0 255
+Connection: 12 6 0 0 255
+Connection: 13 5 0 0 255
+Node: 12 6
+Connection: 11 5 0 0 255
+Connection: 11 7 0 0 255
+Connection: 12 5 0 0 255
+Node: 12 7
+Connection: 11 6 0 0 255
+Connection: 13 6 0 0 255
+Node: 12 8
+Connection: 13 7 0 0 255
+Connection: 12 9 0 0 255
+Connection: 11 8 0 0 255
+Connection: 13 8 0 0 255
+Node: 12 9
+Connection: 12 8 0 0 255
+Connection: 13 10 0 0 255
+Connection: 11 10 0 0 255
+Node: 12 10
+Connection: 11 9 0 0 255
+Connection: 11 11 0 0 255
+Connection: 13 10 0 0 255
+Node: 12 11
+Connection: 11 10 0 0 255
+Connection: 11 12 0 0 255
+Connection: 13 11 0 0 255
+Node: 12 12
+Node: 12 13
+Connection: 11 13 0 0 255
+Connection: 13 12 0 0 255
+Connection: 13 14 0 0 255
+Node: 12 14
+Connection: 11 14 0 0 255
+Connection: 13 13 0 0 255
+Connection: 13 15 0 0 255
+Node: 12 15
+Connection: 13 14 0 0 255
+Connection: 11 14 0 0 255
+Node: 12 16
+Node: 12 17
+Connection: 11 17 0 0 255
+Connection: 11 18 0 0 255
+Connection: 13 16 0 0 255
+Node: 12 18
+Node: 12 19
+Connection: 11 18 0 0 255
+Connection: 12 20 0 0 255
+Connection: 13 19 0 0 255
+Node: 12 20
+Connection: 11 20 0 0 255
+Connection: 13 19 0 0 255
+Connection: 13 21 0 0 255
+Connection: 12 19 0 0 255
+Connection: 13 20 0 0 255
+Node: 12 21
+Node: 12 22
+Connection: 11 21 0 0 255
+Connection: 11 23 0 0 255
+Node: 12 23
+Node: 12 24
+Connection: 11 24 0 0 255
+Connection: 13 23 0 0 255
+Connection: 13 25 0 0 255
+Connection: 12 25 0 0 255
+Connection: 13 24 0 0 255
+Node: 12 25
+Connection: 11 26 0 0 255
+Connection: 12 24 0 0 255
+Connection: 13 25 0 0 255
+Node: 12 26
+Node: 12 27
+Connection: 11 26 0 0 255
+Connection: 11 27 0 0 255
+Connection: 13 28 0 0 255
+Node: 12 28
+Node: 12 29
+Connection: 13 30 0 0 255
+Connection: 11 30 0 0 255
+Node: 12 30
+Connection: 11 30 0 0 255
+Connection: 13 29 0 0 255
+Connection: 13 31 0 0 255
+Node: 12 31
+Connection: 11 31 0 0 255
+Connection: 13 30 0 0 255
+Connection: 13 32 0 0 255
+Node: 12 32
+Node: 12 33
+Connection: 11 32 0 0 255
+Connection: 11 34 0 0 255
+Connection: 13 33 0 0 255
+Node: 12 34
+Connection: 11 33 0 0 255
+Connection: 11 35 0 0 255
+Connection: 13 34 0 0 255
+Node: 12 35
+Connection: 12 36 0 0 255
+Connection: 13 34 0 0 255
+Connection: 11 34 0 0 255
+Node: 12 36
+Connection: 13 37 0 0 255
+Connection: 12 35 0 0 255
+Connection: 11 36 0 0 255
+Connection: 13 36 0 0 255
+Node: 12 37
+Connection: 11 38 0 0 255
+Connection: 13 38 0 0 255
+Node: 12 38
+Connection: 11 37 0 0 255
+Connection: 11 39 0 0 255
+Connection: 12 39 0 0 255
+Node: 12 39
+Connection: 11 40 0 0 255
+Connection: 12 38 0 0 255
+Connection: 13 39 0 0 255
+Node: 12 40
+Connection: 13 40 0 0 255
+Connection: 11 39 0 0 255
+Connection: 11 41 0 0 255
+Node: 12 41
+Node: 12 42
+Connection: 13 41 0 0 255
+Connection: 13 42 0 0 255
+Connection: 11 43 0 0 255
+Node: 12 43
+Node: 12 44
+Connection: 11 44 0 0 0
+Connection: 13 44 0 0 0
+Connection: 13 43 0 0 255
+Connection: 11 43 0 0 255
+Node: 13 0
+Connection: 12 0 0 0 0
+Connection: 14 0 0 0 0
+Connection: 14 1 0 0 255
+Node: 13 1
+Connection: 13 2 0 0 255
+Connection: 14 0 0 0 0
+Connection: 12 0 0 0 0
+Node: 13 2
+Connection: 14 3 0 0 255
+Connection: 13 1 0 0 255
+Connection: 12 2 0 0 255
+Node: 13 3
+Connection: 14 2 0 0 255
+Connection: 12 2 0 0 255
+Node: 13 4
+Connection: 14 3 0 0 255
+Connection: 13 5 0 0 255
+Connection: 12 4 0 0 255
+Connection: 14 5 0 0 255
+Node: 13 5
+Connection: 12 5 0 0 255
+Connection: 13 4 0 0 255
+Connection: 14 6 0 0 255
+Node: 13 6
+Connection: 14 7 0 0 255
+Connection: 12 7 0 0 255
+Connection: 14 5 0 0 255
+Node: 13 7
+Connection: 14 8 0 0 255
+Connection: 12 8 0 0 255
+Connection: 14 6 0 0 255
+Node: 13 8
+Connection: 14 7 0 0 255
+Connection: 13 9 0 0 255
+Connection: 12 8 0 0 255
+Connection: 14 9 0 0 255
+Node: 13 9
+Connection: 14 10 0 0 255
+Connection: 13 10 0 0 255
+Connection: 13 8 0 0 255
+Node: 13 10
+Connection: 14 11 0 0 255
+Connection: 13 9 0 0 255
+Connection: 12 10 0 0 255
+Connection: 12 9 0 0 255
+Connection: 14 9 0 0 255
+Node: 13 11
+Connection: 14 10 0 0 255
+Connection: 13 12 0 0 255
+Connection: 12 11 0 0 255
+Node: 13 12
+Connection: 12 13 0 0 255
+Connection: 14 11 0 0 255
+Connection: 14 12 0 0 255
+Connection: 13 11 0 0 255
+Node: 13 13
+Connection: 12 14 0 0 255
+Connection: 13 14 0 0 255
+Node: 13 14
+Connection: 12 15 0 0 255
+Connection: 12 13 0 0 255
+Connection: 13 13 0 0 255
+Connection: 14 14 0 0 255
+Node: 13 15
+Connection: 12 14 0 0 255
+Connection: 13 16 0 0 255
+Connection: 14 15 0 0 255
+Node: 13 16
+Connection: 13 15 0 0 255
+Connection: 14 17 0 0 255
+Connection: 12 17 0 0 255
+Node: 13 17
+Node: 13 18
+Connection: 13 19 0 0 255
+Connection: 14 19 0 0 255
+Node: 13 19
+Connection: 12 20 0 0 255
+Connection: 12 19 0 0 255
+Connection: 13 18 0 0 255
+Connection: 14 19 0 0 255
+Connection: 13 20 0 0 255
+Node: 13 20
+Connection: 14 21 0 0 255
+Connection: 13 19 0 0 255
+Connection: 12 20 0 0 255
+Node: 13 21
+Connection: 12 20 0 0 255
+Connection: 14 20 0 0 255
+Connection: 14 22 0 0 0
+Node: 13 22
+Connection: 14 21 0 0 255
+Connection: 14 23 0 0 255
+Node: 13 23
+Connection: 12 24 0 0 255
+Connection: 14 22 0 0 0
+Connection: 14 24 0 0 255
+Node: 13 24
+Connection: 14 23 0 0 255
+Connection: 13 25 0 0 255
+Connection: 12 24 0 0 255
+Node: 13 25
+Connection: 12 24 0 0 255
+Connection: 12 25 0 0 255
+Connection: 13 26 0 0 255
+Connection: 14 25 0 0 255
+Connection: 13 24 0 0 255
+Node: 13 26
+Connection: 13 25 0 0 255
+Connection: 14 25 0 0 255
+Node: 13 27
+Node: 13 28
+Connection: 13 29 0 0 255
+Connection: 14 27 0 0 255
+Connection: 12 27 0 0 255
+Node: 13 29
+Connection: 12 30 0 0 255
+Connection: 13 28 0 0 255
+Connection: 14 29 0 0 255
+Node: 13 30
+Connection: 12 29 0 0 255
+Connection: 12 31 0 0 255
+Connection: 13 31 0 0 255
+Connection: 14 30 0 0 255
+Node: 13 31
+Connection: 12 30 0 0 255
+Connection: 13 30 0 0 255
+Node: 13 32
+Connection: 12 31 0 0 255
+Connection: 14 33 0 0 255
+Connection: 14 32 0 0 255
+Connection: 13 33 0 0 255
+Node: 13 33
+Connection: 14 34 0 0 255
+Connection: 13 32 0 0 255
+Connection: 12 33 0 0 255
+Node: 13 34
+Connection: 14 33 0 0 255
+Connection: 13 35 0 0 255
+Connection: 12 34 0 0 255
+Connection: 12 35 0 0 255
+Connection: 14 35 0 0 255
+Node: 13 35
+Connection: 14 34 0 0 255
+Connection: 13 34 0 0 255
+Connection: 13 36 0 0 255
+Node: 13 36
+Connection: 14 37 0 0 255
+Connection: 13 35 0 0 255
+Connection: 12 36 0 0 255
+Connection: 14 35 0 0 255
+Node: 13 37
+Connection: 14 36 0 0 255
+Connection: 12 36 0 0 255
+Connection: 14 38 0 0 255
+Node: 13 38
+Connection: 14 37 0 0 255
+Connection: 12 37 0 0 255
+Connection: 14 39 0 0 255
+Node: 13 39
+Connection: 12 39 0 0 255
+Connection: 13 40 0 0 255
+Connection: 14 38 0 0 255
+Node: 13 40
+Connection: 14 41 0 0 255
+Connection: 13 39 0 0 255
+Connection: 12 40 0 0 255
+Connection: 14 39 0 0 255
+Node: 13 41
+Connection: 14 42 0 0 255
+Connection: 12 42 0 0 255
+Node: 13 42
+Connection: 14 41 0 0 255
+Connection: 13 43 0 0 255
+Connection: 12 42 0 0 255
+Node: 13 43
+Connection: 13 42 0 0 255
+Connection: 14 44 0 0 0
+Connection: 12 44 0 0 0
+Node: 13 44
+Connection: 12 44 0 0 0
+Connection: 14 44 0 0 0
+Connection: 14 43 0 0 255
+Node: 14 0
+Connection: 13 0 0 0 0
+Connection: 15 0 0 0 0
+Connection: 13 1 0 0 255
+Node: 14 1
+Connection: 14 2 0 0 255
+Connection: 15 0 0 0 0
+Connection: 13 0 0 0 0
+Node: 14 2
+Connection: 13 3 0 0 255
+Connection: 14 1 0 0 255
+Connection: 15 2 0 0 255
+Node: 14 3
+Connection: 15 3 0 0 255
+Connection: 13 2 0 0 255
+Connection: 13 4 0 0 255
+Connection: 15 4 0 0 255
+Node: 14 4
+Node: 14 5
+Connection: 13 4 0 0 255
+Connection: 13 6 0 0 255
+Node: 14 6
+Connection: 15 6 0 0 255
+Connection: 13 5 0 0 255
+Connection: 13 7 0 0 255
+Node: 14 7
+Connection: 13 6 0 0 255
+Connection: 15 8 0 0 255
+Connection: 13 8 0 0 255
+Node: 14 8
+Connection: 13 7 0 0 255
+Connection: 15 7 0 0 255
+Node: 14 9
+Connection: 15 9 0 0 255
+Connection: 13 8 0 0 255
+Connection: 13 10 0 0 255
+Node: 14 10
+Connection: 15 10 0 0 255
+Connection: 13 9 0 0 255
+Connection: 13 11 0 0 255
+Node: 14 11
+Connection: 15 11 0 0 255
+Connection: 13 10 0 0 255
+Connection: 13 12 0 0 255
+Connection: 14 12 0 0 255
+Node: 14 12
+Connection: 15 13 0 0 255
+Connection: 14 11 0 0 255
+Connection: 13 12 0 0 255
+Node: 14 13
+Node: 14 14
+Connection: 13 14 0 0 255
+Connection: 15 13 0 0 255
+Node: 14 15
+Connection: 13 15 0 0 255
+Connection: 15 14 0 0 255
+Connection: 15 16 0 0 255
+Node: 14 16
+Node: 14 17
+Connection: 15 16 0 0 255
+Connection: 15 18 0 0 255
+Connection: 13 16 0 0 255
+Node: 14 18
+Node: 14 19
+Connection: 14 20 0 0 255
+Connection: 13 19 0 0 255
+Connection: 15 18 0 0 255
+Connection: 13 18 0 0 255
+Node: 14 20
+Connection: 13 21 0 0 255
+Connection: 14 19 0 0 255
+Connection: 15 20 0 0 255
+Node: 14 21
+Connection: 15 21 0 0 255
+Connection: 13 20 0 0 255
+Connection: 13 22 0 0 0
+Node: 14 22
+Connection: 13 21 0 0 255
+Connection: 13 23 0 0 255
+Node: 14 23
+Connection: 15 23 0 0 255
+Connection: 13 22 0 0 0
+Connection: 13 24 0 0 255
+Node: 14 24
+Connection: 13 23 0 0 255
+Connection: 14 25 0 0 255
+Connection: 15 24 0 0 255
+Node: 14 25
+Connection: 14 24 0 0 255
+Connection: 13 25 0 0 255
+Connection: 15 26 0 0 255
+Connection: 13 26 0 0 255
+Node: 14 26
+Node: 14 27
+Connection: 15 26 0 0 255
+Connection: 15 28 0 0 255
+Connection: 13 28 0 0 255
+Node: 14 28
+Node: 14 29
+Connection: 13 29 0 0 255
+Connection: 15 28 0 0 255
+Connection: 15 30 0 0 255
+Node: 14 30
+Connection: 13 30 0 0 255
+Connection: 15 31 0 0 255
+Node: 14 31
+Node: 14 32
+Connection: 15 31 0 0 255
+Connection: 14 33 0 0 255
+Connection: 13 32 0 0 255
+Node: 14 33
+Connection: 15 33 0 0 255
+Connection: 13 32 0 0 255
+Connection: 13 34 0 0 255
+Connection: 14 32 0 0 255
+Node: 14 34
+Connection: 15 34 0 0 255
+Connection: 13 33 0 0 255
+Connection: 13 35 0 0 255
+Node: 14 35
+Connection: 15 35 0 0 255
+Connection: 13 34 0 0 255
+Connection: 13 36 0 0 255
+Node: 14 36
+Connection: 13 37 0 0 255
+Connection: 15 37 0 0 255
+Node: 14 37
+Connection: 13 38 0 0 255
+Connection: 15 36 0 0 255
+Connection: 13 36 0 0 255
+Node: 14 38
+Connection: 15 38 0 0 255
+Connection: 13 37 0 0 255
+Connection: 13 39 0 0 255
+Node: 14 39
+Connection: 13 38 0 0 255
+Connection: 13 40 0 0 255
+Node: 14 40
+Node: 14 41
+Connection: 15 41 0 0 255
+Connection: 13 40 0 0 255
+Connection: 13 42 0 0 255
+Connection: 15 40 0 0 255
+Node: 14 42
+Connection: 13 41 0 0 255
+Connection: 14 43 0 0 255
+Connection: 15 42 0 0 255
+Node: 14 43
+Connection: 14 42 0 0 255
+Connection: 15 44 0 0 0
+Connection: 13 44 0 0 0
+Node: 14 44
+Connection: 13 44 0 0 0
+Connection: 15 44 0 0 0
+Connection: 13 43 0 0 255
+Node: 15 0
+Connection: 14 0 0 0 0
+Connection: 16 0 0 0 0
+Connection: 14 1 0 0 255
+Node: 15 1
+Node: 15 2
+Connection: 16 1 0 0 255
+Connection: 16 3 0 0 255
+Connection: 15 3 0 0 255
+Connection: 14 2 0 0 255
+Connection: 16 2 0 0 255
+Node: 15 3
+Connection: 16 4 0 0 255
+Connection: 15 2 0 0 255
+Connection: 14 3 0 0 255
+Node: 15 4
+Connection: 16 3 0 0 255
+Connection: 14 3 0 0 255
+Node: 15 5
+Connection: 16 4 0 0 255
+Connection: 16 6 0 0 255
+Node: 15 6
+Connection: 15 7 0 0 255
+Connection: 14 6 0 0 255
+Node: 15 7
+Connection: 15 6 0 0 255
+Connection: 16 8 0 0 255
+Connection: 14 8 0 0 255
+Node: 15 8
+Connection: 15 9 0 0 255
+Connection: 14 7 0 0 255
+Connection: 16 7 0 0 255
+Node: 15 9
+Connection: 16 10 0 0 255
+Connection: 15 8 0 0 255
+Connection: 14 9 0 0 255
+Node: 15 10
+Connection: 16 9 0 0 255
+Connection: 15 11 0 0 255
+Connection: 14 10 0 0 255
+Node: 15 11
+Connection: 16 10 0 0 255
+Connection: 15 12 0 0 255
+Connection: 14 11 0 0 255
+Connection: 15 10 0 0 255
+Node: 15 12
+Connection: 16 12 0 0 255
+Connection: 15 11 0 0 255
+Node: 15 13
+Connection: 14 12 0 0 255
+Connection: 14 14 0 0 255
+Connection: 15 14 0 0 255
+Connection: 16 13 0 0 255
+Node: 15 14
+Connection: 15 13 0 0 255
+Connection: 16 14 0 0 255
+Connection: 14 15 0 0 255
+Node: 15 15
+Node: 15 16
+Connection: 15 17 0 0 255
+Connection: 16 15 0 0 255
+Connection: 14 17 0 0 255
+Connection: 14 15 0 0 255
+Node: 15 17
+Connection: 15 16 0 0 255
+Connection: 16 17 0 0 255
+Connection: 15 18 0 0 255
+Node: 15 18
+Connection: 15 17 0 0 255
+Connection: 16 18 0 0 255
+Connection: 14 17 0 0 255
+Connection: 14 19 0 0 255
+Node: 15 19
+Node: 15 20
+Connection: 14 20 0 0 255
+Connection: 16 19 0 0 255
+Connection: 16 21 0 0 255
+Node: 15 21
+Connection: 16 20 0 0 255
+Connection: 15 22 0 0 0
+Connection: 14 21 0 0 255
+Node: 15 22
+Connection: 15 21 0 0 255
+Connection: 15 23 0 0 255
+Node: 15 23
+Connection: 16 24 0 0 255
+Connection: 15 22 0 0 0
+Connection: 14 23 0 0 255
+Node: 15 24
+Connection: 14 24 0 0 255
+Connection: 16 23 0 0 255
+Connection: 16 25 0 0 255
+Node: 15 25
+Node: 15 26
+Connection: 15 27 0 0 255
+Connection: 16 26 0 0 255
+Connection: 14 27 0 0 255
+Connection: 14 25 0 0 255
+Node: 15 27
+Connection: 15 28 0 0 255
+Connection: 16 27 0 0 255
+Connection: 15 26 0 0 255
+Node: 15 28
+Connection: 15 27 0 0 255
+Connection: 16 29 0 0 255
+Connection: 14 27 0 0 255
+Connection: 14 29 0 0 255
+Node: 15 29
+Node: 15 30
+Connection: 15 31 0 0 255
+Connection: 16 30 0 0 255
+Connection: 14 29 0 0 255
+Node: 15 31
+Connection: 14 30 0 0 255
+Connection: 14 32 0 0 255
+Connection: 15 30 0 0 255
+Connection: 16 31 0 0 255
+Node: 15 32
+Connection: 16 32 0 0 255
+Connection: 15 33 0 0 255
+Node: 15 33
+Connection: 16 34 0 0 255
+Connection: 15 32 0 0 255
+Connection: 14 33 0 0 255
+Connection: 15 34 0 0 255
+Node: 15 34
+Connection: 16 35 0 0 255
+Connection: 15 33 0 0 255
+Connection: 14 34 0 0 255
+Node: 15 35
+Connection: 16 34 0 0 255
+Connection: 15 36 0 0 255
+Connection: 14 35 0 0 255
+Node: 15 36
+Connection: 15 35 0 0 255
+Connection: 14 37 0 0 255
+Connection: 16 37 0 0 255
+Node: 15 37
+Connection: 15 38 0 0 255
+Connection: 16 36 0 0 255
+Connection: 14 36 0 0 255
+Node: 15 38
+Connection: 15 37 0 0 255
+Connection: 14 38 0 0 255
+Node: 15 39
+Connection: 16 40 0 0 255
+Connection: 16 38 0 0 255
+Node: 15 40
+Connection: 16 41 0 0 255
+Connection: 14 41 0 0 255
+Node: 15 41
+Connection: 16 40 0 0 255
+Connection: 15 42 0 0 255
+Connection: 14 41 0 0 255
+Node: 15 42
+Connection: 15 41 0 0 255
+Connection: 16 41 0 0 255
+Connection: 16 43 0 0 255
+Connection: 14 42 0 0 255
+Connection: 16 42 0 0 255
+Node: 15 43
+Node: 15 44
+Connection: 14 44 0 0 0
+Connection: 16 44 0 0 0
+Connection: 14 43 0 0 255
+Node: 16 0
+Connection: 15 0 0 0 0
+Connection: 17 0 0 0 0
+Connection: 16 1 0 0 255
+Node: 16 1
+Connection: 15 2 0 0 255
+Connection: 16 0 0 0 0
+Connection: 17 1 0 0 255
+Connection: 16 2 0 0 255
+Node: 16 2
+Connection: 17 3 0 0 255
+Connection: 16 1 0 0 255
+Connection: 15 2 0 0 255
+Node: 16 3
+Connection: 15 2 0 0 255
+Connection: 16 4 0 0 255
+Connection: 17 3 0 0 255
+Connection: 15 4 0 0 255
+Node: 16 4
+Connection: 17 4 0 0 255
+Connection: 15 3 0 0 255
+Connection: 15 5 0 0 255
+Connection: 16 3 0 0 255
+Node: 16 5
+Node: 16 6
+Connection: 16 7 0 0 255
+Connection: 17 5 0 0 255
+Connection: 15 5 0 0 255
+Node: 16 7
+Connection: 16 6 0 0 255
+Connection: 17 7 0 0 255
+Connection: 17 6 0 0 255
+Connection: 15 8 0 0 255
+Node: 16 8
+Connection: 16 9 0 0 255
+Connection: 17 8 0 0 255
+Connection: 17 9 0 0 255
+Connection: 15 7 0 0 255
+Node: 16 9
+Connection: 16 8 0 0 255
+Connection: 17 10 0 0 255
+Connection: 15 10 0 0 255
+Node: 16 10
+Connection: 17 10 0 0 255
+Connection: 15 9 0 0 255
+Connection: 15 11 0 0 255
+Node: 16 11
+Connection: 16 12 0 0 255
+Connection: 17 11 0 0 255
+Node: 16 12
+Connection: 16 11 0 0 255
+Connection: 15 12 0 0 255
+Connection: 17 13 0 0 255
+Node: 16 13
+Connection: 17 12 0 0 255
+Connection: 16 14 0 0 255
+Connection: 15 13 0 0 255
+Node: 16 14
+Connection: 17 14 0 0 255
+Connection: 15 14 0 0 255
+Connection: 16 13 0 0 255
+Node: 16 15
+Connection: 17 16 0 0 255
+Connection: 15 16 0 0 255
+Connection: 17 15 0 0 255
+Node: 16 16
+Connection: 16 17 0 0 255
+Connection: 17 16 0 0 255
+Node: 16 17
+Connection: 15 17 0 0 255
+Connection: 16 16 0 0 255
+Node: 16 18
+Connection: 15 18 0 0 255
+Connection: 17 17 0 0 255
+Connection: 17 19 0 0 255
+Node: 16 19
+Connection: 17 18 0 0 255
+Connection: 17 20 0 0 255
+Connection: 15 20 0 0 255
+Node: 16 20
+Connection: 17 21 0 0 255
+Connection: 15 21 0 0 255
+Node: 16 21
+Connection: 15 20 0 0 255
+Connection: 16 22 0 0 0
+Connection: 17 21 0 0 255
+Node: 16 22
+Connection: 16 21 0 0 255
+Connection: 16 23 0 0 255
+Node: 16 23
+Connection: 15 24 0 0 255
+Connection: 16 22 0 0 0
+Connection: 17 23 0 0 255
+Node: 16 24
+Connection: 17 23 0 0 255
+Connection: 15 23 0 0 255
+Node: 16 25
+Connection: 17 24 0 0 255
+Connection: 17 26 0 0 255
+Connection: 15 24 0 0 255
+Node: 16 26
+Connection: 15 26 0 0 255
+Connection: 17 25 0 0 255
+Connection: 17 27 0 0 255
+Node: 16 27
+Connection: 15 27 0 0 255
+Connection: 16 28 0 0 255
+Node: 16 28
+Connection: 16 27 0 0 255
+Connection: 17 28 0 0 255
+Node: 16 29
+Connection: 17 28 0 0 255
+Connection: 15 28 0 0 255
+Connection: 17 29 0 0 255
+Node: 16 30
+Connection: 17 30 0 0 255
+Connection: 15 30 0 0 255
+Connection: 16 31 0 0 255
+Node: 16 31
+Connection: 17 32 0 0 255
+Connection: 16 30 0 0 255
+Connection: 15 31 0 0 255
+Node: 16 32
+Connection: 16 33 0 0 255
+Connection: 15 32 0 0 255
+Connection: 17 31 0 0 255
+Node: 16 33
+Connection: 16 32 0 0 255
+Connection: 17 33 0 0 255
+Node: 16 34
+Connection: 17 34 0 0 255
+Connection: 15 33 0 0 255
+Connection: 15 35 0 0 255
+Node: 16 35
+Connection: 16 36 0 0 255
+Connection: 17 34 0 0 255
+Connection: 15 34 0 0 255
+Node: 16 36
+Connection: 16 35 0 0 255
+Connection: 17 36 0 0 255
+Connection: 17 35 0 0 255
+Connection: 15 37 0 0 255
+Node: 16 37
+Connection: 16 38 0 0 255
+Connection: 17 37 0 0 255
+Connection: 17 38 0 0 255
+Connection: 15 36 0 0 255
+Node: 16 38
+Connection: 16 37 0 0 255
+Connection: 17 39 0 0 255
+Connection: 15 39 0 0 255
+Node: 16 39
+Node: 16 40
+Connection: 17 40 0 0 255
+Connection: 15 39 0 0 255
+Connection: 15 41 0 0 255
+Connection: 16 41 0 0 255
+Node: 16 41
+Connection: 15 42 0 0 255
+Connection: 16 40 0 0 255
+Connection: 17 41 0 0 255
+Connection: 15 40 0 0 255
+Node: 16 42
+Connection: 17 41 0 0 255
+Connection: 16 43 0 0 255
+Connection: 15 42 0 0 255
+Node: 16 43
+Connection: 15 42 0 0 255
+Connection: 16 44 0 0 0
+Connection: 17 43 0 0 255
+Connection: 16 42 0 0 255
+Node: 16 44
+Connection: 15 44 0 0 0
+Connection: 17 44 0 0 0
+Connection: 16 43 0 0 255
+Node: 17 0
+Connection: 16 0 0 0 0
+Connection: 18 0 0 0 0
+Node: 17 1
+Connection: 16 1 0 0 255
+Connection: 18 0 0 0 0
+Connection: 18 2 0 0 255
+Node: 17 2
+Connection: 18 2 0 0 255
+Connection: 18 3 0 0 255
+Node: 17 3
+Connection: 17 4 0 0 255
+Connection: 16 3 0 0 255
+Connection: 18 2 0 0 255
+Connection: 16 2 0 0 255
+Node: 17 4
+Connection: 18 5 0 0 255
+Connection: 17 3 0 0 255
+Connection: 16 4 0 0 255
+Connection: 17 5 0 0 255
+Connection: 18 3 0 0 255
+Node: 17 5
+Connection: 17 4 0 0 255
+Connection: 18 5 0 0 255
+Connection: 16 6 0 0 255
+Node: 17 6
+Connection: 18 7 0 0 255
+Connection: 16 7 0 0 255
+Node: 17 7
+Connection: 16 7 0 0 255
+Connection: 18 6 0 0 255
+Connection: 18 8 0 0 255
+Node: 17 8
+Connection: 16 8 0 0 255
+Connection: 18 7 0 0 255
+Connection: 18 9 0 0 255
+Node: 17 9
+Connection: 17 10 0 0 255
+Connection: 18 8 0 0 255
+Connection: 16 8 0 0 255
+Node: 17 10
+Connection: 17 9 0 0 255
+Connection: 16 10 0 0 255
+Connection: 18 11 0 0 255
+Connection: 16 9 0 0 255
+Node: 17 11
+Connection: 18 10 0 0 255
+Connection: 17 12 0 0 255
+Connection: 16 11 0 0 255
+Node: 17 12
+Connection: 17 11 0 0 255
+Connection: 18 13 0 0 255
+Connection: 16 13 0 0 255
+Node: 17 13
+Connection: 17 14 0 0 255
+Connection: 18 12 0 0 255
+Connection: 16 12 0 0 255
+Node: 17 14
+Connection: 17 13 0 0 255
+Connection: 16 14 0 0 255
+Connection: 18 15 0 0 255
+Node: 17 15
+Connection: 18 14 0 0 255
+Connection: 17 16 0 0 255
+Connection: 16 15 0 0 255
+Node: 17 16
+Connection: 16 16 0 0 255
+Connection: 17 17 0 0 255
+Connection: 16 15 0 0 255
+Connection: 17 15 0 0 255
+Connection: 18 15 0 0 255
+Connection: 18 16 0 0 255
+Node: 17 17
+Connection: 16 18 0 0 255
+Connection: 17 16 0 0 255
+Connection: 18 17 0 0 255
+Connection: 17 18 0 0 255
+Node: 17 18
+Connection: 16 19 0 0 255
+Connection: 17 17 0 0 255
+Connection: 18 18 0 0 255
+Node: 17 19
+Connection: 16 18 0 0 255
+Connection: 17 20 0 0 255
+Connection: 18 19 0 0 255
+Node: 17 20
+Connection: 16 19 0 0 255
+Connection: 17 21 0 0 255
+Connection: 18 20 0 0 255
+Connection: 17 19 0 0 255
+Node: 17 21
+Connection: 16 20 0 0 255
+Connection: 17 20 0 0 255
+Connection: 16 21 0 0 255
+Connection: 18 21 0 0 255
+Node: 17 22
+Node: 17 23
+Connection: 16 24 0 0 255
+Connection: 17 24 0 0 255
+Connection: 16 23 0 0 255
+Connection: 18 23 0 0 255
+Node: 17 24
+Connection: 16 25 0 0 255
+Connection: 17 23 0 0 255
+Connection: 18 24 0 0 255
+Connection: 17 25 0 0 255
+Node: 17 25
+Connection: 16 26 0 0 255
+Connection: 17 24 0 0 255
+Connection: 18 25 0 0 255
+Node: 17 26
+Connection: 16 25 0 0 255
+Connection: 17 27 0 0 255
+Connection: 18 26 0 0 255
+Node: 17 27
+Connection: 16 26 0 0 255
+Connection: 17 28 0 0 255
+Connection: 18 27 0 0 255
+Connection: 17 26 0 0 255
+Node: 17 28
+Connection: 16 28 0 0 255
+Connection: 17 27 0 0 255
+Connection: 16 29 0 0 255
+Connection: 17 29 0 0 255
+Connection: 18 28 0 0 255
+Connection: 18 29 0 0 255
+Node: 17 29
+Connection: 18 30 0 0 255
+Connection: 17 28 0 0 255
+Connection: 16 29 0 0 255
+Node: 17 30
+Connection: 17 31 0 0 255
+Connection: 16 30 0 0 255
+Connection: 18 29 0 0 255
+Node: 17 31
+Connection: 17 30 0 0 255
+Connection: 18 32 0 0 255
+Connection: 16 32 0 0 255
+Node: 17 32
+Connection: 17 33 0 0 255
+Connection: 18 31 0 0 255
+Connection: 16 31 0 0 255
+Node: 17 33
+Connection: 18 34 0 0 255
+Connection: 17 32 0 0 255
+Connection: 16 33 0 0 255
+Node: 17 34
+Connection: 17 35 0 0 255
+Connection: 16 34 0 0 255
+Connection: 18 33 0 0 255
+Connection: 16 35 0 0 255
+Node: 17 35
+Connection: 17 34 0 0 255
+Connection: 18 36 0 0 255
+Connection: 16 36 0 0 255
+Node: 17 36
+Connection: 16 36 0 0 255
+Connection: 18 35 0 0 255
+Connection: 18 37 0 0 255
+Node: 17 37
+Connection: 16 37 0 0 255
+Connection: 18 36 0 0 255
+Connection: 18 38 0 0 255
+Node: 17 38
+Connection: 18 37 0 0 255
+Connection: 16 37 0 0 255
+Node: 17 39
+Connection: 17 40 0 0 255
+Connection: 18 39 0 0 255
+Connection: 16 38 0 0 255
+Node: 17 40
+Connection: 18 39 0 0 255
+Connection: 17 41 0 0 255
+Connection: 16 40 0 0 255
+Connection: 17 39 0 0 255
+Connection: 18 41 0 0 255
+Node: 17 41
+Connection: 17 40 0 0 255
+Connection: 16 41 0 0 255
+Connection: 18 42 0 0 255
+Connection: 16 42 0 0 255
+Node: 17 42
+Connection: 18 42 0 0 255
+Connection: 18 41 0 0 255
+Node: 17 43
+Connection: 16 43 0 0 255
+Connection: 18 42 0 0 255
+Connection: 18 44 0 0 0
+Node: 17 44
+Connection: 16 44 0 0 0
+Connection: 18 44 0 0 0
+Node: 18 0
+Connection: 17 0 0 0 0
+Connection: 19 0 0 0 0
+Connection: 17 1 0 0 255
+Node: 18 1
+Connection: 18 2 0 0 255
+Connection: 19 2 0 0 255
+Node: 18 2
+Connection: 18 1 0 0 255
+Connection: 17 2 0 0 255
+Connection: 17 3 0 0 255
+Connection: 17 1 0 0 255
+Node: 18 3
+Connection: 19 3 0 0 255
+Connection: 17 2 0 0 255
+Connection: 17 4 0 0 255
+Node: 18 4
+Node: 18 5
+Connection: 19 4 0 0 255
+Connection: 17 4 0 0 255
+Connection: 17 5 0 0 255
+Connection: 18 6 0 0 255
+Node: 18 6
+Connection: 17 7 0 0 255
+Connection: 18 5 0 0 255
+Connection: 19 6 0 0 255
+Node: 18 7
+Connection: 17 6 0 0 255
+Connection: 17 8 0 0 255
+Node: 18 8
+Connection: 17 7 0 0 255
+Connection: 18 9 0 0 255
+Connection: 19 8 0 0 255
+Connection: 19 9 0 0 255
+Connection: 17 9 0 0 255
+Node: 18 9
+Connection: 17 8 0 0 255
+Connection: 18 8 0 0 255
+Connection: 18 10 0 0 255
+Connection: 19 9 0 0 255
+Node: 18 10
+Connection: 18 9 0 0 255
+Connection: 19 11 0 0 255
+Connection: 17 11 0 0 255
+Node: 18 11
+Connection: 19 10 0 0 255
+Connection: 17 10 0 0 255
+Node: 18 12
+Connection: 19 13 0 0 255
+Connection: 17 13 0 0 255
+Node: 18 13
+Connection: 17 12 0 0 255
+Connection: 18 14 0 0 255
+Connection: 19 13 0 0 255
+Node: 18 14
+Connection: 19 15 0 0 255
+Connection: 17 15 0 0 255
+Connection: 18 13 0 0 255
+Node: 18 15
+Connection: 17 14 0 0 255
+Connection: 17 16 0 0 255
+Connection: 18 16 0 0 255
+Node: 18 16
+Connection: 18 15 0 0 255
+Connection: 17 16 0 0 255
+Connection: 19 17 0 0 255
+Node: 18 17
+Connection: 17 17 0 0 255
+Connection: 19 16 0 0 255
+Connection: 19 18 0 0 255
+Node: 18 18
+Connection: 19 18 0 0 255
+Connection: 17 18 0 0 255
+Node: 18 19
+Connection: 17 19 0 0 255
+Connection: 19 18 0 0 255
+Connection: 19 20 0 0 255
+Node: 18 20
+Connection: 17 20 0 0 255
+Connection: 19 21 0 0 255
+Node: 18 21
+Connection: 19 20 0 0 255
+Connection: 18 22 0 0 0
+Connection: 17 21 0 0 255
+Node: 18 22
+Connection: 19 21 0 0 255
+Connection: 19 23 0 0 255
+Connection: 18 21 0 0 255
+Connection: 18 23 0 0 255
+Node: 18 23
+Connection: 19 24 0 0 255
+Connection: 18 22 0 0 0
+Connection: 17 23 0 0 255
+Node: 18 24
+Connection: 17 24 0 0 255
+Connection: 19 23 0 0 255
+Node: 18 25
+Connection: 17 25 0 0 255
+Connection: 19 24 0 0 255
+Connection: 19 26 0 0 255
+Node: 18 26
+Connection: 19 26 0 0 255
+Connection: 17 26 0 0 255
+Node: 18 27
+Connection: 17 27 0 0 255
+Connection: 19 26 0 0 255
+Connection: 19 28 0 0 255
+Node: 18 28
+Connection: 18 29 0 0 255
+Connection: 17 28 0 0 255
+Connection: 19 27 0 0 255
+Node: 18 29
+Connection: 18 28 0 0 255
+Connection: 17 28 0 0 255
+Connection: 17 30 0 0 255
+Node: 18 30
+Connection: 19 29 0 0 255
+Connection: 17 29 0 0 255
+Connection: 18 31 0 0 255
+Node: 18 31
+Connection: 17 32 0 0 255
+Connection: 18 30 0 0 255
+Connection: 19 31 0 0 255
+Node: 18 32
+Connection: 19 31 0 0 255
+Connection: 17 31 0 0 255
+Node: 18 33
+Connection: 19 34 0 0 255
+Connection: 17 34 0 0 255
+Node: 18 34
+Connection: 18 35 0 0 255
+Connection: 19 33 0 0 255
+Connection: 17 33 0 0 255
+Node: 18 35
+Connection: 17 36 0 0 255
+Connection: 18 34 0 0 255
+Connection: 19 35 0 0 255
+Connection: 18 36 0 0 255
+Node: 18 36
+Connection: 17 37 0 0 255
+Connection: 18 35 0 0 255
+Connection: 19 36 0 0 255
+Connection: 19 35 0 0 255
+Connection: 17 35 0 0 255
+Node: 18 37
+Connection: 17 36 0 0 255
+Connection: 17 38 0 0 255
+Node: 18 38
+Connection: 17 37 0 0 255
+Connection: 18 39 0 0 255
+Connection: 19 38 0 0 255
+Node: 18 39
+Connection: 19 40 0 0 255
+Connection: 17 40 0 0 255
+Connection: 17 39 0 0 255
+Connection: 18 38 0 0 255
+Node: 18 40
+Node: 18 41
+Connection: 19 41 0 0 255
+Connection: 17 40 0 0 255
+Connection: 17 42 0 0 255
+Node: 18 42
+Connection: 18 43 0 0 255
+Connection: 17 42 0 0 255
+Connection: 17 41 0 0 255
+Connection: 17 43 0 0 255
+Node: 18 43
+Connection: 18 42 0 0 255
+Connection: 19 42 0 0 255
+Node: 18 44
+Connection: 17 44 0 0 0
+Connection: 19 44 0 0 0
+Connection: 17 43 0 0 255
+Node: 19 0
+Connection: 18 0 0 0 0
+Connection: 20 0 0 0 0
+Node: 19 1
+Connection: 20 0 0 0 0
+Connection: 20 2 0 0 255
+Node: 19 2
+Connection: 19 3 0 0 255
+Connection: 20 1 0 0 255
+Connection: 18 1 0 0 255
+Node: 19 3
+Connection: 19 2 0 0 255
+Connection: 18 3 0 0 255
+Connection: 19 4 0 0 255
+Node: 19 4
+Connection: 18 5 0 0 255
+Connection: 19 3 0 0 255
+Connection: 20 4 0 0 255
+Node: 19 5
+Node: 19 6
+Connection: 20 5 0 0 255
+Connection: 20 7 0 0 255
+Connection: 18 6 0 0 255
+Node: 19 7
+Node: 19 8
+Connection: 18 8 0 0 255
+Connection: 20 7 0 0 255
+Connection: 20 9 0 0 255
+Node: 19 9
+Connection: 18 9 0 0 255
+Connection: 20 8 0 0 255
+Connection: 18 8 0 0 255
+Connection: 19 10 0 0 255
+Node: 19 10
+Connection: 18 11 0 0 255
+Connection: 19 9 0 0 255
+Connection: 20 10 0 0 255
+Node: 19 11
+Connection: 18 10 0 0 255
+Connection: 19 12 0 0 255
+Connection: 20 11 0 0 255
+Connection: 20 10 0 0 255
+Node: 19 12
+Connection: 19 11 0 0 255
+Node: 19 13
+Connection: 20 12 0 0 255
+Connection: 18 12 0 0 255
+Connection: 18 13 0 0 255
+Node: 19 14
+Node: 19 15
+Connection: 18 14 0 0 255
+Connection: 20 14 0 0 255
+Connection: 19 16 0 0 255
+Node: 19 16
+Connection: 18 17 0 0 255
+Connection: 19 15 0 0 255
+Connection: 20 16 0 0 255
+Node: 19 17
+Connection: 19 18 0 0 255
+Connection: 20 16 0 0 255
+Connection: 18 16 0 0 255
+Node: 19 18
+Connection: 19 17 0 0 255
+Connection: 18 18 0 0 255
+Connection: 18 19 0 0 255
+Connection: 20 18 0 0 255
+Connection: 18 17 0 0 255
+Node: 19 19
+Node: 19 20
+Connection: 20 20 0 0 255
+Connection: 18 19 0 0 255
+Connection: 18 21 0 0 255
+Node: 19 21
+Connection: 20 21 0 0 255
+Connection: 18 20 0 0 255
+Connection: 18 22 0 0 0
+Node: 19 22
+Node: 19 23
+Connection: 20 23 0 0 255
+Connection: 18 22 0 0 0
+Connection: 18 24 0 0 255
+Node: 19 24
+Connection: 20 24 0 0 255
+Connection: 18 25 0 0 255
+Connection: 18 23 0 0 255
+Node: 19 25
+Node: 19 26
+Connection: 19 27 0 0 255
+Connection: 18 26 0 0 255
+Connection: 18 25 0 0 255
+Connection: 20 26 0 0 255
+Connection: 18 27 0 0 255
+Node: 19 27
+Connection: 19 26 0 0 255
+Connection: 20 28 0 0 255
+Connection: 18 28 0 0 255
+Node: 19 28
+Connection: 18 27 0 0 255
+Connection: 19 29 0 0 255
+Connection: 20 28 0 0 255
+Node: 19 29
+Connection: 18 30 0 0 255
+Connection: 20 30 0 0 255
+Connection: 19 28 0 0 255
+Node: 19 30
+Node: 19 31
+Connection: 20 32 0 0 255
+Connection: 18 32 0 0 255
+Connection: 18 31 0 0 255
+Node: 19 32
+Connection: 19 33 0 0 255
+Node: 19 33
+Connection: 18 34 0 0 255
+Connection: 19 32 0 0 255
+Connection: 20 33 0 0 255
+Connection: 20 34 0 0 255
+Node: 19 34
+Connection: 18 33 0 0 255
+Connection: 19 35 0 0 255
+Connection: 20 34 0 0 255
+Node: 19 35
+Connection: 18 35 0 0 255
+Connection: 20 36 0 0 255
+Connection: 18 36 0 0 255
+Connection: 19 34 0 0 255
+Node: 19 36
+Connection: 18 36 0 0 255
+Connection: 20 35 0 0 255
+Connection: 20 37 0 0 255
+Node: 19 37
+Node: 19 38
+Connection: 20 37 0 0 255
+Connection: 20 39 0 0 255
+Connection: 18 38 0 0 255
+Node: 19 39
+Node: 19 40
+Connection: 18 39 0 0 255
+Connection: 19 41 0 0 255
+Connection: 20 40 0 0 255
+Node: 19 41
+Connection: 19 42 0 0 255
+Connection: 18 41 0 0 255
+Connection: 19 40 0 0 255
+Node: 19 42
+Connection: 19 41 0 0 255
+Connection: 20 43 0 0 255
+Connection: 18 43 0 0 255
+Node: 19 43
+Connection: 20 42 0 0 255
+Connection: 20 44 0 0 0
+Node: 19 44
+Connection: 18 44 0 0 0
+Connection: 20 44 0 0 0
+Node: 20 0
+Connection: 19 0 0 0 0
+Connection: 21 0 0 0 0
+Connection: 19 1 0 0 255
+Connection: 21 1 0 0 255
+Connection: 20 1 0 0 255
+Node: 20 1
+Connection: 19 2 0 0 255
+Connection: 20 0 0 0 0
+Connection: 21 1 0 0 255
+Node: 20 2
+Connection: 19 1 0 0 255
+Connection: 20 3 0 0 255
+Node: 20 3
+Connection: 20 2 0 0 255
+Connection: 21 3 0 0 255
+Connection: 21 4 0 0 255
+Node: 20 4
+Connection: 19 4 0 0 255
+Connection: 21 3 0 0 255
+Connection: 21 5 0 0 255
+Node: 20 5
+Connection: 20 6 0 0 255
+Connection: 19 6 0 0 255
+Connection: 21 5 0 0 255
+Node: 20 6
+Connection: 20 5 0 0 255
+Connection: 21 6 0 0 255
+Node: 20 7
+Connection: 21 8 0 0 255
+Connection: 19 6 0 0 255
+Connection: 19 8 0 0 255
+Node: 20 8
+Connection: 19 9 0 0 255
+Connection: 21 9 0 0 255
+Node: 20 9
+Connection: 21 8 0 0 255
+Connection: 19 8 0 0 255
+Node: 20 10
+Connection: 19 10 0 0 255
+Connection: 21 11 0 0 255
+Connection: 19 11 0 0 255
+Node: 20 11
+Connection: 19 11 0 0 255
+Connection: 21 10 0 0 255
+Connection: 20 12 0 0 255
+Node: 20 12
+Connection: 19 13 0 0 255
+Connection: 20 11 0 0 255
+Connection: 21 12 0 0 255
+Node: 20 13
+Connection: 20 14 0 0 255
+Connection: 21 13 0 0 255
+Node: 20 14
+Connection: 20 13 0 0 255
+Connection: 21 15 0 0 255
+Connection: 19 15 0 0 255
+Node: 20 15
+Connection: 20 16 0 0 255
+Connection: 21 16 0 0 255
+Node: 20 16
+Connection: 19 17 0 0 255
+Connection: 20 15 0 0 255
+Connection: 21 16 0 0 255
+Connection: 21 15 0 0 255
+Connection: 19 16 0 0 255
+Node: 20 17
+Connection: 21 17 0 0 255
+Connection: 20 18 0 0 255
+Node: 20 18
+Connection: 21 19 0 0 255
+Connection: 20 17 0 0 255
+Connection: 19 18 0 0 255
+Node: 20 19
+Connection: 20 20 0 0 255
+Connection: 21 20 0 0 255
+Node: 20 20
+Connection: 21 21 0 0 255
+Connection: 20 19 0 0 255
+Connection: 19 20 0 0 255
+Connection: 21 19 0 0 255
+Node: 20 21
+Connection: 21 20 0 0 255
+Connection: 20 22 0 0 0
+Connection: 19 21 0 0 255
+Node: 20 22
+Connection: 21 21 0 0 255
+Connection: 21 23 0 0 255
+Connection: 20 21 0 0 255
+Connection: 20 23 0 0 255
+Node: 20 23
+Connection: 21 24 0 0 255
+Connection: 20 22 0 0 0
+Connection: 19 23 0 0 255
+Node: 20 24
+Connection: 21 23 0 0 255
+Connection: 20 25 0 0 255
+Connection: 19 24 0 0 255
+Connection: 21 25 0 0 255
+Node: 20 25
+Connection: 20 24 0 0 255
+Connection: 21 24 0 0 255
+Node: 20 26
+Connection: 21 25 0 0 255
+Connection: 20 27 0 0 255
+Connection: 19 26 0 0 255
+Node: 20 27
+Connection: 21 27 0 0 255
+Connection: 20 26 0 0 255
+Node: 20 28
+Connection: 19 27 0 0 255
+Connection: 20 29 0 0 255
+Connection: 21 28 0 0 255
+Connection: 21 29 0 0 255
+Connection: 19 28 0 0 255
+Node: 20 29
+Connection: 20 28 0 0 255
+Connection: 21 28 0 0 255
+Node: 20 30
+Connection: 20 31 0 0 255
+Connection: 21 29 0 0 255
+Connection: 19 29 0 0 255
+Node: 20 31
+Connection: 20 30 0 0 255
+Connection: 21 31 0 0 255
+Node: 20 32
+Connection: 19 31 0 0 255
+Connection: 20 33 0 0 255
+Connection: 21 32 0 0 255
+Node: 20 33
+Connection: 19 33 0 0 255
+Connection: 21 34 0 0 255
+Connection: 20 32 0 0 255
+Node: 20 34
+Connection: 19 34 0 0 255
+Connection: 21 33 0 0 255
+Connection: 19 33 0 0 255
+Node: 20 35
+Connection: 21 36 0 0 255
+Connection: 19 36 0 0 255
+Node: 20 36
+Connection: 19 35 0 0 255
+Connection: 21 35 0 0 255
+Node: 20 37
+Connection: 21 36 0 0 255
+Connection: 19 38 0 0 255
+Connection: 19 36 0 0 255
+Node: 20 38
+Connection: 20 39 0 0 255
+Connection: 21 38 0 0 255
+Node: 20 39
+Connection: 20 38 0 0 255
+Connection: 19 38 0 0 255
+Connection: 21 39 0 0 255
+Node: 20 40
+Connection: 19 40 0 0 255
+Connection: 21 39 0 0 255
+Connection: 21 41 0 0 255
+Node: 20 41
+Connection: 20 42 0 0 255
+Connection: 21 41 0 0 255
+Connection: 21 40 0 0 255
+Node: 20 42
+Connection: 19 43 0 0 255
+Connection: 20 41 0 0 255
+Node: 20 43
+Connection: 19 42 0 0 255
+Connection: 20 44 0 0 0
+Connection: 21 43 0 0 255
+Node: 20 44
+Connection: 19 44 0 0 0
+Connection: 21 44 0 0 0
+Connection: 19 43 0 0 255
+Connection: 21 43 0 0 255
+Connection: 20 43 0 0 255
+Node: 21 0
+Connection: 20 0 0 0 0
+Connection: 22 0 0 0 0
+Node: 21 1
+Connection: 22 0 0 0 0
+Connection: 20 0 0 0 0
+Connection: 20 1 0 0 255
+Node: 21 2
+Node: 21 3
+Connection: 20 3 0 0 255
+Connection: 22 4 0 0 0
+Connection: 20 4 0 0 255
+Node: 21 4
+Connection: 21 5 0 0 255
+Connection: 22 3 0 0 0
+Connection: 20 3 0 0 255
+Node: 21 5
+Connection: 22 6 0 0 0
+Connection: 21 4 0 0 255
+Connection: 20 5 0 0 255
+Connection: 22 4 0 0 0
+Connection: 20 4 0 0 255
+Node: 21 6
+Connection: 20 6 0 0 255
+Node: 21 7
+Node: 21 8
+Connection: 20 7 0 0 255
+Connection: 20 9 0 0 255
+Node: 21 9
+Connection: 22 10 0 0 0
+Connection: 20 8 0 0 255
+Node: 21 10
+Connection: 22 11 0 0 0
+Connection: 20 11 0 0 255
+Node: 21 11
+Connection: 22 10 0 0 0
+Connection: 20 10 0 0 255
+Node: 21 12
+Connection: 20 12 0 0 255
+Connection: 22 11 0 0 0
+Connection: 22 13 0 0 0
+Node: 21 13
+Connection: 22 12 0 0 0
+Connection: 20 13 0 0 255
+Node: 21 14
+Node: 21 15
+Connection: 20 14 0 0 255
+Connection: 20 16 0 0 255
+Node: 21 16
+Connection: 21 17 0 0 255
+Connection: 20 16 0 0 255
+Connection: 22 15 0 0 0
+Connection: 20 15 0 0 255
+Node: 21 17
+Connection: 21 16 0 0 255
+Connection: 20 17 0 0 255
+Connection: 22 16 0 0 0
+Node: 21 18
+Connection: 22 17 0 0 0
+Connection: 22 19 0 0 0
+Node: 21 19
+Connection: 22 19 0 0 0
+Connection: 20 18 0 0 255
+Connection: 20 20 0 0 255
+Node: 21 20
+Connection: 22 20 0 0 0
+Connection: 20 19 0 0 255
+Connection: 20 21 0 0 255
+Node: 21 21
+Connection: 22 21 0 0 0
+Connection: 20 20 0 0 255
+Connection: 20 22 0 0 0
+Node: 21 22
+Node: 21 23
+Connection: 22 23 0 0 0
+Connection: 20 22 0 0 0
+Connection: 20 24 0 0 255
+Node: 21 24
+Connection: 22 24 0 0 0
+Connection: 20 23 0 0 255
+Connection: 20 25 0 0 255
+Node: 21 25
+Connection: 22 25 0 0 0
+Connection: 20 24 0 0 255
+Connection: 20 26 0 0 255
+Node: 21 26
+Connection: 22 25 0 0 0
+Connection: 22 27 0 0 0
+Node: 21 27
+Connection: 21 28 0 0 255
+Connection: 20 27 0 0 255
+Connection: 22 28 0 0 0
+Node: 21 28
+Connection: 21 27 0 0 255
+Connection: 20 28 0 0 255
+Connection: 22 29 0 0 0
+Connection: 20 29 0 0 255
+Node: 21 29
+Connection: 20 30 0 0 255
+Connection: 20 28 0 0 255
+Node: 21 30
+Node: 21 31
+Connection: 22 32 0 0 0
+Connection: 20 31 0 0 255
+Node: 21 32
+Connection: 20 32 0 0 255
+Connection: 22 31 0 0 0
+Connection: 22 33 0 0 0
+Node: 21 33
+Connection: 22 34 0 0 0
+Connection: 20 34 0 0 255
+Node: 21 34
+Connection: 22 33 0 0 0
+Connection: 20 33 0 0 255
+Node: 21 35
+Connection: 22 34 0 0 0
+Connection: 20 36 0 0 255
+Node: 21 36
+Connection: 20 35 0 0 255
+Connection: 20 37 0 0 255
+Node: 21 37
+Node: 21 38
+Connection: 20 38 0 0 255
+Node: 21 39
+Connection: 22 38 0 0 0
+Connection: 21 40 0 0 255
+Connection: 20 39 0 0 255
+Connection: 22 40 0 0 0
+Connection: 20 40 0 0 255
+Node: 21 40
+Connection: 21 39 0 0 255
+Connection: 22 41 0 0 0
+Connection: 20 41 0 0 255
+Node: 21 41
+Connection: 20 41 0 0 255
+Connection: 22 40 0 0 0
+Connection: 20 40 0 0 255
+Node: 21 42
+Node: 21 43
+Connection: 22 44 0 0 0
+Connection: 20 44 0 0 0
+Connection: 20 43 0 0 255
+Node: 21 44
+Connection: 20 44 0 0 0
+Connection: 22 44 0 0 0
+Node: 22 0
+Connection: 21 0 0 0 0
+Connection: 23 0 0 0 0
+Connection: 21 1 0 0 255
+Node: 22 1
+Node: 22 2
+Connection: 22 3 0 0 0
+Connection: 23 3 0 0 255
+Node: 22 3
+Connection: 21 4 0 0 255
+Connection: 22 2 0 0 0
+Connection: 23 3 0 0 255
+Node: 22 4
+Connection: 21 3 0 0 255
+Connection: 21 5 0 0 255
+Node: 22 5
+Node: 22 6
+Connection: 23 5 0 0 255
+Connection: 21 5 0 0 255
+Node: 22 7
+Connection: 23 6 0 0 255
+Connection: 23 8 0 0 255
+Node: 22 8
+Node: 22 9
+Connection: 23 9 0 0 255
+Node: 22 10
+Connection: 23 10 0 0 255
+Connection: 21 9 0 0 255
+Connection: 21 11 0 0 255
+Node: 22 11
+Connection: 22 12 0 0 0
+Connection: 23 11 0 0 255
+Connection: 21 10 0 0 255
+Connection: 21 12 0 0 255
+Connection: 23 12 0 0 255
+Node: 22 12
+Connection: 22 11 0 0 0
+Connection: 23 13 0 0 255
+Connection: 21 13 0 0 255
+Node: 22 13
+Connection: 22 14 0 0 0
+Connection: 23 13 0 0 255
+Connection: 21 12 0 0 255
+Node: 22 14
+Connection: 22 13 0 0 0
+Connection: 23 14 0 0 255
+Node: 22 15
+Connection: 23 16 0 0 255
+Connection: 21 16 0 0 255
+Node: 22 16
+Connection: 23 17 0 0 255
+Connection: 21 17 0 0 255
+Node: 22 17
+Connection: 23 16 0 0 255
+Connection: 21 18 0 0 255
+Node: 22 18
+Connection: 22 19 0 0 0
+Connection: 23 18 0 0 255
+Node: 22 19
+Connection: 23 20 0 0 255
+Connection: 22 18 0 0 0
+Connection: 21 19 0 0 255
+Connection: 22 20 0 0 0
+Connection: 21 18 0 0 255
+Node: 22 20
+Connection: 23 21 0 0 255
+Connection: 22 19 0 0 0
+Connection: 21 20 0 0 255
+Node: 22 21
+Connection: 23 20 0 0 255
+Connection: 22 22 0 0 0
+Connection: 21 21 0 0 255
+Node: 22 22
+Connection: 22 21 0 0 0
+Connection: 22 23 0 0 0
+Connection: 23 21 0 0 255
+Connection: 23 23 0 0 255
+Node: 22 23
+Connection: 23 24 0 0 255
+Connection: 22 22 0 0 0
+Connection: 21 23 0 0 255
+Node: 22 24
+Connection: 23 23 0 0 255
+Connection: 22 25 0 0 0
+Connection: 21 24 0 0 255
+Node: 22 25
+Connection: 23 24 0 0 255
+Connection: 22 26 0 0 0
+Connection: 21 25 0 0 255
+Connection: 22 24 0 0 0
+Connection: 21 26 0 0 255
+Node: 22 26
+Connection: 22 25 0 0 0
+Connection: 23 26 0 0 255
+Node: 22 27
+Connection: 23 28 0 0 255
+Connection: 21 26 0 0 255
+Node: 22 28
+Connection: 23 27 0 0 255
+Connection: 21 27 0 0 255
+Node: 22 29
+Connection: 23 28 0 0 255
+Connection: 21 28 0 0 255
+Node: 22 30
+Connection: 22 31 0 0 0
+Connection: 23 30 0 0 255
+Node: 22 31
+Connection: 22 30 0 0 0
+Connection: 23 31 0 0 255
+Connection: 21 32 0 0 255
+Node: 22 32
+Connection: 22 33 0 0 0
+Connection: 23 31 0 0 255
+Connection: 21 31 0 0 255
+Node: 22 33
+Connection: 22 32 0 0 0
+Connection: 23 33 0 0 255
+Connection: 21 34 0 0 255
+Connection: 21 32 0 0 255
+Connection: 23 32 0 0 255
+Node: 22 34
+Connection: 23 34 0 0 255
+Connection: 21 33 0 0 255
+Connection: 21 35 0 0 255
+Node: 22 35
+Connection: 23 35 0 0 255
+Node: 22 36
+Node: 22 37
+Connection: 23 36 0 0 255
+Connection: 23 38 0 0 255
+Node: 22 38
+Connection: 23 39 0 0 255
+Connection: 21 39 0 0 255
+Node: 22 39
+Node: 22 40
+Connection: 21 39 0 0 255
+Connection: 21 41 0 0 255
+Node: 22 41
+Connection: 21 40 0 0 255
+Connection: 22 42 0 0 0
+Connection: 23 41 0 0 255
+Node: 22 42
+Connection: 22 41 0 0 0
+Connection: 23 41 0 0 255
+Node: 22 43
+Node: 22 44
+Connection: 21 44 0 0 0
+Connection: 23 44 0 0 0
+Connection: 21 43 0 0 255
+Node: 23 0
+Connection: 22 0 0 0 0
+Connection: 24 0 0 0 0
+Connection: 23 1 0 0 255
+Node: 23 1
+Connection: 23 0 0 0 0
+Connection: 24 1 0 0 255
+Node: 23 2
+Node: 23 3
+Connection: 22 3 0 0 0
+Connection: 24 2 0 0 255
+Connection: 22 2 0 0 0
+Node: 23 4
+Connection: 23 5 0 0 255
+Node: 23 5
+Connection: 22 6 0 0 0
+Connection: 23 4 0 0 255
+Connection: 24 5 0 0 255
+Node: 23 6
+Connection: 24 7 0 0 255
+Connection: 22 7 0 0 0
+Node: 23 7
+Node: 23 8
+Connection: 23 9 0 0 255
+Connection: 24 7 0 0 255
+Connection: 22 7 0 0 0
+Node: 23 9
+Connection: 24 10 0 0 255
+Connection: 23 8 0 0 255
+Connection: 22 9 0 0 0
+Node: 23 10
+Connection: 23 11 0 0 255
+Connection: 22 10 0 0 0
+Node: 23 11
+Connection: 23 10 0 0 255
+Connection: 24 10 0 0 255
+Connection: 22 11 0 0 0
+Node: 23 12
+Connection: 24 11 0 0 255
+Connection: 22 11 0 0 0
+Node: 23 13
+Connection: 22 12 0 0 0
+Connection: 22 13 0 0 0
+Connection: 23 14 0 0 255
+Node: 23 14
+Connection: 24 15 0 0 255
+Connection: 23 13 0 0 255
+Connection: 22 14 0 0 0
+Node: 23 15
+Connection: 23 16 0 0 255
+Connection: 24 15 0 0 255
+Node: 23 16
+Connection: 22 15 0 0 0
+Connection: 22 17 0 0 0
+Connection: 24 17 0 0 255
+Connection: 23 15 0 0 255
+Node: 23 17
+Connection: 24 16 0 0 255
+Connection: 24 18 0 0 255
+Connection: 23 18 0 0 255
+Connection: 22 16 0 0 0
+Node: 23 18
+Connection: 24 19 0 0 255
+Connection: 23 17 0 0 255
+Connection: 22 18 0 0 0
+Connection: 24 17 0 0 255
+Node: 23 19
+Node: 23 20
+Connection: 24 20 0 0 255
+Connection: 22 19 0 0 0
+Connection: 22 21 0 0 0
+Node: 23 21
+Connection: 24 21 0 0 255
+Connection: 22 20 0 0 0
+Connection: 22 22 0 0 0
+Node: 23 22
+Node: 23 23
+Connection: 24 23 0 0 255
+Connection: 22 22 0 0 0
+Connection: 22 24 0 0 0
+Node: 23 24
+Connection: 24 24 0 0 255
+Connection: 22 23 0 0 0
+Connection: 22 25 0 0 0
+Node: 23 25
+Node: 23 26
+Connection: 24 25 0 0 255
+Connection: 23 27 0 0 255
+Connection: 22 26 0 0 0
+Connection: 24 27 0 0 255
+Node: 23 27
+Connection: 23 26 0 0 255
+Connection: 24 26 0 0 255
+Connection: 24 28 0 0 255
+Connection: 22 28 0 0 0
+Node: 23 28
+Connection: 22 27 0 0 0
+Connection: 22 29 0 0 0
+Connection: 24 27 0 0 255
+Connection: 23 29 0 0 255
+Node: 23 29
+Connection: 23 28 0 0 255
+Connection: 24 29 0 0 255
+Node: 23 30
+Connection: 24 29 0 0 255
+Connection: 23 31 0 0 255
+Connection: 22 30 0 0 0
+Node: 23 31
+Connection: 22 32 0 0 0
+Connection: 22 31 0 0 0
+Connection: 23 30 0 0 255
+Node: 23 32
+Connection: 24 33 0 0 255
+Connection: 22 33 0 0 0
+Node: 23 33
+Connection: 23 34 0 0 255
+Connection: 24 34 0 0 255
+Connection: 22 33 0 0 0
+Node: 23 34
+Connection: 23 33 0 0 255
+Connection: 22 34 0 0 0
+Node: 23 35
+Connection: 24 34 0 0 255
+Connection: 23 36 0 0 255
+Connection: 22 35 0 0 0
+Node: 23 36
+Connection: 23 35 0 0 255
+Connection: 24 37 0 0 255
+Connection: 22 37 0 0 0
+Node: 23 37
+Node: 23 38
+Connection: 24 37 0 0 255
+Connection: 22 37 0 0 0
+Node: 23 39
+Connection: 22 38 0 0 0
+Connection: 23 40 0 0 255
+Connection: 24 39 0 0 255
+Node: 23 40
+Connection: 23 39 0 0 255
+Node: 23 41
+Connection: 22 41 0 0 0
+Connection: 24 42 0 0 255
+Connection: 22 42 0 0 0
+Node: 23 42
+Node: 23 43
+Connection: 23 44 0 0 0
+Connection: 24 43 0 0 255
+Node: 23 44
+Connection: 22 44 0 0 0
+Connection: 24 44 0 0 0
+Connection: 23 43 0 0 255
+Node: 24 0
+Connection: 23 0 0 0 0
+Connection: 25 0 0 0 0
+Node: 24 1
+Connection: 23 1 0 0 255
+Connection: 25 0 0 0 0
+Connection: 25 2 0 0 255
+Connection: 24 2 0 0 255
+Node: 24 2
+Connection: 23 3 0 0 255
+Connection: 24 1 0 0 255
+Connection: 25 2 0 0 255
+Connection: 25 3 0 0 255
+Node: 24 3
+Node: 24 4
+Node: 24 5
+Connection: 25 4 0 0 255
+Connection: 25 6 0 0 255
+Connection: 25 5 0 0 255
+Connection: 23 5 0 0 255
+Node: 24 6
+Node: 24 7
+Connection: 23 6 0 0 255
+Connection: 23 8 0 0 255
+Node: 24 8
+Connection: 25 7 0 0 255
+Connection: 25 9 0 0 255
+Node: 24 9
+Node: 24 10
+Connection: 23 9 0 0 255
+Connection: 23 11 0 0 255
+Connection: 24 11 0 0 255
+Node: 24 11
+Connection: 23 12 0 0 255
+Connection: 24 10 0 0 255
+Connection: 25 11 0 0 255
+Node: 24 12
+Connection: 25 12 0 0 255
+Node: 24 13
+Connection: 25 12 0 0 255
+Connection: 25 14 0 0 255
+Node: 24 14
+Node: 24 15
+Connection: 25 14 0 0 255
+Connection: 23 14 0 0 255
+Connection: 25 16 0 0 255
+Connection: 23 15 0 0 255
+Connection: 24 16 0 0 255
+Connection: 25 15 0 0 255
+Node: 24 16
+Connection: 23 17 0 0 255
+Connection: 24 15 0 0 255
+Connection: 25 16 0 0 255
+Node: 24 17
+Connection: 23 16 0 0 255
+Connection: 23 18 0 0 255
+Node: 24 18
+Connection: 23 17 0 0 255
+Connection: 24 19 0 0 255
+Connection: 25 18 0 0 255
+Node: 24 19
+Connection: 24 20 0 0 255
+Connection: 25 18 0 0 255
+Connection: 23 18 0 0 255
+Connection: 24 18 0 0 255
+Connection: 25 20 0 0 255
+Node: 24 20
+Connection: 24 19 0 0 255
+Connection: 23 20 0 0 255
+Node: 24 21
+Connection: 25 20 0 0 255
+Connection: 24 22 0 0 0
+Connection: 23 21 0 0 255
+Node: 24 22
+Connection: 24 21 0 0 255
+Connection: 24 23 0 0 255
+Node: 24 23
+Connection: 25 24 0 0 255
+Connection: 24 22 0 0 0
+Connection: 23 23 0 0 255
+Node: 24 24
+Connection: 24 25 0 0 255
+Connection: 23 24 0 0 255
+Node: 24 25
+Connection: 24 24 0 0 255
+Connection: 25 26 0 0 255
+Connection: 23 26 0 0 255
+Connection: 24 26 0 0 255
+Connection: 25 24 0 0 255
+Node: 24 26
+Connection: 23 27 0 0 255
+Connection: 24 25 0 0 255
+Connection: 25 26 0 0 255
+Node: 24 27
+Connection: 23 26 0 0 255
+Connection: 23 28 0 0 255
+Node: 24 28
+Connection: 23 27 0 0 255
+Connection: 24 29 0 0 255
+Connection: 25 28 0 0 255
+Node: 24 29
+Connection: 25 30 0 0 255
+Connection: 23 30 0 0 255
+Connection: 25 28 0 0 255
+Connection: 23 29 0 0 255
+Connection: 24 28 0 0 255
+Connection: 25 29 0 0 255
+Node: 24 30
+Node: 24 31
+Connection: 25 30 0 0 255
+Connection: 25 32 0 0 255
+Node: 24 32
+Connection: 25 32 0 0 255
+Node: 24 33
+Connection: 23 32 0 0 255
+Connection: 24 34 0 0 255
+Connection: 25 33 0 0 255
+Node: 24 34
+Connection: 23 33 0 0 255
+Connection: 23 35 0 0 255
+Connection: 24 33 0 0 255
+Node: 24 35
+Node: 24 36
+Connection: 25 35 0 0 255
+Connection: 25 37 0 0 255
+Node: 24 37
+Connection: 23 36 0 0 255
+Connection: 23 38 0 0 255
+Node: 24 38
+Node: 24 39
+Connection: 25 38 0 0 255
+Connection: 25 40 0 0 255
+Connection: 25 39 0 0 255
+Connection: 23 39 0 0 255
+Node: 24 40
+Node: 24 41
+Node: 24 42
+Connection: 23 41 0 0 255
+Connection: 24 43 0 0 255
+Connection: 25 42 0 0 255
+Connection: 25 41 0 0 255
+Node: 24 43
+Connection: 23 43 0 0 255
+Connection: 25 42 0 0 255
+Connection: 25 44 0 0 0
+Connection: 24 42 0 0 255
+Node: 24 44
+Connection: 23 44 0 0 0
+Connection: 25 44 0 0 0
+Node: 25 0
+Connection: 24 0 0 0 0
+Connection: 26 0 0 0 0
+Connection: 24 1 0 0 255
+Connection: 26 1 0 0 255
+Node: 25 1
+Node: 25 2
+Connection: 24 1 0 0 255
+Connection: 24 2 0 0 255
+Node: 25 3
+Connection: 25 4 0 0 255
+Connection: 26 2 0 0 255
+Connection: 24 2 0 0 255
+Node: 25 4
+Connection: 25 3 0 0 255
+Connection: 26 4 0 0 255
+Connection: 24 5 0 0 255
+Connection: 25 5 0 0 255
+Node: 25 5
+Connection: 25 4 0 0 255
+Connection: 24 5 0 0 255
+Connection: 26 5 0 0 255
+Node: 25 6
+Connection: 24 5 0 0 255
+Connection: 25 7 0 0 255
+Connection: 26 6 0 0 255
+Node: 25 7
+Connection: 24 8 0 0 255
+Connection: 25 6 0 0 255
+Node: 25 8
+Node: 25 9
+Connection: 24 8 0 0 255
+Connection: 25 10 0 0 255
+Connection: 26 9 0 0 255
+Node: 25 10
+Connection: 26 10 0 0 255
+Connection: 25 9 0 0 255
+Node: 25 11
+Connection: 24 11 0 0 255
+Node: 25 12
+Connection: 26 11 0 0 255
+Connection: 25 13 0 0 255
+Connection: 24 12 0 0 255
+Connection: 24 13 0 0 255
+Node: 25 13
+Connection: 25 12 0 0 255
+Connection: 26 14 0 0 255
+Connection: 25 14 0 0 255
+Node: 25 14
+Connection: 24 15 0 0 255
+Connection: 24 13 0 0 255
+Connection: 25 13 0 0 255
+Connection: 26 14 0 0 255
+Node: 25 15
+Connection: 26 14 0 0 255
+Connection: 25 16 0 0 255
+Connection: 24 15 0 0 255
+Node: 25 16
+Connection: 26 15 0 0 255
+Connection: 24 15 0 0 255
+Connection: 24 16 0 0 255
+Connection: 25 15 0 0 255
+Connection: 26 16 0 0 255
+Node: 25 17
+Node: 25 18
+Connection: 26 17 0 0 255
+Connection: 24 19 0 0 255
+Connection: 24 18 0 0 255
+Connection: 26 18 0 0 255
+Node: 25 19
+Node: 25 20
+Connection: 26 20 0 0 255
+Connection: 24 19 0 0 255
+Connection: 24 21 0 0 255
+Connection: 26 19 0 0 255
+Node: 25 21
+Node: 25 22
+Connection: 26 21 0 0 255
+Connection: 26 23 0 0 255
+Node: 25 23
+Node: 25 24
+Connection: 26 24 0 0 255
+Connection: 24 23 0 0 255
+Connection: 24 25 0 0 255
+Connection: 26 25 0 0 255
+Node: 25 25
+Node: 25 26
+Connection: 26 27 0 0 255
+Connection: 24 25 0 0 255
+Connection: 24 26 0 0 255
+Connection: 26 26 0 0 255
+Node: 25 27
+Node: 25 28
+Connection: 26 29 0 0 255
+Connection: 24 29 0 0 255
+Connection: 24 28 0 0 255
+Connection: 25 29 0 0 255
+Connection: 26 28 0 0 255
+Node: 25 29
+Connection: 26 30 0 0 255
+Connection: 25 28 0 0 255
+Connection: 24 29 0 0 255
+Node: 25 30
+Connection: 24 29 0 0 255
+Connection: 24 31 0 0 255
+Connection: 25 31 0 0 255
+Connection: 26 30 0 0 255
+Node: 25 31
+Connection: 25 32 0 0 255
+Connection: 26 30 0 0 255
+Connection: 25 30 0 0 255
+Node: 25 32
+Connection: 26 33 0 0 255
+Connection: 25 31 0 0 255
+Connection: 24 32 0 0 255
+Connection: 24 31 0 0 255
+Node: 25 33
+Connection: 24 33 0 0 255
+Node: 25 34
+Connection: 26 34 0 0 255
+Connection: 25 35 0 0 255
+Node: 25 35
+Connection: 24 36 0 0 255
+Connection: 25 34 0 0 255
+Connection: 26 35 0 0 255
+Node: 25 36
+Node: 25 37
+Connection: 24 36 0 0 255
+Connection: 25 38 0 0 255
+Node: 25 38
+Connection: 24 39 0 0 255
+Connection: 25 37 0 0 255
+Connection: 26 38 0 0 255
+Node: 25 39
+Connection: 25 40 0 0 255
+Connection: 24 39 0 0 255
+Connection: 26 39 0 0 255
+Node: 25 40
+Connection: 25 41 0 0 255
+Connection: 26 40 0 0 255
+Connection: 24 39 0 0 255
+Connection: 25 39 0 0 255
+Node: 25 41
+Connection: 25 40 0 0 255
+Connection: 26 42 0 0 255
+Connection: 24 42 0 0 255
+Node: 25 42
+Connection: 24 43 0 0 255
+Connection: 24 42 0 0 255
+Node: 25 43
+Node: 25 44
+Connection: 24 44 0 0 0
+Connection: 26 44 0 0 0
+Connection: 24 43 0 0 255
+Connection: 26 43 0 0 255
+Node: 26 0
+Connection: 25 0 0 0 0
+Connection: 27 0 0 0 0
+Node: 26 1
+Connection: 27 0 0 0 0
+Connection: 25 0 0 0 0
+Connection: 27 1 0 0 255
+Connection: 26 2 0 0 255
+Node: 26 2
+Connection: 25 3 0 0 255
+Connection: 26 1 0 0 255
+Connection: 27 2 0 0 255
+Node: 26 3
+Connection: 26 4 0 0 255
+Connection: 27 3 0 0 255
+Node: 26 4
+Connection: 25 4 0 0 255
+Connection: 26 3 0 0 255
+Connection: 27 4 0 0 255
+Node: 26 5
+Connection: 26 6 0 0 255
+Connection: 25 5 0 0 255
+Node: 26 6
+Connection: 26 5 0 0 255
+Connection: 25 6 0 0 255
+Connection: 27 5 0 0 255
+Connection: 27 6 0 0 255
+Node: 26 7
+Node: 26 8
+Connection: 27 8 0 0 255
+Node: 26 9
+Connection: 25 9 0 0 255
+Connection: 27 8 0 0 255
+Connection: 27 10 0 0 255
+Node: 26 10
+Connection: 26 11 0 0 255
+Connection: 25 10 0 0 255
+Connection: 27 11 0 0 255
+Node: 26 11
+Connection: 26 10 0 0 255
+Connection: 27 12 0 0 255
+Connection: 25 12 0 0 255
+Node: 26 12
+Connection: 27 11 0 0 255
+Node: 26 13
+Node: 26 14
+Connection: 25 13 0 0 255
+Connection: 25 15 0 0 255
+Connection: 26 15 0 0 255
+Connection: 27 14 0 0 255
+Connection: 25 14 0 0 255
+Node: 26 15
+Connection: 25 16 0 0 255
+Connection: 26 14 0 0 255
+Connection: 27 15 0 0 255
+Node: 26 16
+Connection: 26 17 0 0 255
+Connection: 25 16 0 0 255
+Connection: 27 16 0 0 255
+Node: 26 17
+Connection: 27 18 0 0 255
+Connection: 25 18 0 0 255
+Connection: 26 16 0 0 255
+Node: 26 18
+Connection: 27 17 0 0 255
+Connection: 26 19 0 0 255
+Connection: 25 18 0 0 255
+Node: 26 19
+Connection: 26 18 0 0 255
+Connection: 27 20 0 0 255
+Connection: 25 20 0 0 255
+Node: 26 20
+Connection: 27 19 0 0 255
+Connection: 26 21 0 0 255
+Connection: 25 20 0 0 255
+Node: 26 21
+Connection: 26 20 0 0 255
+Connection: 27 22 0 0 0
+Connection: 25 22 0 0 0
+Node: 26 22
+Connection: 27 21 0 0 255
+Connection: 27 23 0 0 255
+Node: 26 23
+Connection: 26 24 0 0 255
+Connection: 27 22 0 0 0
+Connection: 25 22 0 0 0
+Node: 26 24
+Connection: 27 25 0 0 255
+Connection: 26 23 0 0 255
+Connection: 25 24 0 0 255
+Node: 26 25
+Connection: 26 26 0 0 255
+Connection: 27 24 0 0 255
+Connection: 25 24 0 0 255
+Node: 26 26
+Connection: 27 27 0 0 255
+Connection: 26 25 0 0 255
+Connection: 25 26 0 0 255
+Node: 26 27
+Connection: 27 26 0 0 255
+Connection: 25 26 0 0 255
+Connection: 26 28 0 0 255
+Node: 26 28
+Connection: 26 27 0 0 255
+Connection: 25 28 0 0 255
+Connection: 27 28 0 0 255
+Node: 26 29
+Connection: 25 28 0 0 255
+Connection: 26 30 0 0 255
+Connection: 27 29 0 0 255
+Node: 26 30
+Connection: 25 29 0 0 255
+Connection: 25 31 0 0 255
+Connection: 26 29 0 0 255
+Connection: 27 30 0 0 255
+Connection: 25 30 0 0 255
+Node: 26 31
+Node: 26 32
+Connection: 27 33 0 0 255
+Node: 26 33
+Connection: 26 34 0 0 255
+Connection: 27 32 0 0 255
+Connection: 25 32 0 0 255
+Node: 26 34
+Connection: 26 33 0 0 255
+Connection: 25 34 0 0 255
+Connection: 27 33 0 0 255
+Node: 26 35
+Connection: 25 35 0 0 255
+Connection: 27 34 0 0 255
+Connection: 27 36 0 0 255
+Node: 26 36
+Connection: 27 36 0 0 255
+Node: 26 37
+Node: 26 38
+Connection: 26 39 0 0 255
+Connection: 25 38 0 0 255
+Connection: 27 39 0 0 255
+Connection: 27 38 0 0 255
+Node: 26 39
+Connection: 26 38 0 0 255
+Connection: 25 39 0 0 255
+Node: 26 40
+Connection: 25 40 0 0 255
+Connection: 26 41 0 0 255
+Connection: 27 40 0 0 255
+Node: 26 41
+Connection: 26 40 0 0 255
+Connection: 27 41 0 0 255
+Node: 26 42
+Connection: 25 41 0 0 255
+Connection: 26 43 0 0 255
+Connection: 27 42 0 0 255
+Node: 26 43
+Connection: 27 44 0 0 0
+Connection: 25 44 0 0 0
+Connection: 27 43 0 0 255
+Connection: 26 42 0 0 255
+Node: 26 44
+Connection: 25 44 0 0 0
+Connection: 27 44 0 0 0
+Node: 27 0
+Connection: 26 0 0 0 0
+Connection: 28 0 0 0 0
+Connection: 26 1 0 0 255
+Connection: 27 1 0 0 255
+Node: 27 1
+Connection: 28 2 0 0 255
+Connection: 27 0 0 0 0
+Connection: 26 1 0 0 255
+Node: 27 2
+Connection: 26 2 0 0 255
+Connection: 28 1 0 0 255
+Connection: 28 3 0 0 255
+Node: 27 3
+Connection: 28 2 0 0 255
+Connection: 27 4 0 0 255
+Connection: 26 3 0 0 255
+Node: 27 4
+Connection: 28 3 0 0 255
+Connection: 27 5 0 0 255
+Connection: 26 4 0 0 255
+Connection: 27 3 0 0 255
+Connection: 28 5 0 0 255
+Node: 27 5
+Connection: 27 4 0 0 255
+Connection: 28 6 0 0 255
+Connection: 26 6 0 0 255
+Connection: 27 6 0 0 255
+Node: 27 6
+Connection: 28 7 0 0 255
+Connection: 27 5 0 0 255
+Connection: 26 6 0 0 255
+Node: 27 7
+Connection: 28 6 0 0 255
+Connection: 28 8 0 0 255
+Node: 27 8
+Connection: 28 7 0 0 255
+Connection: 27 9 0 0 255
+Connection: 26 8 0 0 255
+Connection: 26 9 0 0 255
+Node: 27 9
+Connection: 28 9 0 0 255
+Connection: 27 8 0 0 255
+Node: 27 10
+Connection: 26 9 0 0 255
+Connection: 28 10 0 0 255
+Node: 27 11
+Connection: 28 11 0 0 255
+Connection: 26 10 0 0 255
+Connection: 26 12 0 0 255
+Node: 27 12
+Connection: 26 11 0 0 255
+Connection: 27 13 0 0 255
+Connection: 28 12 0 0 255
+Node: 27 13
+Connection: 27 12 0 0 255
+Connection: 27 14 0 0 255
+Connection: 28 13 0 0 255
+Node: 27 14
+Connection: 28 15 0 0 255
+Connection: 27 13 0 0 255
+Connection: 26 14 0 0 255
+Node: 27 15
+Connection: 26 15 0 0 255
+Connection: 28 14 0 0 255
+Connection: 28 16 0 0 255
+Node: 27 16
+Connection: 28 15 0 0 255
+Connection: 27 17 0 0 255
+Connection: 26 16 0 0 255
+Node: 27 17
+Connection: 27 16 0 0 255
+Connection: 28 18 0 0 255
+Connection: 26 18 0 0 255
+Node: 27 18
+Connection: 26 17 0 0 255
+Connection: 27 19 0 0 255
+Connection: 28 18 0 0 255
+Node: 27 19
+Connection: 27 18 0 0 255
+Connection: 28 20 0 0 255
+Connection: 26 20 0 0 255
+Node: 27 20
+Connection: 26 19 0 0 255
+Connection: 27 21 0 0 255
+Connection: 28 20 0 0 255
+Node: 27 21
+Connection: 27 20 0 0 255
+Connection: 28 22 0 0 0
+Connection: 26 22 0 0 0
+Node: 27 22
+Connection: 28 21 0 0 255
+Connection: 28 23 0 0 255
+Connection: 26 21 0 0 255
+Connection: 26 23 0 0 255
+Node: 27 23
+Connection: 27 24 0 0 255
+Connection: 28 22 0 0 0
+Connection: 26 22 0 0 0
+Node: 27 24
+Connection: 26 25 0 0 255
+Connection: 27 23 0 0 255
+Connection: 28 24 0 0 255
+Node: 27 25
+Connection: 27 26 0 0 255
+Connection: 28 24 0 0 255
+Connection: 26 24 0 0 255
+Node: 27 26
+Connection: 26 27 0 0 255
+Connection: 27 25 0 0 255
+Connection: 28 26 0 0 255
+Node: 27 27
+Connection: 27 28 0 0 255
+Connection: 28 26 0 0 255
+Connection: 26 26 0 0 255
+Node: 27 28
+Connection: 28 29 0 0 255
+Connection: 27 27 0 0 255
+Connection: 26 28 0 0 255
+Node: 27 29
+Connection: 26 29 0 0 255
+Connection: 28 28 0 0 255
+Connection: 28 30 0 0 255
+Node: 27 30
+Connection: 28 29 0 0 255
+Connection: 27 31 0 0 255
+Connection: 26 30 0 0 255
+Node: 27 31
+Connection: 27 30 0 0 255
+Connection: 27 32 0 0 255
+Connection: 28 31 0 0 255
+Node: 27 32
+Connection: 26 33 0 0 255
+Connection: 27 31 0 0 255
+Connection: 28 32 0 0 255
+Node: 27 33
+Connection: 28 33 0 0 255
+Connection: 26 32 0 0 255
+Connection: 26 34 0 0 255
+Node: 27 34
+Connection: 26 35 0 0 255
+Connection: 28 34 0 0 255
+Node: 27 35
+Connection: 28 35 0 0 255
+Connection: 27 36 0 0 255
+Node: 27 36
+Connection: 28 37 0 0 255
+Connection: 27 35 0 0 255
+Connection: 26 36 0 0 255
+Connection: 26 35 0 0 255
+Node: 27 37
+Connection: 28 36 0 0 255
+Connection: 28 38 0 0 255
+Node: 27 38
+Connection: 28 37 0 0 255
+Connection: 27 39 0 0 255
+Connection: 26 38 0 0 255
+Node: 27 39
+Connection: 27 40 0 0 255
+Connection: 28 38 0 0 255
+Connection: 26 38 0 0 255
+Connection: 27 38 0 0 255
+Node: 27 40
+Connection: 28 41 0 0 255
+Connection: 27 39 0 0 255
+Connection: 26 40 0 0 255
+Connection: 27 41 0 0 255
+Connection: 28 39 0 0 255
+Node: 27 41
+Connection: 28 42 0 0 255
+Connection: 27 40 0 0 255
+Connection: 26 41 0 0 255
+Node: 27 42
+Connection: 26 42 0 0 255
+Connection: 28 41 0 0 255
+Connection: 28 43 0 0 255
+Node: 27 43
+Connection: 28 42 0 0 255
+Connection: 27 44 0 0 0
+Connection: 26 43 0 0 255
+Node: 27 44
+Connection: 26 44 0 0 0
+Connection: 28 44 0 0 0
+Connection: 26 43 0 0 255
+Connection: 27 43 0 0 255
+Node: 28 0
+Connection: 27 0 0 0 0
+Connection: 29 0 0 0 0
+Connection: 29 1 0 0 255
+Connection: 28 1 0 0 255
+Node: 28 1
+Connection: 27 2 0 0 255
+Connection: 28 0 0 0 0
+Connection: 29 1 0 0 255
+Node: 28 2
+Connection: 27 1 0 0 255
+Connection: 27 3 0 0 255
+Connection: 29 2 0 0 255
+Node: 28 3
+Connection: 29 4 0 0 255
+Connection: 27 4 0 0 255
+Connection: 27 2 0 0 255
+Connection: 29 3 0 0 255
+Node: 28 4
+Node: 28 5
+Connection: 28 6 0 0 255
+Connection: 29 4 0 0 255
+Connection: 27 4 0 0 255
+Connection: 29 5 0 0 255
+Node: 28 6
+Connection: 27 7 0 0 255
+Connection: 28 5 0 0 255
+Connection: 29 6 0 0 255
+Connection: 27 5 0 0 255
+Node: 28 7
+Connection: 29 7 0 0 255
+Connection: 27 6 0 0 255
+Connection: 27 8 0 0 255
+Node: 28 8
+Connection: 27 7 0 0 255
+Connection: 28 9 0 0 255
+Connection: 29 9 0 0 255
+Node: 28 9
+Connection: 28 8 0 0 255
+Connection: 27 9 0 0 255
+Connection: 29 8 0 0 255
+Node: 28 10
+Connection: 28 11 0 0 255
+Connection: 27 10 0 0 255
+Connection: 29 9 0 0 255
+Node: 28 11
+Connection: 28 12 0 0 255
+Connection: 27 11 0 0 255
+Connection: 28 10 0 0 255
+Connection: 29 11 0 0 255
+Node: 28 12
+Connection: 28 11 0 0 255
+Connection: 27 12 0 0 255
+Connection: 28 13 0 0 255
+Node: 28 13
+Connection: 28 12 0 0 255
+Connection: 27 13 0 0 255
+Connection: 28 14 0 0 255
+Node: 28 14
+Connection: 27 15 0 0 255
+Connection: 28 13 0 0 255
+Connection: 29 14 0 0 255
+Node: 28 15
+Connection: 27 14 0 0 255
+Connection: 27 16 0 0 255
+Connection: 29 15 0 0 255
+Node: 28 16
+Connection: 28 17 0 0 255
+Connection: 29 16 0 0 255
+Connection: 29 17 0 0 255
+Connection: 27 15 0 0 255
+Node: 28 17
+Connection: 28 16 0 0 255
+Connection: 29 16 0 0 255
+Connection: 29 18 0 0 255
+Node: 28 18
+Connection: 27 18 0 0 255
+Connection: 29 17 0 0 255
+Connection: 29 19 0 0 255
+Connection: 27 17 0 0 255
+Node: 28 19
+Node: 28 20
+Connection: 27 19 0 0 255
+Connection: 27 20 0 0 255
+Node: 28 21
+Connection: 29 22 0 0 0
+Connection: 27 22 0 0 0
+Node: 28 22
+Connection: 27 21 0 0 255
+Connection: 27 23 0 0 255
+Node: 28 23
+Connection: 29 22 0 0 0
+Connection: 27 22 0 0 0
+Node: 28 24
+Connection: 27 25 0 0 255
+Connection: 27 24 0 0 255
+Node: 28 25
+Node: 28 26
+Connection: 27 26 0 0 255
+Connection: 29 25 0 0 255
+Connection: 29 27 0 0 255
+Connection: 27 27 0 0 255
+Node: 28 27
+Connection: 29 26 0 0 255
+Connection: 29 28 0 0 255
+Connection: 28 28 0 0 255
+Node: 28 28
+Connection: 28 27 0 0 255
+Connection: 29 28 0 0 255
+Connection: 29 27 0 0 255
+Connection: 27 29 0 0 255
+Node: 28 29
+Connection: 27 28 0 0 255
+Connection: 27 30 0 0 255
+Connection: 29 29 0 0 255
+Node: 28 30
+Connection: 27 29 0 0 255
+Connection: 28 31 0 0 255
+Connection: 29 30 0 0 255
+Node: 28 31
+Connection: 28 30 0 0 255
+Connection: 28 32 0 0 255
+Connection: 27 31 0 0 255
+Node: 28 32
+Connection: 28 33 0 0 255
+Connection: 27 32 0 0 255
+Connection: 28 31 0 0 255
+Node: 28 33
+Connection: 28 32 0 0 255
+Connection: 27 33 0 0 255
+Connection: 28 34 0 0 255
+Connection: 29 33 0 0 255
+Node: 28 34
+Connection: 28 33 0 0 255
+Connection: 27 34 0 0 255
+Connection: 29 35 0 0 255
+Node: 28 35
+Connection: 28 36 0 0 255
+Connection: 27 35 0 0 255
+Connection: 29 36 0 0 255
+Node: 28 36
+Connection: 27 37 0 0 255
+Connection: 28 35 0 0 255
+Connection: 29 35 0 0 255
+Node: 28 37
+Connection: 29 37 0 0 255
+Connection: 27 36 0 0 255
+Connection: 27 38 0 0 255
+Node: 28 38
+Connection: 27 37 0 0 255
+Connection: 28 39 0 0 255
+Connection: 29 38 0 0 255
+Connection: 27 39 0 0 255
+Node: 28 39
+Connection: 28 38 0 0 255
+Connection: 29 40 0 0 255
+Connection: 27 40 0 0 255
+Connection: 29 39 0 0 255
+Node: 28 40
+Node: 28 41
+Connection: 29 40 0 0 255
+Connection: 27 40 0 0 255
+Connection: 27 42 0 0 255
+Connection: 29 41 0 0 255
+Node: 28 42
+Connection: 27 41 0 0 255
+Connection: 27 43 0 0 255
+Connection: 29 42 0 0 255
+Node: 28 43
+Connection: 27 42 0 0 255
+Connection: 28 44 0 0 0
+Connection: 29 43 0 0 255
+Node: 28 44
+Connection: 27 44 0 0 0
+Connection: 29 44 0 0 0
+Connection: 29 43 0 0 255
+Connection: 28 43 0 0 255
+Node: 29 0
+Connection: 28 0 0 0 0
+Connection: 30 0 0 0 0
+Node: 29 1
+Connection: 29 2 0 0 255
+Connection: 30 0 0 0 0
+Connection: 28 0 0 0 0
+Connection: 30 1 0 0 255
+Connection: 28 1 0 0 255
+Node: 29 2
+Connection: 30 3 0 0 255
+Connection: 29 1 0 0 255
+Connection: 28 2 0 0 255
+Connection: 30 2 0 0 255
+Connection: 29 3 0 0 255
+Node: 29 3
+Connection: 30 4 0 0 255
+Connection: 29 2 0 0 255
+Connection: 28 3 0 0 255
+Node: 29 4
+Connection: 28 3 0 0 255
+Connection: 30 3 0 0 255
+Connection: 28 5 0 0 255
+Connection: 29 5 0 0 255
+Node: 29 5
+Connection: 30 6 0 0 255
+Connection: 29 4 0 0 255
+Connection: 28 5 0 0 255
+Node: 29 6
+Connection: 28 6 0 0 255
+Connection: 30 5 0 0 255
+Connection: 30 7 0 0 255
+Node: 29 7
+Connection: 30 6 0 0 255
+Connection: 29 8 0 0 255
+Connection: 28 7 0 0 255
+Node: 29 8
+Connection: 29 7 0 0 255
+Connection: 30 9 0 0 255
+Connection: 28 9 0 0 255
+Node: 29 9
+Connection: 30 9 0 0 255
+Connection: 28 8 0 0 255
+Connection: 28 10 0 0 255
+Node: 29 10
+Node: 29 11
+Connection: 30 10 0 0 255
+Connection: 29 12 0 0 255
+Connection: 28 11 0 0 255
+Node: 29 12
+Connection: 30 11 0 0 255
+Connection: 30 13 0 0 255
+Connection: 29 11 0 0 255
+Node: 29 13
+Node: 29 14
+Connection: 30 15 0 0 255
+Connection: 28 14 0 0 255
+Node: 29 15
+Connection: 29 16 0 0 255
+Connection: 28 15 0 0 255
+Node: 29 16
+Connection: 28 16 0 0 255
+Connection: 28 17 0 0 255
+Connection: 30 16 0 0 255
+Connection: 29 15 0 0 255
+Node: 29 17
+Connection: 28 18 0 0 255
+Connection: 28 16 0 0 255
+Node: 29 18
+Connection: 28 17 0 0 255
+Connection: 29 19 0 0 255
+Connection: 30 18 0 0 255
+Node: 29 19
+Connection: 28 18 0 0 255
+Connection: 29 18 0 0 255
+Node: 29 20
+Node: 29 21
+Node: 29 22
+Connection: 28 21 0 0 255
+Connection: 28 23 0 0 255
+Node: 29 23
+Node: 29 24
+Node: 29 25
+Connection: 28 26 0 0 255
+Connection: 29 26 0 0 255
+Node: 29 26
+Connection: 28 27 0 0 255
+Connection: 29 25 0 0 255
+Connection: 30 26 0 0 255
+Node: 29 27
+Connection: 28 26 0 0 255
+Connection: 28 28 0 0 255
+Node: 29 28
+Connection: 28 27 0 0 255
+Connection: 28 28 0 0 255
+Connection: 30 28 0 0 255
+Connection: 29 29 0 0 255
+Node: 29 29
+Connection: 29 28 0 0 255
+Connection: 28 29 0 0 255
+Node: 29 30
+Connection: 30 29 0 0 255
+Connection: 28 30 0 0 255
+Node: 29 31
+Node: 29 32
+Connection: 30 31 0 0 255
+Connection: 30 33 0 0 255
+Connection: 29 33 0 0 255
+Node: 29 33
+Connection: 30 34 0 0 255
+Connection: 29 32 0 0 255
+Connection: 28 33 0 0 255
+Node: 29 34
+Node: 29 35
+Connection: 30 35 0 0 255
+Connection: 28 34 0 0 255
+Connection: 28 36 0 0 255
+Node: 29 36
+Connection: 29 37 0 0 255
+Connection: 30 35 0 0 255
+Connection: 28 35 0 0 255
+Node: 29 37
+Connection: 30 38 0 0 255
+Connection: 29 36 0 0 255
+Connection: 28 37 0 0 255
+Node: 29 38
+Connection: 28 38 0 0 255
+Connection: 30 37 0 0 255
+Connection: 30 39 0 0 255
+Node: 29 39
+Connection: 30 38 0 0 255
+Connection: 29 40 0 0 255
+Connection: 28 39 0 0 255
+Node: 29 40
+Connection: 28 41 0 0 255
+Connection: 30 41 0 0 255
+Connection: 28 39 0 0 255
+Connection: 29 39 0 0 255
+Node: 29 41
+Connection: 30 40 0 0 255
+Connection: 29 42 0 0 255
+Connection: 28 41 0 0 255
+Node: 29 42
+Connection: 30 41 0 0 255
+Connection: 29 43 0 0 255
+Connection: 28 42 0 0 255
+Connection: 30 42 0 0 255
+Connection: 29 41 0 0 255
+Node: 29 43
+Connection: 29 42 0 0 255
+Connection: 30 44 0 0 0
+Connection: 28 44 0 0 0
+Connection: 30 43 0 0 255
+Connection: 28 43 0 0 255
+Node: 29 44
+Connection: 28 44 0 0 0
+Connection: 30 44 0 0 0
+Node: 30 0
+Connection: 29 0 0 0 0
+Connection: 31 0 0 0 0
+Connection: 31 1 0 0 255
+Connection: 29 1 0 0 255
+Connection: 30 1 0 0 255
+Node: 30 1
+Connection: 31 2 0 0 255
+Connection: 30 0 0 0 0
+Connection: 29 1 0 0 255
+Node: 30 2
+Connection: 31 1 0 0 255
+Connection: 30 3 0 0 255
+Connection: 29 2 0 0 255
+Node: 30 3
+Connection: 31 3 0 0 255
+Connection: 29 2 0 0 255
+Connection: 29 4 0 0 255
+Connection: 30 2 0 0 255
+Node: 30 4
+Connection: 30 5 0 0 255
+Connection: 31 3 0 0 255
+Connection: 29 3 0 0 255
+Node: 30 5
+Connection: 29 6 0 0 255
+Connection: 30 4 0 0 255
+Connection: 31 5 0 0 255
+Node: 30 6
+Connection: 29 5 0 0 255
+Connection: 29 7 0 0 255
+Node: 30 7
+Connection: 29 6 0 0 255
+Connection: 31 7 0 0 255
+Node: 30 8
+Connection: 31 8 0 0 255
+Connection: 31 9 0 0 255
+Node: 30 9
+Connection: 30 10 0 0 255
+Connection: 29 9 0 0 255
+Connection: 29 8 0 0 255
+Node: 30 10
+Connection: 30 9 0 0 255
+Connection: 31 11 0 0 255
+Connection: 29 11 0 0 255
+Connection: 30 11 0 0 255
+Connection: 31 10 0 0 255
+Node: 30 11
+Connection: 29 12 0 0 255
+Connection: 30 10 0 0 255
+Connection: 31 11 0 0 255
+Node: 30 12
+Node: 30 13
+Connection: 29 12 0 0 255
+Connection: 30 14 0 0 255
+Connection: 31 13 0 0 255
+Node: 30 14
+Connection: 30 13 0 0 255
+Node: 30 15
+Connection: 30 16 0 0 255
+Connection: 31 14 0 0 255
+Connection: 29 14 0 0 255
+Node: 30 16
+Connection: 31 17 0 0 255
+Connection: 30 15 0 0 255
+Connection: 29 16 0 0 255
+Node: 30 17
+Node: 30 18
+Connection: 31 17 0 0 255
+Connection: 29 18 0 0 255
+Node: 30 19
+Connection: 31 19 0 0 255
+Connection: 30 20 0 0 255
+Node: 30 20
+Connection: 30 19 0 0 255
+Connection: 31 20 0 0 255
+Node: 30 21
+Node: 30 22
+Node: 30 23
+Node: 30 24
+Connection: 30 25 0 0 255
+Connection: 31 24 0 0 255
+Node: 30 25
+Connection: 31 25 0 0 255
+Connection: 30 24 0 0 255
+Node: 30 26
+Connection: 31 27 0 0 255
+Connection: 29 26 0 0 255
+Node: 30 27
+Node: 30 28
+Connection: 31 27 0 0 255
+Connection: 30 29 0 0 255
+Connection: 29 28 0 0 255
+Node: 30 29
+Connection: 30 28 0 0 255
+Connection: 31 30 0 0 255
+Connection: 29 30 0 0 255
+Node: 30 30
+Connection: 30 31 0 0 255
+Node: 30 31
+Connection: 29 32 0 0 255
+Connection: 30 30 0 0 255
+Connection: 31 31 0 0 255
+Node: 30 32
+Node: 30 33
+Connection: 29 32 0 0 255
+Connection: 30 34 0 0 255
+Connection: 31 33 0 0 255
+Node: 30 34
+Connection: 30 35 0 0 255
+Connection: 30 33 0 0 255
+Connection: 31 33 0 0 255
+Connection: 29 33 0 0 255
+Connection: 31 34 0 0 255
+Node: 30 35
+Connection: 30 34 0 0 255
+Connection: 29 35 0 0 255
+Connection: 29 36 0 0 255
+Node: 30 36
+Connection: 31 35 0 0 255
+Connection: 31 36 0 0 255
+Node: 30 37
+Connection: 29 38 0 0 255
+Connection: 31 37 0 0 255
+Node: 30 38
+Connection: 29 37 0 0 255
+Connection: 29 39 0 0 255
+Node: 30 39
+Connection: 29 38 0 0 255
+Connection: 30 40 0 0 255
+Connection: 31 39 0 0 255
+Node: 30 40
+Connection: 30 39 0 0 255
+Connection: 31 41 0 0 255
+Connection: 29 41 0 0 255
+Node: 30 41
+Connection: 31 41 0 0 255
+Connection: 29 40 0 0 255
+Connection: 29 42 0 0 255
+Connection: 30 42 0 0 255
+Node: 30 42
+Connection: 31 43 0 0 255
+Connection: 30 41 0 0 255
+Connection: 29 42 0 0 255
+Node: 30 43
+Connection: 31 42 0 0 255
+Connection: 30 44 0 0 0
+Connection: 29 43 0 0 255
+Node: 30 44
+Connection: 29 44 0 0 0
+Connection: 31 44 0 0 0
+Connection: 31 43 0 0 255
+Connection: 29 43 0 0 255
+Connection: 30 43 0 0 255
+Node: 31 0
+Connection: 30 0 0 0 0
+Connection: 32 0 0 0 0
+Node: 31 1
+Connection: 32 1 0 0 255
+Connection: 30 0 0 0 0
+Connection: 30 2 0 0 255
+Node: 31 2
+Connection: 31 3 0 0 255
+Connection: 32 1 0 0 255
+Connection: 30 1 0 0 255
+Connection: 32 2 0 0 255
+Node: 31 3
+Connection: 31 2 0 0 255
+Connection: 30 3 0 0 255
+Connection: 32 4 0 0 255
+Connection: 30 4 0 0 255
+Node: 31 4
+Node: 31 5
+Connection: 32 6 0 0 255
+Connection: 32 4 0 0 255
+Connection: 30 5 0 0 255
+Node: 31 6
+Node: 31 7
+Connection: 32 6 0 0 255
+Connection: 31 8 0 0 255
+Connection: 30 7 0 0 255
+Node: 31 8
+Connection: 31 7 0 0 255
+Connection: 31 9 0 0 255
+Connection: 30 8 0 0 255
+Node: 31 9
+Connection: 31 8 0 0 255
+Connection: 32 8 0 0 255
+Connection: 30 8 0 0 255
+Connection: 32 9 0 0 255
+Connection: 31 10 0 0 255
+Node: 31 10
+Connection: 32 11 0 0 255
+Connection: 31 9 0 0 255
+Connection: 30 10 0 0 255
+Node: 31 11
+Connection: 30 10 0 0 255
+Connection: 30 11 0 0 255
+Node: 31 12
+Connection: 31 13 0 0 255
+Connection: 32 12 0 0 255
+Connection: 32 11 0 0 255
+Node: 31 13
+Connection: 31 12 0 0 255
+Connection: 31 14 0 0 255
+Connection: 30 13 0 0 255
+Node: 31 14
+Connection: 30 15 0 0 255
+Connection: 31 13 0 0 255
+Connection: 32 14 0 0 255
+Node: 31 15
+Connection: 31 16 0 0 255
+Connection: 32 15 0 0 255
+Node: 31 16
+Connection: 31 15 0 0 255
+Connection: 32 16 0 0 255
+Node: 31 17
+Connection: 32 17 0 0 255
+Connection: 30 16 0 0 255
+Connection: 30 18 0 0 255
+Connection: 31 18 0 0 255
+Node: 31 18
+Connection: 31 17 0 0 255
+Connection: 32 18 0 0 255
+Node: 31 19
+Connection: 32 18 0 0 255
+Connection: 31 20 0 0 255
+Connection: 30 19 0 0 255
+Node: 31 20
+Connection: 31 19 0 0 255
+Connection: 30 20 0 0 255
+Node: 31 21
+Node: 31 22
+Node: 31 23
+Node: 31 24
+Connection: 31 25 0 0 255
+Connection: 30 24 0 0 255
+Node: 31 25
+Connection: 32 26 0 0 255
+Connection: 31 24 0 0 255
+Connection: 30 25 0 0 255
+Node: 31 26
+Connection: 31 27 0 0 255
+Connection: 32 26 0 0 255
+Node: 31 27
+Connection: 32 27 0 0 255
+Connection: 30 26 0 0 255
+Connection: 30 28 0 0 255
+Connection: 31 26 0 0 255
+Node: 31 28
+Connection: 31 29 0 0 255
+Connection: 32 28 0 0 255
+Node: 31 29
+Connection: 31 28 0 0 255
+Connection: 32 29 0 0 255
+Node: 31 30
+Connection: 30 29 0 0 255
+Connection: 31 31 0 0 255
+Connection: 32 30 0 0 255
+Node: 31 31
+Connection: 31 32 0 0 255
+Connection: 31 30 0 0 255
+Connection: 30 31 0 0 255
+Node: 31 32
+Connection: 31 31 0 0 255
+Connection: 32 32 0 0 255
+Connection: 32 33 0 0 255
+Node: 31 33
+Connection: 30 33 0 0 255
+Connection: 30 34 0 0 255
+Node: 31 34
+Connection: 32 33 0 0 255
+Connection: 31 35 0 0 255
+Connection: 30 34 0 0 255
+Node: 31 35
+Connection: 32 36 0 0 255
+Connection: 30 36 0 0 255
+Connection: 31 36 0 0 255
+Connection: 32 35 0 0 255
+Connection: 31 34 0 0 255
+Node: 31 36
+Connection: 31 35 0 0 255
+Connection: 30 36 0 0 255
+Connection: 31 37 0 0 255
+Node: 31 37
+Connection: 32 38 0 0 255
+Connection: 31 36 0 0 255
+Connection: 30 37 0 0 255
+Node: 31 38
+Node: 31 39
+Connection: 32 38 0 0 255
+Connection: 32 40 0 0 255
+Connection: 30 39 0 0 255
+Node: 31 40
+Node: 31 41
+Connection: 31 42 0 0 255
+Connection: 30 41 0 0 255
+Connection: 32 40 0 0 255
+Connection: 30 40 0 0 255
+Node: 31 42
+Connection: 31 41 0 0 255
+Connection: 32 43 0 0 255
+Connection: 30 43 0 0 255
+Connection: 32 42 0 0 255
+Node: 31 43
+Connection: 32 43 0 0 255
+Connection: 30 42 0 0 255
+Connection: 30 44 0 0 0
+Node: 31 44
+Connection: 30 44 0 0 0
+Connection: 32 44 0 0 0
+Node: 32 0
+Connection: 31 0 0 0 0
+Connection: 33 0 0 0 0
+Connection: 32 1 0 0 255
+Connection: 33 1 0 0 255
+Node: 32 1
+Connection: 32 0 0 0 0
+Connection: 31 1 0 0 255
+Connection: 31 2 0 0 255
+Connection: 32 2 0 0 255
+Node: 32 2
+Connection: 33 3 0 0 255
+Connection: 32 1 0 0 255
+Connection: 31 2 0 0 255
+Connection: 33 2 0 0 255
+Node: 32 3
+Node: 32 4
+Connection: 31 3 0 0 255
+Connection: 31 5 0 0 255
+Connection: 33 4 0 0 255
+Node: 32 5
+Node: 32 6
+Connection: 31 5 0 0 255
+Connection: 31 7 0 0 255
+Connection: 33 6 0 0 255
+Node: 32 7
+Connection: 32 8 0 0 255
+Connection: 33 8 0 0 255
+Node: 32 8
+Connection: 31 9 0 0 255
+Connection: 32 7 0 0 255
+Connection: 33 8 0 0 255
+Connection: 32 9 0 0 255
+Connection: 33 7 0 0 255
+Node: 32 9
+Connection: 33 10 0 0 255
+Connection: 32 8 0 0 255
+Connection: 31 9 0 0 255
+Node: 32 10
+Connection: 33 9 0 0 255
+Connection: 33 11 0 0 255
+Node: 32 11
+Connection: 33 11 0 0 255
+Connection: 31 10 0 0 255
+Connection: 31 12 0 0 255
+Node: 32 12
+Connection: 31 12 0 0 255
+Connection: 33 12 0 0 255
+Connection: 33 13 0 0 255
+Node: 32 13
+Node: 32 14
+Connection: 33 14 0 0 255
+Connection: 31 14 0 0 255
+Node: 32 15
+Connection: 31 15 0 0 255
+Connection: 32 16 0 0 255
+Connection: 33 15 0 0 255
+Node: 32 16
+Connection: 33 17 0 0 255
+Connection: 32 15 0 0 255
+Connection: 31 16 0 0 255
+Node: 32 17
+Connection: 32 18 0 0 255
+Connection: 31 17 0 0 255
+Node: 32 18
+Connection: 32 17 0 0 255
+Connection: 33 19 0 0 255
+Connection: 31 19 0 0 255
+Connection: 31 18 0 0 255
+Connection: 32 19 0 0 255
+Node: 32 19
+Connection: 32 18 0 0 255
+Connection: 33 19 0 0 255
+Node: 32 20
+Node: 32 21
+Connection: 32 22 0 0 0
+Connection: 33 21 0 0 255
+Node: 32 22
+Connection: 32 21 0 0 255
+Connection: 32 23 0 0 255
+Node: 32 23
+Connection: 32 22 0 0 0
+Connection: 33 23 0 0 255
+Node: 32 24
+Node: 32 25
+Connection: 32 26 0 0 255
+Connection: 33 25 0 0 255
+Node: 32 26
+Connection: 32 27 0 0 255
+Connection: 33 25 0 0 255
+Connection: 31 25 0 0 255
+Connection: 31 26 0 0 255
+Connection: 32 25 0 0 255
+Node: 32 27
+Connection: 32 26 0 0 255
+Connection: 31 27 0 0 255
+Node: 32 28
+Connection: 33 27 0 0 255
+Connection: 32 29 0 0 255
+Connection: 31 28 0 0 255
+Node: 32 29
+Connection: 31 29 0 0 255
+Connection: 32 28 0 0 255
+Connection: 33 29 0 0 255
+Node: 32 30
+Connection: 33 30 0 0 255
+Connection: 31 30 0 0 255
+Node: 32 31
+Node: 32 32
+Connection: 31 32 0 0 255
+Connection: 33 31 0 0 255
+Connection: 33 32 0 0 255
+Node: 32 33
+Connection: 33 33 0 0 255
+Connection: 31 32 0 0 255
+Connection: 31 34 0 0 255
+Node: 32 34
+Connection: 33 33 0 0 255
+Connection: 33 35 0 0 255
+Node: 32 35
+Connection: 33 34 0 0 255
+Connection: 32 36 0 0 255
+Connection: 31 35 0 0 255
+Node: 32 36
+Connection: 31 35 0 0 255
+Connection: 32 35 0 0 255
+Connection: 32 37 0 0 255
+Connection: 33 36 0 0 255
+Connection: 33 37 0 0 255
+Node: 32 37
+Connection: 32 36 0 0 255
+Connection: 33 36 0 0 255
+Node: 32 38
+Connection: 31 37 0 0 255
+Connection: 31 39 0 0 255
+Connection: 33 38 0 0 255
+Node: 32 39
+Node: 32 40
+Connection: 31 39 0 0 255
+Connection: 31 41 0 0 255
+Connection: 33 40 0 0 255
+Node: 32 41
+Node: 32 42
+Connection: 33 41 0 0 255
+Connection: 32 43 0 0 255
+Connection: 31 42 0 0 255
+Connection: 33 42 0 0 255
+Node: 32 43
+Connection: 32 44 0 0 0
+Connection: 31 43 0 0 255
+Connection: 31 42 0 0 255
+Connection: 32 42 0 0 255
+Node: 32 44
+Connection: 31 44 0 0 0
+Connection: 33 44 0 0 0
+Connection: 32 43 0 0 255
+Connection: 33 43 0 0 255
+Node: 33 0
+Connection: 32 0 0 0 0
+Connection: 34 0 0 0 0
+Connection: 34 1 0 0 255
+Node: 33 1
+Connection: 33 2 0 0 255
+Connection: 34 0 0 0 0
+Connection: 32 0 0 0 0
+Node: 33 2
+Connection: 34 3 0 0 255
+Connection: 33 1 0 0 255
+Connection: 32 2 0 0 255
+Node: 33 3
+Connection: 34 2 0 0 255
+Connection: 32 2 0 0 255
+Connection: 33 4 0 0 255
+Node: 33 4
+Connection: 34 5 0 0 255
+Connection: 33 3 0 0 255
+Connection: 32 4 0 0 255
+Node: 33 5
+Node: 33 6
+Connection: 34 5 0 0 255
+Connection: 33 7 0 0 255
+Connection: 32 6 0 0 255
+Connection: 34 6 0 0 255
+Node: 33 7
+Connection: 33 6 0 0 255
+Connection: 34 8 0 0 255
+Connection: 32 8 0 0 255
+Node: 33 8
+Connection: 33 9 0 0 255
+Connection: 32 8 0 0 255
+Connection: 34 7 0 0 255
+Connection: 32 7 0 0 255
+Node: 33 9
+Connection: 32 10 0 0 255
+Connection: 33 8 0 0 255
+Connection: 34 9 0 0 255
+Node: 33 10
+Connection: 33 11 0 0 255
+Connection: 34 9 0 0 255
+Connection: 32 9 0 0 255
+Connection: 34 10 0 0 255
+Node: 33 11
+Connection: 34 12 0 0 255
+Connection: 32 10 0 0 255
+Connection: 33 10 0 0 255
+Connection: 32 11 0 0 255
+Node: 33 12
+Connection: 34 11 0 0 255
+Connection: 33 13 0 0 255
+Connection: 32 12 0 0 255
+Node: 33 13
+Connection: 33 14 0 0 255
+Connection: 33 12 0 0 255
+Connection: 34 12 0 0 255
+Connection: 32 12 0 0 255
+Connection: 34 13 0 0 255
+Node: 33 14
+Connection: 34 15 0 0 255
+Connection: 33 13 0 0 255
+Connection: 32 14 0 0 255
+Connection: 33 15 0 0 255
+Connection: 34 14 0 0 255
+Node: 33 15
+Connection: 34 16 0 0 255
+Connection: 33 14 0 0 255
+Connection: 32 15 0 0 255
+Node: 33 16
+Node: 33 17
+Connection: 34 16 0 0 255
+Connection: 32 16 0 0 255
+Connection: 34 17 0 0 255
+Node: 33 18
+Node: 33 19
+Connection: 32 18 0 0 255
+Connection: 33 20 0 0 255
+Connection: 34 19 0 0 255
+Connection: 32 19 0 0 255
+Connection: 34 18 0 0 255
+Node: 33 20
+Connection: 34 21 0 0 255
+Connection: 33 19 0 0 255
+Node: 33 21
+Connection: 32 21 0 0 255
+Connection: 34 20 0 0 255
+Connection: 34 22 0 0 0
+Node: 33 22
+Connection: 34 21 0 0 255
+Connection: 34 23 0 0 255
+Node: 33 23
+Connection: 32 23 0 0 255
+Connection: 34 22 0 0 0
+Connection: 34 24 0 0 255
+Node: 33 24
+Connection: 34 23 0 0 255
+Connection: 33 25 0 0 255
+Node: 33 25
+Connection: 32 26 0 0 255
+Connection: 33 24 0 0 255
+Connection: 34 25 0 0 255
+Connection: 32 25 0 0 255
+Connection: 34 26 0 0 255
+Node: 33 26
+Node: 33 27
+Connection: 34 28 0 0 255
+Connection: 32 28 0 0 255
+Connection: 34 27 0 0 255
+Node: 33 28
+Node: 33 29
+Connection: 34 28 0 0 255
+Connection: 33 30 0 0 255
+Connection: 32 29 0 0 255
+Node: 33 30
+Connection: 34 29 0 0 255
+Connection: 33 31 0 0 255
+Connection: 32 30 0 0 255
+Connection: 33 29 0 0 255
+Connection: 34 30 0 0 255
+Node: 33 31
+Connection: 33 30 0 0 255
+Connection: 34 32 0 0 255
+Connection: 32 32 0 0 255
+Connection: 33 32 0 0 255
+Connection: 34 31 0 0 255
+Node: 33 32
+Connection: 34 33 0 0 255
+Connection: 33 31 0 0 255
+Connection: 32 32 0 0 255
+Node: 33 33
+Connection: 34 32 0 0 255
+Connection: 32 34 0 0 255
+Connection: 33 34 0 0 255
+Connection: 32 33 0 0 255
+Node: 33 34
+Connection: 33 33 0 0 255
+Connection: 34 35 0 0 255
+Connection: 32 35 0 0 255
+Connection: 34 34 0 0 255
+Node: 33 35
+Connection: 32 34 0 0 255
+Connection: 33 36 0 0 255
+Connection: 34 35 0 0 255
+Node: 33 36
+Connection: 33 35 0 0 255
+Connection: 32 36 0 0 255
+Connection: 34 37 0 0 255
+Connection: 32 37 0 0 255
+Node: 33 37
+Connection: 33 38 0 0 255
+Connection: 34 36 0 0 255
+Connection: 32 36 0 0 255
+Node: 33 38
+Connection: 34 39 0 0 255
+Connection: 33 37 0 0 255
+Connection: 32 38 0 0 255
+Connection: 34 38 0 0 255
+Node: 33 39
+Node: 33 40
+Connection: 34 39 0 0 255
+Connection: 33 41 0 0 255
+Connection: 32 40 0 0 255
+Node: 33 41
+Connection: 34 42 0 0 255
+Connection: 32 42 0 0 255
+Connection: 33 40 0 0 255
+Node: 33 42
+Connection: 34 41 0 0 255
+Connection: 33 43 0 0 255
+Connection: 32 42 0 0 255
+Node: 33 43
+Connection: 33 42 0 0 255
+Connection: 34 44 0 0 0
+Connection: 32 44 0 0 0
+Node: 33 44
+Connection: 32 44 0 0 0
+Connection: 34 44 0 0 0
+Connection: 34 43 0 0 255
+Node: 34 0
+Connection: 33 0 0 0 0
+Connection: 35 0 0 0 0
+Connection: 33 1 0 0 255
+Connection: 35 1 0 0 255
+Node: 34 1
+Connection: 34 2 0 0 255
+Connection: 35 0 0 0 0
+Connection: 33 0 0 0 0
+Node: 34 2
+Connection: 33 3 0 0 255
+Connection: 34 1 0 0 255
+Connection: 35 2 0 0 255
+Node: 34 3
+Connection: 35 2 0 0 255
+Connection: 33 2 0 0 255
+Connection: 35 4 0 0 255
+Node: 34 4
+Node: 34 5
+Connection: 35 5 0 0 255
+Connection: 33 4 0 0 255
+Connection: 33 6 0 0 255
+Connection: 34 6 0 0 255
+Node: 34 6
+Connection: 35 7 0 0 255
+Connection: 34 5 0 0 255
+Connection: 33 6 0 0 255
+Node: 34 7
+Connection: 35 8 0 0 255
+Connection: 33 8 0 0 255
+Node: 34 8
+Connection: 34 9 0 0 255
+Connection: 35 9 0 0 255
+Connection: 35 7 0 0 255
+Connection: 33 7 0 0 255
+Node: 34 9
+Connection: 34 8 0 0 255
+Connection: 35 9 0 0 255
+Connection: 35 8 0 0 255
+Connection: 33 9 0 0 255
+Connection: 33 10 0 0 255
+Node: 34 10
+Connection: 35 9 0 0 255
+Connection: 34 11 0 0 255
+Connection: 33 10 0 0 255
+Node: 34 11
+Connection: 34 10 0 0 255
+Connection: 35 12 0 0 255
+Connection: 33 12 0 0 255
+Node: 34 12
+Connection: 35 11 0 0 255
+Connection: 33 11 0 0 255
+Connection: 35 12 0 0 255
+Connection: 35 13 0 0 255
+Connection: 33 13 0 0 255
+Connection: 34 13 0 0 255
+Node: 34 13
+Connection: 35 14 0 0 255
+Connection: 34 12 0 0 255
+Connection: 33 13 0 0 255
+Node: 34 14
+Connection: 35 13 0 0 255
+Connection: 34 15 0 0 255
+Connection: 33 14 0 0 255
+Node: 34 15
+Connection: 35 14 0 0 255
+Connection: 33 14 0 0 255
+Connection: 34 14 0 0 255
+Node: 34 16
+Connection: 33 17 0 0 255
+Connection: 33 15 0 0 255
+Connection: 35 17 0 0 255
+Node: 34 17
+Connection: 35 16 0 0 255
+Connection: 34 18 0 0 255
+Connection: 33 17 0 0 255
+Node: 34 18
+Connection: 34 17 0 0 255
+Connection: 35 19 0 0 255
+Connection: 33 19 0 0 255
+Node: 34 19
+Connection: 33 19 0 0 255
+Connection: 35 18 0 0 255
+Connection: 35 20 0 0 255
+Connection: 34 20 0 0 255
+Node: 34 20
+Connection: 33 21 0 0 255
+Connection: 34 19 0 0 255
+Connection: 35 20 0 0 255
+Node: 34 21
+Connection: 33 20 0 0 255
+Connection: 33 22 0 0 0
+Node: 34 22
+Connection: 33 21 0 0 255
+Connection: 33 23 0 0 255
+Node: 34 23
+Connection: 33 22 0 0 0
+Connection: 33 24 0 0 255
+Node: 34 24
+Connection: 33 23 0 0 255
+Connection: 34 25 0 0 255
+Connection: 35 24 0 0 255
+Node: 34 25
+Connection: 33 25 0 0 255
+Connection: 35 24 0 0 255
+Connection: 35 26 0 0 255
+Connection: 34 24 0 0 255
+Node: 34 26
+Connection: 34 27 0 0 255
+Connection: 35 25 0 0 255
+Connection: 33 25 0 0 255
+Node: 34 27
+Connection: 35 28 0 0 255
+Connection: 34 26 0 0 255
+Connection: 33 27 0 0 255
+Node: 34 28
+Connection: 33 27 0 0 255
+Connection: 33 29 0 0 255
+Connection: 35 27 0 0 255
+Node: 34 29
+Connection: 35 30 0 0 255
+Connection: 33 30 0 0 255
+Connection: 34 30 0 0 255
+Node: 34 30
+Connection: 35 31 0 0 255
+Connection: 34 29 0 0 255
+Connection: 33 30 0 0 255
+Node: 34 31
+Connection: 35 30 0 0 255
+Connection: 34 32 0 0 255
+Connection: 33 31 0 0 255
+Node: 34 32
+Connection: 35 33 0 0 255
+Connection: 33 33 0 0 255
+Connection: 35 31 0 0 255
+Connection: 35 32 0 0 255
+Connection: 33 31 0 0 255
+Connection: 34 31 0 0 255
+Node: 34 33
+Connection: 34 34 0 0 255
+Connection: 35 32 0 0 255
+Connection: 33 32 0 0 255
+Node: 34 34
+Connection: 35 35 0 0 255
+Connection: 34 33 0 0 255
+Connection: 33 34 0 0 255
+Node: 34 35
+Connection: 34 36 0 0 255
+Connection: 35 35 0 0 255
+Connection: 35 36 0 0 255
+Connection: 33 34 0 0 255
+Connection: 33 35 0 0 255
+Node: 34 36
+Connection: 34 35 0 0 255
+Connection: 35 35 0 0 255
+Connection: 35 37 0 0 255
+Connection: 33 37 0 0 255
+Node: 34 37
+Connection: 35 36 0 0 255
+Connection: 33 36 0 0 255
+Node: 34 38
+Connection: 35 37 0 0 255
+Connection: 34 39 0 0 255
+Connection: 33 38 0 0 255
+Node: 34 39
+Connection: 35 39 0 0 255
+Connection: 33 38 0 0 255
+Connection: 33 40 0 0 255
+Connection: 34 38 0 0 255
+Node: 34 40
+Node: 34 41
+Connection: 35 42 0 0 255
+Connection: 33 42 0 0 255
+Connection: 35 40 0 0 255
+Node: 34 42
+Connection: 33 41 0 0 255
+Connection: 34 43 0 0 255
+Connection: 35 42 0 0 255
+Node: 34 43
+Connection: 34 42 0 0 255
+Connection: 35 44 0 0 0
+Connection: 33 44 0 0 0
+Node: 34 44
+Connection: 33 44 0 0 0
+Connection: 35 44 0 0 0
+Connection: 33 43 0 0 255
+Connection: 35 43 0 0 255
+Node: 35 0
+Connection: 34 0 0 0 0
+Connection: 36 0 0 0 0
+Connection: 34 1 0 0 255
+Node: 35 1
+Connection: 35 2 0 0 255
+Connection: 36 0 0 0 0
+Connection: 34 0 0 0 0
+Node: 35 2
+Connection: 34 3 0 0 255
+Connection: 34 2 0 0 255
+Connection: 35 1 0 0 255
+Connection: 36 2 0 0 255
+Node: 35 3
+Node: 35 4
+Connection: 35 5 0 0 255
+Connection: 36 3 0 0 255
+Connection: 34 3 0 0 255
+Node: 35 5
+Connection: 35 4 0 0 255
+Connection: 34 5 0 0 255
+Connection: 36 5 0 0 255
+Connection: 36 6 0 0 255
+Node: 35 6
+Node: 35 7
+Connection: 34 6 0 0 255
+Connection: 34 8 0 0 255
+Connection: 36 6 0 0 255
+Node: 35 8
+Connection: 36 8 0 0 255
+Connection: 34 7 0 0 255
+Connection: 34 9 0 0 255
+Node: 35 9
+Connection: 34 9 0 0 255
+Connection: 34 8 0 0 255
+Connection: 34 10 0 0 255
+Node: 35 10
+Connection: 35 11 0 0 255
+Connection: 36 11 0 0 255
+Node: 35 11
+Connection: 34 12 0 0 255
+Connection: 35 10 0 0 255
+Connection: 36 11 0 0 255
+Connection: 36 12 0 0 255
+Node: 35 12
+Connection: 36 11 0 0 255
+Connection: 34 11 0 0 255
+Connection: 35 13 0 0 255
+Connection: 34 12 0 0 255
+Node: 35 13
+Connection: 35 12 0 0 255
+Connection: 34 12 0 0 255
+Connection: 34 14 0 0 255
+Node: 35 14
+Connection: 34 15 0 0 255
+Connection: 34 13 0 0 255
+Node: 35 15
+Node: 35 16
+Connection: 36 17 0 0 255
+Connection: 34 17 0 0 255
+Node: 35 17
+Connection: 35 18 0 0 255
+Connection: 36 16 0 0 255
+Connection: 34 16 0 0 255
+Node: 35 18
+Connection: 34 19 0 0 255
+Connection: 35 17 0 0 255
+Connection: 36 18 0 0 255
+Node: 35 19
+Connection: 34 18 0 0 255
+Node: 35 20
+Connection: 34 19 0 0 255
+Connection: 34 20 0 0 255
+Connection: 36 19 0 0 255
+Node: 35 21
+Node: 35 22
+Node: 35 23
+Node: 35 24
+Connection: 34 25 0 0 255
+Connection: 34 24 0 0 255
+Connection: 36 25 0 0 255
+Node: 35 25
+Connection: 34 26 0 0 255
+Node: 35 26
+Connection: 34 25 0 0 255
+Connection: 35 27 0 0 255
+Connection: 36 26 0 0 255
+Node: 35 27
+Connection: 35 26 0 0 255
+Connection: 36 28 0 0 255
+Connection: 34 28 0 0 255
+Node: 35 28
+Connection: 36 27 0 0 255
+Connection: 34 27 0 0 255
+Node: 35 29
+Node: 35 30
+Connection: 34 29 0 0 255
+Connection: 34 31 0 0 255
+Node: 35 31
+Connection: 34 30 0 0 255
+Connection: 34 32 0 0 255
+Connection: 35 32 0 0 255
+Node: 35 32
+Connection: 36 33 0 0 255
+Connection: 34 33 0 0 255
+Connection: 35 31 0 0 255
+Connection: 34 32 0 0 255
+Node: 35 33
+Connection: 34 32 0 0 255
+Connection: 35 34 0 0 255
+Connection: 36 33 0 0 255
+Connection: 36 32 0 0 255
+Node: 35 34
+Connection: 35 33 0 0 255
+Connection: 36 33 0 0 255
+Node: 35 35
+Connection: 34 35 0 0 255
+Connection: 34 34 0 0 255
+Connection: 34 36 0 0 255
+Node: 35 36
+Connection: 36 36 0 0 255
+Connection: 34 35 0 0 255
+Connection: 34 37 0 0 255
+Node: 35 37
+Connection: 34 36 0 0 255
+Connection: 34 38 0 0 255
+Connection: 36 38 0 0 255
+Node: 35 38
+Node: 35 39
+Connection: 35 40 0 0 255
+Connection: 34 39 0 0 255
+Connection: 36 38 0 0 255
+Connection: 36 39 0 0 255
+Node: 35 40
+Connection: 35 39 0 0 255
+Connection: 36 41 0 0 255
+Connection: 34 41 0 0 255
+Node: 35 41
+Node: 35 42
+Connection: 34 41 0 0 255
+Connection: 34 42 0 0 255
+Connection: 35 43 0 0 255
+Connection: 36 42 0 0 255
+Node: 35 43
+Connection: 35 42 0 0 255
+Connection: 36 44 0 0 0
+Connection: 34 44 0 0 0
+Node: 35 44
+Connection: 34 44 0 0 0
+Connection: 36 44 0 0 0
+Connection: 34 43 0 0 255
+Node: 36 0
+Connection: 35 0 0 0 0
+Connection: 37 0 0 0 0
+Connection: 35 1 0 0 255
+Node: 36 1
+Node: 36 2
+Connection: 37 2 0 0 255
+Connection: 35 2 0 0 255
+Connection: 36 3 0 0 255
+Node: 36 3
+Connection: 36 2 0 0 255
+Connection: 37 3 0 0 255
+Connection: 35 4 0 0 255
+Connection: 37 4 0 0 255
+Node: 36 4
+Node: 36 5
+Connection: 37 4 0 0 255
+Connection: 36 6 0 0 255
+Connection: 35 5 0 0 255
+Node: 36 6
+Connection: 37 6 0 0 255
+Connection: 36 5 0 0 255
+Connection: 35 5 0 0 255
+Connection: 35 7 0 0 255
+Node: 36 7
+Connection: 36 8 0 0 255
+Connection: 37 7 0 0 255
+Node: 36 8
+Connection: 36 9 0 0 255
+Connection: 35 8 0 0 255
+Connection: 37 8 0 0 255
+Connection: 36 7 0 0 255
+Node: 36 9
+Connection: 36 8 0 0 255
+Connection: 37 9 0 0 255
+Connection: 37 10 0 0 255
+Node: 36 10
+Node: 36 11
+Connection: 35 11 0 0 255
+Connection: 35 10 0 0 255
+Connection: 35 12 0 0 255
+Node: 36 12
+Connection: 37 11 0 0 255
+Connection: 35 11 0 0 255
+Node: 36 13
+Node: 36 14
+Node: 36 15
+Node: 36 16
+Connection: 35 17 0 0 255
+Node: 36 17
+Connection: 35 16 0 0 255
+Connection: 37 17 0 0 255
+Node: 36 18
+Connection: 36 19 0 0 255
+Connection: 37 18 0 0 255
+Connection: 35 18 0 0 255
+Node: 36 19
+Connection: 36 18 0 0 255
+Connection: 37 20 0 0 255
+Connection: 35 20 0 0 255
+Node: 36 20
+Node: 36 21
+Node: 36 22
+Connection: 37 21 0 0 255
+Connection: 37 23 0 0 255
+Node: 36 23
+Node: 36 24
+Node: 36 25
+Connection: 36 26 0 0 255
+Connection: 37 24 0 0 255
+Connection: 35 24 0 0 255
+Node: 36 26
+Connection: 36 25 0 0 255
+Connection: 37 26 0 0 255
+Connection: 35 26 0 0 255
+Node: 36 27
+Connection: 35 28 0 0 255
+Connection: 37 27 0 0 255
+Node: 36 28
+Connection: 35 27 0 0 255
+Node: 36 29
+Node: 36 30
+Node: 36 31
+Node: 36 32
+Connection: 37 33 0 0 255
+Connection: 35 33 0 0 255
+Node: 36 33
+Connection: 35 33 0 0 255
+Connection: 35 32 0 0 255
+Connection: 35 34 0 0 255
+Node: 36 34
+Node: 36 35
+Connection: 36 36 0 0 255
+Connection: 37 34 0 0 255
+Connection: 37 35 0 0 255
+Node: 36 36
+Connection: 36 35 0 0 255
+Connection: 35 36 0 0 255
+Connection: 37 36 0 0 255
+Connection: 36 37 0 0 255
+Node: 36 37
+Connection: 36 36 0 0 255
+Connection: 37 37 0 0 255
+Node: 36 38
+Connection: 37 38 0 0 255
+Connection: 35 37 0 0 255
+Connection: 35 39 0 0 255
+Connection: 36 39 0 0 255
+Node: 36 39
+Connection: 37 40 0 0 255
+Connection: 36 38 0 0 255
+Connection: 35 39 0 0 255
+Node: 36 40
+Node: 36 41
+Connection: 36 42 0 0 255
+Connection: 37 41 0 0 255
+Connection: 35 40 0 0 255
+Connection: 37 40 0 0 255
+Node: 36 42
+Connection: 37 42 0 0 255
+Connection: 35 42 0 0 255
+Connection: 36 41 0 0 255
+Node: 36 43
+Node: 36 44
+Connection: 35 44 0 0 0
+Connection: 37 44 0 0 0
+Connection: 35 43 0 0 255
+Node: 37 0
+Connection: 36 0 0 0 0
+Connection: 38 0 0 0 0
+Connection: 38 1 0 0 255
+Node: 37 1
+Node: 37 2
+Connection: 38 1 0 0 255
+Connection: 37 3 0 0 255
+Connection: 36 2 0 0 255
+Node: 37 3
+Connection: 37 2 0 0 255
+Connection: 36 3 0 0 255
+Node: 37 4
+Connection: 36 3 0 0 255
+Connection: 36 5 0 0 255
+Connection: 38 4 0 0 255
+Node: 37 5
+Connection: 38 6 0 0 255
+Connection: 37 6 0 0 255
+Node: 37 6
+Connection: 38 7 0 0 255
+Connection: 37 5 0 0 255
+Connection: 36 6 0 0 255
+Connection: 38 5 0 0 255
+Node: 37 7
+Connection: 38 6 0 0 255
+Connection: 36 7 0 0 255
+Connection: 37 8 0 0 255
+Node: 37 8
+Connection: 38 7 0 0 255
+Connection: 37 9 0 0 255
+Connection: 36 8 0 0 255
+Connection: 38 9 0 0 255
+Connection: 37 7 0 0 255
+Node: 37 9
+Connection: 38 10 0 0 255
+Connection: 37 8 0 0 255
+Connection: 36 9 0 0 255
+Node: 37 10
+Connection: 38 9 0 0 255
+Connection: 36 9 0 0 255
+Node: 37 11
+Connection: 38 10 0 0 255
+Connection: 38 12 0 0 255
+Connection: 36 12 0 0 255
+Node: 37 12
+Node: 37 13
+Connection: 38 14 0 0 255
+Node: 37 14
+Node: 37 15
+Connection: 38 16 0 0 255
+Node: 37 16
+Connection: 38 15 0 0 255
+Connection: 38 17 0 0 255
+Node: 37 17
+Connection: 37 18 0 0 255
+Connection: 36 17 0 0 255
+Connection: 38 17 0 0 255
+Node: 37 18
+Connection: 36 18 0 0 255
+Connection: 37 19 0 0 255
+Connection: 37 17 0 0 255
+Node: 37 19
+Connection: 37 18 0 0 255
+Connection: 38 19 0 0 255
+Node: 37 20
+Connection: 37 21 0 0 255
+Connection: 38 20 0 0 255
+Connection: 36 19 0 0 255
+Node: 37 21
+Connection: 37 20 0 0 255
+Connection: 38 22 0 0 0
+Connection: 36 22 0 0 0
+Node: 37 22
+Node: 37 23
+Connection: 37 24 0 0 255
+Connection: 38 22 0 0 0
+Connection: 36 22 0 0 0
+Node: 37 24
+Connection: 37 23 0 0 255
+Connection: 38 24 0 0 255
+Connection: 36 25 0 0 255
+Node: 37 25
+Connection: 37 26 0 0 255
+Connection: 38 25 0 0 255
+Node: 37 26
+Connection: 36 26 0 0 255
+Connection: 37 25 0 0 255
+Connection: 37 27 0 0 255
+Node: 37 27
+Connection: 37 26 0 0 255
+Connection: 36 27 0 0 255
+Connection: 38 27 0 0 255
+Node: 37 28
+Connection: 38 27 0 0 255
+Connection: 38 29 0 0 255
+Node: 37 29
+Connection: 38 28 0 0 255
+Node: 37 30
+Node: 37 31
+Connection: 38 30 0 0 255
+Node: 37 32
+Node: 37 33
+Connection: 38 34 0 0 255
+Connection: 38 32 0 0 255
+Connection: 36 32 0 0 255
+Node: 37 34
+Connection: 38 35 0 0 255
+Connection: 36 35 0 0 255
+Node: 37 35
+Connection: 38 34 0 0 255
+Connection: 37 36 0 0 255
+Connection: 36 35 0 0 255
+Node: 37 36
+Connection: 38 37 0 0 255
+Connection: 37 35 0 0 255
+Connection: 36 36 0 0 255
+Connection: 38 35 0 0 255
+Connection: 37 37 0 0 255
+Node: 37 37
+Connection: 38 38 0 0 255
+Connection: 36 37 0 0 255
+Connection: 37 36 0 0 255
+Node: 37 38
+Connection: 38 37 0 0 255
+Connection: 37 39 0 0 255
+Connection: 36 38 0 0 255
+Connection: 38 39 0 0 255
+Node: 37 39
+Connection: 38 38 0 0 255
+Connection: 37 38 0 0 255
+Node: 37 40
+Connection: 36 39 0 0 255
+Connection: 36 41 0 0 255
+Connection: 38 40 0 0 255
+Node: 37 41
+Connection: 37 42 0 0 255
+Connection: 36 41 0 0 255
+Node: 37 42
+Connection: 38 43 0 0 255
+Connection: 37 41 0 0 255
+Connection: 36 42 0 0 255
+Node: 37 43
+Node: 37 44
+Connection: 36 44 0 0 0
+Connection: 38 44 0 0 0
+Connection: 38 43 0 0 255
+Node: 38 0
+Connection: 37 0 0 0 0
+Connection: 39 0 0 0 0
+Node: 38 1
+Connection: 37 0 0 0 0
+Connection: 37 2 0 0 255
+Node: 38 2
+Connection: 38 3 0 0 255
+Connection: 39 2 0 0 255
+Connection: 39 3 0 0 255
+Node: 38 3
+Connection: 38 2 0 0 255
+Connection: 39 3 0 0 255
+Connection: 38 4 0 0 255
+Node: 38 4
+Connection: 38 3 0 0 255
+Connection: 37 4 0 0 255
+Node: 38 5
+Connection: 39 6 0 0 255
+Connection: 37 6 0 0 255
+Node: 38 6
+Connection: 37 5 0 0 255
+Connection: 37 7 0 0 255
+Node: 38 7
+Connection: 39 7 0 0 255
+Connection: 37 6 0 0 255
+Connection: 37 8 0 0 255
+Connection: 39 8 0 0 255
+Node: 38 8
+Node: 38 9
+Connection: 39 9 0 0 255
+Connection: 37 10 0 0 255
+Connection: 37 8 0 0 255
+Node: 38 10
+Connection: 39 10 0 0 255
+Connection: 37 9 0 0 255
+Connection: 37 11 0 0 255
+Node: 38 11
+Node: 38 12
+Connection: 39 11 0 0 255
+Connection: 37 11 0 0 255
+Connection: 39 12 0 0 255
+Node: 38 13
+Node: 38 14
+Connection: 38 15 0 0 255
+Connection: 39 13 0 0 255
+Connection: 37 13 0 0 255
+Node: 38 15
+Connection: 38 14 0 0 255
+Connection: 39 15 0 0 255
+Connection: 37 16 0 0 255
+Node: 38 16
+Connection: 38 17 0 0 255
+Connection: 39 15 0 0 255
+Connection: 37 15 0 0 255
+Node: 38 17
+Connection: 37 16 0 0 255
+Connection: 38 16 0 0 255
+Connection: 37 17 0 0 255
+Connection: 39 17 0 0 255
+Node: 38 18
+Node: 38 19
+Connection: 37 19 0 0 255
+Connection: 39 18 0 0 255
+Connection: 39 20 0 0 255
+Node: 38 20
+Connection: 37 20 0 0 255
+Connection: 39 19 0 0 255
+Connection: 39 21 0 0 255
+Node: 38 21
+Node: 38 22
+Connection: 37 21 0 0 255
+Connection: 37 23 0 0 255
+Node: 38 23
+Node: 38 24
+Connection: 37 24 0 0 255
+Connection: 39 23 0 0 255
+Connection: 39 25 0 0 255
+Node: 38 25
+Connection: 37 25 0 0 255
+Connection: 39 24 0 0 255
+Connection: 39 26 0 0 255
+Node: 38 26
+Node: 38 27
+Connection: 37 28 0 0 255
+Connection: 38 28 0 0 255
+Connection: 37 27 0 0 255
+Connection: 39 27 0 0 255
+Node: 38 28
+Connection: 38 27 0 0 255
+Connection: 39 29 0 0 255
+Connection: 37 29 0 0 255
+Node: 38 29
+Connection: 38 30 0 0 255
+Connection: 39 29 0 0 255
+Connection: 37 28 0 0 255
+Node: 38 30
+Connection: 38 29 0 0 255
+Connection: 39 31 0 0 255
+Connection: 37 31 0 0 255
+Node: 38 31
+Node: 38 32
+Connection: 39 33 0 0 255
+Connection: 37 33 0 0 255
+Connection: 39 32 0 0 255
+Node: 38 33
+Node: 38 34
+Connection: 39 34 0 0 255
+Connection: 37 33 0 0 255
+Connection: 37 35 0 0 255
+Node: 38 35
+Connection: 39 35 0 0 255
+Connection: 37 34 0 0 255
+Connection: 37 36 0 0 255
+Node: 38 36
+Node: 38 37
+Connection: 39 37 0 0 255
+Connection: 37 36 0 0 255
+Connection: 37 38 0 0 255
+Connection: 39 36 0 0 255
+Node: 38 38
+Connection: 37 37 0 0 255
+Connection: 37 39 0 0 255
+Node: 38 39
+Connection: 39 38 0 0 255
+Connection: 37 38 0 0 255
+Node: 38 40
+Connection: 38 41 0 0 255
+Connection: 37 40 0 0 255
+Node: 38 41
+Connection: 38 42 0 0 255
+Connection: 39 41 0 0 255
+Connection: 38 40 0 0 255
+Node: 38 42
+Connection: 38 41 0 0 255
+Connection: 39 42 0 0 255
+Connection: 39 41 0 0 255
+Node: 38 43
+Connection: 37 42 0 0 255
+Connection: 37 44 0 0 0
+Node: 38 44
+Connection: 37 44 0 0 0
+Connection: 39 44 0 0 0
+Node: 39 0
+Connection: 38 0 0 0 0
+Connection: 40 0 0 0 0
+Node: 39 1
+Node: 39 2
+Connection: 38 2 0 0 255
+Connection: 40 1 0 0 255
+Connection: 40 3 0 0 255
+Node: 39 3
+Connection: 38 3 0 0 255
+Connection: 40 2 0 0 255
+Connection: 38 2 0 0 255
+Connection: 40 3 0 0 255
+Node: 39 4
+Node: 39 5
+Connection: 40 6 0 0 255
+Node: 39 6
+Connection: 39 7 0 0 255
+Connection: 38 5 0 0 255
+Node: 39 7
+Connection: 39 6 0 0 255
+Connection: 38 7 0 0 255
+Node: 39 8
+Connection: 39 9 0 0 255
+Connection: 40 7 0 0 255
+Connection: 38 7 0 0 255
+Node: 39 9
+Connection: 39 8 0 0 255
+Connection: 38 9 0 0 255
+Connection: 39 10 0 0 255
+Node: 39 10
+Connection: 39 9 0 0 255
+Connection: 38 10 0 0 255
+Node: 39 11
+Connection: 38 12 0 0 255
+Node: 39 12
+Connection: 39 13 0 0 255
+Connection: 38 12 0 0 255
+Node: 39 13
+Connection: 40 12 0 0 255
+Connection: 40 14 0 0 255
+Connection: 39 12 0 0 255
+Connection: 38 14 0 0 255
+Connection: 40 13 0 0 255
+Node: 39 14
+Node: 39 15
+Connection: 38 15 0 0 255
+Connection: 38 16 0 0 255
+Connection: 40 14 0 0 255
+Connection: 40 16 0 0 255
+Node: 39 16
+Node: 39 17
+Connection: 39 18 0 0 255
+Connection: 38 17 0 0 255
+Node: 39 18
+Connection: 39 17 0 0 255
+Connection: 38 19 0 0 255
+Node: 39 19
+Connection: 38 20 0 0 255
+Node: 39 20
+Connection: 40 19 0 0 255
+Connection: 38 19 0 0 255
+Node: 39 21
+Connection: 38 20 0 0 255
+Connection: 39 22 0 0 0
+Connection: 40 21 0 0 255
+Node: 39 22
+Connection: 39 21 0 0 255
+Connection: 39 23 0 0 255
+Node: 39 23
+Connection: 38 24 0 0 255
+Connection: 39 22 0 0 0
+Connection: 40 23 0 0 255
+Node: 39 24
+Connection: 40 25 0 0 255
+Connection: 38 25 0 0 255
+Node: 39 25
+Connection: 38 24 0 0 255
+Node: 39 26
+Connection: 39 27 0 0 255
+Connection: 38 25 0 0 255
+Node: 39 27
+Connection: 39 26 0 0 255
+Connection: 38 27 0 0 255
+Node: 39 28
+Node: 39 29
+Connection: 38 29 0 0 255
+Connection: 38 28 0 0 255
+Connection: 40 28 0 0 255
+Connection: 40 30 0 0 255
+Node: 39 30
+Node: 39 31
+Connection: 40 30 0 0 255
+Connection: 40 32 0 0 255
+Connection: 39 32 0 0 255
+Connection: 38 30 0 0 255
+Connection: 40 31 0 0 255
+Node: 39 32
+Connection: 39 31 0 0 255
+Connection: 38 32 0 0 255
+Node: 39 33
+Connection: 38 32 0 0 255
+Node: 39 34
+Connection: 39 35 0 0 255
+Connection: 38 34 0 0 255
+Node: 39 35
+Connection: 39 34 0 0 255
+Connection: 39 36 0 0 255
+Connection: 38 35 0 0 255
+Node: 39 36
+Connection: 39 35 0 0 255
+Connection: 40 37 0 0 255
+Connection: 38 37 0 0 255
+Node: 39 37
+Connection: 39 38 0 0 255
+Connection: 38 37 0 0 255
+Node: 39 38
+Connection: 39 37 0 0 255
+Connection: 38 39 0 0 255
+Node: 39 39
+Connection: 40 38 0 0 255
+Node: 39 40
+Node: 39 41
+Connection: 38 41 0 0 255
+Connection: 40 42 0 0 255
+Connection: 38 42 0 0 255
+Connection: 40 41 0 0 255
+Node: 39 42
+Connection: 38 42 0 0 255
+Connection: 40 41 0 0 255
+Connection: 40 43 0 0 255
+Node: 39 43
+Node: 39 44
+Connection: 38 44 0 0 0
+Connection: 40 44 0 0 0
+Node: 40 0
+Connection: 39 0 0 0 0
+Connection: 41 0 0 0 0
+Connection: 40 1 0 0 255
+Node: 40 1
+Connection: 39 2 0 0 255
+Connection: 40 0 0 0 0
+Connection: 41 1 0 0 255
+Node: 40 2
+Connection: 39 3 0 0 255
+Connection: 40 3 0 0 255
+Node: 40 3
+Connection: 40 2 0 0 255
+Connection: 39 3 0 0 255
+Connection: 39 2 0 0 255
+Node: 40 4
+Node: 40 5
+Node: 40 6
+Connection: 40 7 0 0 255
+Connection: 41 5 0 0 255
+Connection: 39 5 0 0 255
+Node: 40 7
+Connection: 39 8 0 0 255
+Connection: 40 6 0 0 255
+Connection: 41 7 0 0 255
+Node: 40 8
+Connection: 41 9 0 0 255
+Node: 40 9
+Node: 40 10
+Connection: 41 10 0 0 255
+Node: 40 11
+Node: 40 12
+Connection: 39 13 0 0 255
+Node: 40 13
+Connection: 40 14 0 0 255
+Connection: 39 13 0 0 255
+Node: 40 14
+Connection: 39 13 0 0 255
+Connection: 40 15 0 0 255
+Connection: 41 14 0 0 255
+Connection: 39 15 0 0 255
+Connection: 40 13 0 0 255
+Node: 40 15
+Connection: 40 14 0 0 255
+Connection: 41 15 0 0 255
+Node: 40 16
+Connection: 40 17 0 0 255
+Connection: 41 16 0 0 255
+Connection: 39 15 0 0 255
+Node: 40 17
+Connection: 40 16 0 0 255
+Connection: 41 17 0 0 255
+Node: 40 18
+Connection: 40 19 0 0 255
+Connection: 41 18 0 0 255
+Node: 40 19
+Connection: 40 18 0 0 255
+Connection: 41 20 0 0 255
+Connection: 39 20 0 0 255
+Node: 40 20
+Node: 40 21
+Connection: 39 21 0 0 255
+Connection: 41 20 0 0 255
+Connection: 41 22 0 0 0
+Node: 40 22
+Connection: 41 21 0 0 255
+Connection: 41 23 0 0 255
+Node: 40 23
+Connection: 39 23 0 0 255
+Connection: 41 22 0 0 0
+Connection: 41 24 0 0 255
+Node: 40 24
+Node: 40 25
+Connection: 40 26 0 0 255
+Connection: 41 24 0 0 255
+Connection: 39 24 0 0 255
+Node: 40 26
+Connection: 40 25 0 0 255
+Connection: 41 26 0 0 255
+Node: 40 27
+Connection: 40 28 0 0 255
+Connection: 41 27 0 0 255
+Node: 40 28
+Connection: 40 27 0 0 255
+Connection: 41 28 0 0 255
+Connection: 39 29 0 0 255
+Node: 40 29
+Connection: 40 30 0 0 255
+Connection: 41 29 0 0 255
+Node: 40 30
+Connection: 39 31 0 0 255
+Connection: 40 29 0 0 255
+Connection: 41 30 0 0 255
+Connection: 39 29 0 0 255
+Connection: 40 31 0 0 255
+Node: 40 31
+Connection: 40 30 0 0 255
+Connection: 39 31 0 0 255
+Node: 40 32
+Connection: 39 31 0 0 255
+Node: 40 33
+Node: 40 34
+Connection: 41 34 0 0 255
+Node: 40 35
+Node: 40 36
+Connection: 41 35 0 0 255
+Node: 40 37
+Connection: 39 36 0 0 255
+Connection: 40 38 0 0 255
+Connection: 41 37 0 0 255
+Node: 40 38
+Connection: 40 37 0 0 255
+Connection: 41 39 0 0 255
+Connection: 39 39 0 0 255
+Node: 40 39
+Node: 40 40
+Node: 40 41
+Connection: 40 42 0 0 255
+Connection: 39 41 0 0 255
+Connection: 39 42 0 0 255
+Node: 40 42
+Connection: 39 41 0 0 255
+Connection: 40 41 0 0 255
+Node: 40 43
+Connection: 39 42 0 0 255
+Connection: 40 44 0 0 0
+Connection: 41 43 0 0 255
+Node: 40 44
+Connection: 39 44 0 0 0
+Connection: 41 44 0 0 0
+Connection: 40 43 0 0 255
+Node: 41 0
+Connection: 40 0 0 0 0
+Connection: 42 0 0 0 0
+Connection: 42 1 0 0 255
+Node: 41 1
+Connection: 40 1 0 0 255
+Connection: 42 0 0 0 0
+Connection: 42 2 0 0 255
+Node: 41 2
+Node: 41 3
+Node: 41 4
+Connection: 42 3 0 0 255
+Connection: 42 5 0 0 255
+Connection: 41 5 0 0 255
+Node: 41 5
+Connection: 40 6 0 0 255
+Connection: 41 4 0 0 255
+Connection: 42 5 0 0 255
+Node: 41 6
+Connection: 41 7 0 0 255
+Connection: 42 6 0 0 255
+Connection: 42 5 0 0 255
+Node: 41 7
+Connection: 41 6 0 0 255
+Connection: 40 7 0 0 255
+Node: 41 8
+Node: 41 9
+Connection: 42 8 0 0 255
+Connection: 40 8 0 0 255
+Connection: 42 9 0 0 255
+Connection: 41 10 0 0 255
+Node: 41 10
+Connection: 42 11 0 0 255
+Connection: 41 9 0 0 255
+Connection: 40 10 0 0 255
+Connection: 41 11 0 0 255
+Node: 41 11
+Connection: 41 10 0 0 255
+Connection: 42 11 0 0 255
+Connection: 42 10 0 0 255
+Node: 41 12
+Node: 41 13
+Node: 41 14
+Connection: 40 14 0 0 255
+Connection: 42 13 0 0 255
+Connection: 42 15 0 0 255
+Connection: 41 15 0 0 255
+Node: 41 15
+Connection: 42 16 0 0 255
+Connection: 41 14 0 0 255
+Connection: 40 15 0 0 255
+Node: 41 16
+Connection: 42 15 0 0 255
+Connection: 41 17 0 0 255
+Connection: 40 16 0 0 255
+Node: 41 17
+Connection: 40 17 0 0 255
+Connection: 41 16 0 0 255
+Node: 41 18
+Connection: 40 18 0 0 255
+Connection: 42 17 0 0 255
+Connection: 42 19 0 0 255
+Node: 41 19
+Node: 41 20
+Connection: 40 19 0 0 255
+Connection: 40 21 0 0 255
+Node: 41 21
+Connection: 42 22 0 0 0
+Connection: 40 22 0 0 0
+Connection: 42 20 0 0 255
+Node: 41 22
+Connection: 40 21 0 0 255
+Connection: 40 23 0 0 255
+Node: 41 23
+Connection: 42 22 0 0 0
+Connection: 40 22 0 0 0
+Connection: 42 24 0 0 255
+Node: 41 24
+Connection: 40 25 0 0 255
+Connection: 40 23 0 0 255
+Node: 41 25
+Node: 41 26
+Connection: 40 26 0 0 255
+Connection: 42 25 0 0 255
+Connection: 42 27 0 0 255
+Node: 41 27
+Connection: 40 27 0 0 255
+Connection: 41 28 0 0 255
+Node: 41 28
+Connection: 42 29 0 0 255
+Connection: 41 27 0 0 255
+Connection: 40 28 0 0 255
+Node: 41 29
+Connection: 42 28 0 0 255
+Connection: 41 30 0 0 255
+Connection: 40 29 0 0 255
+Node: 41 30
+Connection: 40 30 0 0 255
+Connection: 41 29 0 0 255
+Connection: 42 29 0 0 255
+Connection: 42 31 0 0 255
+Node: 41 31
+Node: 41 32
+Node: 41 33
+Connection: 41 34 0 0 255
+Connection: 42 33 0 0 255
+Connection: 42 34 0 0 255
+Node: 41 34
+Connection: 42 33 0 0 255
+Connection: 41 33 0 0 255
+Connection: 41 35 0 0 255
+Connection: 40 34 0 0 255
+Node: 41 35
+Connection: 42 36 0 0 255
+Connection: 40 36 0 0 255
+Connection: 42 35 0 0 255
+Connection: 41 34 0 0 255
+Node: 41 36
+Node: 41 37
+Connection: 41 38 0 0 255
+Connection: 40 37 0 0 255
+Node: 41 38
+Connection: 41 37 0 0 255
+Connection: 42 38 0 0 255
+Connection: 42 39 0 0 255
+Node: 41 39
+Connection: 40 38 0 0 255
+Connection: 41 40 0 0 255
+Connection: 42 39 0 0 255
+Node: 41 40
+Connection: 42 39 0 0 255
+Connection: 42 41 0 0 255
+Connection: 41 39 0 0 255
+Node: 41 41
+Node: 41 42
+Node: 41 43
+Connection: 40 43 0 0 255
+Connection: 42 42 0 0 255
+Connection: 42 44 0 0 0
+Node: 41 44
+Connection: 40 44 0 0 0
+Connection: 42 44 0 0 0
+Connection: 42 43 0 0 255
+Node: 42 0
+Connection: 41 0 0 0 0
+Connection: 43 0 0 0 0
+Connection: 41 1 0 0 255
+Node: 42 1
+Connection: 42 2 0 0 255
+Connection: 43 0 0 0 0
+Connection: 41 0 0 0 0
+Node: 42 2
+Connection: 42 1 0 0 255
+Connection: 43 2 0 0 255
+Connection: 41 1 0 0 255
+Node: 42 3
+Connection: 41 4 0 0 255
+Node: 42 4
+Connection: 43 3 0 0 255
+Node: 42 5
+Connection: 43 6 0 0 255
+Connection: 41 6 0 0 255
+Connection: 41 4 0 0 255
+Connection: 41 5 0 0 255
+Node: 42 6
+Connection: 41 6 0 0 255
+Node: 42 7
+Node: 42 8
+Connection: 41 9 0 0 255
+Node: 42 9
+Connection: 43 8 0 0 255
+Connection: 42 10 0 0 255
+Connection: 41 9 0 0 255
+Node: 42 10
+Connection: 42 9 0 0 255
+Connection: 43 11 0 0 255
+Connection: 41 11 0 0 255
+Node: 42 11
+Connection: 42 12 0 0 255
+Connection: 43 10 0 0 255
+Connection: 41 10 0 0 255
+Connection: 41 11 0 0 255
+Node: 42 12
+Connection: 42 11 0 0 255
+Connection: 43 12 0 0 255
+Node: 42 13
+Connection: 42 14 0 0 255
+Connection: 43 13 0 0 255
+Connection: 41 14 0 0 255
+Node: 42 14
+Connection: 42 13 0 0 255
+Connection: 42 15 0 0 255
+Connection: 43 14 0 0 255
+Node: 42 15
+Connection: 42 14 0 0 255
+Connection: 41 14 0 0 255
+Connection: 43 16 0 0 255
+Connection: 41 16 0 0 255
+Node: 42 16
+Connection: 42 17 0 0 255
+Connection: 43 15 0 0 255
+Connection: 41 15 0 0 255
+Node: 42 17
+Connection: 41 18 0 0 255
+Connection: 42 16 0 0 255
+Connection: 43 17 0 0 255
+Node: 42 18
+Node: 42 19
+Connection: 41 18 0 0 255
+Connection: 42 20 0 0 255
+Connection: 43 19 0 0 255
+Connection: 43 18 0 0 255
+Node: 42 20
+Connection: 42 19 0 0 255
+Connection: 43 21 0 0 255
+Connection: 41 21 0 0 255
+Node: 42 21
+Node: 42 22
+Connection: 41 21 0 0 255
+Connection: 41 23 0 0 255
+Node: 42 23
+Node: 42 24
+Connection: 42 25 0 0 255
+Connection: 43 23 0 0 255
+Connection: 41 23 0 0 255
+Node: 42 25
+Connection: 41 26 0 0 255
+Connection: 42 24 0 0 255
+Connection: 43 25 0 0 255
+Connection: 43 26 0 0 255
+Node: 42 26
+Node: 42 27
+Connection: 41 26 0 0 255
+Connection: 42 28 0 0 255
+Connection: 43 27 0 0 255
+Node: 42 28
+Connection: 42 27 0 0 255
+Connection: 43 29 0 0 255
+Connection: 41 29 0 0 255
+Node: 42 29
+Connection: 42 30 0 0 255
+Connection: 41 30 0 0 255
+Connection: 43 28 0 0 255
+Connection: 41 28 0 0 255
+Node: 42 30
+Connection: 42 29 0 0 255
+Connection: 43 30 0 0 255
+Connection: 42 31 0 0 255
+Node: 42 31
+Connection: 42 30 0 0 255
+Connection: 43 31 0 0 255
+Connection: 41 30 0 0 255
+Node: 42 32
+Connection: 42 33 0 0 255
+Connection: 43 32 0 0 255
+Node: 42 33
+Connection: 42 32 0 0 255
+Connection: 43 34 0 0 255
+Connection: 41 34 0 0 255
+Connection: 41 33 0 0 255
+Node: 42 34
+Connection: 42 35 0 0 255
+Connection: 43 33 0 0 255
+Connection: 41 33 0 0 255
+Node: 42 35
+Connection: 43 36 0 0 255
+Connection: 42 34 0 0 255
+Connection: 41 35 0 0 255
+Node: 42 36
+Connection: 41 35 0 0 255
+Node: 42 37
+Node: 42 38
+Connection: 41 38 0 0 255
+Node: 42 39
+Connection: 43 38 0 0 255
+Connection: 41 38 0 0 255
+Connection: 41 40 0 0 255
+Connection: 41 39 0 0 255
+Node: 42 40
+Connection: 43 41 0 0 255
+Node: 42 41
+Connection: 41 40 0 0 255
+Node: 42 42
+Connection: 42 43 0 0 255
+Connection: 43 42 0 0 255
+Connection: 41 43 0 0 255
+Node: 42 43
+Connection: 42 42 0 0 255
+Connection: 43 44 0 0 0
+Connection: 41 44 0 0 0
+Node: 42 44
+Connection: 41 44 0 0 0
+Connection: 43 44 0 0 0
+Connection: 41 43 0 0 255
+Node: 43 0
+Connection: 42 0 0 0 0
+Connection: 44 0 0 0 0
+Connection: 42 1 0 0 255
+Node: 43 1
+Node: 43 2
+Connection: 42 2 0 0 255
+Connection: 44 1 0 0 0
+Connection: 44 3 0 0 0
+Node: 43 3
+Connection: 44 4 0 0 0
+Connection: 42 4 0 0 255
+Node: 43 4
+Connection: 43 5 0 0 255
+Node: 43 5
+Connection: 43 4 0 0 255
+Connection: 44 5 0 0 0
+Node: 43 6
+Connection: 42 5 0 0 255
+Connection: 43 7 0 0 255
+Connection: 44 6 0 0 0
+Node: 43 7
+Connection: 43 8 0 0 255
+Connection: 44 7 0 0 0
+Connection: 43 6 0 0 255
+Node: 43 8
+Connection: 43 7 0 0 255
+Connection: 44 9 0 0 0
+Connection: 42 9 0 0 255
+Node: 43 9
+Connection: 43 10 0 0 255
+Node: 43 10
+Connection: 42 11 0 0 255
+Connection: 43 9 0 0 255
+Connection: 44 10 0 0 0
+Node: 43 11
+Connection: 43 12 0 0 255
+Connection: 44 11 0 0 0
+Connection: 42 10 0 0 255
+Node: 43 12
+Connection: 42 12 0 0 255
+Connection: 43 11 0 0 255
+Node: 43 13
+Connection: 42 13 0 0 255
+Connection: 44 12 0 0 0
+Connection: 44 14 0 0 0
+Node: 43 14
+Connection: 42 14 0 0 255
+Connection: 44 13 0 0 0
+Connection: 44 15 0 0 0
+Connection: 43 15 0 0 255
+Node: 43 15
+Connection: 42 16 0 0 255
+Connection: 43 14 0 0 255
+Connection: 44 15 0 0 0
+Node: 43 16
+Connection: 42 15 0 0 255
+Connection: 43 17 0 0 255
+Connection: 44 16 0 0 0
+Node: 43 17
+Connection: 42 17 0 0 255
+Connection: 44 16 0 0 0
+Connection: 44 18 0 0 0
+Connection: 43 16 0 0 255
+Node: 43 18
+Connection: 44 19 0 0 0
+Connection: 42 19 0 0 255
+Node: 43 19
+Connection: 42 19 0 0 255
+Connection: 44 18 0 0 0
+Connection: 44 20 0 0 0
+Node: 43 20
+Node: 43 21
+Connection: 42 20 0 0 255
+Connection: 43 22 0 0 0
+Connection: 44 21 0 0 0
+Node: 43 22
+Connection: 43 21 0 0 255
+Connection: 43 23 0 0 255
+Node: 43 23
+Connection: 42 24 0 0 255
+Connection: 43 22 0 0 0
+Connection: 44 23 0 0 0
+Node: 43 24
+Node: 43 25
+Connection: 42 25 0 0 255
+Connection: 44 24 0 0 0
+Connection: 44 26 0 0 0
+Node: 43 26
+Connection: 44 25 0 0 0
+Connection: 42 25 0 0 255
+Node: 43 27
+Connection: 42 27 0 0 255
+Connection: 44 26 0 0 0
+Connection: 44 28 0 0 0
+Connection: 43 28 0 0 255
+Node: 43 28
+Connection: 42 29 0 0 255
+Connection: 43 27 0 0 255
+Connection: 44 28 0 0 0
+Node: 43 29
+Connection: 42 28 0 0 255
+Connection: 43 30 0 0 255
+Connection: 44 29 0 0 0
+Node: 43 30
+Connection: 42 30 0 0 255
+Connection: 44 29 0 0 0
+Connection: 44 31 0 0 0
+Connection: 43 29 0 0 255
+Node: 43 31
+Connection: 42 31 0 0 255
+Connection: 44 30 0 0 0
+Connection: 44 32 0 0 0
+Node: 43 32
+Connection: 42 32 0 0 255
+Connection: 43 33 0 0 255
+Node: 43 33
+Connection: 43 32 0 0 255
+Connection: 44 33 0 0 0
+Connection: 42 34 0 0 255
+Node: 43 34
+Connection: 42 33 0 0 255
+Connection: 43 35 0 0 255
+Connection: 44 34 0 0 0
+Node: 43 35
+Connection: 43 34 0 0 255
+Node: 43 36
+Connection: 43 37 0 0 255
+Connection: 44 35 0 0 0
+Connection: 42 35 0 0 255
+Node: 43 37
+Connection: 43 36 0 0 255
+Connection: 44 37 0 0 0
+Connection: 43 38 0 0 255
+Node: 43 38
+Connection: 42 39 0 0 255
+Connection: 43 37 0 0 255
+Connection: 44 38 0 0 0
+Node: 43 39
+Connection: 43 40 0 0 255
+Connection: 44 39 0 0 0
+Node: 43 40
+Connection: 43 39 0 0 255
+Node: 43 41
+Connection: 44 40 0 0 0
+Connection: 42 40 0 0 255
+Node: 43 42
+Connection: 42 42 0 0 255
+Connection: 44 41 0 0 0
+Connection: 44 43 0 0 0
+Node: 43 43
+Node: 43 44
+Connection: 42 44 0 0 0
+Connection: 44 44 0 0 0
+Connection: 42 43 0 0 255
+Node: 44 0
+Connection: 43 0 0 0 0
+Connection: 44 1 0 0 0
+Node: 44 1
+Connection: 44 0 0 0 0
+Connection: 44 2 0 0 0
+Connection: 43 2 0 0 255
+Node: 44 2
+Connection: 44 1 0 0 0
+Connection: 44 3 0 0 0
+Node: 44 3
+Connection: 44 2 0 0 0
+Connection: 44 4 0 0 0
+Connection: 43 2 0 0 255
+Node: 44 4
+Connection: 44 3 0 0 0
+Connection: 44 5 0 0 0
+Connection: 43 3 0 0 255
+Node: 44 5
+Connection: 44 4 0 0 0
+Connection: 44 6 0 0 0
+Connection: 43 5 0 0 255
+Node: 44 6
+Connection: 44 5 0 0 0
+Connection: 44 7 0 0 0
+Connection: 43 6 0 0 255
+Node: 44 7
+Connection: 44 6 0 0 0
+Connection: 44 8 0 0 0
+Connection: 43 7 0 0 255
+Node: 44 8
+Connection: 44 7 0 0 0
+Connection: 44 9 0 0 0
+Node: 44 9
+Connection: 44 8 0 0 0
+Connection: 44 10 0 0 0
+Connection: 43 8 0 0 255
+Node: 44 10
+Connection: 44 9 0 0 0
+Connection: 44 11 0 0 0
+Connection: 43 10 0 0 255
+Node: 44 11
+Connection: 44 10 0 0 0
+Connection: 44 12 0 0 0
+Connection: 43 11 0 0 255
+Node: 44 12
+Connection: 44 11 0 0 0
+Connection: 44 13 0 0 0
+Connection: 43 13 0 0 255
+Node: 44 13
+Connection: 44 12 0 0 0
+Connection: 44 14 0 0 0
+Connection: 43 14 0 0 255
+Node: 44 14
+Connection: 44 13 0 0 0
+Connection: 44 15 0 0 0
+Connection: 43 13 0 0 255
+Node: 44 15
+Connection: 44 14 0 0 0
+Connection: 44 16 0 0 0
+Connection: 43 14 0 0 255
+Connection: 43 15 0 0 255
+Node: 44 16
+Connection: 44 15 0 0 0
+Connection: 44 17 0 0 0
+Connection: 43 17 0 0 255
+Connection: 43 16 0 0 255
+Node: 44 17
+Connection: 44 16 0 0 0
+Connection: 44 18 0 0 0
+Node: 44 18
+Connection: 44 17 0 0 0
+Connection: 44 19 0 0 0
+Connection: 43 17 0 0 255
+Connection: 43 19 0 0 255
+Node: 44 19
+Connection: 44 18 0 0 0
+Connection: 44 20 0 0 0
+Connection: 43 18 0 0 255
+Node: 44 20
+Connection: 44 19 0 0 0
+Connection: 44 21 0 0 0
+Connection: 43 19 0 0 255
+Node: 44 21
+Connection: 44 20 0 0 0
+Connection: 44 22 0 0 0
+Connection: 43 21 0 0 255
+Node: 44 22
+Connection: 44 21 0 0 0
+Connection: 44 23 0 0 0
+Node: 44 23
+Connection: 44 22 0 0 0
+Connection: 44 24 0 0 0
+Connection: 43 23 0 0 255
+Node: 44 24
+Connection: 44 23 0 0 0
+Connection: 44 25 0 0 0
+Connection: 43 25 0 0 255
+Node: 44 25
+Connection: 44 24 0 0 0
+Connection: 44 26 0 0 0
+Connection: 43 26 0 0 255
+Node: 44 26
+Connection: 44 25 0 0 0
+Connection: 44 27 0 0 0
+Connection: 43 25 0 0 255
+Connection: 43 27 0 0 255
+Node: 44 27
+Connection: 44 26 0 0 0
+Connection: 44 28 0 0 0
+Node: 44 28
+Connection: 44 27 0 0 0
+Connection: 44 29 0 0 0
+Connection: 43 27 0 0 255
+Connection: 43 28 0 0 255
+Node: 44 29
+Connection: 44 28 0 0 0
+Connection: 44 30 0 0 0
+Connection: 43 30 0 0 255
+Connection: 43 29 0 0 255
+Node: 44 30
+Connection: 44 29 0 0 0
+Connection: 44 31 0 0 0
+Connection: 43 31 0 0 255
+Node: 44 31
+Connection: 44 30 0 0 0
+Connection: 44 32 0 0 0
+Connection: 43 30 0 0 255
+Node: 44 32
+Connection: 44 31 0 0 0
+Connection: 44 33 0 0 0
+Connection: 43 31 0 0 255
+Node: 44 33
+Connection: 44 32 0 0 0
+Connection: 44 34 0 0 0
+Connection: 43 33 0 0 255
+Node: 44 34
+Connection: 44 33 0 0 0
+Connection: 44 35 0 0 0
+Connection: 43 34 0 0 255
+Node: 44 35
+Connection: 44 34 0 0 0
+Connection: 44 36 0 0 0
+Connection: 43 36 0 0 255
+Node: 44 36
+Connection: 44 35 0 0 0
+Connection: 44 37 0 0 0
+Node: 44 37
+Connection: 44 36 0 0 0
+Connection: 44 38 0 0 0
+Connection: 43 37 0 0 255
+Node: 44 38
+Connection: 44 37 0 0 0
+Connection: 44 39 0 0 0
+Connection: 43 38 0 0 255
+Node: 44 39
+Connection: 44 38 0 0 0
+Connection: 44 40 0 0 0
+Connection: 43 39 0 0 255
+Node: 44 40
+Connection: 44 39 0 0 0
+Connection: 44 41 0 0 0
+Connection: 43 41 0 0 255
+Node: 44 41
+Connection: 44 40 0 0 0
+Connection: 44 42 0 0 0
+Connection: 43 42 0 0 255
+Node: 44 42
+Connection: 44 41 0 0 0
+Connection: 44 43 0 0 0
+Node: 44 43
+Connection: 44 42 0 0 0
+Connection: 44 44 0 0 0
+Connection: 43 42 0 0 255
+Node: 44 44
+Connection: 43 44 0 0 0
+Connection: 44 43 0 0 0
