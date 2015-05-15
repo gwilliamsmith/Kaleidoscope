@@ -39,6 +39,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="MutationTextField" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ReproductionClockLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ReproductionClockTextField" min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="CycleBaseLable" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="CycleBaseCheckBox" min="-2" max="-2" attributes="0"/>
@@ -56,13 +60,17 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="HealthLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="HealthTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="MutationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="MutationTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CycleBaseLable" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="CycleBaseCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="CycleBaseCheckBox" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="HealthLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="HealthTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="MutationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="MutationTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="CycleBaseLable" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ReproductionClockLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ReproductionClockTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jColorChooser1" min="-2" pref="316" max="-2" attributes="0"/>
@@ -104,6 +112,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="CycleBaseCheckBox">
+    </Component>
+    <Component class="javax.swing.JLabel" name="ReproductionClockLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Turns for reproduction: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="ReproductionClockTextField">
     </Component>
   </SubComponents>
 </Form>

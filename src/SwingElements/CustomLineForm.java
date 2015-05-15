@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package graphvisualizer;
+package SwingElements;
 
+import graphvisualizer.Base;
+import graphvisualizer.GraphTupleInfo;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -16,6 +13,7 @@ public class CustomLineForm extends javax.swing.JFrame {
 
     GraphTupleInfo store;
     private boolean ready = false;
+    private boolean complete = true;
     Base sim = null;
 
     public CustomLineForm() {
@@ -48,6 +46,8 @@ public class CustomLineForm extends javax.swing.JFrame {
         SubmitButton = new javax.swing.JButton();
         CycleBaseLable = new javax.swing.JLabel();
         CycleBaseCheckBox = new javax.swing.JCheckBox();
+        ReproductionClockLabel = new javax.swing.JLabel();
+        ReproductionClockTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -63,6 +63,8 @@ public class CustomLineForm extends javax.swing.JFrame {
         });
 
         CycleBaseLable.setText("Cycle Base?");
+
+        ReproductionClockLabel.setText("Turns for reproduction: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,6 +85,10 @@ public class CustomLineForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(MutationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ReproductionClockLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ReproductionClockTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(CycleBaseLable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CycleBaseCheckBox))
@@ -95,13 +101,16 @@ public class CustomLineForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(HealthLabel)
-                    .addComponent(HealthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MutationLabel)
-                    .addComponent(MutationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CycleBaseLable)
-                    .addComponent(CycleBaseCheckBox))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CycleBaseCheckBox, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(HealthLabel)
+                        .addComponent(HealthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(MutationLabel)
+                        .addComponent(MutationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CycleBaseLable)
+                        .addComponent(ReproductionClockLabel)
+                        .addComponent(ReproductionClockTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -113,15 +122,21 @@ public class CustomLineForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
+        complete = true;
         if (ready) {
-            store.startHealth = checkTextField(HealthTextField);
-            store.mutationPercentage = checkTextField(MutationTextField);
+            store.startHealth = checkTextField(HealthTextField, "Starting Health");
+            store.mutationPercentage = checkTextField(MutationTextField, "Mutation Percentage");
+            store.reproductionClock = checkTextField(ReproductionClockTextField, "Reproduction Clock");
             store.color = jColorChooser1.getColor();
             if (CycleBaseCheckBox.isSelected()) {
-                sim.cycleBase = checkTextField(HealthTextField);
+                if(store.startHealth > 0){
+                    sim.setCycleBase(store.startHealth);
+                }//end if
             }//end if
         }//end if
-        this.dispose();
+        if (complete) {
+            this.dispose();
+        }//end if
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
 
@@ -132,20 +147,24 @@ public class CustomLineForm extends javax.swing.JFrame {
     private javax.swing.JTextField HealthTextField;
     private javax.swing.JLabel MutationLabel;
     private javax.swing.JTextField MutationTextField;
+    private javax.swing.JLabel ReproductionClockLabel;
+    private javax.swing.JTextField ReproductionClockTextField;
     private javax.swing.JButton SubmitButton;
     private javax.swing.JColorChooser jColorChooser1;
     // End of variables declaration//GEN-END:variables
 
-    private int checkTextField(JTextField field) {
+    private int checkTextField(JTextField field, String title) {
         int out;
         try {
             out = Integer.parseInt(field.getText());
             if (out < 0) {
-                JOptionPane.showMessageDialog(this, "Enter a number greater than 0!", null, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Enter a number greater than 0!", title, JOptionPane.ERROR_MESSAGE);
+                complete = false;
                 out = -1;
             }//end if
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "You must enter a number!", null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "You must enter a number!", title, JOptionPane.ERROR_MESSAGE);
+            complete = false;
             out = -1;
         }//end tryCatch
         return out;

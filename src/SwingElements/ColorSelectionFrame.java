@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package SwingElements;
 
-package graphvisualizer;
+import graphvisualizer.Base;
 
-/**
- *
- * @author Redpox
- */
 public class ColorSelectionFrame extends javax.swing.JFrame {
 
     Base parent;
@@ -17,7 +9,7 @@ public class ColorSelectionFrame extends javax.swing.JFrame {
     public ColorSelectionFrame(Base b) {
         parent = b;
         initComponents();
-    }
+    }//end constructor
 
     /**
      * This method is called from within the constructor to initialize the form.

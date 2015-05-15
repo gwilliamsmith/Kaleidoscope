@@ -5,9 +5,6 @@ import java.awt.Color;
 public class GraphTuple {
 
     public GraphNode location;
-    public double weight;
-    public boolean searched;
-    public boolean weighted = false;
     public boolean recent;
     public int startHealth = 50;
     public int health = startHealth;
@@ -20,78 +17,8 @@ public class GraphTuple {
     public int startReproductionClock = 1;
     public int reproductionClock = startReproductionClock;
 
-    public GraphTuple(GraphNode loc, double dis) {
+    public GraphTuple(GraphNode loc,GraphTupleInfo gti) {
         location = loc;
-        weight = dis;
-        searched = false;
-        recent = true;
-    }//end constructor
-
-    public GraphTuple(GraphNode loc, double weight, boolean weighted) {
-        location = loc;
-        this.weight = weight;
-        this.weighted = weighted;
-    }//end constructor
-
-    public GraphTuple(GraphNode loc, double weight, boolean weighted, boolean edge) {
-        location = loc;
-        this.weight = weight;
-        this.weighted = weighted;
-        this.edge = edge;
-    }//end constructor
-
-    public GraphTuple(GraphNode loc, double weight, boolean weighted, Color color) {
-        location = loc;
-        this.weight = weight;
-        this.weighted = false;
-        this.color = color;
-        r = color.getRed();
-        g = color.getGreen();
-        b = color.getBlue();
-    }//end constructor
-
-    public GraphTuple(GraphNode loc, double weight, boolean weighted, Color color, int baseHealth) {
-        location = loc;
-        this.weight = weight;
-        this.weighted = false;
-        this.color = color;
-        r = color.getRed();
-        g = color.getGreen();
-        b = color.getBlue();
-        startHealth = baseHealth;
-        health = startHealth;
-    }//end constructor
-
-    public GraphTuple(GraphNode loc, double weight, boolean weighted, Color color, int baseHealth, boolean edge) {
-        location = loc;
-        this.weight = weight;
-        this.weighted = false;
-        this.color = color;
-        r = color.getRed();
-        g = color.getGreen();
-        b = color.getBlue();
-        startHealth = baseHealth;
-        health = startHealth;
-        this.edge = edge;
-    }//end constructor
-
-    public GraphTuple(GraphNode loc, double weight, boolean weighted, Color color, int baseHealth, int mutationPercentage) {
-        location = loc;
-        this.weight = weight;
-        this.weighted = false;
-        this.color = color;
-        r = color.getRed();
-        g = color.getGreen();
-        b = color.getBlue();
-        startHealth = baseHealth;
-        health = startHealth;
-        mutatePercentage = mutationPercentage;
-    }//end constructor
-
-    public GraphTuple(GraphNode loc, double weight, boolean weighted, GraphTupleInfo gti) {
-        location = loc;
-        this.weight = weight;
-        this.weighted = false;
         this.color = gti.color;
         r = gti.color.getRed();
         g = gti.color.getGreen();
@@ -99,7 +26,15 @@ public class GraphTuple {
         startHealth = gti.startHealth;
         health = startHealth;
         mutatePercentage = gti.mutationPercentage;
+        startReproductionClock = gti.reproductionClock;
+        reproductionClock = startReproductionClock;
+        edge = gti.edge;
     }//end constructor
+    
+    public GraphTupleInfo generateGTI(){
+        GraphTupleInfo out = new GraphTupleInfo(this.startHealth,this.color,this.mutatePercentage,this.startReproductionClock);
+        return out;
+    }//end generateGTI
 
     public void setColor(Color in) {
         color = in;

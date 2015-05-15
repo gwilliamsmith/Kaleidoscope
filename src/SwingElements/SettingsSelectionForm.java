@@ -1,26 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package SwingElements;
 
-package graphvisualizer;
+import graphvisualizer.Base;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author Redpox
- */
 public class SettingsSelectionForm extends javax.swing.JFrame {
 
     Base parent;
-    
+
     public SettingsSelectionForm(Base b) {
         parent = b;
+        JOptionPane.showMessageDialog(parent, "This has not been implemented yet!");
         initComponents();
     }//end constructor
-    
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

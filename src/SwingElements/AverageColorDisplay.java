@@ -1,13 +1,9 @@
-package graphvisualizer;
+package SwingElements;
 
 import java.awt.Color;
-import javax.swing.JFrame;
 
 public class AverageColorDisplay extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AverageColorDisplay
-     */
     public AverageColorDisplay() {
         initComponents();
     }

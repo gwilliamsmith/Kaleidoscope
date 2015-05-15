@@ -1,27 +1,27 @@
-package graphvisualizer;
+package SwingElements;
 
 
+import graphvisualizer.Base;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Redpox
- */
 public class GridSelectionFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GridSelectionFrame
-     */
-    public GridSelectionFrame() {
+    private static GridSelectionFrame instance = null;
+    
+    private GridSelectionFrame() {
         initComponents();
-    }
+    }//end constructor
+    
+    public static GridSelectionFrame getInstance(){
+        if(instance == null){
+            instance = new GridSelectionFrame();
+            return instance;
+        }//end if
+        else{
+            return null;
+        }//end else
+    }//end getInstance
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,18 +45,6 @@ public class GridSelectionFrame extends javax.swing.JFrame {
         NumberOfColumnsLabel.setText("Number of Columns");
 
         NumberOfRowsLabel.setText("Number of Rows");
-
-        NumberOfColumnsTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NumberOfColumnsTextFieldActionPerformed(evt);
-            }
-        });
-
-        NumberOfRowsTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NumberOfRowsTextFieldActionPerformed(evt);
-            }
-        });
 
         SubmitButton.setText("Ok");
         SubmitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -116,34 +104,26 @@ public class GridSelectionFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NumberOfColumnsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumberOfColumnsTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NumberOfColumnsTextFieldActionPerformed
-
-    private void NumberOfRowsTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumberOfRowsTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NumberOfRowsTextFieldActionPerformed
-
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
-       int c = checkTextField(NumberOfColumnsTextField);
-       int r = checkTextField(NumberOfRowsTextField);
-       int st = checkTextField(StepTimeTextField);
+       int c = checkTextField(NumberOfColumnsTextField, "Columns");
+       int r = checkTextField(NumberOfRowsTextField, "Rows");
+       int st = checkTextField(StepTimeTextField, "Step Time");
        if(c != -1 && r != -1){
            new Base(c,r,st).setVisible(true);
            this.dispose();
        }//end if
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
-    private int checkTextField(JTextField field){
+    private int checkTextField(JTextField field, String title){
         int out;
         try{
             out = Integer.parseInt(field.getText());
             if(out <= 0){
-                JOptionPane.showMessageDialog(this, "Enter a number greater than 0!", null, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Enter a number greater than 0!", title, JOptionPane.ERROR_MESSAGE);
                 out = -1;
             }//end if
         } catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "You must enter a number!", null, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "You must enter a number!", title, JOptionPane.ERROR_MESSAGE);
             out = -1;
         }//end tryCatch
         return out;
@@ -159,4 +139,4 @@ public class GridSelectionFrame extends javax.swing.JFrame {
     private javax.swing.JButton SubmitButton;
     private javax.swing.JLabel TimeBetweenStepsLabel;
     // End of variables declaration//GEN-END:variables
-}
+}//end GridSelectionFrame

@@ -1,6 +1,5 @@
 package graphvisualizer;
 
-
 public class MyQueue<T>{
 	QueueNode<T> front = null;
 	private int length = 0;
