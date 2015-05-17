@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class WhiteOutGridActionListener implements ActionListener {
 
-    Base ref = null;
+    private Base ref;
 
     public WhiteOutGridActionListener(Base in) {
         ref = in;
@@ -16,13 +16,11 @@ public class WhiteOutGridActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (ref != null) {
             for (GraphNode[] matrix1 : ref.graph.getMatrix()) {
                 for (GraphNode gn : matrix1) {
                     gn.setColor(new Color(255, 255, 255));
                     ref.getCanvas().repaint();
                 }//end for
             }//end for
-        }//end if
     }//end actionPerformed
 }//end WhiteOutGridActionListener

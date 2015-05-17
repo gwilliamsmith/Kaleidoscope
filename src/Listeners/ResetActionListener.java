@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class ResetActionListener implements ActionListener {
 
-    Base ref = null;
+    private Base ref;
 
     public ResetActionListener(Base in) {
         ref = in;
@@ -14,8 +14,6 @@ public class ResetActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (ref != null) {
             ref.reset();
-        }//end if
     }//endActionPerformed
 }//end LoopActionListener

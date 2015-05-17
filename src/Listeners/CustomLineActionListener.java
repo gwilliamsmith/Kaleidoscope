@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class CustomLineActionListener implements ActionListener{
     
-    Base ref = null;
+    private Base ref = null;
     
     public CustomLineActionListener(Base in){
         ref = in;
@@ -18,9 +18,7 @@ public class CustomLineActionListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (ref != null) {
             ref.setGtiStorage(new GraphTupleInfo());
-            CustomLineForm clf = new CustomLineForm();
-            clf.giveStoreLocation(ref.getGtiStorage());
-            clf.giveField(ref);
+            CustomLineForm clf = new CustomLineForm(ref);
             clf.setVisible(true);
         }//end if
     }//end actionPerformed

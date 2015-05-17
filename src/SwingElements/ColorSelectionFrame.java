@@ -4,10 +4,10 @@ import graphvisualizer.Base;
 
 public class ColorSelectionFrame extends javax.swing.JFrame {
 
-    Base parent;
+    private Base ref;
     
     public ColorSelectionFrame(Base b) {
-        parent = b;
+        ref = b;
         initComponents();
     }//end constructor
 
@@ -57,7 +57,7 @@ public class ColorSelectionFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
-        parent.setTempColor(ColorChooser.getColor());
+        ref.setTempColor(ColorChooser.getColor());
         this.dispose();
     }//GEN-LAST:event_SubmitButtonActionPerformed
 

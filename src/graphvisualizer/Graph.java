@@ -22,7 +22,6 @@ public class Graph {
     private boolean mutateColor = true;
     private boolean mutateHealth = false;
     private int growthType = 0;
-    private int foodThreshhold = 1;
 
     public Graph(int r, int c, Base in) {
         matrix = new GraphNode[r][c];
@@ -64,7 +63,7 @@ public class Graph {
         int spacing = ref.getSpacing();
         for (int i = 0, ySpace = pointSize / 2; i < matrix.length; i++, ySpace += spacing) {
             for (int j = 0, xSpace = pointSize / 2; j < matrix[i].length; j++, xSpace += spacing) {
-                GraphNode temp = new GraphNode(xSpace - pointSize / 2, ySpace - pointSize / 2, pointSize, pointSize, newID(), i, j, consume);
+                GraphNode temp = new GraphNode(xSpace - pointSize / 2, ySpace - pointSize / 2, pointSize, pointSize, newID(), i, j, matrix.length - 1, matrix[0].length - 1, consume);
                 temp.setColor(Color.BLUE);
                 add(temp, i, j);
             }//end for
@@ -79,7 +78,7 @@ public class Graph {
                 try {
                     if (j == 0 || j == matrix[i].length - 1 || i == 0 || i == matrix.length - 1) {
                         temp.setColor(Color.BLACK);
-                        GraphTupleInfo gti = new GraphTupleInfo(50, Color.BLACK, 0, 1, true);
+                        GraphTupleInfo gti = new GraphTupleInfo(50, Color.BLACK, 0, 1);
                         if (j == 0) {
                             if (i == 0) {
                                 connector(temp, new GraphNode[]{matrix[i + 1][j], matrix[i][j + 1]}, gti);
@@ -138,123 +137,55 @@ public class Graph {
     private void buildQueue() {
         for (GraphNode[] matrix1 : matrix) {
             for (GraphNode temp : matrix1) {
-                if (temp.connections.size() == 1) {
+                if (temp.getNumberOfConnections() == 1) {
                     queue.enqueue(temp);
                 }//end if
             }//end for
         } //end for
     }//end buildQueue
 
-    private void decay() {
+    private void decayNodes() {
         for (GraphNode[] matrix1 : matrix) {
             for (GraphNode temp : matrix1) {
-                if (temp.connections.size() > 0) {
-                    for (int i = 0; i < temp.connections.size(); i++) {
-                        GraphTuple gt = temp.connections.get(i);
-                        if (temp.getILoc() != matrix.length - 1 && temp.getILoc() != 0 && temp.getJLoc() != 0 && temp.getJLoc() != matrix[0].length - 1) {
-                            gt.health--;
-                            if (gt.health <= 0) {
-                                GraphNode gn = gt.location;
-                                for (int j = 0; j < gn.connections.size(); j++) {
-                                    GraphTuple gt2 = gn.connections.get(j);
-                                    if (gt2.location == temp) {
-                                        gn.connections.remove(gt2);
-                                        j--;
-                                    }//end if
-                                }//end for
-                                temp.connections.remove(gt);
-                                i--;
-                            }//end if
+                for (int i = 0; i < temp.getNumberOfConnections(); i++) {
+                    GraphTuple gt = temp.getConnection(i);
+                    if (!temp.isEdgeNode()) {
+                        gt.decay();
+                        if (!gt.isAlive()) {
+                            temp.severConnection(gt.getToLocation());
+                            i--;
                         }//end if
-                    }//end for
-                }//end if
+                    }//end if
+                }//end for
             }//end for
         } //end for
     }//end decay
 
     private void regularStep(GraphNode temp, int xCompare, int yCompare) {
-        GraphTuple parent = temp.connections.get(0);
-        parent.reproductionClock--;
-        if (parent.reproductionClock <= 0) {
-            GraphTupleInfo gti = new GraphTupleInfo(parent.startHealth, parent.getColor(), parent.mutatePercentage);
-            normalRules(temp,gti,xCompare,yCompare);   
-            parent.reproductionClock = parent.startReproductionClock;
+        GraphTuple parent = temp.getParentLine();
+        int reproductionClock = parent.getReproductionCock();
+        parent.setReproductionClock(reproductionClock--);
+        if (reproductionClock <= 0) {
+            GraphTupleInfo gti = new GraphTupleInfo(parent.getStartHealth(), parent.getColor(), parent.getMutatePercentage());
+            normalRules(temp, gti, xCompare, yCompare);
+            parent.setReproductionClock(parent.getStartReproductionClock());
         }//end if
     }//end regularStep
 
     private void mutateStep(GraphNode temp, int xCompare, int yCompare) {
-        GraphTuple parent = temp.connections.get(0);
-        parent.reproductionClock--;
-        if (parent.reproductionClock <= 0) {
-            Random rand = new Random();
-            int rInfluence = rand.nextInt(51);
-            int gInfluence = rand.nextInt(51);
-            int bInfluence = rand.nextInt(51);
-            int healthInfluence;
-            int mutationPercentage = parent.mutatePercentage;
-            if (parent.startHealth <= 1) {
-                healthInfluence = 0;
+        GraphTuple parent = temp.getParentLine();
+        int reproductionClock = parent.getReproductionCock();
+        parent.setReproductionClock(reproductionClock--);
+        if (reproductionClock <= 0) {
+            GraphTupleInfo gti;
+            if (mutate) {
+                gti = generateMutatedGti(parent);
             }//end if
             else {
-                double deviation = .05;
-                int variance = (int) (parent.startHealth * deviation);
-                if (variance <= 1) {
-                    variance = 1;
-                }//end if
-                healthInfluence = rand.nextInt(variance + 1);
+                gti = new GraphTupleInfo(parent.getStartHealth(), parent.getColor(), parent.getMutatePercentage());
             }//end else
-            if (rand.nextBoolean()) {
-                rInfluence = rInfluence * -1;
-            }//end if
-            if (rand.nextBoolean()) {
-                gInfluence = gInfluence * -1;
-            }//end if
-            if (rand.nextBoolean()) {
-                bInfluence = bInfluence * -1;
-            }//end if
-            if (rand.nextBoolean()) {
-                healthInfluence = healthInfluence * -1;
-            }//end if
-            int red = parent.getColor().getRed();
-            if (rand.nextBoolean() && mutateColor) {
-                red = parent.getColor().getRed() + rInfluence;
-            }//end if
-            int green = parent.getColor().getGreen();
-            if (rand.nextBoolean() && mutateColor) {
-                green = parent.getColor().getGreen() + gInfluence;
-            }//end if
-            int blue = parent.getColor().getBlue();
-            if (rand.nextBoolean() && mutateColor) {
-                blue = parent.getColor().getBlue() + bInfluence;
-            }//end if
-            int newHealth = parent.startHealth;
-            if (rand.nextBoolean() && mutateHealth) {
-                newHealth = parent.startHealth + healthInfluence;
-            }//end if
-            if (red > 255) {
-                red = 255;
-            }//end if
-            else if (red < 0) {
-                red = 0;
-            }//end else if
-            if (green > 255) {
-                green = 255;
-            }//end if
-            else if (green < 0) {
-                green = 0;
-            }//end else if
-            if (blue > 255) {
-                blue = 255;
-            }//end if
-            else if (blue < 0) {
-                blue = 0;
-            }//end else if
-            if (newHealth < 0) {
-                newHealth = 0;
-            }//end if
-            GraphTupleInfo gti = new GraphTupleInfo(newHealth, new Color(red, green, blue), mutationPercentage);
-            normalRules(temp,gti,xCompare,yCompare);            
-            parent.reproductionClock = parent.startReproductionClock;
+            normalRules(temp, gti, xCompare, yCompare);
+            parent.setReproductionClock(parent.getStartReproductionClock());
         }//end if
     }//end mutateStep
 
@@ -266,125 +197,186 @@ public class Graph {
         int jLoc = temp.getJLoc();
         if (jLoc > 0 && iLoc > 0 && jLoc < matrix[0].length - 1 && iLoc < matrix.length - 1) {
             //Top Left Check
-            if (matrix[iLoc - 1][jLoc - 1] != temp && matrix[iLoc - 1][jLoc - 1].food > greatestFood && matrix[iLoc - 1][jLoc - 1].food > 0) {
-                greatestFood = matrix[iLoc - 1][jLoc - 1].food;
+            if (matrix[iLoc - 1][jLoc - 1] != temp && matrix[iLoc - 1][jLoc - 1].getFood() > greatestFood && matrix[iLoc - 1][jLoc - 1].getFood() > 0) {
+                greatestFood = matrix[iLoc - 1][jLoc - 1].getFood();
                 target = matrix[iLoc - 1][jLoc - 1];
             }//end if
             //Top Middle Check
-            if (matrix[iLoc - 1][jLoc] != temp && matrix[iLoc - 1][jLoc].food > greatestFood) {
-                greatestFood = matrix[iLoc - 1][jLoc].food;
+            if (matrix[iLoc - 1][jLoc] != temp && matrix[iLoc - 1][jLoc].getFood() > greatestFood) {
+                greatestFood = matrix[iLoc - 1][jLoc].getFood();
                 target = matrix[iLoc - 1][jLoc];
                 sameNodes.clear();
             }//end if
-            else if (matrix[iLoc - 1][jLoc] != temp && matrix[iLoc - 1][jLoc].food > greatestFood && matrix[iLoc - 1][jLoc].food > 0) {
+            else if (matrix[iLoc - 1][jLoc] != temp && matrix[iLoc - 1][jLoc].getFood() > greatestFood && matrix[iLoc - 1][jLoc].getFood() > 0) {
                 sameNodes.add(matrix[iLoc - 1][jLoc]);
             }//end else if
             //Top Right Check
-            if (matrix[iLoc - 1][jLoc + 1] != temp && matrix[iLoc - 1][jLoc + 1].food > greatestFood && matrix[iLoc - 1][jLoc + 1].food > 0) {
-                greatestFood = matrix[iLoc - 1][jLoc + 1].food;
+            if (matrix[iLoc - 1][jLoc + 1] != temp && matrix[iLoc - 1][jLoc + 1].getFood() > greatestFood && matrix[iLoc - 1][jLoc + 1].getFood() > 0) {
+                greatestFood = matrix[iLoc - 1][jLoc + 1].getFood();
                 target = matrix[iLoc - 1][jLoc + 1];
                 sameNodes.clear();
             }//end if
-            else if (matrix[iLoc - 1][jLoc + 1] != temp && matrix[iLoc - 1][jLoc + 1].food > greatestFood && matrix[iLoc - 1][jLoc + 1].food > 0) {
+            else if (matrix[iLoc - 1][jLoc + 1] != temp && matrix[iLoc - 1][jLoc + 1].getFood() > greatestFood && matrix[iLoc - 1][jLoc + 1].getFood() > 0) {
                 sameNodes.add(matrix[iLoc - 1][jLoc + 1]);
             }//end else if
             //Middle Left Check
-            if (matrix[iLoc][jLoc - 1] != temp && matrix[iLoc][jLoc - 1].food > greatestFood && matrix[iLoc][jLoc - 1].food > 0) {
-                greatestFood = matrix[iLoc][jLoc - 1].food;
+            if (matrix[iLoc][jLoc - 1] != temp && matrix[iLoc][jLoc - 1].getFood() > greatestFood && matrix[iLoc][jLoc - 1].getFood() > 0) {
+                greatestFood = matrix[iLoc][jLoc - 1].getFood();
                 target = matrix[iLoc][jLoc - 1];
                 sameNodes.clear();
             }//end if
-            else if (matrix[iLoc][jLoc - 1] != temp && matrix[iLoc][jLoc - 1].food > greatestFood && matrix[iLoc][jLoc - 1].food > 0) {
+            else if (matrix[iLoc][jLoc - 1] != temp && matrix[iLoc][jLoc - 1].getFood() > greatestFood && matrix[iLoc][jLoc - 1].getFood() > 0) {
                 sameNodes.add(matrix[iLoc][jLoc - 1]);
             }//end else if
             //Middle Right Check
-            if (matrix[iLoc][jLoc + 1] != temp && matrix[iLoc][jLoc + 1].food > greatestFood && matrix[iLoc][jLoc + 1].food > 0) {
-                greatestFood = matrix[iLoc][jLoc + 1].food;
+            if (matrix[iLoc][jLoc + 1] != temp && matrix[iLoc][jLoc + 1].getFood() > greatestFood && matrix[iLoc][jLoc + 1].getFood() > 0) {
+                greatestFood = matrix[iLoc][jLoc + 1].getFood();
                 target = matrix[iLoc][jLoc - 1];
                 sameNodes.clear();
             }//end if
-            else if (matrix[iLoc][jLoc + 1] != temp && matrix[iLoc][jLoc + 1].food > greatestFood && matrix[iLoc][jLoc + 1].food > 0) {
+            else if (matrix[iLoc][jLoc + 1] != temp && matrix[iLoc][jLoc + 1].getFood() > greatestFood && matrix[iLoc][jLoc + 1].getFood() > 0) {
                 sameNodes.add(matrix[iLoc][jLoc + 1]);
             }//end else if
             //Bottom Left Check
             if (matrix[iLoc + 1][jLoc - 1] != temp) {
-                if (matrix[iLoc + 1][jLoc - 1].food > greatestFood && matrix[iLoc + 1][jLoc - 1].food > 0) {
-                    greatestFood = matrix[iLoc + 1][jLoc - 1].food;
+                if (matrix[iLoc + 1][jLoc - 1].getFood() > greatestFood && matrix[iLoc + 1][jLoc - 1].getFood() > 0) {
+                    greatestFood = matrix[iLoc + 1][jLoc - 1].getFood();
                     target = matrix[iLoc + 1][jLoc - 1];
                     sameNodes.clear();
                 }//end if
             }//end if
-            else if (matrix[iLoc + 1][jLoc - 1] != temp && matrix[iLoc + 1][jLoc - 1].food > greatestFood && matrix[iLoc + 1][jLoc - 1].food > 0) {
+            else if (matrix[iLoc + 1][jLoc - 1] != temp && matrix[iLoc + 1][jLoc - 1].getFood() > greatestFood && matrix[iLoc + 1][jLoc - 1].getFood() > 0) {
                 sameNodes.add(matrix[iLoc + 1][jLoc - 1]);
             }//end else if
             //Bottom Middle Check
-            if (matrix[iLoc + 1][jLoc] != temp && matrix[iLoc + 1][jLoc].food > greatestFood && matrix[iLoc + 1][jLoc].food > 0) {
-                greatestFood = matrix[iLoc + 1][jLoc].food;
+            if (matrix[iLoc + 1][jLoc] != temp && matrix[iLoc + 1][jLoc].getFood() > greatestFood && matrix[iLoc + 1][jLoc].getFood() > 0) {
+                greatestFood = matrix[iLoc + 1][jLoc].getFood();
                 target = matrix[iLoc + 1][jLoc];
                 sameNodes.clear();
             }//end if
-            else if (matrix[iLoc + 1][jLoc] != temp && matrix[iLoc + 1][jLoc].food > greatestFood && matrix[iLoc + 1][jLoc].food > 0) {
+            else if (matrix[iLoc + 1][jLoc] != temp && matrix[iLoc + 1][jLoc].getFood() > greatestFood && matrix[iLoc + 1][jLoc].getFood() > 0) {
                 sameNodes.add(matrix[iLoc + 1][jLoc]);
             }//end else if
             //Bottom Left Check
-            if (matrix[iLoc + 1][jLoc + 1] != temp && matrix[iLoc + 1][jLoc + 1].food > greatestFood && matrix[iLoc + 1][jLoc + 1].food > 0) {
+            if (matrix[iLoc + 1][jLoc + 1] != temp && matrix[iLoc + 1][jLoc + 1].getFood() > greatestFood && matrix[iLoc + 1][jLoc + 1].getFood() > 0) {
                 target = matrix[iLoc + 1][jLoc + 1];
                 sameNodes.clear();
             }//end if
-            else if (matrix[iLoc + 1][jLoc + 1] != temp && matrix[iLoc + 1][jLoc + 1].food > greatestFood && matrix[iLoc + 1][jLoc - +1].food > 0) {
+            else if (matrix[iLoc + 1][jLoc + 1] != temp && matrix[iLoc + 1][jLoc + 1].getFood() > greatestFood && matrix[iLoc + 1][jLoc - +1].getFood() > 0) {
                 sameNodes.add(matrix[iLoc + 1][jLoc + 1]);
             }//end else if
             //Check to see if there are nodes in the list of possible targets
             if (sameNodes.isEmpty()) {
-                connector(temp, target, new GraphTupleInfo(temp.connections.get(0).getColor()));
+                connector(temp, target, temp.getParentLine().generateGTI());
             }//end if
             else {
-                connector(temp, sameNodes.get(0), new GraphTupleInfo(temp.connections.get(0).getColor()));
+                connector(temp, sameNodes.get(0), temp.getParentLine().generateGTI());
             }//end else
         }//end if
     }//end growthStep
-    
-    private void normalRules(GraphNode start, GraphTupleInfo gti, int xCompare, int yCompare){
+
+    private void normalRules(GraphNode start, GraphTupleInfo gti, int xCompare, int yCompare) {
         int iLoc = start.getILoc();
         int jLoc = start.getJLoc();
         if (xCompare == 1 && yCompare == 1) {
-                connector(start, new GraphNode[]{matrix[iLoc][jLoc + 1], matrix[iLoc + 1][jLoc]}, gti);
+            connector(start, new GraphNode[]{matrix[iLoc][jLoc + 1], matrix[iLoc + 1][jLoc]}, gti);
+        }//end if
+        else if (xCompare == -1 && yCompare == 1) {
+            connector(start, new GraphNode[]{matrix[iLoc][jLoc - 1], matrix[iLoc + 1][jLoc]}, gti);
+        }//end else if
+        else if (xCompare == 1 && yCompare == -1) {
+            connector(start, new GraphNode[]{matrix[iLoc][jLoc + 1], matrix[iLoc - 1][jLoc]}, gti);
+        }//end else if
+        else if (xCompare == -1 && yCompare == -1) {
+            connector(start, new GraphNode[]{matrix[iLoc][jLoc - 1], matrix[iLoc - 1][jLoc]}, gti);
+        }//end else if
+        else if (xCompare == 0 && yCompare == 1) {
+            connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc - 1], matrix[iLoc + 1][jLoc + 1]}, gti);
+        }//end else if
+        else if (xCompare == 1 && yCompare == 0) {
+            connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc + 1], matrix[iLoc - 1][jLoc + 1]}, gti);
+        }//end else if
+        else if (xCompare == -1 && yCompare == 0) {
+            connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc - 1], matrix[iLoc - 1][jLoc - 1]}, gti);
+        }//end else if
+        else if (xCompare == 0 && yCompare == -1) {
+            connector(start, new GraphNode[]{matrix[iLoc - 1][jLoc - 1], matrix[iLoc - 1][jLoc + 1]}, gti);
+        }//end else if
+    }//end normalRules
+
+    private GraphTupleInfo generateMutatedGti(GraphTuple parent) {
+        Random rand = new Random();
+        return new GraphTupleInfo(generateMutatedHealth(parent, rand), generateMutatedColor(parent, rand), parent.getMutatePercentage());
+    }//end generateMutatedGti
+
+    private Color generateMutatedColor(GraphTuple parent, Random rand) {
+        if (mutateColor) {
+            int rInfluence = flipInfluenceCheck(rand.nextInt(51), rand);
+            int gInfluence = flipInfluenceCheck(rand.nextInt(51), rand);
+            int bInfluence = flipInfluenceCheck(rand.nextInt(51), rand);
+            int red = influenceInt(parent.getColor().getRed(), rInfluence, rand);
+            int green = influenceInt(parent.getColor().getGreen(), gInfluence, rand);
+            int blue = influenceInt(parent.getColor().getBlue(), bInfluence, rand);
+            red = validateColor(red);
+            green = validateColor(green);
+            blue = validateColor(blue);
+            return new Color(red, green, blue);
+        }//end if
+        else {
+            return parent.getColor();
+        }//end else
+    }//end generateMutatedColor
+
+    private int generateMutatedHealth(GraphTuple parent, Random rand) {
+        if (mutateHealth && parent.getStartHealth() > 1) {
+            int healthInfluence;
+            double deviation = .05;
+            int variance = (int) (parent.getStartHealth() * deviation);
+            if (variance <= 1) {
+                variance = 1;
             }//end if
-            else if (xCompare == -1 && yCompare == 1) {
-                connector(start, new GraphNode[]{matrix[iLoc][jLoc - 1], matrix[iLoc + 1][jLoc]}, gti);
-            }//end else if
-            else if (xCompare == 1 && yCompare == -1) {
-                connector(start, new GraphNode[]{matrix[iLoc][jLoc + 1], matrix[iLoc - 1][jLoc]}, gti);
-            }//end else if
-            else if (xCompare == -1 && yCompare == -1) {
-                connector(start, new GraphNode[]{matrix[iLoc][jLoc - 1], matrix[iLoc - 1][jLoc]}, gti);
-            }//end else if
-            else if (xCompare == 0 && yCompare == 1) {
-                connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc - 1], matrix[iLoc + 1][jLoc + 1]}, gti);
-            }//end else if
-            else if (xCompare == 1 && yCompare == 0) {
-                connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc + 1], matrix[iLoc - 1][jLoc + 1]}, gti);
-            }//end else if
-            else if (xCompare == -1 && yCompare == 0) {
-                connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc - 1], matrix[iLoc - 1][jLoc - 1]}, gti);
-            }//end else if
-            else if (xCompare == 0 && yCompare == -1) {
-                connector(start, new GraphNode[]{matrix[iLoc - 1][jLoc - 1], matrix[iLoc - 1][jLoc + 1]}, gti);
-            }//end else if
-    }
+            healthInfluence = flipInfluenceCheck(rand.nextInt(variance + 1), rand);
+            int newHealth = influenceInt(parent.getStartHealth(),healthInfluence,rand);
+            if (newHealth < 0) {
+                newHealth = 0;
+            }//end if
+            return newHealth;
+        }//end if
+        else {
+            return parent.getStartHealth();
+        }//end else
+    }//end generateMutatedHealth
+
+    private int validateColor(int in) {
+        if (in > 255) {
+            return 255;
+        }//end if
+        else if (in < 0) {
+            return 0;
+        }//end else if
+        else {
+            return in;
+        }//end else
+    }//end validateColor
+
+    private int flipInfluenceCheck(int in, Random rand) {
+        if (rand.nextBoolean()) {
+            in *= -1;
+        }//end if
+        return in;
+    }//end flipColorInfluence
+
+    private int influenceInt(int in, int influencer, Random rand) {
+        if (rand.nextBoolean()) {
+            in += influencer;
+        }//end if
+        return in;
+    }//end influenceInt
 
     private void eat() {
         for (GraphNode[] matrix1 : matrix) {
             for (GraphNode gn : matrix1) {
-                for (GraphTuple gt : gn.connections) {
-                    gt.location.food--;
-                }//end for
-                if (gn.food < 0) {
-                    gn.food = 0;
-                }//end if
-                if (gn.food >= foodThreshhold) {
-                    gn.regenFood();
-                }//end if
+                gn.consume();
             }//end for
         }//end for
     }//end eat
@@ -392,7 +384,7 @@ public class Graph {
     public void clearGrid() {
         for (GraphNode[] matrix1 : matrix) {
             for (GraphNode gn : matrix1) {
-                gn.connections.clear();
+                gn.clearConnections();
                 gn.setColor(Color.BLUE);
             }//end for
         }//end for
@@ -405,11 +397,12 @@ public class Graph {
         int blueVal = 0;
         int numOfConnections = 0;
         for (GraphNode gn : nodes) {
-            for (GraphTuple gt : gn.connections) {
+            for (int i = 0; i < gn.getNumberOfConnections(); i++) {
+                GraphTuple gt = gn.getConnection(i);
                 if (!gt.isEdge()) {
-                    redVal += gt.r;
-                    greenVal += gt.g;
-                    blueVal += gt.b;
+                    redVal += gt.getRed();
+                    greenVal += gt.getGreen();
+                    blueVal += gt.getBlue();
                     numOfConnections++;
                 }//end if
             }//end for
@@ -429,15 +422,15 @@ public class Graph {
         if (growthType == 0) {
             while (queue.hasFront()) {
                 GraphNode temp = queue.dequeue();
-                int xCompare = (temp.x - temp.connections.get(0).location.x) / spacing;
-                int yCompare = (temp.y - temp.connections.get(0).location.y) / spacing;
+                int xCompare = temp.compareX(spacing);
+                int yCompare = temp.compareY(spacing);
                 if (!mutate) {
                     regularStep(temp, xCompare, yCompare);
                 }//end if
                 else {
                     Random rand = new Random();
                     int mutator = rand.nextInt(1000) + 1;
-                    if (mutator <= temp.connections.get(0).mutatePercentage) {
+                    if (mutator <= temp.getParentLine().getMutatePercentage()) {
                         mutateStep(temp, xCompare, yCompare);
                     }//end if
                     else {
@@ -453,7 +446,7 @@ public class Graph {
             }//end while
         }//end else if
         if (trim) {
-            decay();
+            decayNodes();
         }//end if
         if (consume || growthType == 1) {
             eat();
@@ -461,16 +454,18 @@ public class Graph {
     }//end stepForward
 
     public void paint(Graphics g) {
-        for (GraphNode r : this.nodes) {
-            g.setColor(r.getColor());
-            if (r.food <= 0) {
+        for (GraphNode gn : this.nodes) {
+            g.setColor(gn.getColor());
+            if (gn.getFood() <= 0) {
                 g.setColor(Color.WHITE);
             }//end if
-            g.fillRect(r.x, r.y, r.height, r.width);
-            for (GraphTuple gt : r.connections) {
+            g.fillRect(gn.x, gn.y, gn.height, gn.width);
+            for (int i = 0; i < gn.getNumberOfConnections(); i++) {
+                GraphTuple gt = gn.getConnection(i);
                 g.setColor(gt.getColor());
-                if (r.isConnected(gt.location) && gt.location.isConnected(r)) {
-                    g.drawLine(r.x + r.width / 2, r.y + r.height / 2, gt.location.x + gt.location.width / 2, gt.location.y + gt.location.height / 2);
+                GraphNode location = gt.getToLocation();
+                if (gn.isConnected(location) && location.isConnected(gn)) {
+                    g.drawLine(gn.x + gn.width / 2, gn.y + gn.height / 2, location.x + location.width / 2, location.y + location.height / 2);
                 }//end if
             }//end for
         }//end for

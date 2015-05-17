@@ -5,10 +5,9 @@ import SwingElements.ColorSelectionFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class SetColorActionListener implements ActionListener {
 
-    Base ref = null;
+    private Base ref;
 
     public SetColorActionListener(Base in) {
         ref = in;
@@ -16,8 +15,6 @@ public class SetColorActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (ref != null) {
-            new ColorSelectionFrame(ref).setVisible(true);
-        }//end if
+        new ColorSelectionFrame(ref).setVisible(true);
     }//endActionPerformed
 }//end LoopActionListener

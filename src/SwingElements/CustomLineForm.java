@@ -5,29 +5,18 @@ import graphvisualizer.GraphTupleInfo;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-/**
- *
- * @author Redpox
- */
 public class CustomLineForm extends javax.swing.JFrame {
 
-    GraphTupleInfo store;
-    private boolean ready = false;
+    private GraphTupleInfo store;
     private boolean complete = true;
-    Base sim = null;
+    private Base sim;
 
-    public CustomLineForm() {
+    public CustomLineForm(Base simIn) {
+        sim = simIn;
+        store = simIn.getGtiStorage();
         initComponents();
     }//end constructor
 
-    public void giveStoreLocation(GraphTupleInfo gfi) {
-        store = gfi;
-        ready = true;
-    }//end giveStoreLocation
-
-    public void giveField(Base b) {
-        sim = b;
-    }//end giveField
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,7 +112,6 @@ public class CustomLineForm extends javax.swing.JFrame {
 
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         complete = true;
-        if (ready) {
             store.startHealth = checkTextField(HealthTextField, "Starting Health");
             store.mutationPercentage = checkTextField(MutationTextField, "Mutation Percentage");
             store.reproductionClock = checkTextField(ReproductionClockTextField, "Reproduction Clock");
@@ -133,8 +121,8 @@ public class CustomLineForm extends javax.swing.JFrame {
                     sim.setCycleBase(store.startHealth);
                 }//end if
             }//end if
-        }//end if
         if (complete) {
+            sim.setGtiStorage(store);
             this.dispose();
         }//end if
     }//GEN-LAST:event_SubmitButtonActionPerformed

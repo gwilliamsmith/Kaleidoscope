@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class StepActionListener implements ActionListener {
 
-    Base ref = null;
+    private Base ref;
 
     public StepActionListener(Base in) {
         ref = in;
@@ -14,9 +14,7 @@ public class StepActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (ref != null) {
-            ref.takeStep();
-        }//end if
+        ref.takeStep();
     }//end actionPerformed
 
 }//end StepActionListener

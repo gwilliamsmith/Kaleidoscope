@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class AverageColorActionListener implements ActionListener {
 
-    Base ref = null;
+    private Base ref;
 
     public AverageColorActionListener(Base in) {
         ref = in;
@@ -15,7 +15,7 @@ public class AverageColorActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (ref != null) {
-                ref.getAverageDisplay().setVisible(true);
+                ref.showAverageDisplay();
         }//end if
     }//end actionPerformed
 

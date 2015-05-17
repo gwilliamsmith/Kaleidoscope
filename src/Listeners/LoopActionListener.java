@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class LoopActionListener implements ActionListener {
 
-    Base ref = null;
+    private Base ref;
 
     public LoopActionListener(Base in) {
         ref = in;
@@ -14,8 +14,6 @@ public class LoopActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (ref != null) {
-            ref.setRun(!ref.getRun());
-        }//end if
+            ref.flipRun();
     }//endActionPerformed
 }//end LoopActionListener

@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class PropertiesActionListener implements ActionListener {
 
-    Base ref = null;
+    private Base ref;
 
     public PropertiesActionListener(Base in) {
         ref = in;
@@ -15,10 +15,8 @@ public class PropertiesActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (ref != null) {
             ref.setRun(false);
             new SettingsSelectionForm(ref).setVisible(true);
-        }//end if
     }//end actionPerformed
 
 }//end PropertiesActionListener

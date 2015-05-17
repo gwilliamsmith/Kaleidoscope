@@ -4,38 +4,32 @@ import java.awt.Color;
 
 public class GraphTuple {
 
-    public GraphNode location;
-    public boolean recent;
-    public int startHealth = 50;
-    public int health = startHealth;
-    public int mutatePercentage = 50;    //Out of 1000
-    public int r = 0;
-    public int g = 0;
-    public int b = 0;
+    private final GraphNode toLocation;
+    private final GraphNode fromLocation;
+    private int startHealth = 50;
+    private int health = startHealth;
+    private int decayRate = 1;
+    private int mutatePercentage = 50;    //Out of 1000
     private Color color = Color.BLACK;
-    private boolean edge = false;
-    public int startReproductionClock = 1;
-    public int reproductionClock = startReproductionClock;
+    private int startReproductionClock = 1;
+    private int reproductionClock = startReproductionClock;
 
-    public GraphTuple(GraphNode loc,GraphTupleInfo gti) {
-        location = loc;
+    public GraphTuple(GraphNode to, GraphNode from, GraphTupleInfo gti) {
+        toLocation = to;
+        fromLocation = from;
         this.color = gti.color;
-        r = gti.color.getRed();
-        g = gti.color.getGreen();
-        b = gti.color.getBlue();
         startHealth = gti.startHealth;
         health = startHealth;
         mutatePercentage = gti.mutationPercentage;
         startReproductionClock = gti.reproductionClock;
         reproductionClock = startReproductionClock;
-        edge = gti.edge;
     }//end constructor
-    
-    public GraphTupleInfo generateGTI(){
-        GraphTupleInfo out = new GraphTupleInfo(this.startHealth,this.color,this.mutatePercentage,this.startReproductionClock);
+
+    public GraphTupleInfo generateGTI() {
+        GraphTupleInfo out = new GraphTupleInfo(this.startHealth, this.color, this.mutatePercentage, this.startReproductionClock);
         return out;
     }//end generateGTI
-
+    
     public void setColor(Color in) {
         color = in;
     }//end setColor
@@ -48,11 +42,63 @@ public class GraphTuple {
         return color;
     }//end getColor
 
-    public void setEdge() {
-        edge = true;
-    }//end setEdge
+    public int getRed() {
+        return color.getRed();
+    }//end getRed
+
+    public int getGreen() {
+        return color.getGreen();
+    }//end getRed
+
+    public int getBlue() {
+        return color.getBlue();
+    }//end getRed
 
     public boolean isEdge() {
-        return edge;
+        return (toLocation.isEdgeNode() && fromLocation.isEdgeNode());
     }//end isEdge
+    
+    public boolean isAlive(){
+        return (health > 0);
+    }//return isAlive
+
+    public GraphNode getToLocation() {
+        return toLocation;
+    }//end getLocation
+    
+    public GraphNode getFromLocation(){
+        return fromLocation;
+    }//end fromLocation
+
+    public int getStartHealth() {
+        return startHealth;
+    }//edn getStartHealth
+
+    public void setStartHealth(int in) {
+        startHealth = in;
+    }//end setStartHealth
+    
+    public int getHealth(){
+        return health;
+    }//return getHealth
+    
+    public void decay(){
+        health = health - decayRate;
+    }//end decay
+    
+    public int getMutatePercentage(){
+        return mutatePercentage;
+    }//end getMutatePercentage
+    
+    public int getStartReproductionClock(){
+        return startReproductionClock;
+    }//end getStartReproductionClock
+    
+    public int getReproductionCock(){
+        return reproductionClock;
+    }//end getReproductionClock
+    
+    public void setReproductionClock(int in){
+        reproductionClock = in;
+    }//end setReproductionClock
 }//end GraphTuple

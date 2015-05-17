@@ -5,8 +5,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class BaseKeyListener implements KeyListener {
-
-    Base ref = null;
+    
+    private Base ref;
 
     public BaseKeyListener(Base in) {
         ref = in;

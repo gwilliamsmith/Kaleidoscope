@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.Timer;
 
-public final class Base extends JFrame {
+public class Base extends JFrame {
 
     //////////////////////////////
     //      Grid Variables      //
@@ -23,7 +23,7 @@ public final class Base extends JFrame {
     //    Display Variables     //
     //////////////////////////////
     //Canvas for displaying stuff
-    private static Canvas canvas;
+    private Canvas canvas;
 
     //Says what the next action is
     private String actionString = "";
@@ -40,7 +40,6 @@ public final class Base extends JFrame {
     //////////////////////////////
     //Right-Click Menu Variables//
     //////////////////////////////
-    
     //Actual menu
     private final JPopupMenu rightClickMenu = new JPopupMenu();
 
@@ -101,8 +100,8 @@ public final class Base extends JFrame {
         }//end if
         canvas.repaint();
     }//end takeStep
-    
-    public void reset(){
+
+    public void reset() {
         graph.clearGrid();
         stepCount = 0;
         cycleBase = 0;
@@ -137,22 +136,20 @@ public final class Base extends JFrame {
         rightClickMenu.add(customLine);
         rightClickMenu.add(saveState);
     }//end createRightClickMenu
+    
+    public void flipRun(){
+        run = !run;
+    }//end flipRun
 
     //////////////////////////////
     //     Setters/Getters      //
     //////////////////////////////
-    
     public void setTempColor(Color c) {
         tempColor = c;
     }//end setTempColor
 
     public Color getTempColor() {
-        if (tempColor != null) {
-            return new Color(tempColor.getRed(), tempColor.getGreen(), tempColor.getBlue());
-        }//end if
-        else {
-            return null;
-        }//end else
+        return tempColor;
     }//end getTempColor
 
     public void setRightStore(Point in) {
@@ -207,8 +204,8 @@ public final class Base extends JFrame {
         return run;
     }//end getRun
 
-    public AverageColorDisplay getAverageDisplay() {
-        return averageDisplay;
+    public void showAverageDisplay() {
+        averageDisplay.setVisible(true);
     }//end getAverageDisplay
 
     public void setGtiStorage(GraphTupleInfo in) {

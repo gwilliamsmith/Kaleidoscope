@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 public class SettingsSelectionForm extends javax.swing.JFrame {
 
-    Base parent;
+    private Base parent;
 
     public SettingsSelectionForm(Base b) {
         parent = b;

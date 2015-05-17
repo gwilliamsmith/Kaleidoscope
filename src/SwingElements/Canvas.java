@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 public class Canvas extends JPanel {
 
-    Base ref = null;
+    private Base ref;
 
     public Canvas(Base in) {
         ref = in;

@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class TimerActionListener implements ActionListener {
 
-    Base ref = null;
+    private Base ref;
 
     public TimerActionListener(Base in) {
         ref = in;
@@ -14,11 +14,9 @@ public class TimerActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        if (ref != null) {
-            if (ref.getRun()) {
-                ref.takeStep();
-                ref.getCanvas().repaint();
-            }//end if
+        if (ref.getRun()) {
+            ref.takeStep();
+            ref.getCanvas().repaint();
         }//end if
     }//actionPerformed
 
