@@ -109,6 +109,12 @@ public class GraphNode extends Rectangle {
     public boolean isEdgeNode() {
         return (getILoc() == iMax || getILoc() == 0 || getJLoc() == 0 || getJLoc() == jMax);
     }//end isEdgeNode
+    
+    public boolean isAdjacentTo(GraphNode in){
+        int i = Math.abs(in.getILoc() - iLoc);
+        int j = Math.abs(in.getJLoc() - jLoc);
+        return ((i==i && j==1) || (i==1 && j==0) || (i==0 && j==1));
+    }//end isAdjacentTo
 
     public void consume() {
         for (GraphTuple gt : connections) {
@@ -127,6 +133,7 @@ public class GraphNode extends Rectangle {
     //////////////////////////////
     //     Setters/Getters      //
     //////////////////////////////
+    
     public void setColor(Color in) {
         color = in;
     }//end setColor

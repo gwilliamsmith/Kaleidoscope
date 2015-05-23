@@ -20,7 +20,7 @@ public class Graph {
     private boolean consume = false;
     private boolean mutate = true;
     private boolean mutateColor = true;
-    private boolean mutateHealth = false;
+    private boolean mutateHealth = true;
     private int growthType = 0;
 
     public Graph(int r, int c, Base in) {
@@ -49,13 +49,19 @@ public class Graph {
     //Connect one node with any number of other nodes
     public void connector(GraphNode start, GraphNode[] targets, GraphTupleInfo gti) {
         for (GraphNode gn : targets) {
-            biconnect(start, gn, gti);
+            if (gn != start && start.isAdjacentTo(gn)) {
+                biconnect(start, gn, gti);
+            }//end if
         }//end for
     }//end connectTo
 
     //Connect one node to another node
-    public void connector(GraphNode start, GraphNode target, GraphTupleInfo gti) {
-        biconnect(start, target, gti);
+    public boolean connector(GraphNode start, GraphNode target, GraphTupleInfo gti) {
+        if (target != start && start.isAdjacentTo(target)) {
+            biconnect(start, target, gti);
+            return true;
+        }//end if
+        return false;
     }//end connectTo
 
     private void initializeGrid() {
@@ -336,7 +342,7 @@ public class Graph {
                 variance = 1;
             }//end if
             healthInfluence = flipInfluenceCheck(rand.nextInt(variance + 1), rand);
-            int newHealth = influenceInt(parent.getStartHealth(),healthInfluence,rand);
+            int newHealth = influenceInt(parent.getStartHealth(), healthInfluence, rand);
             if (newHealth < 0) {
                 newHealth = 0;
             }//end if

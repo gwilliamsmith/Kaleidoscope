@@ -142,4 +142,4 @@ public class SettingsSelectionForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
-}
+}//end SettingsSelectionForm

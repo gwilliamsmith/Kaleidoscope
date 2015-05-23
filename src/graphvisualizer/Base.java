@@ -74,7 +74,7 @@ public class Base extends JFrame {
     private boolean run = false;
 
     //Displays average color of all lines
-    private final AverageColorDisplay averageDisplay = new AverageColorDisplay();
+    private AverageColorDisplay averageDisplay = new AverageColorDisplay();
 
     public Base(int c, int r, int stepTime) {
         graph = new Graph(r, c, this);

@@ -14,6 +14,6 @@ public class LoopActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-            ref.flipRun();
+        ref.flipRun();
     }//endActionPerformed
 }//end LoopActionListener

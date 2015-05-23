@@ -14,6 +14,6 @@ public class ResetActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-            ref.reset();
+        ref.reset();
     }//endActionPerformed
 }//end LoopActionListener

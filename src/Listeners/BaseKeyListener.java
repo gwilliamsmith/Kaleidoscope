@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class BaseKeyListener implements KeyListener {
-    
+
     private Base ref;
 
     public BaseKeyListener(Base in) {
@@ -18,10 +18,8 @@ public class BaseKeyListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (ref != null) {
-            if (e.getKeyChar() == 's') {
-                ref.takeStep();
-            }//end if
+        if (e.getKeyChar() == 's') {
+            ref.takeStep();
         }//end if
     }//end keyPressed
 

@@ -15,8 +15,8 @@ public class PropertiesActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-            ref.setRun(false);
-            new SettingsSelectionForm(ref).setVisible(true);
+        ref.setRun(false);
+        new SettingsSelectionForm(ref).setVisible(true);
     }//end actionPerformed
 
 }//end PropertiesActionListener

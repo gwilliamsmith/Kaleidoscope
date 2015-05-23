@@ -158,4 +158,4 @@ public class CustomLineForm extends javax.swing.JFrame {
         return out;
     }//end checkTextField
 
-}
+}//end CustomLineForm

@@ -19,8 +19,8 @@ public class SaveStateActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-            ref.setRun(false);
-            saveState();
+        ref.setRun(false);
+        saveState();
     }//actionPerformed
 
     private void saveState() {
@@ -31,7 +31,7 @@ public class SaveStateActionListener implements ActionListener {
             for (int j = 0; j < refMatrix[i].length; j++) {
                 String tempString = "";
                 tempString += "Node: " + i + " " + j + "\n";
-                for (int k=0;k<refMatrix[i][j].getNumberOfConnections();k++) {
+                for (int k = 0; k < refMatrix[i][j].getNumberOfConnections(); k++) {
                     GraphTuple gt = refMatrix[i][j].getConnection(k);
                     GraphNode gn = gt.getToLocation();
                     tempString += "Connection: " + gn.getILoc() + " " + gn.getJLoc() + " " + gn.getColor().getRed() + " " + gn.getColor().getGreen() + " " + gn.getColor().getBlue() + "\n";

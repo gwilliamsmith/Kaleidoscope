@@ -18,25 +18,18 @@ public class CanvasMouseListener extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
-            System.out.println("1");
             if (ref.getConnect()) {
-                System.out.println("2");
                 for (GraphNode gn : ref.graph.getGraphNodes()) {
                     if (gn.contains(e.getPoint())) {
-                        System.out.println("3");
                         if (gn != ref.getConnectA() && !gn.isConnected(ref.getConnectA())) {
-                            System.out.println("4");
                             ref.setConnectB(gn);
                         }//end if
-                        ref.setActionString("");
                         ref.setConnect(false);
                         break;
                     }//end if
                 }//end for
                 if (ref.getConnectB() != null && ref.getConnectA() != null) {
-                    System.out.println("5");
                     if (ref.getGtiStorage() != null) {
-                        System.out.println("6");
                         ref.graph.connector(ref.getConnectA(), ref.getConnectB(), ref.getGtiStorage());
                         ref.setGtiStorage(null);
                     }//end if

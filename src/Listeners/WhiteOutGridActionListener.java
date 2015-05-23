@@ -16,11 +16,11 @@ public class WhiteOutGridActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-            for (GraphNode[] matrix1 : ref.graph.getMatrix()) {
-                for (GraphNode gn : matrix1) {
-                    gn.setColor(new Color(255, 255, 255));
-                    ref.getCanvas().repaint();
-                }//end for
+        for (GraphNode[] matrix1 : ref.graph.getMatrix()) {
+            for (GraphNode gn : matrix1) {
+                gn.setColor(new Color(255, 255, 255));
+                ref.getCanvas().repaint();
             }//end for
+        }//end for
     }//end actionPerformed
 }//end WhiteOutGridActionListener
