@@ -16,8 +16,8 @@ public class TimerActionListener implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         if (ref.getRun()) {
             ref.takeStep();
-            ref.getCanvas().repaint();
         }//end if
+        ref.getCanvas().repaint();
     }//actionPerformed
 
 }//end TimerActionListner

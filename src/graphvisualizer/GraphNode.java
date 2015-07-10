@@ -56,6 +56,10 @@ public class GraphNode extends Rectangle {
         System.out.println();
     }//end print
 
+    public Rectangle mapMovement(int x, int y){
+        return new Rectangle(this.x + x,this.y + y, this.width, this.height);
+    }
+
     @Override
     public String toString() {
         return "Node ID: " + id;

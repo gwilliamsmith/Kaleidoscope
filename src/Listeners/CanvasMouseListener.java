@@ -5,11 +5,16 @@ import graphvisualizer.GraphNode;
 import graphvisualizer.GraphTupleInfo;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import javax.swing.SwingUtilities;
 
-public class CanvasMouseListener extends MouseAdapter {
+public class CanvasMouseListener extends MouseAdapter implements MouseWheelListener, MouseMotionListener{
 
     private Base ref;
+    private int startY;
+    private int startX;
 
     public CanvasMouseListener(Base in) {
         ref = in;
@@ -18,9 +23,10 @@ public class CanvasMouseListener extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
+            
             if (ref.getConnect()) {
-                for (GraphNode gn : ref.graph.getGraphNodes()) {
-                    if (gn.contains(e.getPoint())) {
+                for (GraphNode gn : ref.getGraph().getGraphNodes()) {
+                    if (gn.mapMovement(ref.getCanvas().getWindowX(),ref.getCanvas().getWindowY()).contains(e.getPoint())) {
                         if (gn != ref.getConnectA() && !gn.isConnected(ref.getConnectA())) {
                             ref.setConnectB(gn);
                         }//end if
@@ -30,18 +36,18 @@ public class CanvasMouseListener extends MouseAdapter {
                 }//end for
                 if (ref.getConnectB() != null && ref.getConnectA() != null) {
                     if (ref.getGtiStorage() != null) {
-                        ref.graph.connector(ref.getConnectA(), ref.getConnectB(), ref.getGtiStorage());
+                        ref.getGraph().connector(ref.getConnectA(), ref.getConnectB(), ref.getGtiStorage());
                         ref.setGtiStorage(null);
                     }//end if
                     else {
                         if (ref.getTempColor() != null) {
                             GraphTupleInfo gtiOut = new GraphTupleInfo();
                             gtiOut.color = ref.getTempColor();
-                            ref.graph.connector(ref.getConnectA(), ref.getConnectB(), gtiOut);
+                            ref.getGraph().connector(ref.getConnectA(), ref.getConnectB(), gtiOut);
                             ref.setTempColor(null);
                         }//end if 
                         else {
-                            ref.graph.connector(ref.getConnectA(), ref.getConnectB(), new GraphTupleInfo());
+                            ref.getGraph().connector(ref.getConnectA(), ref.getConnectB(), new GraphTupleInfo());
                         }//end else
                     }//end else
                 }//end if
@@ -52,8 +58,8 @@ public class CanvasMouseListener extends MouseAdapter {
                 ref.setConnectB(null);
             }//end if
             else {
-                for (GraphNode gn : ref.graph.getGraphNodes()) {
-                    if (gn.contains(e.getPoint())) {
+                for (GraphNode gn : ref.getGraph().getGraphNodes()) {
+                    if (gn.mapMovement(ref.getCanvas().getWindowX(),ref.getCanvas().getWindowY()).contains(e.getPoint())) {
                         ref.setActionString("Connect node");
                         ref.setConnectA(gn);
                         ref.setConnect(true);
@@ -67,4 +73,40 @@ public class CanvasMouseListener extends MouseAdapter {
         }//end else if
         ref.repaint();
     }//end MouseClicked
+    
+    @Override
+    public void mousePressed(MouseEvent e){
+        startY = e.getYOnScreen();
+        startX = e.getXOnScreen();
+    }//end mousePressed
+    
+    @Override
+    public void mouseDragged(MouseEvent e){
+        ref.getCanvas().modifyWindowX(e.getXOnScreen()-startX);
+        ref.getCanvas().modifyWindowY(e.getYOnScreen()-startY);
+        startX = e.getXOnScreen();
+        startY = e.getYOnScreen();
+        //System.out.println(ref.getCanvas().windowX + " " + ref.getCanvas().windowY);
+    }//end mouseDragged
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        if (e.getPreciseWheelRotation() > 0) {
+            if (ref.getPointSize() > 2) {
+                ref.setPointSize((int) Math.max(ref.getPointSize() - (e.getPreciseWheelRotation() * 2), 2));
+            }//end if
+            if (ref.getSpacing() > 10) {
+                 ref.setSpacing((int) Math.max(ref.getSpacing() - (e.getPreciseWheelRotation() * 2), 10));
+            }//end if
+        }//end if
+        else if (e.getPreciseWheelRotation() < 0) {
+            if (ref.getPointSize() < 10) {
+                ref.setPointSize((int) Math.max(ref.getPointSize() - (e.getPreciseWheelRotation() * 2), 2));
+            }//end if
+            if (ref.getSpacing() < 18) {
+                ref.setSpacing((int) Math.max(ref.getSpacing() - (e.getPreciseWheelRotation() * 2), 10));
+            }//end if
+        }//end else if
+        ref.getGraph().resizeGrid();
+    }//end mouseWheelMoved
 }//end CanvasMouseListener

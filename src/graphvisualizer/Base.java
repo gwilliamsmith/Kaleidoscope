@@ -8,7 +8,6 @@ import java.awt.Point;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.Timer;
 
@@ -17,7 +16,7 @@ public class Base extends JFrame {
     //////////////////////////////
     //      Grid Variables      //
     //////////////////////////////
-    public Graph graph;
+    private Graph graph;
 
     //////////////////////////////
     //    Display Variables     //
@@ -29,8 +28,8 @@ public class Base extends JFrame {
     private String actionString = "";
 
     //Spacing/Size for grid points
-    private final int spacing = 10;
-    private final int pointSize = 2;
+    private int spacing = 10;
+    private int pointSize = 2;
 
     //number of steps, steps per cycle, and number of cycles
     private long stepCount = 0;
@@ -53,6 +52,7 @@ public class Base extends JFrame {
     private final JMenuItem averageColor = new JMenuItem("Show average connection color");
     private final JMenuItem customLine = new JMenuItem("Set properties for next line");
     private final JMenuItem saveState = new JMenuItem("Save state");
+    private final JMenuItem savePicture = new JMenuItem("Save Picture");
 
     //Remembers point clicked on 
     private Point rightStore = new Point();
@@ -123,6 +123,7 @@ public class Base extends JFrame {
         averageColor.addActionListener(new AverageColorActionListener(this));
         customLine.addActionListener(new CustomLineActionListener(this));
         saveState.addActionListener(new SaveStateActionListener(this));
+        savePicture.addActionListener(new SavePictureActionListener(this));
     }//end addMenuListeners
 
     private void createRightClickMenu() {
@@ -135,6 +136,7 @@ public class Base extends JFrame {
         rightClickMenu.add(averageColor);
         rightClickMenu.add(customLine);
         rightClickMenu.add(saveState);
+        rightClickMenu.add(savePicture);
     }//end createRightClickMenu
     
     public void flipRun(){
@@ -192,7 +194,7 @@ public class Base extends JFrame {
         return actionString;
     }//end getActionString
 
-    public JPanel getCanvas() {
+    public Canvas getCanvas() {
         return canvas;
     }//end getCanvas
 
@@ -239,8 +241,21 @@ public class Base extends JFrame {
     public int getPointSize() {
         return pointSize;
     }//end getPointSize
+    
+    public void setPointSize(int in){
+        pointSize = in;
+    }//end setPointSize
 
     public int getSpacing() {
         return spacing;
     }//end getSpacing
+    
+    public void setSpacing(int in){
+        spacing = in;
+    }//end setSpacing
+    
+    public Graph getGraph(){
+        return graph;
+    }//end getGraph
+    
 }//end Base class

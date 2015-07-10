@@ -1,7 +1,9 @@
 package graphvisualizer;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -76,6 +78,20 @@ public class Graph {
         }//end for
         outlineGrid();
     }//end initializeGrid
+
+    public void resizeGrid() {
+        int pointSize = ref.getPointSize();
+        int spacing = ref.getSpacing();
+        for (int i = 0, ySpace = pointSize / 2; i < matrix.length; i++, ySpace += spacing) {
+            for (int j = 0, xSpace = pointSize / 2; j < matrix[i].length; j++, xSpace += spacing) {
+                GraphNode temp = matrix[i][j];
+                temp.x = xSpace - pointSize / 2;
+                temp.y = ySpace - pointSize / 2;
+                temp.width = pointSize;
+                temp.height = pointSize;
+            }//end for
+        }//end for
+    }//end resizeGrid
 
     private void outlineGrid() {
         for (int i = 0; i < matrix.length; i++) {
@@ -460,18 +476,21 @@ public class Graph {
     }//end stepForward
 
     public void paint(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(ref.getPointSize()/2));
         for (GraphNode gn : this.nodes) {
-            g.setColor(gn.getColor());
+            g2.setColor(gn.getColor());
             if (gn.getFood() <= 0) {
-                g.setColor(Color.WHITE);
+                g2.setColor(Color.WHITE);
             }//end if
-            g.fillRect(gn.x, gn.y, gn.height, gn.width);
+            g2.fillRect(gn.x + ref.getCanvas().getWindowX(), gn.y + ref.getCanvas().getWindowY(), gn.height, gn.width);
             for (int i = 0; i < gn.getNumberOfConnections(); i++) {
                 GraphTuple gt = gn.getConnection(i);
-                g.setColor(gt.getColor());
+                g2.setColor(gt.getColor());
                 GraphNode location = gt.getToLocation();
                 if (gn.isConnected(location) && location.isConnected(gn)) {
-                    g.drawLine(gn.x + gn.width / 2, gn.y + gn.height / 2, location.x + location.width / 2, location.y + location.height / 2);
+                    //This line is a mess, fix it at some point
+                    g2.drawLine(gn.x + gn.width / 2 + ref.getCanvas().getWindowX(), gn.y + gn.height / 2 + ref.getCanvas().getWindowY(), location.x + location.width / 2 + ref.getCanvas().getWindowX(), location.y + location.height / 2 + ref.getCanvas().getWindowY());
                 }//end if
             }//end for
         }//end for
@@ -490,4 +509,53 @@ public class Graph {
         idCount++;
         return out;
     }//end newID
+
+    public boolean getTrim() {
+        return trim;
+    }//end getTrim
+
+    public void setTrim(boolean in) {
+        trim = in;
+    }//end setTrim
+
+    public boolean getConsume() {
+        return consume;
+    }//end getConsume
+
+    public void setConsume(boolean in) {
+        consume = in;
+    }//end setConsume
+
+    public boolean getMutate() {
+        return mutate;
+    }//end getMutate()
+
+    public void setMutate(boolean in) {
+        mutate = in;
+    }//end setMutate
+
+    public boolean getMutateColor() {
+        return mutateColor;
+    }//end getMutateColor
+
+    public void setMutateColor(boolean in) {
+        mutateColor = in;
+    }//end setMutateColor
+
+    public boolean getMutateHealth() {
+        return mutateHealth;
+    }//end getMutateHealth
+
+    public void setMutateHealth(boolean in) {
+        mutateHealth = in;
+    }//end setMutateHealth
+
+    public int getGrowthType() {
+        return growthType;
+    }//end getGrowthType
+
+    public void setGrowthType(int in) {
+        growthType = in;
+    }//end setGrowthType
+
 }//end Graph
