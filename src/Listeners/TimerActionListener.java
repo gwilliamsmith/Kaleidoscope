@@ -1,6 +1,6 @@
 package Listeners;
 
-import graphvisualizer.Base;
+import SwingElements.Base;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,7 +15,7 @@ public class TimerActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evt) {
         if (ref.getRun()) {
-            ref.takeStep();
+            ref.getGraph().takeStep();
         }//end if
         ref.getCanvas().repaint();
     }//actionPerformed

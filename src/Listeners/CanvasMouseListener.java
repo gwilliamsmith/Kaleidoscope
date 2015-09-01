@@ -1,6 +1,7 @@
 package Listeners;
 
-import graphvisualizer.Base;
+import SwingElements.Canvas;
+import SwingElements.Base;
 import graphvisualizer.GraphNode;
 import graphvisualizer.GraphTupleInfo;
 import java.awt.event.MouseAdapter;
@@ -24,45 +25,45 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
     public void mouseClicked(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
             
-            if (ref.getConnect()) {
+            if (ref.getCanvas().getConnect()) {
                 for (GraphNode gn : ref.getGraph().getGraphNodes()) {
                     if (gn.mapMovement(ref.getCanvas().getWindowX(),ref.getCanvas().getWindowY()).contains(e.getPoint())) {
-                        if (gn != ref.getConnectA() && !gn.isConnected(ref.getConnectA())) {
-                            ref.setConnectB(gn);
+                        if (gn != ref.getCanvas().getConnectA() && !gn.isConnected(ref.getCanvas().getConnectA())) {
+                            ref.getCanvas().setConnectB(gn);
                         }//end if
-                        ref.setConnect(false);
+                        ref.getCanvas().setConnect(false);
                         break;
                     }//end if
                 }//end for
-                if (ref.getConnectB() != null && ref.getConnectA() != null) {
-                    if (ref.getGtiStorage() != null) {
-                        ref.getGraph().connector(ref.getConnectA(), ref.getConnectB(), ref.getGtiStorage());
-                        ref.setGtiStorage(null);
+                if (ref.getCanvas().getConnectB() != null && ref.getCanvas().getConnectA() != null) {
+                    if (ref.getCanvas().getGtiStorage() != null) {
+                        ref.getGraph().connector(ref.getCanvas().getConnectA(), ref.getCanvas().getConnectB(), ref.getCanvas().getGtiStorage());
+                        //ref.setGtiStorage(null);
                     }//end if
                     else {
-                        if (ref.getTempColor() != null) {
+                        if (ref.getCanvas().getTempColor() != null) {
                             GraphTupleInfo gtiOut = new GraphTupleInfo();
-                            gtiOut.color = ref.getTempColor();
-                            ref.getGraph().connector(ref.getConnectA(), ref.getConnectB(), gtiOut);
-                            ref.setTempColor(null);
+                            gtiOut.color = ref.getCanvas().getTempColor();
+                            ref.getGraph().connector(ref.getCanvas().getConnectA(), ref.getCanvas().getConnectB(), gtiOut);
+                            ref.getCanvas().setTempColor(null);
                         }//end if 
                         else {
-                            ref.getGraph().connector(ref.getConnectA(), ref.getConnectB(), new GraphTupleInfo());
+                            ref.getGraph().connector(ref.getCanvas().getConnectA(), ref.getCanvas().getConnectB(), new GraphTupleInfo());
                         }//end else
                     }//end else
                 }//end if
-                ref.setActionString("");
+                ref.getCanvas().setActionString("");
                 ref.getCanvas().repaint();
-                ref.setConnect(false);
-                ref.setConnectA(null);
-                ref.setConnectB(null);
+                ref.getCanvas().setConnect(false);
+                ref.getCanvas().setConnectA(null);
+                ref.getCanvas().setConnectB(null);
             }//end if
             else {
                 for (GraphNode gn : ref.getGraph().getGraphNodes()) {
                     if (gn.mapMovement(ref.getCanvas().getWindowX(),ref.getCanvas().getWindowY()).contains(e.getPoint())) {
-                        ref.setActionString("Connect node");
-                        ref.setConnectA(gn);
-                        ref.setConnect(true);
+                        ref.getCanvas().setActionString("Connect node");
+                        ref.getCanvas().setConnectA(gn);
+                        ref.getCanvas().setConnect(true);
                         break;
                     }//end else
                 }//end for

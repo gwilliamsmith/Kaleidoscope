@@ -58,7 +58,7 @@ public class GraphNode extends Rectangle {
 
     public Rectangle mapMovement(int x, int y){
         return new Rectangle(this.x + x,this.y + y, this.width, this.height);
-    }
+    }//end mapMovement
 
     @Override
     public String toString() {

@@ -1,6 +1,6 @@
 package Listeners;
 
-import graphvisualizer.Base;
+import SwingElements.Base;
 import SwingElements.SettingsSelectionForm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

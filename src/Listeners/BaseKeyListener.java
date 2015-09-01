@@ -1,6 +1,7 @@
 package Listeners;
 
-import graphvisualizer.Base;
+import SwingElements.Base;
+import graphvisualizer.Graph;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -19,7 +20,7 @@ public class BaseKeyListener implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == 's') {
-            ref.takeStep();
+            ref.getGraph().takeStep();
         }//end if
     }//end keyPressed
 

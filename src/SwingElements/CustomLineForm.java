@@ -1,6 +1,5 @@
 package SwingElements;
 
-import graphvisualizer.Base;
 import graphvisualizer.GraphTupleInfo;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -9,11 +8,11 @@ public class CustomLineForm extends javax.swing.JFrame {
 
     private GraphTupleInfo store;
     private boolean complete = true;
-    private Base sim;
+    private Base ref;
 
     public CustomLineForm(Base simIn) {
-        sim = simIn;
-        store = simIn.getGtiStorage();
+        ref = simIn;
+        store = ref.getCanvas().getGtiStorage();
         initComponents();
     }//end constructor
 
@@ -37,6 +36,8 @@ public class CustomLineForm extends javax.swing.JFrame {
         CycleBaseCheckBox = new javax.swing.JCheckBox();
         ReproductionClockLabel = new javax.swing.JLabel();
         ReproductionClockTextField = new javax.swing.JTextField();
+        EdgeLabel = new javax.swing.JLabel();
+        EdgeCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,6 +55,8 @@ public class CustomLineForm extends javax.swing.JFrame {
         CycleBaseLable.setText("Cycle Base?");
 
         ReproductionClockLabel.setText("Turns for reproduction: ");
+
+        EdgeLabel.setText("Edge? ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,7 +83,11 @@ public class CustomLineForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(CycleBaseLable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CycleBaseCheckBox))
+                        .addComponent(CycleBaseCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EdgeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EdgeCheckBox))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(274, 274, 274)
                         .addComponent(SubmitButton)))
@@ -91,16 +98,19 @@ public class CustomLineForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CycleBaseCheckBox, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(HealthLabel)
-                        .addComponent(HealthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(MutationLabel)
-                        .addComponent(MutationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CycleBaseLable)
-                        .addComponent(ReproductionClockLabel)
-                        .addComponent(ReproductionClockTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(EdgeCheckBox)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(HealthLabel)
+                            .addComponent(HealthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MutationLabel)
+                            .addComponent(MutationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CycleBaseLable)
+                            .addComponent(ReproductionClockLabel)
+                            .addComponent(ReproductionClockTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EdgeLabel)))
+                    .addComponent(CycleBaseCheckBox))
+                .addGap(5, 5, 5)
                 .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(SubmitButton)
@@ -118,11 +128,13 @@ public class CustomLineForm extends javax.swing.JFrame {
             store.color = jColorChooser1.getColor();
             if (CycleBaseCheckBox.isSelected()) {
                 if(store.startHealth > 0){
-                    sim.setCycleBase(store.startHealth);
+                    ref.getGraph().setCycleBase(store.startHealth);
                 }//end if
             }//end if
+            store.edge = EdgeCheckBox.isSelected();
+            System.out.println(EdgeCheckBox.isSelected());
         if (complete) {
-            sim.setGtiStorage(store);
+            ref.getCanvas().setGtiStorage(store);
             this.dispose();
         }//end if
     }//GEN-LAST:event_SubmitButtonActionPerformed
@@ -131,6 +143,8 @@ public class CustomLineForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox CycleBaseCheckBox;
     private javax.swing.JLabel CycleBaseLable;
+    private javax.swing.JCheckBox EdgeCheckBox;
+    private javax.swing.JLabel EdgeLabel;
     private javax.swing.JLabel HealthLabel;
     private javax.swing.JTextField HealthTextField;
     private javax.swing.JLabel MutationLabel;

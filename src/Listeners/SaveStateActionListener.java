@@ -4,7 +4,7 @@
 
 package Listeners;
 
-import graphvisualizer.Base;
+import SwingElements.Base;
 import graphvisualizer.GraphNode;
 import graphvisualizer.GraphTuple;
 import java.awt.event.ActionEvent;
@@ -50,9 +50,9 @@ public class SaveStateActionListener implements ActionListener {
         //Record global variable states
         String globals = "Spacing: " + ref.getSpacing() + "\n";
         globals += "Point size: " + ref.getPointSize() + "\n";
-        globals += "Step count: " + ref.getStepCount() + "\n";
-        globals += "Cycle base: " + ref.getCycleBase() + "\n";
-        globals += "Cycle count: " + ref.getCycleCount() + "\n";
+        globals += "Step count: " + ref.getGraph().getStepCount() + "\n";
+        globals += "Cycle base: " + ref.getGraph().getCycleBase() + "\n";
+        globals += "Cycle count: " + ref.getGraph().getCycleCount() + "\n";
         globals += "Trim: " + ref.getGraph().getTrim() + "\n";
         globals += "Mutate: " + ref.getGraph().getMutate() + "\n";
         globals += "Mutate Color: " + ref.getGraph().getMutateColor() + "\n";

@@ -1,6 +1,5 @@
 package SwingElements;
 
-import graphvisualizer.Base;
 import javax.swing.JOptionPane;
 
 public class SettingsSelectionForm extends javax.swing.JFrame {

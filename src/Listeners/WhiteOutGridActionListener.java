@@ -1,6 +1,6 @@
 package Listeners;
 
-import graphvisualizer.Base;
+import SwingElements.Base;
 import graphvisualizer.GraphNode;
 import java.awt.Color;
 import java.awt.event.ActionEvent;

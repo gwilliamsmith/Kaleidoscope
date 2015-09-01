@@ -8,6 +8,7 @@ public class GraphTupleInfo {
     public Color color;
     public int mutationPercentage;
     public int reproductionClock = 1;
+    public boolean edge;
     
     public GraphTupleInfo(){
         startHealth = 50;
@@ -32,6 +33,14 @@ public class GraphTupleInfo {
         color = colorIn;
         mutationPercentage = mutationPercentageIn;
         reproductionClock = reproductionClockIn;
+    }//end constructor
+    
+    public GraphTupleInfo(int startHealthIn, Color colorIn, int mutationPercentageIn, int reproductionClockIn, boolean edgeIn){
+        startHealth = startHealthIn;
+        color = colorIn;
+        mutationPercentage = mutationPercentageIn;
+        reproductionClock = reproductionClockIn;
+        edge = edgeIn;
     }//end constructor
 
 }//end GraphTupleInfo class

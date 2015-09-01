@@ -1,5 +1,6 @@
 package graphvisualizer;
 
+import SwingElements.Base;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -24,12 +25,38 @@ public class Graph {
     private boolean mutateColor = true;
     private boolean mutateHealth = true;
     private int growthType = 0;
+    
+    //number of steps, steps per cycle, and number of cycles
+    private long stepCount = 0;
+    private long cycleBase = 0;
+    private long cycleCount = 0;
+    
+    //Cycle planning stuff
+    long cycleSteps = 0;
+    boolean cycleFinished = false;
+    boolean cycleStarted = false;
 
     public Graph(int r, int c, Base in) {
         matrix = new GraphNode[r][c];
         ref = in;
         initializeGrid();
     }//end constructor
+
+    public void takeStep() {
+        stepForward();
+        stepCount++;
+        if (cycleBase > 0) {
+            cycleCount = stepCount / cycleBase;
+        }//end if
+        ref.getCanvas().repaint();
+    }//end takeStep
+
+    public void reset() {
+        clearGrid();
+        stepCount = 0;
+        cycleBase = 0;
+        cycleCount = 0;
+    }//end reset
 
     private void add(GraphNode gn, int i, int j) {
         nodes.add(gn);
@@ -163,7 +190,14 @@ public class Graph {
                     queue.enqueue(temp);
                 }//end if
             }//end for
-        } //end for
+        }//end for
+        cycleFinished = queue.isEmpty();
+        if (getCycleFinished()) {
+            if (cycleSteps <= 0) {
+                cycleSteps = stepCount;
+            }//end if
+            System.out.println(cycleSteps);
+        }//end if
     }//end buildQueue
 
     private void decayNodes() {
@@ -171,7 +205,7 @@ public class Graph {
             for (GraphNode temp : matrix1) {
                 for (int i = 0; i < temp.getNumberOfConnections(); i++) {
                     GraphTuple gt = temp.getConnection(i);
-                    if (!temp.isEdgeNode()) {
+                    if (!gt.isEdge()) {
                         gt.decay();
                         if (!gt.isAlive()) {
                             temp.severConnection(gt.getToLocation());
@@ -477,7 +511,7 @@ public class Graph {
 
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(ref.getPointSize()/2));
+        g2.setStroke(new BasicStroke(ref.getPointSize() / 2));
         for (GraphNode gn : this.nodes) {
             g2.setColor(gn.getColor());
             if (gn.getFood() <= 0) {
@@ -557,5 +591,37 @@ public class Graph {
     public void setGrowthType(int in) {
         growthType = in;
     }//end setGrowthType
+    
+    public long getStepCount() {
+        return stepCount;
+    }//end getStepCount
+
+    public void setCycleBase(long in) {
+        cycleBase = in;
+    }//end setCycleBase
+
+    public long getCycleBase() {
+        return cycleBase;
+    }//end getCycleBase
+
+    public long getCycleCount() {
+        return cycleCount;
+    }//end getCycleCount
+
+    public boolean getCycleFinished(){
+        return cycleFinished;
+    }//end getCycleFinished
+    
+    public void setCycleFinished(boolean in){
+        cycleFinished = in;
+    }//end setCycleFinished
+    
+    public boolean getCycleStarted(){
+        return cycleStarted;
+    }//end getCycleStarted
+    
+    public void setCycleStarted(boolean in){
+        cycleStarted = in;
+    }//end setCycleStarted
 
 }//end Graph

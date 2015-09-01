@@ -1,6 +1,6 @@
 package Listeners;
 
-import graphvisualizer.Base;
+import SwingElements.Base;
 import SwingElements.CustomLineForm;
 import graphvisualizer.GraphTupleInfo;
 import java.awt.event.ActionEvent;
@@ -16,7 +16,7 @@ public class CustomLineActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ref.setGtiStorage(new GraphTupleInfo());
+        ref.getCanvas().setGtiStorage(new GraphTupleInfo());
         CustomLineForm clf = new CustomLineForm(ref);
         clf.setVisible(true);
     }//end actionPerformed

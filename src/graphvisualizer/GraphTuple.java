@@ -13,6 +13,7 @@ public class GraphTuple {
     private Color color = Color.BLACK;
     private int startReproductionClock = 1;
     private int reproductionClock = startReproductionClock;
+    private boolean edge = false;
 
     public GraphTuple(GraphNode to, GraphNode from, GraphTupleInfo gti) {
         toLocation = to;
@@ -23,6 +24,7 @@ public class GraphTuple {
         mutatePercentage = gti.mutationPercentage;
         startReproductionClock = gti.reproductionClock;
         reproductionClock = startReproductionClock;
+        edge = gti.edge;
     }//end constructor
 
     public GraphTupleInfo generateGTI() {
@@ -55,7 +57,7 @@ public class GraphTuple {
     }//end getRed
 
     public boolean isEdge() {
-        return (toLocation.isEdgeNode() && fromLocation.isEdgeNode());
+        return ((toLocation.isEdgeNode() && fromLocation.isEdgeNode()) || edge);
     }//end isEdge
     
     public boolean isAlive(){

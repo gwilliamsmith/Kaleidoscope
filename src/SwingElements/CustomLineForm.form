@@ -46,6 +46,10 @@
                       <Component id="CycleBaseLable" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="CycleBaseCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="EdgeLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="EdgeCheckBox" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="274" max="-2" attributes="0"/>
@@ -61,7 +65,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="CycleBaseCheckBox" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="EdgeCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="HealthLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="HealthTextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -70,9 +74,11 @@
                       <Component id="CycleBaseLable" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ReproductionClockLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ReproductionClockTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="EdgeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="CycleBaseCheckBox" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               <Component id="jColorChooser1" min="-2" pref="316" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="SubmitButton" min="-2" max="-2" attributes="0"/>
@@ -119,6 +125,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="ReproductionClockTextField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="EdgeLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Edge? "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="EdgeCheckBox">
     </Component>
   </SubComponents>
 </Form>

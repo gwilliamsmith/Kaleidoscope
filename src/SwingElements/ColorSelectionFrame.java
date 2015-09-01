@@ -1,7 +1,5 @@
 package SwingElements;
 
-import graphvisualizer.Base;
-
 public class ColorSelectionFrame extends javax.swing.JFrame {
 
     private Base ref;
@@ -57,7 +55,7 @@ public class ColorSelectionFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
-        ref.setTempColor(ColorChooser.getColor());
+        ref.getCanvas().setTempColor(ColorChooser.getColor());
         this.dispose();
     }//GEN-LAST:event_SubmitButtonActionPerformed
 

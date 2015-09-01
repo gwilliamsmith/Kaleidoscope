@@ -1,8 +1,9 @@
-package graphvisualizer;
+package SwingElements;
 
 import Listeners.*;
 import SwingElements.AverageColorDisplay;
 import SwingElements.Canvas;
+import graphvisualizer.Graph;
 import java.awt.Color;
 import java.awt.Point;
 import javax.swing.JFrame;
@@ -10,12 +11,13 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.Timer;
-
+/**
+ * Initializes both the Graph, and the Canvas.&nbsp;Attaches mouse and key listeners, for user interaction.
+ * @author Redpox
+ */
 public class Base extends JFrame {
 
-    //////////////////////////////
-    //      Grid Variables      //
-    //////////////////////////////
+    //The grid
     private Graph graph;
 
     //////////////////////////////
@@ -24,22 +26,14 @@ public class Base extends JFrame {
     //Canvas for displaying stuff
     private Canvas canvas;
 
-    //Says what the next action is
-    private String actionString = "";
-
     //Spacing/Size for grid points
     private int spacing = 10;
     private int pointSize = 2;
 
-    //number of steps, steps per cycle, and number of cycles
-    private long stepCount = 0;
-    private long cycleBase = 0;
-    private long cycleCount = 0;
-
     //////////////////////////////
     //Right-Click Menu Variables//
     //////////////////////////////
-    //Actual menu
+    //Right-Click Menu
     private final JPopupMenu rightClickMenu = new JPopupMenu();
 
     //Menu buttons
@@ -54,28 +48,19 @@ public class Base extends JFrame {
     private final JMenuItem saveState = new JMenuItem("Save state");
     private final JMenuItem savePicture = new JMenuItem("Save Picture");
 
-    //Remembers point clicked on 
-    private Point rightStore = new Point();
-
-    //Color for next line(black if null)
-    private Color tempColor = null;
-
-    //Info for next line
-    private GraphTupleInfo gtiStorage = null;
-
-    //////////////////////////////
-    //   Connection Variables   //
-    //////////////////////////////
-    private GraphNode connectA;
-    private GraphNode connectB;
-    private boolean connect = false;
-
-    //Determines if loop should be run
+    //Determines Graph.takeStep() should be executed inside the TimerActionListener
     private boolean run = false;
 
     //Displays average color of all lines
     private AverageColorDisplay averageDisplay = new AverageColorDisplay();
 
+    /**
+     * Constructor for Base class.&nbsp;Determines grid dimensions, as well as the interval for steps and repaint actions
+     * 
+     * @param c The number of columns in the grid
+     * @param r The number of rows in the grid
+     * @param stepTime The time in between TimerActionLister events
+     */
     public Base(int c, int r, int stepTime) {
         graph = new Graph(r, c, this);
         canvas = new Canvas(this);
@@ -92,27 +77,17 @@ public class Base extends JFrame {
         new Timer(stepTime, new TimerActionListener(this)).start();
     }//end constructor
 
-    public void takeStep() {
-        graph.stepForward();
-        stepCount++;
-        if (cycleBase > 0) {
-            cycleCount = stepCount / cycleBase;
-        }//end if
-        canvas.repaint();
-    }//end takeStep
 
-    public void reset() {
-        graph.clearGrid();
-        stepCount = 0;
-        cycleBase = 0;
-        cycleCount = 0;
-        canvas.repaint();
-    }//end reset
-
+    /**
+     * Changes the color of the AverageColorDisplay
+     */
     public void updateAverageColor() {
         averageDisplay.updateColor(graph.getAverageColor());
     }//end updateAverageColor
 
+    /**
+     * Adds the ActionListeners to the right-click menu buttons
+     */
     private void addMenuListeners() {
         step.addActionListener(new StepActionListener(this));
         loop.addActionListener(new LoopActionListener(this));
@@ -126,6 +101,9 @@ public class Base extends JFrame {
         savePicture.addActionListener(new SavePictureActionListener(this));
     }//end addMenuListeners
 
+    /**
+     * Adds the right-click menu buttons to the menu
+     */
     private void createRightClickMenu() {
         rightClickMenu.add(step);
         rightClickMenu.add(loop);
@@ -139,6 +117,9 @@ public class Base extends JFrame {
         rightClickMenu.add(savePicture);
     }//end createRightClickMenu
     
+    /**
+     * Inverts the run boolean, used in the TimerActionListener
+     */
     public void flipRun(){
         run = !run;
     }//end flipRun
@@ -146,114 +127,83 @@ public class Base extends JFrame {
     //////////////////////////////
     //     Setters/Getters      //
     //////////////////////////////
-    public void setTempColor(Color c) {
-        tempColor = c;
-    }//end setTempColor
-
-    public Color getTempColor() {
-        return tempColor;
-    }//end getTempColor
-
-    public void setRightStore(Point in) {
-        rightStore = in;
-    }//end setRightStore
-
-    public Point getRightStore() {
-        return rightStore;
-    }//end getRightStore
-
-    public void setConnect(boolean in) {
-        connect = in;
-    }//end setConnect
-
-    public boolean getConnect() {
-        return connect;
-    }//end getConnect
-
-    public void setConnectA(GraphNode in) {
-        connectA = in;
-    }//end setConnectA
-
-    public GraphNode getConnectA() {
-        return connectA;
-    }//end getConnectA
-
-    public void setConnectB(GraphNode in) {
-        connectB = in;
-    }//end setConnectB
-
-    public GraphNode getConnectB() {
-        return connectB;
-    }//end getConnectB
-
-    public void setActionString(String in) {
-        actionString = in;
-    }//end setActionString
-
-    public String getActionString() {
-        return actionString;
-    }//end getActionString
-
+    
+    /**
+     * Returns the {@link Canvas} object
+     * @return The canvas object
+     * @see Canvas
+     */
     public Canvas getCanvas() {
         return canvas;
     }//end getCanvas
 
+    /**
+     * Sets the value for the run variable
+     * @param in The new value for run
+     */
     public void setRun(boolean in) {
         run = in;
     }//end setRun
 
+    /**
+     * Returns the value of the run variable
+     * @return The value of run
+     */
     public boolean getRun() {
         return run;
     }//end getRun
 
+    /**
+     * Makes the AverageColorDisplay visible
+     */
     public void showAverageDisplay() {
         averageDisplay.setVisible(true);
     }//end getAverageDisplay
-
-    public void setGtiStorage(GraphTupleInfo in) {
-        gtiStorage = in;
-    }//end setGtiStorage
-
-    public GraphTupleInfo getGtiStorage() {
-        return gtiStorage;
-    }//end getGtiStorage
-
+    
+    /**
+     * Returns the right click menu
+     * @return The right click menu
+     */
     public JPopupMenu getRightClickMenu() {
         return rightClickMenu;
     }//end getRightClickMenu
-
-    public long getStepCount() {
-        return stepCount;
-    }//end getStepCount
-
-    public void setCycleBase(long in) {
-        cycleBase = in;
-    }//end setCycleBase
-
-    public long getCycleBase() {
-        return cycleBase;
-    }//end getCycleBase
-
-    public long getCycleCount() {
-        return cycleCount;
-    }//end getCycleCount
-
-    public int getPointSize() {
-        return pointSize;
-    }//end getPointSize
     
+    /**
+     * Sets the display size of the graph nodes
+     * @param in The new value of pointSize
+     */
     public void setPointSize(int in){
         pointSize = in;
     }//end setPointSize
-
-    public int getSpacing() {
-        return spacing;
-    }//end getSpacing
     
+    /**
+     * Returns the display size of the graph nodes
+     * @return The value of pointSize
+     */
+    public int getPointSize() {
+        return pointSize;
+    }//end getPointSize
+
+    /**
+     * Sets the amount of space between graph nodes
+     * @param in The new value of spacing
+     */
     public void setSpacing(int in){
         spacing = in;
     }//end setSpacing
     
+    /**
+     * Returns the amount of space between graph nodes
+     * @return The value of spacing
+     */
+    public int getSpacing() {
+        return spacing;
+    }//end getSpacing
+    
+    /**
+     * Returns the Graph object
+     * @return The graph object
+     */
     public Graph getGraph(){
         return graph;
     }//end getGraph

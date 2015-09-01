@@ -1,6 +1,6 @@
 package Listeners;
 
-import graphvisualizer.Base;
+import SwingElements.Base;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,6 +14,6 @@ public class ResetActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ref.reset();
+        ref.getGraph().reset();
     }//endActionPerformed
 }//end LoopActionListener

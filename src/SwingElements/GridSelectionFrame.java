@@ -1,7 +1,6 @@
 package SwingElements;
 
 
-import graphvisualizer.Base;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
