@@ -5,6 +5,8 @@
 package Listeners;
 
 import SwingElements.Base;
+import SwingElements.Canvas;
+import graphvisualizer.Graph;
 import graphvisualizer.GraphNode;
 import graphvisualizer.GraphTuple;
 import java.awt.event.ActionEvent;
@@ -35,6 +37,8 @@ public class SaveStateActionListener implements ActionListener {
         GraphNode[][] refMatrix = ref.getGraph().getMatrix();
         double itemsTotal = refMatrix.length * refMatrix[0].length;
         double itemsDone = 0;
+        Canvas canvas = ref.getCanvas();
+        Graph graph = ref.getGraph();
         
         //File saving code
         JFileChooser fileChooser = new JFileChooser();
@@ -48,16 +52,16 @@ public class SaveStateActionListener implements ActionListener {
         }//end saveState
         
         //Record global variable states
-        String globals = "Spacing: " + ref.getSpacing() + "\n";
-        globals += "Point size: " + ref.getPointSize() + "\n";
-        globals += "Step count: " + ref.getGraph().getStepCount() + "\n";
-        globals += "Cycle base: " + ref.getGraph().getCycleBase() + "\n";
-        globals += "Cycle count: " + ref.getGraph().getCycleCount() + "\n";
-        globals += "Trim: " + ref.getGraph().getTrim() + "\n";
-        globals += "Mutate: " + ref.getGraph().getMutate() + "\n";
-        globals += "Mutate Color: " + ref.getGraph().getMutateColor() + "\n";
-        globals += "Mutate Health: " + ref.getGraph().getMutateHealth() + "\n";
-        globals += "Growth Type: " + ref.getGraph().getGrowthType()+ "\n";
+        String globals = "Spacing: " + canvas.getSpacing() + "\n";
+        globals += "Point size: " + canvas.getPointSize() + "\n";
+        globals += "Step count: " + graph.getStepCount() + "\n";
+        globals += "Cycle base: " + graph.getCycleBase() + "\n";
+        globals += "Cycle count: " + graph.getCycleCount() + "\n";
+        globals += "Trim: " + graph.getTrim() + "\n";
+        globals += "Mutate: " + graph.getMutate() + "\n";
+        globals += "Mutate Color: " + graph.getMutateColor() + "\n";
+        globals += "Mutate Health: " + graph.getMutateHealth() + "\n";
+        globals += "Growth Type: " + graph.getGrowthType()+ "\n";
         
         //Seems magic, but is actually the number of global variables. Not likely to change
         itemsTotal += 10;

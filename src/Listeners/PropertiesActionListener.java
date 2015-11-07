@@ -1,7 +1,7 @@
 package Listeners;
 
 import SwingElements.Base;
-import SwingElements.SettingsSelectionForm;
+import SwingElements.PropertiesSelectionForm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,7 +16,7 @@ public class PropertiesActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         ref.setRun(false);
-        new SettingsSelectionForm(ref).setVisible(true);
+        new PropertiesSelectionForm(ref).setVisible(true);
     }//end actionPerformed
 
 }//end PropertiesActionListener

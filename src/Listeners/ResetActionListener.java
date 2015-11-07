@@ -14,6 +14,7 @@ public class ResetActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        ref.setRun(false);
         ref.getGraph().reset();
     }//endActionPerformed
 }//end LoopActionListener

@@ -1,6 +1,3 @@
-/*TODO:
- Stop Using Magic Numbers for JPanel/BufferedImage size
- */
 package SwingElements;
 
 import Listeners.CanvasMouseListener;
@@ -19,6 +16,12 @@ public class Canvas extends JPanel {
     private Base ref;
     public int windowX = 0;
     public int windowY = 0;
+    
+    //Spacing and Size for grid points
+    private int minSpacing = 10;
+    private int minPointSize = 2;
+    private int spacing = 10;
+    private int pointSize = 2;
 
     //Says what the next action is
     private String actionString = "";
@@ -175,4 +178,53 @@ public class Canvas extends JPanel {
     public String getActionString() {
         return actionString;
     }//end getActionString
+    
+    /**
+     * Sets the display size of the graph nodes
+     * @param in The new value of pointSize
+     */
+    public void setPointSize(int in){
+        pointSize = in;
+    }//end setPointSize
+    
+    /**
+     * Returns the display size of the graph nodes
+     * @return The value of pointSize
+     */
+    public int getPointSize() {
+        return pointSize;
+    }//end getPointSize
+
+    /**
+     * Sets the amount of space between graph nodes
+     * @param in The new value of spacing
+     */
+    public void setSpacing(int in){
+        spacing = in;
+    }//end setSpacing
+    
+    /**
+     * Returns the amount of space between graph nodes
+     * @return The value of spacing
+     */
+    public int getSpacing() {
+        return spacing;
+    }//end getSpacing
+    
+    public int getMinSpacing(){
+        return minSpacing;
+    }//end getMinSpacing
+    
+    public void setMinSpacing(int in){
+        minSpacing = in;
+    }//end setMinSpacing
+    
+    public int getMinPointSize(){
+        return minPointSize;
+    }//end getMinPointSize
+    
+    public void setMinPointSize(int in){
+        minPointSize = in;
+    }//end setMinPointSize
+    
 }//end Canvas

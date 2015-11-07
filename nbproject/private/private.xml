@@ -3,11 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/graphvisualizer/MyQueue.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/SwingElements/Canvas.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/SwingElements/ColorSelectionFrame.java</file>
             <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/graphvisualizer/GraphTupleInfo.java</file>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/graphvisualizer/Base.java</file>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/graphvisualizer/GraphTuple.java</file>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/graphvisualizer/ArenaRunner.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Listeners/CustomLineActionListener.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/SwingElements/Base.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/graphvisualizer/Graph.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Listeners/CanvasMouseListener.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/SwingElements/CustomLineForm.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Listeners/LoopActionListener.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Listeners/SeedColoringBookListener.java</file>
         </group>
     </open-files>
 </project-private>

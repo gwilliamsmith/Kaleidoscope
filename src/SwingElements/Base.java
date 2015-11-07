@@ -1,11 +1,7 @@
 package SwingElements;
 
 import Listeners.*;
-import SwingElements.AverageColorDisplay;
-import SwingElements.Canvas;
 import graphvisualizer.Graph;
-import java.awt.Color;
-import java.awt.Point;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JMenuItem;
@@ -26,10 +22,6 @@ public class Base extends JFrame {
     //Canvas for displaying stuff
     private Canvas canvas;
 
-    //Spacing/Size for grid points
-    private int spacing = 10;
-    private int pointSize = 2;
-
     //////////////////////////////
     //Right-Click Menu Variables//
     //////////////////////////////
@@ -47,8 +39,9 @@ public class Base extends JFrame {
     private final JMenuItem customLine = new JMenuItem("Set properties for next line");
     private final JMenuItem saveState = new JMenuItem("Save state");
     private final JMenuItem savePicture = new JMenuItem("Save Picture");
-
-    //Determines Graph.takeStep() should be executed inside the TimerActionListener
+    private final JMenuItem seedColoringBook  = new JMenuItem("Set up starting coloring book seed");
+            
+    //Determines if Graph.takeStep() should be executed inside the TimerActionListener
     private boolean run = false;
 
     //Displays average color of all lines
@@ -62,8 +55,8 @@ public class Base extends JFrame {
      * @param stepTime The time in between TimerActionLister events
      */
     public Base(int c, int r, int stepTime) {
-        graph = new Graph(r, c, this);
         canvas = new Canvas(this);
+        graph = new Graph(r, c, this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         addMenuListeners();
@@ -99,6 +92,7 @@ public class Base extends JFrame {
         customLine.addActionListener(new CustomLineActionListener(this));
         saveState.addActionListener(new SaveStateActionListener(this));
         savePicture.addActionListener(new SavePictureActionListener(this));
+        seedColoringBook.addActionListener(new SeedColoringBookListener(this));
     }//end addMenuListeners
 
     /**
@@ -115,6 +109,7 @@ public class Base extends JFrame {
         rightClickMenu.add(customLine);
         rightClickMenu.add(saveState);
         rightClickMenu.add(savePicture);
+        rightClickMenu.add(seedColoringBook);
     }//end createRightClickMenu
     
     /**
@@ -154,7 +149,7 @@ public class Base extends JFrame {
     }//end getRun
 
     /**
-     * Makes the AverageColorDisplay visible
+     * Shows the {@link AverageColorDisplay} window
      */
     public void showAverageDisplay() {
         averageDisplay.setVisible(true);
@@ -167,38 +162,6 @@ public class Base extends JFrame {
     public JPopupMenu getRightClickMenu() {
         return rightClickMenu;
     }//end getRightClickMenu
-    
-    /**
-     * Sets the display size of the graph nodes
-     * @param in The new value of pointSize
-     */
-    public void setPointSize(int in){
-        pointSize = in;
-    }//end setPointSize
-    
-    /**
-     * Returns the display size of the graph nodes
-     * @return The value of pointSize
-     */
-    public int getPointSize() {
-        return pointSize;
-    }//end getPointSize
-
-    /**
-     * Sets the amount of space between graph nodes
-     * @param in The new value of spacing
-     */
-    public void setSpacing(int in){
-        spacing = in;
-    }//end setSpacing
-    
-    /**
-     * Returns the amount of space between graph nodes
-     * @return The value of spacing
-     */
-    public int getSpacing() {
-        return spacing;
-    }//end getSpacing
     
     /**
      * Returns the Graph object

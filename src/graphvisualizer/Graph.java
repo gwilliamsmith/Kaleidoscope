@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Graph {
@@ -26,15 +27,27 @@ public class Graph {
     private boolean mutateHealth = true;
     private int growthType = 0;
     
+    //true if grid has been seeded
+    private boolean seeded = false;
+
     //number of steps, steps per cycle, and number of cycles
     private long stepCount = 0;
     private long cycleBase = 0;
     private long cycleCount = 0;
-    
+
     //Cycle planning stuff
-    long cycleSteps = 0;
-    boolean cycleFinished = false;
-    boolean cycleStarted = false;
+    private long cycleSteps = 0;
+    private boolean noNewGrowth = false;
+    private boolean pictureTaken = false;
+    
+    //Seeding booleans
+    private boolean seed1 = true;
+    private boolean seed2 = true;
+    private boolean seed4 = true;
+    private boolean seed8 = true;
+
+    private int printCount = 0;
+    private int midCount = 0;
 
     public Graph(int r, int c, Base in) {
         matrix = new GraphNode[r][c];
@@ -48,7 +61,7 @@ public class Graph {
         if (cycleBase > 0) {
             cycleCount = stepCount / cycleBase;
         }//end if
-        ref.getCanvas().repaint();
+        //ref.getCanvas().repaint();
     }//end takeStep
 
     public void reset() {
@@ -56,6 +69,7 @@ public class Graph {
         stepCount = 0;
         cycleBase = 0;
         cycleCount = 0;
+        seeded = false;
     }//end reset
 
     private void add(GraphNode gn, int i, int j) {
@@ -94,8 +108,8 @@ public class Graph {
     }//end connectTo
 
     private void initializeGrid() {
-        int pointSize = ref.getPointSize();
-        int spacing = ref.getSpacing();
+        int pointSize = ref.getCanvas().getPointSize();
+        int spacing = ref.getCanvas().getSpacing();
         for (int i = 0, ySpace = pointSize / 2; i < matrix.length; i++, ySpace += spacing) {
             for (int j = 0, xSpace = pointSize / 2; j < matrix[i].length; j++, xSpace += spacing) {
                 GraphNode temp = new GraphNode(xSpace - pointSize / 2, ySpace - pointSize / 2, pointSize, pointSize, newID(), i, j, matrix.length - 1, matrix[0].length - 1, consume);
@@ -107,8 +121,8 @@ public class Graph {
     }//end initializeGrid
 
     public void resizeGrid() {
-        int pointSize = ref.getPointSize();
-        int spacing = ref.getSpacing();
+        int pointSize = ref.getCanvas().getPointSize();
+        int spacing = ref.getCanvas().getSpacing();
         for (int i = 0, ySpace = pointSize / 2; i < matrix.length; i++, ySpace += spacing) {
             for (int j = 0, xSpace = pointSize / 2; j < matrix[i].length; j++, xSpace += spacing) {
                 GraphNode temp = matrix[i][j];
@@ -191,12 +205,23 @@ public class Graph {
                 }//end if
             }//end for
         }//end for
-        cycleFinished = queue.isEmpty();
-        if (getCycleFinished()) {
+        noNewGrowth = queue.isEmpty();
+        if (noNewGrowth && !pictureTaken) {
             if (cycleSteps <= 0) {
                 cycleSteps = stepCount;
             }//end if
-            System.out.println(cycleSteps);
+            pictureTaken = true;
+            System.out.println("Picture taken " + ++printCount);
+            midCount = 0;
+        }//end if
+        else if (!noNewGrowth && pictureTaken) {
+            if (midCount >= cycleSteps) {
+                pictureTaken = false;
+                System.out.println("Picture boolean reset " + ++printCount);
+            }//end if
+        }//end else if
+        if (pictureTaken) {
+            midCount++;
         }//end if
     }//end buildQueue
 
@@ -473,7 +498,7 @@ public class Graph {
     }//end getAverageColor
 
     public void stepForward() {
-        int spacing = ref.getSpacing();
+        int spacing = ref.getCanvas().getSpacing();
         buildQueue();
         if (growthType == 0) {
             while (queue.hasFront()) {
@@ -511,7 +536,7 @@ public class Graph {
 
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(ref.getPointSize() / 2));
+        g2.setStroke(new BasicStroke(ref.getCanvas().getPointSize() / 2));
         for (GraphNode gn : this.nodes) {
             g2.setColor(gn.getColor());
             if (gn.getFood() <= 0) {
@@ -530,6 +555,195 @@ public class Graph {
         }//end for
     }//end paint
 
+    private int newID() {
+        int out = idCount;
+        idCount++;
+        return out;
+    }//end newID
+
+    /*TODO:
+        Break this up into multiple methods
+    */
+    public void generateSeeds() {
+        System.out.println("generateSeeds()");
+        Random rand = new Random();
+        HashMap<String, Integer> seedsOut = new HashMap<>();
+        int seeds = rand.nextInt(9);
+        boolean seedCheck = (seeds == 1 && !seeded && seed1) || (seeds == 2 && seed2) || (seeds == 4 && seed4) || (seeds == 8 && seed8);
+        System.out.println(" " + seeds);
+        while (!seedCheck) {
+            seeds = rand.nextInt(9);
+            seedCheck = (seeds == 1 && !seeded && seed1) || (seeds == 2 && seed2) || (seeds == 4 && seed4) || (seeds == 8 && seed8);
+            System.out.println(" " + seeds);
+        }//end while
+        switch (seeds) {
+            case 1:
+                switch(rand.nextInt(9)+1){
+                    case 1:
+                        int steps = rand.nextInt(matrix.length / 2) + 1;
+                        seedsOut.put("Top", steps);
+                        break;
+                    case 2:
+                        steps = rand.nextInt(matrix.length / 2) + 1;
+                        seedsOut.put("Bottom", steps);
+                        break;
+                    case 3:
+                        steps = rand.nextInt(matrix.length / 2) + 1;
+                        seedsOut.put("Left", steps);
+                        break;
+                    case 4:
+                        steps = rand.nextInt(matrix.length / 2) + 1;
+                        seedsOut.put("Right", steps);
+                        break;
+                    case 5:
+                        steps = rand.nextInt(matrix.length / 2) + 1;
+                        seedsOut.put("TL", steps);
+                        break;
+                    case 6:
+                        steps = rand.nextInt(matrix.length / 2) + 1;
+                        seedsOut.put("TR", steps);
+                        break;
+                    case 7:
+                        steps = rand.nextInt(matrix.length / 2) + 1;
+                        seedsOut.put("BL", steps);
+                        break;
+                    case 8:
+                        steps = rand.nextInt(matrix.length / 2) + 1;
+                        seedsOut.put("BR", steps);
+                        break;
+                }//end switch
+                break;
+            case 2:
+                switch (rand.nextInt(4)) {
+                    case 0:
+                        int steps = rand.nextInt(matrix.length / 2) + 1;
+                        seedsOut.put("Top", steps);
+                        seedsOut.put("Bottom", steps);
+                        break;
+                    case 1:
+                        steps = rand.nextInt(matrix[0].length / 2) + 1;
+                        seedsOut.put("Left", steps);
+                        seedsOut.put("Right", steps);
+                        break;
+                    case 2:
+                        steps = rand.nextInt(Math.min(matrix[0].length, matrix.length) / 2) + 1;
+                        seedsOut.put("TL", steps);
+                        seedsOut.put("BR", steps);
+                        break;
+                    case 3:
+                        steps = rand.nextInt(Math.min(matrix[0].length, matrix.length) / 2) + 1;
+                        seedsOut.put("TR", steps);
+                        seedsOut.put("BL", steps);
+                        break;
+                    default:
+                        break;
+                }//end switch
+                break;
+            case 4:
+                switch (rand.nextInt(2)) {
+                    case 0:
+                        int steps = rand.nextInt(matrix.length / 2) + 1;
+                        seedsOut.put("Top", steps);
+                        seedsOut.put("Bottom", steps);
+                        steps = rand.nextInt(matrix[0].length / 2) + 1;
+                        seedsOut.put("Left", steps);
+                        seedsOut.put("Right", steps);
+                        break;
+                    case 1:
+                        steps = rand.nextInt(Math.min(matrix[0].length, matrix.length) / 2) + 1;
+                        seedsOut.put("TL", steps);
+                        seedsOut.put("BR", steps);
+                        steps = rand.nextInt(Math.min(matrix[0].length, matrix.length) / 2) + 1;
+                        seedsOut.put("TR", steps);
+                        seedsOut.put("BL", steps);
+                        break;
+                }//end switch
+                break;
+            case 8:
+                int steps = rand.nextInt(matrix.length / 2) + 1;
+                seedsOut.put("Top", steps);
+                seedsOut.put("Bottom", steps);
+                seedsOut.put("Left", steps);
+                seedsOut.put("Right", steps);
+                steps = rand.nextInt(Math.min(matrix[0].length, matrix.length) / 2) + 1;
+                seedsOut.put("TL", steps);
+                seedsOut.put("BR", steps);
+                seedsOut.put("TR", steps);
+                seedsOut.put("BL", steps);
+                break;
+        }//end switch
+        seedGraph(seedsOut);
+    }//end generateSeeds
+
+    /*TODO:
+        Simplify this
+    */
+    private void seedGraph(HashMap<String, Integer> seedInfo) {
+        System.out.println("seedGraph()");
+        for (String line : seedInfo.keySet()) {
+            if (null != line) {
+                switch (line) {
+                    case "Top": {
+                        System.out.println("Left");
+                        System.out.println(seedInfo.get(line));
+                        GraphNode node1 = matrix[matrix[0].length / 2][(int) seedInfo.get(line)];
+                        GraphNode node2 = matrix[matrix[0].length / 2][(int) (seedInfo.get(line)) - 1];
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        break;
+                    }//end case
+                    case "Bottom": {
+                        System.out.println("Right");
+                        System.out.println(seedInfo.get(line));
+                        GraphNode node1 = matrix[matrix[0].length / 2][matrix.length - (int) seedInfo.get(line)];
+                        GraphNode node2 = matrix[matrix[0].length / 2][matrix.length - (int) (seedInfo.get(line)) - 1];
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        break;
+                    }//end case 
+                    case "Left": {
+                        System.out.println("Top");
+                        System.out.println(seedInfo.get(line));
+                        GraphNode node1 = matrix[(int) seedInfo.get(line)][matrix.length / 2];
+                        GraphNode node2 = matrix[(int) seedInfo.get(line) - 1][matrix.length / 2];
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        break;
+                    }//end case
+                    case "Right": {
+                        System.out.println("Bottom");
+                        System.out.println(seedInfo.get(line));
+                        GraphNode node1 = matrix[matrix[0].length - (int) seedInfo.get(line)][matrix.length / 2];
+                        GraphNode node2 = matrix[matrix[0].length - (int) seedInfo.get(line) - 1][matrix.length / 2];
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        break;
+                    }//end case
+                    case "TL": {
+                        GraphNode node1 = matrix[(int) seedInfo.get(line)][(int) seedInfo.get(line)];
+                        GraphNode node2 = matrix[(int) seedInfo.get(line) - 1][(int) seedInfo.get(line) - 1];
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        break;
+                    }//end case
+                    case "BR": {
+                        GraphNode node1 = matrix[matrix[0].length - (int) seedInfo.get(line)][matrix.length - (int) seedInfo.get(line)];
+                        GraphNode node2 = matrix[matrix[0].length - ((int) seedInfo.get(line) + 1)][matrix.length - ((int) seedInfo.get(line) + 1)];
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        break;
+                    }//end case
+                    case "TR": {
+                        GraphNode node1 = matrix[matrix[0].length - (int) seedInfo.get(line) -1][(int) seedInfo.get(line)];
+                        GraphNode node2 = matrix[matrix[0].length - ((int) seedInfo.get(line))][(int) seedInfo.get(line)-1];
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        break;
+                    }//end case
+                    case "BL": {
+                        GraphNode node1 = matrix[(int) seedInfo.get(line)-1][matrix.length - (int) seedInfo.get(line)];
+                        GraphNode node2 = matrix[(int) seedInfo.get(line)][matrix.length - ((int) seedInfo.get(line) + 1)];
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        break;
+                    }//end case
+                }//end switch
+            }//end if
+        }//end for
+    }//end seedGraph
+
     public GraphNode[][] getMatrix() {
         return matrix;
     }//end getMatrix
@@ -537,12 +751,6 @@ public class Graph {
     public ArrayList<GraphNode> getGraphNodes() {
         return nodes;
     }//end getGraphNodes
-
-    private int newID() {
-        int out = idCount;
-        idCount++;
-        return out;
-    }//end newID
 
     public boolean getTrim() {
         return trim;
@@ -591,7 +799,7 @@ public class Graph {
     public void setGrowthType(int in) {
         growthType = in;
     }//end setGrowthType
-    
+
     public long getStepCount() {
         return stepCount;
     }//end getStepCount
@@ -608,20 +816,47 @@ public class Graph {
         return cycleCount;
     }//end getCycleCount
 
-    public boolean getCycleFinished(){
-        return cycleFinished;
-    }//end getCycleFinished
-    
-    public void setCycleFinished(boolean in){
-        cycleFinished = in;
-    }//end setCycleFinished
-    
-    public boolean getCycleStarted(){
-        return cycleStarted;
+    public boolean getNewGrowth() {
+        return noNewGrowth;
     }//end getCycleStarted
     
-    public void setCycleStarted(boolean in){
-        cycleStarted = in;
-    }//end setCycleStarted
-
+    public boolean isSeeded(){
+        return seeded;
+    }//end isSeeded
+    
+    public void setSeeded(boolean in){
+        seeded = in;
+    }//end setSeeded
+    
+    public boolean getSeed1(){
+        return seed1;
+    }//end getSeed1
+    
+    public void setSeed1(boolean in){
+        seed1 = in;
+    }//end setSeed1
+    
+    public boolean getSeed2(){
+        return seed2;
+    }//end getSeed2
+    
+    public void setSeed2(boolean in){
+        seed2 = in;
+    }//end setSeed2
+    
+    public boolean getSeed4(){
+        return seed4;
+    }//end getSeed4
+    
+    public void setSeed4(boolean in){
+        seed4 = in;
+    }//end setSeed4
+    
+    public boolean getSeed8(){
+        return seed8;
+    }//end getSeed1
+    
+    public void setSeed8(boolean in){
+        seed8 = in;
+    }//end setSeed1
 }//end Graph
