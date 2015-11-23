@@ -4,7 +4,7 @@ import graphvisualizer.GraphTupleInfo;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class CustomLineForm extends javax.swing.JFrame {
+public class CustomLineForm extends javax.swing.JFrame{
 
     private GraphTupleInfo store;
     private boolean complete = true;
@@ -171,5 +171,10 @@ public class CustomLineForm extends javax.swing.JFrame {
         }//end tryCatch
         return out;
     }//end checkTextField
-
+    
+    public void run(Base simIn) {
+        ref = simIn;
+        store = ref.getCanvas().getGtiStorage();
+        initComponents();
+    }//end run
 }//end CustomLineForm

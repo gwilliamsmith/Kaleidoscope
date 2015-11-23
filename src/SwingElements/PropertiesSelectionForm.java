@@ -64,6 +64,7 @@ public class PropertiesSelectionForm extends javax.swing.JFrame {
         PointSizeLabel = new javax.swing.JLabel();
         PointSpacingTextField = new javax.swing.JTextField();
         PointSizeTextField = new javax.swing.JTextField();
+        ResizeGridButton = new javax.swing.JButton();
         SeedingVariablePanel = new javax.swing.JPanel();
         ColoringBookSeedOptionsLabel = new javax.swing.JLabel();
         OneLineLabel = new javax.swing.JLabel();
@@ -114,6 +115,17 @@ public class PropertiesSelectionForm extends javax.swing.JFrame {
         PointSizeTextField.setMinimumSize(new java.awt.Dimension(82, 20));
         PointSizeTextField.setPreferredSize(new java.awt.Dimension(82, 20));
 
+        ResizeGridButton.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        ResizeGridButton.setText("Resize Grid");
+        ResizeGridButton.setMaximumSize(new java.awt.Dimension(90, 25));
+        ResizeGridButton.setMinimumSize(new java.awt.Dimension(90, 25));
+        ResizeGridButton.setPreferredSize(new java.awt.Dimension(90, 25));
+        ResizeGridButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResizeGridButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CanvasVariablePanelLayout = new javax.swing.GroupLayout(CanvasVariablePanel);
         CanvasVariablePanel.setLayout(CanvasVariablePanelLayout);
         CanvasVariablePanelLayout.setHorizontalGroup(
@@ -129,6 +141,10 @@ public class PropertiesSelectionForm extends javax.swing.JFrame {
                     .addComponent(PointSizeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PointSizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(78, 78, 78))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CanvasVariablePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ResizeGridButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153))
         );
         CanvasVariablePanelLayout.setVerticalGroup(
             CanvasVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,6 +159,8 @@ public class PropertiesSelectionForm extends javax.swing.JFrame {
                 .addGroup(CanvasVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PointSpacingTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PointSizeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(ResizeGridButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -437,6 +455,10 @@ public class PropertiesSelectionForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ApplyButtonActionPerformed
 
+    private void ResizeGridButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResizeGridButtonActionPerformed
+        new GridSelectionFrame(ref).setVisible(true);
+    }//GEN-LAST:event_ResizeGridButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ApplyButton;
     private javax.swing.JPanel ButtonsPanel;
@@ -463,6 +485,7 @@ public class PropertiesSelectionForm extends javax.swing.JFrame {
     private javax.swing.JTextField PointSizeTextField;
     private javax.swing.JLabel PointSpacingLabel;
     private javax.swing.JTextField PointSpacingTextField;
+    private javax.swing.JButton ResizeGridButton;
     private javax.swing.JPanel RuntimeVariablePanel;
     private javax.swing.JPanel SeedingVariablePanel;
     private javax.swing.JComboBox TrimComboBox;

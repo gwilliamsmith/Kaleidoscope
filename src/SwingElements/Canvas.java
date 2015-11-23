@@ -22,6 +22,10 @@ public class Canvas extends JPanel {
     private int minPointSize = 2;
     private int spacing = 10;
     private int pointSize = 2;
+    private int zoomLevel = 1;
+    
+    //Determines if the drag to reposition is enabled/disabled
+    private boolean drag = true;
 
     //Says what the next action is
     private String actionString = "";
@@ -94,6 +98,10 @@ public class Canvas extends JPanel {
     public void modifyWindowX(int mod) {
         windowX = windowX + mod;
     }//end modifyWindowX
+    
+    public void resetWindowX(){
+        windowX = 0;
+    }//end resetWindowX
 
     public int getWindowY() {
         return windowY;
@@ -102,6 +110,15 @@ public class Canvas extends JPanel {
     public void modifyWindowY(int mod) {
         windowY = windowY + mod;
     }//end modifyWindowX
+    
+    public void resetWindowY(){
+        windowY = 0;
+    }//end resetWindowY
+    
+    public void resetCanvasWindow(){
+        resetWindowX();
+        resetWindowY();
+    }//end resetCanvasWindow
 
     /**
      * Sets the variable connect
@@ -226,5 +243,13 @@ public class Canvas extends JPanel {
     public void setMinPointSize(int in){
         minPointSize = in;
     }//end setMinPointSize
+    
+    public boolean canDrag(){
+        return drag;
+    }//end canDrag
+    
+    public void flipDrag(){
+        drag = !drag;
+    }//end flipDrag
     
 }//end Canvas

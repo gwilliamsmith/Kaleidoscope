@@ -1,26 +1,21 @@
 package SwingElements;
 
-
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class GridSelectionFrame extends javax.swing.JFrame {
 
-    private static GridSelectionFrame instance = null;
-    
-    private GridSelectionFrame() {
+    private Base ref;
+
+    public GridSelectionFrame(Base in) {
+        ref = in;
         initComponents();
+        if (ref != null) {
+            NumberOfRowsTextField.setText(ref.getGraph().getMatrix().length + "");
+            NumberOfColumnsTextField.setText(ref.getGraph().getMatrix()[0].length + "");
+            StepTimeTextField.setText(ref.getStepTime() + "");
+        }
     }//end constructor
-    
-    public static GridSelectionFrame getInstance(){
-        if(instance == null){
-            instance = new GridSelectionFrame();
-            return instance;
-        }//end if
-        else{
-            return null;
-        }//end else
-    }//end getInstance
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,30 +99,34 @@ public class GridSelectionFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
-       int c = checkTextField(NumberOfColumnsTextField, "Columns");
-       int r = checkTextField(NumberOfRowsTextField, "Rows");
-       int st = checkTextField(StepTimeTextField, "Step Time");
-       if(c != -1 && r != -1){
-           new Base(c,r,st).setVisible(true);
-           this.dispose();
-       }//end if
+        int c = checkTextField(NumberOfColumnsTextField, "Columns");
+        int r = checkTextField(NumberOfRowsTextField, "Rows");
+        int st = checkTextField(StepTimeTextField, "Step Time");
+        if (c != -1 && r != -1) {
+            if (ref == null) {
+                new Base(c, r, st).setVisible(true);
+            } else {
+                ref.resizeGrid(c, r, st);
+            }//end else
+            this.dispose();
+        }//end if
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
-    private int checkTextField(JTextField field, String title){
+    private int checkTextField(JTextField field, String title) {
         int out;
-        try{
+        try {
             out = Integer.parseInt(field.getText());
-            if(out <= 0){
+            if (out <= 0) {
                 JOptionPane.showMessageDialog(this, "Enter a number greater than 0!", title, JOptionPane.ERROR_MESSAGE);
                 out = -1;
             }//end if
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "You must enter a number!", title, JOptionPane.ERROR_MESSAGE);
             out = -1;
         }//end tryCatch
         return out;
     }//end checkTextField
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel NumberOfColumnsLabel;

@@ -64,4 +64,4 @@ public class ColorSelectionFrame extends javax.swing.JFrame {
     private javax.swing.JColorChooser ColorChooser;
     private javax.swing.JButton SubmitButton;
     // End of variables declaration//GEN-END:variables
-}
+}//end ColorSelectionFrame

@@ -96,7 +96,7 @@ public class GraphTuple {
         return startReproductionClock;
     }//end getStartReproductionClock
     
-    public int getReproductionCock(){
+    public int getReproductionClock(){
         return reproductionClock;
     }//end getReproductionClock
     

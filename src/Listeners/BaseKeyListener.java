@@ -1,7 +1,6 @@
 package Listeners;
 
 import SwingElements.Base;
-import graphvisualizer.Graph;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

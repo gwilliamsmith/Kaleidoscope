@@ -47,6 +47,8 @@ public class AverageColorDisplay extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ColorDisplay;
     // End of variables declaration//GEN-END:variables
+    
+    
     public void updateColor(Color in){
         ColorDisplay.setBackground(in);
         ColorDisplay.repaint();

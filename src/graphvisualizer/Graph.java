@@ -5,9 +5,12 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import javax.imageio.ImageIO;
 
 public class Graph {
 
@@ -211,13 +214,19 @@ public class Graph {
                 cycleSteps = stepCount;
             }//end if
             pictureTaken = true;
-            System.out.println("Picture taken " + ++printCount);
+            try {
+                if(ref.getBookDirectory() != null){
+                    ImageIO.write(ref.getCanvas().producePicture(), "jpg", new File(ref.getBookDirectory().getAbsolutePath()+"\\"+printCount+".jpg"));
+                    printCount++;
+                    System.out.println(printCount + " Pictures");
+                }//end if
+            } catch (IOException ex) {
+            }//end try catch block
             midCount = 0;
         }//end if
         else if (!noNewGrowth && pictureTaken) {
             if (midCount >= cycleSteps) {
                 pictureTaken = false;
-                System.out.println("Picture boolean reset " + ++printCount);
             }//end if
         }//end else if
         if (pictureTaken) {
@@ -244,10 +253,10 @@ public class Graph {
 
     private void regularStep(GraphNode temp, int xCompare, int yCompare) {
         GraphTuple parent = temp.getParentLine();
-        int reproductionClock = parent.getReproductionCock();
-        parent.setReproductionClock(reproductionClock--);
-        if (reproductionClock <= 0) {
-            GraphTupleInfo gti = new GraphTupleInfo(parent.getStartHealth(), parent.getColor(), parent.getMutatePercentage());
+        int reproductionClock = parent.getReproductionClock();
+        parent.setReproductionClock(reproductionClock-1);
+        if (parent.getReproductionClock() <= 0) {
+            GraphTupleInfo gti = new GraphTupleInfo(parent.getStartHealth(), parent.getColor(), parent.getMutatePercentage(), parent.getStartReproductionClock());
             normalRules(temp, gti, xCompare, yCompare);
             parent.setReproductionClock(parent.getStartReproductionClock());
         }//end if
@@ -255,15 +264,15 @@ public class Graph {
 
     private void mutateStep(GraphNode temp, int xCompare, int yCompare) {
         GraphTuple parent = temp.getParentLine();
-        int reproductionClock = parent.getReproductionCock();
-        parent.setReproductionClock(reproductionClock--);
-        if (reproductionClock <= 0) {
+        int reproductionClock = parent.getReproductionClock();
+        parent.setReproductionClock(reproductionClock-1);
+        if (parent.getReproductionClock() <= 0) {
             GraphTupleInfo gti;
             if (mutate) {
                 gti = generateMutatedGti(parent);
             }//end if
             else {
-                gti = new GraphTupleInfo(parent.getStartHealth(), parent.getColor(), parent.getMutatePercentage());
+                gti = new GraphTupleInfo(parent.getStartHealth(), parent.getColor(), parent.getMutatePercentage(),parent.getStartReproductionClock());
             }//end else
             normalRules(temp, gti, xCompare, yCompare);
             parent.setReproductionClock(parent.getStartReproductionClock());
@@ -387,7 +396,7 @@ public class Graph {
 
     private GraphTupleInfo generateMutatedGti(GraphTuple parent) {
         Random rand = new Random();
-        return new GraphTupleInfo(generateMutatedHealth(parent, rand), generateMutatedColor(parent, rand), parent.getMutatePercentage());
+        return new GraphTupleInfo(generateMutatedHealth(parent, rand), generateMutatedColor(parent, rand), parent.getMutatePercentage(),parent.getStartReproductionClock());
     }//end generateMutatedGti
 
     private Color generateMutatedColor(GraphTuple parent, Random rand) {
@@ -565,16 +574,13 @@ public class Graph {
         Break this up into multiple methods
     */
     public void generateSeeds() {
-        System.out.println("generateSeeds()");
         Random rand = new Random();
         HashMap<String, Integer> seedsOut = new HashMap<>();
         int seeds = rand.nextInt(9);
         boolean seedCheck = (seeds == 1 && !seeded && seed1) || (seeds == 2 && seed2) || (seeds == 4 && seed4) || (seeds == 8 && seed8);
-        System.out.println(" " + seeds);
         while (!seedCheck) {
             seeds = rand.nextInt(9);
             seedCheck = (seeds == 1 && !seeded && seed1) || (seeds == 2 && seed2) || (seeds == 4 && seed4) || (seeds == 8 && seed8);
-            System.out.println(" " + seeds);
         }//end while
         switch (seeds) {
             case 1:
@@ -679,37 +685,28 @@ public class Graph {
         Simplify this
     */
     private void seedGraph(HashMap<String, Integer> seedInfo) {
-        System.out.println("seedGraph()");
         for (String line : seedInfo.keySet()) {
             if (null != line) {
                 switch (line) {
                     case "Top": {
-                        System.out.println("Left");
-                        System.out.println(seedInfo.get(line));
                         GraphNode node1 = matrix[matrix[0].length / 2][(int) seedInfo.get(line)];
                         GraphNode node2 = matrix[matrix[0].length / 2][(int) (seedInfo.get(line)) - 1];
                         biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
                         break;
                     }//end case
                     case "Bottom": {
-                        System.out.println("Right");
-                        System.out.println(seedInfo.get(line));
                         GraphNode node1 = matrix[matrix[0].length / 2][matrix.length - (int) seedInfo.get(line)];
                         GraphNode node2 = matrix[matrix[0].length / 2][matrix.length - (int) (seedInfo.get(line)) - 1];
                         biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
                         break;
                     }//end case 
                     case "Left": {
-                        System.out.println("Top");
-                        System.out.println(seedInfo.get(line));
                         GraphNode node1 = matrix[(int) seedInfo.get(line)][matrix.length / 2];
                         GraphNode node2 = matrix[(int) seedInfo.get(line) - 1][matrix.length / 2];
                         biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
                         break;
                     }//end case
                     case "Right": {
-                        System.out.println("Bottom");
-                        System.out.println(seedInfo.get(line));
                         GraphNode node1 = matrix[matrix[0].length - (int) seedInfo.get(line)][matrix.length / 2];
                         GraphNode node2 = matrix[matrix[0].length - (int) seedInfo.get(line) - 1][matrix.length / 2];
                         biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));

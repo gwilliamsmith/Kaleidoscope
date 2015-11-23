@@ -11,7 +11,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import javax.swing.SwingUtilities;
 
-public class CanvasMouseListener extends MouseAdapter implements MouseWheelListener, MouseMotionListener{
+public class CanvasMouseListener extends MouseAdapter implements MouseWheelListener, MouseMotionListener {
 
     private Base ref;
     private int startY;
@@ -25,10 +25,10 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
     public void mouseClicked(MouseEvent e) {
         Canvas canvas = ref.getCanvas();
         if (SwingUtilities.isLeftMouseButton(e)) {
-            
+
             if (canvas.getConnect()) {
                 for (GraphNode gn : ref.getGraph().getGraphNodes()) {
-                    if (gn.mapMovement(canvas.getWindowX(),canvas.getWindowY()).contains(e.getPoint())) {
+                    if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint())) {
                         if (gn != canvas.getConnectA() && !gn.isConnected(canvas.getConnectA())) {
                             canvas.setConnectB(gn);
                         }//end if
@@ -61,7 +61,7 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
             }//end if
             else {
                 for (GraphNode gn : ref.getGraph().getGraphNodes()) {
-                    if (gn.mapMovement(canvas.getWindowX(),canvas.getWindowY()).contains(e.getPoint())) {
+                    if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint())) {
                         canvas.setActionString("Connect node");
                         canvas.setConnectA(gn);
                         canvas.setConnect(true);
@@ -75,20 +75,24 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
         }//end else if
         ref.repaint();
     }//end MouseClicked
-    
+
     @Override
-    public void mousePressed(MouseEvent e){
-        startY = e.getYOnScreen();
-        startX = e.getXOnScreen();
+    public void mousePressed(MouseEvent e) {
+        if (SwingUtilities.isLeftMouseButton(e) && ref.getCanvas().canDrag()) {
+            startY = e.getYOnScreen();
+            startX = e.getXOnScreen();
+        }//end if
     }//end mousePressed
-    
+
     @Override
-    public void mouseDragged(MouseEvent e){
-        Canvas canvas = ref.getCanvas();
-        canvas.modifyWindowX(e.getXOnScreen()-startX);
-        canvas.modifyWindowY(e.getYOnScreen()-startY);
-        startX = e.getXOnScreen();
-        startY = e.getYOnScreen();
+    public void mouseDragged(MouseEvent e) {
+        if (SwingUtilities.isLeftMouseButton(e) && ref.getCanvas().canDrag()) {
+            Canvas canvas = ref.getCanvas();
+            canvas.modifyWindowX(e.getXOnScreen() - startX);
+            canvas.modifyWindowY(e.getYOnScreen() - startY);
+            startX = e.getXOnScreen();
+            startY = e.getYOnScreen();
+        }//end if
     }//end mouseDragged
 
     @Override
@@ -99,14 +103,14 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
                 canvas.setPointSize((int) Math.max(canvas.getPointSize() - (e.getPreciseWheelRotation() * 2), canvas.getMinPointSize()));
             }//end if
             if (canvas.getSpacing() > canvas.getMinSpacing()) {
-                 canvas.setSpacing((int) Math.max(canvas.getSpacing() - (e.getPreciseWheelRotation() * 2), canvas.getMinSpacing()));
+                canvas.setSpacing((int) Math.max(canvas.getSpacing() - (e.getPreciseWheelRotation() * 2), canvas.getMinSpacing()));
             }//end if
         }//end if
         else if (e.getPreciseWheelRotation() < 0) {
-            if (canvas.getPointSize() < canvas.getMinPointSize()*5) {
+            if (canvas.getPointSize() < canvas.getMinPointSize() * 5) {
                 canvas.setPointSize((int) Math.max(canvas.getPointSize() - (e.getPreciseWheelRotation() * 2), canvas.getMinPointSize()));
             }//end if
-            if (canvas.getSpacing() < canvas.getMinSpacing() + (canvas.getMinPointSize()*5) - canvas.getMinPointSize()) {
+            if (canvas.getSpacing() < canvas.getMinSpacing() + (canvas.getMinPointSize() * 5) - canvas.getMinPointSize()) {
                 canvas.setSpacing((int) Math.max(canvas.getSpacing() - (e.getPreciseWheelRotation() * 2), canvas.getMinSpacing()));
             }//end if
         }//end else if
