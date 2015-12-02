@@ -4,7 +4,7 @@ import graphvisualizer.GraphTupleInfo;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class CustomLineForm extends javax.swing.JFrame{
+public class CustomLineForm extends javax.swing.JFrame implements Runnable {
 
     private GraphTupleInfo store;
     private boolean complete = true;
@@ -13,9 +13,8 @@ public class CustomLineForm extends javax.swing.JFrame{
     public CustomLineForm(Base simIn) {
         ref = simIn;
         store = ref.getCanvas().getGtiStorage();
-        initComponents();
+        //initComponents();
     }//end constructor
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,17 +121,17 @@ public class CustomLineForm extends javax.swing.JFrame{
 
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         complete = true;
-            store.startHealth = checkTextField(HealthTextField, "Starting Health");
-            store.mutationPercentage = checkTextField(MutationTextField, "Mutation Percentage");
-            store.reproductionClock = checkTextField(ReproductionClockTextField, "Reproduction Clock");
-            store.color = jColorChooser1.getColor();
-            if (CycleBaseCheckBox.isSelected()) {
-                if(store.startHealth > 0){
-                    ref.getGraph().setCycleBase(store.startHealth);
-                }//end if
+        store.startHealth = checkTextField(HealthTextField, "Starting Health");
+        store.mutationPercentage = checkTextField(MutationTextField, "Mutation Percentage");
+        store.reproductionClock = checkTextField(ReproductionClockTextField, "Reproduction Clock");
+        store.color = jColorChooser1.getColor();
+        if (CycleBaseCheckBox.isSelected()) {
+            if (store.startHealth > 0) {
+                ref.getGraph().setCycleBase(store.startHealth);
             }//end if
-            store.edge = EdgeCheckBox.isSelected();
-            System.out.println(EdgeCheckBox.isSelected());
+        }//end if
+        store.edge = EdgeCheckBox.isSelected();
+        System.out.println(EdgeCheckBox.isSelected());
         if (complete) {
             ref.getCanvas().setGtiStorage(store);
             this.dispose();
@@ -171,10 +170,14 @@ public class CustomLineForm extends javax.swing.JFrame{
         }//end tryCatch
         return out;
     }//end checkTextField
-    
-    public void run(Base simIn) {
-        ref = simIn;
-        store = ref.getCanvas().getGtiStorage();
-        initComponents();
+
+    @Override
+    public void run() {
+        if (ref != null) {
+            store = ref.getCanvas().getGtiStorage();
+            initComponents();
+            this.setVisible(true);
+        }//end if
     }//end run
+
 }//end CustomLineForm

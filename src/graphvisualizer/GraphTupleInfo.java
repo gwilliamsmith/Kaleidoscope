@@ -14,6 +14,7 @@ public class GraphTupleInfo {
         startHealth = 50;
         color = Color.BLACK;
         mutationPercentage = 0;
+        edge = false;
     }//end constructor
     
     public GraphTupleInfo(Color colorIn){

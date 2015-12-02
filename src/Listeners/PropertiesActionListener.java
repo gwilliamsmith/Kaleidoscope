@@ -4,6 +4,7 @@ import SwingElements.Base;
 import SwingElements.PropertiesSelectionForm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.SwingUtilities;
 
 public class PropertiesActionListener implements ActionListener {
 
@@ -15,8 +16,7 @@ public class PropertiesActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ref.setRun(false);
-        new PropertiesSelectionForm(ref).setVisible(true);
+        SwingUtilities.invokeLater(new PropertiesSelectionForm(ref));
     }//end actionPerformed
 
 }//end PropertiesActionListener

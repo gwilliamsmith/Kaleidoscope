@@ -32,6 +32,10 @@ public class GraphTuple {
         return out;
     }//end generateGTI
     
+    public void resetReproductionClock(){
+        reproductionClock = startReproductionClock;
+    }//end resetReproductionClock
+    
     public void setColor(Color in) {
         color = in;
     }//end setColor

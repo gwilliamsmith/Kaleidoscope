@@ -1,8 +1,10 @@
 package Listeners;
 
 import SwingElements.Base;
+import SwingElements.FolderSelectFileChooser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 public class LoopActionListener implements ActionListener {
 
@@ -14,12 +16,23 @@ public class LoopActionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ref.flipRun();
-        if(ref.getRun()){
+        if (!ref.getRun() && ref.getBookDirectory() == null) {
+            int choice = JOptionPane.showConfirmDialog(ref, "Do you want to save generated pictures?", "No folder selected!", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.NO_OPTION) {
+                ref.flipRun();
+            }//end if
+            else{
+                new FolderSelectFileChooser(ref,true).setVisible(true);
+            }//end else
+        }//end if
+        else {
+            ref.flipRun();
+        }//end else
+        if (ref.getRun()) {
             ref.getLoop().setText("Pause");
         }//end if
-        else{
+        else {
             ref.getLoop().setText("Run");
-        }
+        }//end else
     }//endActionPerformed
 }//end LoopActionListener

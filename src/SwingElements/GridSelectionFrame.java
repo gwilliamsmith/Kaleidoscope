@@ -3,7 +3,7 @@ package SwingElements;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class GridSelectionFrame extends javax.swing.JFrame {
+public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
 
     private Base ref;
 
@@ -14,7 +14,8 @@ public class GridSelectionFrame extends javax.swing.JFrame {
             NumberOfRowsTextField.setText(ref.getGraph().getMatrix().length + "");
             NumberOfColumnsTextField.setText(ref.getGraph().getMatrix()[0].length + "");
             StepTimeTextField.setText(ref.getStepTime() + "");
-        }
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        }//end if
     }//end constructor
 
     /**
@@ -137,4 +138,11 @@ public class GridSelectionFrame extends javax.swing.JFrame {
     private javax.swing.JButton SubmitButton;
     private javax.swing.JLabel TimeBetweenStepsLabel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        if (ref != null) {
+            this.setVisible(true);
+        }//end if
+    }//end run
 }//end GridSelectionFrame

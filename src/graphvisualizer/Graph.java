@@ -1,16 +1,10 @@
 package graphvisualizer;
 
 import SwingElements.Base;
-import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import javax.imageio.ImageIO;
 
 public class Graph {
 
@@ -18,7 +12,15 @@ public class Graph {
     private final GraphNode[][] matrix;
     private int idCount = 1;
     private final MyQueue<GraphNode> queue = new MyQueue<>();
-    private Base ref = null;
+    private Base ref;
+    private Camera camera;
+
+    //////////////////////////////
+    //   Connection Variables   //
+    //////////////////////////////
+    private GraphNode connectA;
+    private GraphNode connectB;
+    private boolean connect = false;
 
     //////////////////////////////
     //    Runtime Variables     //
@@ -29,7 +31,7 @@ public class Graph {
     private boolean mutateColor = true;
     private boolean mutateHealth = true;
     private int growthType = 0;
-    
+
     //true if grid has been seeded
     private boolean seeded = false;
 
@@ -41,20 +43,19 @@ public class Graph {
     //Cycle planning stuff
     private long cycleSteps = 0;
     private boolean noNewGrowth = false;
-    private boolean pictureTaken = false;
-    
+
     //Seeding booleans
     private boolean seed1 = true;
     private boolean seed2 = true;
     private boolean seed4 = true;
     private boolean seed8 = true;
 
-    private int printCount = 0;
     private int midCount = 0;
 
     public Graph(int r, int c, Base in) {
         matrix = new GraphNode[r][c];
         ref = in;
+        camera = new Camera(ref);
         initializeGrid();
     }//end constructor
 
@@ -64,7 +65,6 @@ public class Graph {
         if (cycleBase > 0) {
             cycleCount = stepCount / cycleBase;
         }//end if
-        //ref.getCanvas().repaint();
     }//end takeStep
 
     public void reset() {
@@ -88,7 +88,7 @@ public class Graph {
             }//end if
         }//end if
         else {
-            System.out.println("One or more nodes is not in the node list!");
+            System.err.println("One or more nodes is not in the node list!");
         }//end else
     }//end biconnect
 
@@ -116,7 +116,7 @@ public class Graph {
         for (int i = 0, ySpace = pointSize / 2; i < matrix.length; i++, ySpace += spacing) {
             for (int j = 0, xSpace = pointSize / 2; j < matrix[i].length; j++, xSpace += spacing) {
                 GraphNode temp = new GraphNode(xSpace - pointSize / 2, ySpace - pointSize / 2, pointSize, pointSize, newID(), i, j, matrix.length - 1, matrix[0].length - 1, consume);
-                temp.setColor(Color.BLUE);
+                temp.setColor(GraphNode.DEFAULT_COLOR);
                 add(temp, i, j);
             }//end for
         }//end for
@@ -143,8 +143,8 @@ public class Graph {
                 GraphNode temp = matrix[i][j];
                 try {
                     if (j == 0 || j == matrix[i].length - 1 || i == 0 || i == matrix.length - 1) {
-                        temp.setColor(Color.BLACK);
-                        GraphTupleInfo gti = new GraphTupleInfo(50, Color.BLACK, 0, 1);
+                        temp.setColor(GraphNode.DEFAULT_MIDDLE_EDGE_COLOR);
+                        GraphTupleInfo gti = new GraphTupleInfo(50, GraphNode.DEFAULT_MIDDLE_EDGE_COLOR, 0, 1);
                         if (j == 0) {
                             if (i == 0) {
                                 connector(temp, new GraphNode[]{matrix[i + 1][j], matrix[i][j + 1]}, gti);
@@ -190,11 +190,11 @@ public class Graph {
                             }//end else
                         }//end else if
                     }//end if
-                    if (temp.getILoc() == matrix.length / 2 || temp.getJLoc() == matrix[0].length / 2) {
-                        temp.setColor(Color.BLACK);
+                    if (nodeIsMiddle(temp)) {
+                        temp.setColor(GraphNode.DEFAULT_MIDDLE_EDGE_COLOR);
                     }//end if
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Figure out something to do with this problem");
+                    System.err.println("Figure out something to do with this problem");
                 }//end try catch
             }//end for
         }//end for
@@ -209,27 +209,20 @@ public class Graph {
             }//end for
         }//end for
         noNewGrowth = queue.isEmpty();
-        if (noNewGrowth && !pictureTaken) {
+        if (noNewGrowth && !camera.isPictureTaken()) {
             if (cycleSteps <= 0) {
                 cycleSteps = stepCount;
             }//end if
-            pictureTaken = true;
-            try {
-                if(ref.getBookDirectory() != null){
-                    ImageIO.write(ref.getCanvas().producePicture(), "jpg", new File(ref.getBookDirectory().getAbsolutePath()+"\\"+printCount+".jpg"));
-                    printCount++;
-                    System.out.println(printCount + " Pictures");
-                }//end if
-            } catch (IOException ex) {
-            }//end try catch block
+            camera.setPictureTaken(true);
+            camera.takePicture();
             midCount = 0;
         }//end if
-        else if (!noNewGrowth && pictureTaken) {
+        else if (!noNewGrowth && camera.isPictureTaken()) {
             if (midCount >= cycleSteps) {
-                pictureTaken = false;
+                camera.setPictureTaken(false);
             }//end if
         }//end else if
-        if (pictureTaken) {
+        if (camera.isPictureTaken()) {
             midCount++;
         }//end if
     }//end buildQueue
@@ -254,28 +247,28 @@ public class Graph {
     private void regularStep(GraphNode temp, int xCompare, int yCompare) {
         GraphTuple parent = temp.getParentLine();
         int reproductionClock = parent.getReproductionClock();
-        parent.setReproductionClock(reproductionClock-1);
+        parent.setReproductionClock(reproductionClock - 1);
         if (parent.getReproductionClock() <= 0) {
             GraphTupleInfo gti = new GraphTupleInfo(parent.getStartHealth(), parent.getColor(), parent.getMutatePercentage(), parent.getStartReproductionClock());
             normalRules(temp, gti, xCompare, yCompare);
-            parent.setReproductionClock(parent.getStartReproductionClock());
+            parent.resetReproductionClock();
         }//end if
     }//end regularStep
 
     private void mutateStep(GraphNode temp, int xCompare, int yCompare) {
         GraphTuple parent = temp.getParentLine();
         int reproductionClock = parent.getReproductionClock();
-        parent.setReproductionClock(reproductionClock-1);
+        parent.setReproductionClock(reproductionClock - 1);
         if (parent.getReproductionClock() <= 0) {
             GraphTupleInfo gti;
             if (mutate) {
                 gti = generateMutatedGti(parent);
             }//end if
             else {
-                gti = new GraphTupleInfo(parent.getStartHealth(), parent.getColor(), parent.getMutatePercentage(),parent.getStartReproductionClock());
+                gti = new GraphTupleInfo(parent.getStartHealth(), parent.getColor(), parent.getMutatePercentage(), parent.getStartReproductionClock());
             }//end else
             normalRules(temp, gti, xCompare, yCompare);
-            parent.setReproductionClock(parent.getStartReproductionClock());
+            parent.resetReproductionClock();
         }//end if
     }//end mutateStep
 
@@ -396,7 +389,7 @@ public class Graph {
 
     private GraphTupleInfo generateMutatedGti(GraphTuple parent) {
         Random rand = new Random();
-        return new GraphTupleInfo(generateMutatedHealth(parent, rand), generateMutatedColor(parent, rand), parent.getMutatePercentage(),parent.getStartReproductionClock());
+        return new GraphTupleInfo(generateMutatedHealth(parent, rand), generateMutatedColor(parent, rand), parent.getMutatePercentage(), parent.getStartReproductionClock());
     }//end generateMutatedGti
 
     private Color generateMutatedColor(GraphTuple parent, Random rand) {
@@ -475,7 +468,7 @@ public class Graph {
         for (GraphNode[] matrix1 : matrix) {
             for (GraphNode gn : matrix1) {
                 gn.clearConnections();
-                gn.setColor(Color.BLUE);
+                gn.setColor(GraphNode.DEFAULT_COLOR);
             }//end for
         }//end for
         outlineGrid();
@@ -543,26 +536,78 @@ public class Graph {
         }//end if
     }//end stepForward
 
-    public void paint(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(ref.getCanvas().getPointSize() / 2));
-        for (GraphNode gn : this.nodes) {
-            g2.setColor(gn.getColor());
-            if (gn.getFood() <= 0) {
-                g2.setColor(Color.WHITE);
+    public void highlightNodeSelection(GraphNode in) {
+        in.setColor(GraphNode.SELECTED_COLOR);
+        int iLoc = in.getILoc();
+        int jLoc = in.getJLoc();
+        if (iLoc > 0) {
+            matrix[iLoc - 1][jLoc].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+            if (jLoc > 0) {
+                matrix[iLoc - 1][jLoc - 1].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
             }//end if
-            g2.fillRect(gn.x + ref.getCanvas().getWindowX(), gn.y + ref.getCanvas().getWindowY(), gn.height, gn.width);
-            for (int i = 0; i < gn.getNumberOfConnections(); i++) {
-                GraphTuple gt = gn.getConnection(i);
-                g2.setColor(gt.getColor());
-                GraphNode location = gt.getToLocation();
-                if (gn.isConnected(location) && location.isConnected(gn)) {
-                    //This line is a mess, fix it at some point
-                    g2.drawLine(gn.x + gn.width / 2 + ref.getCanvas().getWindowX(), gn.y + gn.height / 2 + ref.getCanvas().getWindowY(), location.x + location.width / 2 + ref.getCanvas().getWindowX(), location.y + location.height / 2 + ref.getCanvas().getWindowY());
-                }//end if
-            }//end for
-        }//end for
-    }//end paint
+            if (jLoc < matrix[iLoc].length - 1) {
+                matrix[iLoc - 1][jLoc + 1].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+            }//end if
+        }//end if
+        if (iLoc < matrix.length - 1) {
+            matrix[iLoc + 1][jLoc].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+            if (jLoc > 0) {
+                matrix[iLoc + 1][jLoc - 1].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+            }//end if
+            if (jLoc < matrix[iLoc].length - 1) {
+                matrix[iLoc + 1][jLoc + 1].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+            }//end if
+        }//end if
+        if (jLoc > 0) {
+            matrix[iLoc][jLoc - 1].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+        }//end if
+        if (jLoc < matrix[iLoc].length - 1) {
+            matrix[iLoc][jLoc + 1].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+        }//end if
+    }//end highlightNodeSelection
+
+    public void resetSelectionHighlight(GraphNode in) {
+        resetNodeColor(in);
+        int iLoc = in.getILoc();
+        int jLoc = in.getJLoc();
+        if (iLoc > 0) {
+            resetNodeColor(matrix[iLoc - 1][jLoc]);
+            if (jLoc > 0) {
+                resetNodeColor(matrix[iLoc - 1][jLoc - 1]);
+            }//end if
+            if (jLoc < matrix[iLoc].length - 1) {
+                resetNodeColor(matrix[iLoc - 1][jLoc + 1]);
+            }//end if
+        }//end if
+        if (iLoc < matrix.length - 1) {
+            resetNodeColor(matrix[iLoc + 1][jLoc]);
+            if (jLoc > 0) {
+                resetNodeColor(matrix[iLoc + 1][jLoc - 1]);
+            }//end if
+            if (jLoc < matrix[iLoc].length - 1) {
+                resetNodeColor(matrix[iLoc + 1][jLoc + 1]);
+            }//end if
+        }//end if
+        if (jLoc > 0) {
+            resetNodeColor(matrix[iLoc][jLoc - 1]);
+        }//end if
+        if (jLoc < matrix[iLoc].length - 1) {
+            resetNodeColor(matrix[iLoc][jLoc + 1]);
+        }//end if
+    }//end resetSelectionHighlight
+
+    public void resetNodeColor(GraphNode in) {
+        if (nodeIsMiddle(in) || in.isEdgeNode()) {
+            in.setColor(GraphNode.DEFAULT_MIDDLE_EDGE_COLOR);
+        }//end if
+        else {
+            in.setColor(GraphNode.DEFAULT_COLOR);
+        }//end else
+    }//end resetNodeColor
+
+    public boolean nodeIsMiddle(GraphNode in) {
+        return (in.getILoc() == matrix.length / 2 || in.getJLoc() == matrix[0].length / 2);
+    }//end nodeIsMidde
 
     private int newID() {
         int out = idCount;
@@ -570,9 +615,6 @@ public class Graph {
         return out;
     }//end newID
 
-    /*TODO:
-        Break this up into multiple methods
-    */
     public void generateSeeds() {
         Random rand = new Random();
         HashMap<String, Integer> seedsOut = new HashMap<>();
@@ -584,7 +626,7 @@ public class Graph {
         }//end while
         switch (seeds) {
             case 1:
-                switch(rand.nextInt(9)+1){
+                switch (rand.nextInt(9) + 1) {
                     case 1:
                         int steps = rand.nextInt(matrix.length / 2) + 1;
                         seedsOut.put("Top", steps);
@@ -681,9 +723,6 @@ public class Graph {
         seedGraph(seedsOut);
     }//end generateSeeds
 
-    /*TODO:
-        Simplify this
-    */
     private void seedGraph(HashMap<String, Integer> seedInfo) {
         for (String line : seedInfo.keySet()) {
             if (null != line) {
@@ -691,49 +730,49 @@ public class Graph {
                     case "Top": {
                         GraphNode node1 = matrix[matrix[0].length / 2][(int) seedInfo.get(line)];
                         GraphNode node2 = matrix[matrix[0].length / 2][(int) (seedInfo.get(line)) - 1];
-                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, GraphNode.DEFAULT_MIDDLE_EDGE_COLOR, 0, 0));
                         break;
                     }//end case
                     case "Bottom": {
                         GraphNode node1 = matrix[matrix[0].length / 2][matrix.length - (int) seedInfo.get(line)];
                         GraphNode node2 = matrix[matrix[0].length / 2][matrix.length - (int) (seedInfo.get(line)) - 1];
-                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, GraphNode.DEFAULT_MIDDLE_EDGE_COLOR, 0, 0));
                         break;
                     }//end case 
                     case "Left": {
                         GraphNode node1 = matrix[(int) seedInfo.get(line)][matrix.length / 2];
                         GraphNode node2 = matrix[(int) seedInfo.get(line) - 1][matrix.length / 2];
-                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, GraphNode.DEFAULT_MIDDLE_EDGE_COLOR, 0, 0));
                         break;
                     }//end case
                     case "Right": {
                         GraphNode node1 = matrix[matrix[0].length - (int) seedInfo.get(line)][matrix.length / 2];
                         GraphNode node2 = matrix[matrix[0].length - (int) seedInfo.get(line) - 1][matrix.length / 2];
-                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, GraphNode.DEFAULT_MIDDLE_EDGE_COLOR, 0, 0));
                         break;
                     }//end case
                     case "TL": {
                         GraphNode node1 = matrix[(int) seedInfo.get(line)][(int) seedInfo.get(line)];
                         GraphNode node2 = matrix[(int) seedInfo.get(line) - 1][(int) seedInfo.get(line) - 1];
-                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, GraphNode.DEFAULT_MIDDLE_EDGE_COLOR, 0, 0));
                         break;
                     }//end case
                     case "BR": {
                         GraphNode node1 = matrix[matrix[0].length - (int) seedInfo.get(line)][matrix.length - (int) seedInfo.get(line)];
                         GraphNode node2 = matrix[matrix[0].length - ((int) seedInfo.get(line) + 1)][matrix.length - ((int) seedInfo.get(line) + 1)];
-                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, GraphNode.DEFAULT_MIDDLE_EDGE_COLOR, 0, 0));
                         break;
                     }//end case
                     case "TR": {
-                        GraphNode node1 = matrix[matrix[0].length - (int) seedInfo.get(line) -1][(int) seedInfo.get(line)];
-                        GraphNode node2 = matrix[matrix[0].length - ((int) seedInfo.get(line))][(int) seedInfo.get(line)-1];
-                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        GraphNode node1 = matrix[matrix[0].length - (int) seedInfo.get(line) - 1][(int) seedInfo.get(line)];
+                        GraphNode node2 = matrix[matrix[0].length - ((int) seedInfo.get(line))][(int) seedInfo.get(line) - 1];
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, GraphNode.DEFAULT_MIDDLE_EDGE_COLOR, 0, 0));
                         break;
                     }//end case
                     case "BL": {
-                        GraphNode node1 = matrix[(int) seedInfo.get(line)-1][matrix.length - (int) seedInfo.get(line)];
+                        GraphNode node1 = matrix[(int) seedInfo.get(line) - 1][matrix.length - (int) seedInfo.get(line)];
                         GraphNode node2 = matrix[(int) seedInfo.get(line)][matrix.length - ((int) seedInfo.get(line) + 1)];
-                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, Color.BLACK, 0, 0));
+                        biconnect(node1, node2, new GraphTupleInfo(matrix.length + matrix[0].length, GraphNode.DEFAULT_MIDDLE_EDGE_COLOR, 0, 0));
                         break;
                     }//end case
                 }//end switch
@@ -816,44 +855,83 @@ public class Graph {
     public boolean getNewGrowth() {
         return noNewGrowth;
     }//end getCycleStarted
-    
-    public boolean isSeeded(){
+
+    public boolean isSeeded() {
         return seeded;
     }//end isSeeded
-    
-    public void setSeeded(boolean in){
+
+    public void setSeeded(boolean in) {
         seeded = in;
     }//end setSeeded
-    
-    public boolean getSeed1(){
+
+    public boolean getSeed1() {
         return seed1;
     }//end getSeed1
-    
-    public void setSeed1(boolean in){
+
+    public void setSeed1(boolean in) {
         seed1 = in;
     }//end setSeed1
-    
-    public boolean getSeed2(){
+
+    public boolean getSeed2() {
         return seed2;
     }//end getSeed2
-    
-    public void setSeed2(boolean in){
+
+    public void setSeed2(boolean in) {
         seed2 = in;
     }//end setSeed2
-    
-    public boolean getSeed4(){
+
+    public boolean getSeed4() {
         return seed4;
     }//end getSeed4
-    
-    public void setSeed4(boolean in){
+
+    public void setSeed4(boolean in) {
         seed4 = in;
     }//end setSeed4
-    
-    public boolean getSeed8(){
+
+    public boolean getSeed8() {
         return seed8;
     }//end getSeed1
-    
-    public void setSeed8(boolean in){
+
+    public void setSeed8(boolean in) {
         seed8 = in;
     }//end setSeed1
+
+    public void setConnectA(GraphNode in) {
+        connectA = in;
+    }//end setConnectA
+
+    /**
+     * Returns the first selected node when connecting two nodes
+     *
+     * @return
+     */
+    public GraphNode getConnectA() {
+        return connectA;
+    }//end getConnectA
+
+    public void setConnectB(GraphNode in) {
+        connectB = in;
+    }//end setConnectB
+
+    public GraphNode getConnectB() {
+        return connectB;
+    }//end getConnectB
+
+    /**
+     * Sets the variable connect
+     *
+     * @param in The new boolean value
+     */
+    public void setConnect(boolean in) {
+        connect = in;
+    }//end setConnect
+
+    /**
+     * Returns value of connect
+     *
+     * @return the value of connect
+     */
+    public boolean getConnect() {
+        return connect;
+    }//end getConnect
 }//end Graph

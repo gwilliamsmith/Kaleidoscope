@@ -13,10 +13,6 @@ import javax.swing.Timer;
  * @author Redpox
  */
 public class Base extends JFrame {
-    
-    public final boolean instanced;
-    
-    public static Base instance;
 
     //The grid
     private Graph graph;
@@ -43,7 +39,6 @@ public class Base extends JFrame {
     private final JMenuItem step = new JMenuItem("Step forward");
     private final JMenuItem loop = new JMenuItem("Run");
     private final JMenuItem reset = new JMenuItem("Reset grid");
-    private final JMenuItem setColor = new JMenuItem("Set color for next connection");
     private final JMenuItem whiteOutGrid = new JMenuItem("Turn all grid points white");
     private final JMenuItem properties = new JMenuItem("Edit properties");
     private final JMenuItem averageColor = new JMenuItem("Show average connection color");
@@ -69,7 +64,6 @@ public class Base extends JFrame {
      * @param st The time in between TimerActionLister events
      */
     public Base(int c, int r, int st) {
-        instanced = true;
         canvas = new Canvas(this);
         graph = new Graph(r, c, this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -114,7 +108,6 @@ public class Base extends JFrame {
         step.addActionListener(new StepActionListener(this));
         loop.addActionListener(new LoopActionListener(this));
         reset.addActionListener(new ResetActionListener(this));
-        setColor.addActionListener(new SetColorActionListener(this));
         whiteOutGrid.addActionListener(new WhiteOutGridActionListener(this));
         properties.addActionListener(new PropertiesActionListener(this));
         averageColor.addActionListener(new AverageColorActionListener(this));
@@ -134,7 +127,6 @@ public class Base extends JFrame {
         rightClickMenu.add(step);
         rightClickMenu.add(loop);
         rightClickMenu.add(reset);
-        //rightClickMenu.add(setColor);
         rightClickMenu.add(whiteOutGrid);
         rightClickMenu.add(properties);
         rightClickMenu.add(averageColor);

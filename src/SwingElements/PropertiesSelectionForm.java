@@ -3,8 +3,9 @@ package SwingElements;
 import graphvisualizer.Graph;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
-public class PropertiesSelectionForm extends javax.swing.JFrame {
+public class PropertiesSelectionForm extends javax.swing.JFrame implements Runnable{
 
     private Base ref;
     private Canvas canvas;
@@ -16,42 +17,7 @@ public class PropertiesSelectionForm extends javax.swing.JFrame {
         graph = ref.getGraph();
         ref.setRun(false);
         initComponents();
-        PointSpacingTextField.setText(""+canvas.getMinSpacing());
-        PointSizeTextField.setText(""+canvas.getMinPointSize());
-        if(!graph.getTrim()){
-            TrimComboBox.setSelectedIndex(1);
-        }//end if
-        if(!graph.getConsume()){
-            ConsumeComboBox.setSelectedIndex(1);
-        }//end if
-        switch(graph.getGrowthType()){
-            case 0:
-                GrowthTypeComboBox.setSelectedIndex(0);
-                break;
-            case 1:
-                GrowthTypeComboBox.setSelectedIndex(1);
-                break;
-            default:
-                break;
-        }//end switch
-        if(!graph.getMutateHealth()){
-            MutateHealthComboBox.setSelectedIndex(1);
-        }//end if
-        if(!graph.getMutateColor()){
-            MutateColorComboBox.setSelectedIndex(1);
-        }//end if
-        if(graph.getSeed1()){
-            OneLineCheckBox.setSelected(true);
-        }//end if
-        if(graph.getSeed2()){
-            OnePairCheckBox.setSelected(true);
-        }//end if
-        if(graph.getSeed4()){
-            TwoPairsCheckBox.setSelected(true);
-        }//end if
-        if(graph.getSeed8()){
-            FourPairsCheckBox.setSelected(true);
-        }//end if
+        setUpUIFields();
     }//end constructor
 
     @SuppressWarnings("unchecked")
@@ -434,13 +400,13 @@ public class PropertiesSelectionForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void ApplyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyButtonActionPerformed
-        canvas.setSpacing(checkTextField(PointSpacingTextField, "Point Spacing",canvas.getSpacing()));
+        canvas.setSpacing(checkTextField(PointSpacingTextField, "Point Spacing", canvas.getSpacing()));
         canvas.setMinSpacing(canvas.getSpacing());
-        canvas.setPointSize(checkTextField(PointSizeTextField, "Point Size",canvas.getPointSize()));
+        canvas.setPointSize(checkTextField(PointSizeTextField, "Point Size", canvas.getPointSize()));
         canvas.setMinPointSize(canvas.getPointSize());
         graph.setTrim(TrimComboBox.getSelectedIndex() == 0);
         graph.setConsume(ConsumeComboBox.getSelectedIndex() == 0);
@@ -456,7 +422,7 @@ public class PropertiesSelectionForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ApplyButtonActionPerformed
 
     private void ResizeGridButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResizeGridButtonActionPerformed
-        new GridSelectionFrame(ref).setVisible(true);
+        SwingUtilities.invokeLater(new GridSelectionFrame(ref));
     }//GEN-LAST:event_ResizeGridButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -494,19 +460,65 @@ public class PropertiesSelectionForm extends javax.swing.JFrame {
     private javax.swing.JLabel TwoPairsLabel;
     // End of variables declaration//GEN-END:variables
 
-    private int checkTextField(JTextField field, String title, int emptyValue){
+    private int checkTextField(JTextField field, String title, int emptyValue) {
         int out;
-        try{
+        try {
             out = Integer.parseInt(field.getText());
-            if(out <= 0){
+            if (out <= 0) {
                 JOptionPane.showMessageDialog(this, "Enter a number greater than 0!", title, JOptionPane.ERROR_MESSAGE);
                 out = -1;
             }//end if
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             //JOptionPane.showMessageDialog(this, "You must enter a number!", title, JOptionPane.ERROR_MESSAGE);
             out = emptyValue;
         }//end tryCatch
         return out;
     }//end checkTextField
+
+    private void setUpUIFields() {
+        PointSpacingTextField.setText("" + canvas.getMinSpacing());
+        PointSizeTextField.setText("" + canvas.getMinPointSize());
+        if (!graph.getTrim()) {
+            TrimComboBox.setSelectedIndex(1);
+        }//end if
+        if (!graph.getConsume()) {
+            ConsumeComboBox.setSelectedIndex(1);
+        }//end if
+        switch (graph.getGrowthType()) {
+            case 0:
+                GrowthTypeComboBox.setSelectedIndex(0);
+                break;
+            case 1:
+                GrowthTypeComboBox.setSelectedIndex(1);
+                break;
+            default:
+                break;
+        }//end switch
+        if (!graph.getMutateHealth()) {
+            MutateHealthComboBox.setSelectedIndex(1);
+        }//end if
+        if (!graph.getMutateColor()) {
+            MutateColorComboBox.setSelectedIndex(1);
+        }//end if
+        if (graph.getSeed1()) {
+            OneLineCheckBox.setSelected(true);
+        }//end if
+        if (graph.getSeed2()) {
+            OnePairCheckBox.setSelected(true);
+        }//end if
+        if (graph.getSeed4()) {
+            TwoPairsCheckBox.setSelected(true);
+        }//end if
+        if (graph.getSeed8()) {
+            FourPairsCheckBox.setSelected(true);
+        }//end if
+    }//end setUpUIFields
+
+    @Override
+    public void run() {
+        if(ref != null){
+            this.setVisible(true);
+        }//end if
+    }//end run
 
 }//end PropertiesSelectionForm

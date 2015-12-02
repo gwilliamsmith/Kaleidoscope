@@ -2,6 +2,7 @@ package Listeners;
 
 import SwingElements.Base;
 import SwingElements.Canvas;
+import graphvisualizer.Graph;
 import graphvisualizer.GraphNode;
 import graphvisualizer.GraphTupleInfo;
 import java.awt.event.MouseAdapter;
@@ -24,47 +25,47 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
     @Override
     public void mouseClicked(MouseEvent e) {
         Canvas canvas = ref.getCanvas();
+        Graph graph = ref.getGraph();
         if (SwingUtilities.isLeftMouseButton(e)) {
-
-            if (canvas.getConnect()) {
-                for (GraphNode gn : ref.getGraph().getGraphNodes()) {
+            if (graph.getConnect()) {
+                for (GraphNode gn : graph.getGraphNodes()) {
                     if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint())) {
-                        if (gn != canvas.getConnectA() && !gn.isConnected(canvas.getConnectA())) {
-                            canvas.setConnectB(gn);
+                        if (gn != graph.getConnectA() && !gn.isConnected(graph.getConnectA())) {
+                            graph.setConnectB(gn);
                         }//end if
-                        canvas.setConnect(false);
+                        graph.setConnect(false);
                         break;
                     }//end if
                 }//end for
-                if (canvas.getConnectB() != null && canvas.getConnectA() != null) {
+                if (graph.getConnectB() != null && graph.getConnectA() != null) {
                     if (canvas.getGtiStorage() != null) {
-                        ref.getGraph().connector(canvas.getConnectA(), canvas.getConnectB(), canvas.getGtiStorage());
+                        graph.connector(graph.getConnectA(), graph.getConnectB(), canvas.getGtiStorage());
                         //ref.setGtiStorage(null);
                     }//end if
                     else {
                         if (canvas.getTempColor() != null) {
                             GraphTupleInfo gtiOut = new GraphTupleInfo();
                             gtiOut.color = canvas.getTempColor();
-                            ref.getGraph().connector(canvas.getConnectA(), canvas.getConnectB(), gtiOut);
+                            graph.connector(graph.getConnectA(), graph.getConnectB(), gtiOut);
                             canvas.setTempColor(null);
                         }//end if 
                         else {
-                            ref.getGraph().connector(canvas.getConnectA(), canvas.getConnectB(), new GraphTupleInfo());
+                            graph.connector(graph.getConnectA(), graph.getConnectB(), new GraphTupleInfo());
                         }//end else
                     }//end else
                 }//end if
-                canvas.setActionString("");
+                graph.resetSelectionHighlight(graph.getConnectA());
                 canvas.repaint();
-                canvas.setConnect(false);
-                canvas.setConnectA(null);
-                canvas.setConnectB(null);
+                graph.setConnect(false);
+                graph.setConnectA(null);
+                graph.setConnectB(null);
             }//end if
             else {
-                for (GraphNode gn : ref.getGraph().getGraphNodes()) {
+                for (GraphNode gn : graph.getGraphNodes()) {
                     if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint())) {
-                        canvas.setActionString("Connect node");
-                        canvas.setConnectA(gn);
-                        canvas.setConnect(true);
+                        graph.setConnectA(gn);
+                        graph.setConnect(true);
+                        graph.highlightNodeSelection(gn);
                         break;
                     }//end else
                 }//end for
