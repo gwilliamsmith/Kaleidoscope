@@ -123,20 +123,6 @@ public class Graph {
         outlineGrid();
     }//end initializeGrid
 
-    public void resizeGrid() {
-        int pointSize = ref.getCanvas().getPointSize();
-        int spacing = ref.getCanvas().getSpacing();
-        for (int i = 0, ySpace = pointSize / 2; i < matrix.length; i++, ySpace += spacing) {
-            for (int j = 0, xSpace = pointSize / 2; j < matrix[i].length; j++, xSpace += spacing) {
-                GraphNode temp = matrix[i][j];
-                temp.x = xSpace - pointSize / 2;
-                temp.y = ySpace - pointSize / 2;
-                temp.width = pointSize;
-                temp.height = pointSize;
-            }//end for
-        }//end for
-    }//end resizeGrid
-
     private void outlineGrid() {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {

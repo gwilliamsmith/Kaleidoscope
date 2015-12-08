@@ -2,6 +2,7 @@ package SwingElements;
 
 import Listeners.*;
 import graphvisualizer.Graph;
+import graphvisualizer.SettingsFileManipulator;
 import java.io.File;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -52,6 +53,8 @@ public class Base extends JFrame {
             
     //Determines if Graph.takeStep() should be executed inside the TimerActionListener
     private boolean run = false;
+    
+    private SettingsFileManipulator settingsManager;
 
     //Displays average color of all lines
     private AverageColorDisplay averageDisplay = new AverageColorDisplay();
@@ -67,6 +70,9 @@ public class Base extends JFrame {
         canvas = new Canvas(this);
         graph = new Graph(r, c, this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        settingsManager = new SettingsFileManipulator("./res/settings.txt",this);
+        settingsManager.readSettingsIn();
 
         addMenuListeners();
         createRightClickMenu();
@@ -221,5 +227,9 @@ public class Base extends JFrame {
     public void setStepTime(int in){
         stepTime = in;
     }//end setStepTime
+    
+    public SettingsFileManipulator getSettingsManager(){
+        return settingsManager;
+    }//end getSettingsManager
     
 }//end Base class

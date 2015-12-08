@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/SwingElements/Canvas.java</file>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/SwingElements/ColorSelectionFrame.java</file>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/graphvisualizer/GraphTupleInfo.java</file>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Listeners/CustomLineActionListener.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/graphvisualizer/SettingsFileManipulator.java</file>
             <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/SwingElements/Base.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Listeners/BaseKeyListener.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/graphvisualizer/GenericFileManipulator.java</file>
             <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/graphvisualizer/Graph.java</file>
             <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Listeners/CanvasMouseListener.java</file>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/SwingElements/CustomLineForm.java</file>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Listeners/LoopActionListener.java</file>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Listeners/SeedColoringBookListener.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/SwingElements/PropertiesSelectionForm.java</file>
         </group>
     </open-files>
 </project-private>

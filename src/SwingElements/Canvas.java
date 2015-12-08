@@ -1,6 +1,7 @@
 package SwingElements;
 
 import Listeners.CanvasMouseListener;
+import graphvisualizer.Graph;
 import graphvisualizer.GraphNode;
 import graphvisualizer.GraphTuple;
 import graphvisualizer.GraphTupleInfo;
@@ -9,7 +10,6 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
@@ -24,7 +24,8 @@ public class Canvas extends JPanel {
     private int minPointSize = 2;
     private int spacing = 10;
     private int pointSize = 2;
-    private int zoomLevel = 1;
+    private int zoomLevel = 0;
+    private boolean resized = false;
 
     //Determines if the drag to reposition is enabled/disabled
     private boolean drag = true;
@@ -55,42 +56,40 @@ public class Canvas extends JPanel {
     }//end paint
 
     public void paintGraph(Graphics g) {
-        Canvas canvas = ref.getCanvas();
-        int canvasWindowX = canvas.getWindowX();
-        int canvasWindowY = canvas.getWindowY();
         Graphics2D g2 = (Graphics2D) g;
-        g2.setStroke(new BasicStroke(canvas.getPointSize() / 2));
+        resizeGrid();
+        g2.setStroke(new BasicStroke(pointSize / 2));
         for (GraphNode gn : ref.getGraph().getGraphNodes()) {
             g2.setColor(gn.getColor());
             if (gn.getFood() <= 0) {
                 g2.setColor(Color.WHITE);
             }//end if
-            g2.fillRect(gn.x + canvasWindowX, gn.y + canvasWindowY, gn.height, gn.width);
+            g2.fillRect(gn.x + windowX, gn.y + windowY, gn.height, gn.width);
             for (int i = 0; i < gn.getNumberOfConnections(); i++) {
                 GraphTuple gt = gn.getConnection(i);
                 g2.setColor(gt.getColor());
                 GraphNode location = gt.getToLocation();
                 if (gn.isConnected(location) && location.isConnected(gn)) {
-                    //This line is a mess, fix it at some point
-                    g2.drawLine(gn.x + gn.width / 2 + canvasWindowX, 
-                            gn.y + gn.height / 2 + canvasWindowY, 
-                            location.x + location.width / 2 + canvasWindowX, 
-                            location.y + location.height / 2 + canvasWindowY);
+                    g2.drawLine(gn.x + gn.width / 2 + windowX,
+                            gn.y + gn.height / 2 + windowY,
+                            location.x + location.width / 2 + windowX,
+                            location.y + location.height / 2 + windowY);
                 }//end if
             }//end for
         }//end for
-        paintGridPicture();
     }//end paint
 
-    public void paintGridPicture() {
-        BufferedImage image = ref.getCanvas().getGridPicture();
-        Graphics2D g2 = (Graphics2D) image.getGraphics();
+    private BufferedImage produceGridPicture() {
+        BufferedImage out = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
+        Graphics2D g2 = out.createGraphics();
+        resizeGrid();
         g2.setColor(Color.white);
-        g2.fillRect(0, 0, image.getWidth(), image.getHeight());
+        g2.fillRect(0, 0, this.getWidth(), this.getHeight());
+        g2.setStroke(new BasicStroke(pointSize / 2));
         for (GraphNode gn : ref.getGraph().getGraphNodes()) {
             g2.setColor(gn.getColor());
             if (gn.getFood() <= 0) {
-                g2.setColor(Color.white);
+                g2.setColor(Color.WHITE);
             }//end if
             g2.fillRect(gn.x, gn.y, gn.height, gn.width);
             for (int i = 0; i < gn.getNumberOfConnections(); i++) {
@@ -98,12 +97,15 @@ public class Canvas extends JPanel {
                 g2.setColor(gt.getColor());
                 GraphNode location = gt.getToLocation();
                 if (gn.isConnected(location) && location.isConnected(gn)) {
-                    //This line is a mess, fix it at some point
-                    g2.drawLine(gn.x + gn.width / 2, gn.y + gn.height / 2, location.x + location.width / 2, location.y + location.height / 2);
+                    g2.drawLine(gn.x + gn.width / 2,
+                            gn.y + gn.height / 2,
+                            location.x + location.width / 2,
+                            location.y + location.height / 2);
                 }//end if
             }//end for
         }//end for
-    }//end paintGridPicture
+        return out;
+    }//end produceGridPicture
 
     public BufferedImage producePicture() {
         BufferedImage picture = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
@@ -111,6 +113,7 @@ public class Canvas extends JPanel {
         g.setColor(Color.white);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
         paintGraph(g);
+        gridPicture = produceGridPicture();
         drawString("Steps taken: " + ref.getGraph().getStepCount(), 0, 4, g);
         if (ref.getGraph().getCycleBase() > 0) {
             drawString("Cycles: " + ref.getGraph().getCycleCount(), 1, 4, g);
@@ -126,6 +129,22 @@ public class Canvas extends JPanel {
         return out;
     }//endGetTrimmedImage
 
+    public void resizeGrid() {
+        if (resized) {
+            adjustZoom();
+            Graph graph = ref.getGraph();
+            for (int i = 0, ySpace = pointSize / 2; i < graph.getMatrix().length; i++, ySpace += spacing) {
+                for (int j = 0, xSpace = pointSize / 2; j < graph.getMatrix()[i].length; j++, xSpace += spacing) {
+                    GraphNode temp = graph.getMatrix()[i][j];
+                    temp.x = xSpace - pointSize / 2;
+                    temp.y = ySpace - pointSize / 2;
+                    temp.width = pointSize;
+                    temp.height = pointSize;
+                }//end for
+            }//end for
+        }//end if
+    }//end resizeGrid
+
     /*
      TODO:
      Clean this up:
@@ -137,17 +156,17 @@ public class Canvas extends JPanel {
         g.setColor(Color.black);
         FontMetrics fontSize = g.getFontMetrics();
         int textWidth = fontSize.stringWidth(in);
-        if(corner == 1){
-            
+        if (corner == 1) {
+
         }//end if
-        else if(corner == 2){
-            
+        else if (corner == 2) {
+
         }//end else if
-        else if(corner == 3){
-            
+        else if (corner == 3) {
+
         }//end else if
-        else if(corner == 4){
-                g.drawString(in, this.getWidth() - textWidth - 5, this.getHeight() - (fontSize.getHeight() * (lineOffset)) - 5);   
+        else if (corner == 4) {
+            g.drawString(in, this.getWidth() - textWidth - 5, this.getHeight() - (fontSize.getHeight() * (lineOffset)) - 5);
         }//end else if
     }//end drawString
 
@@ -184,6 +203,43 @@ public class Canvas extends JPanel {
         }//end for
         return trimmedHeight;
     }//end getTrimmedHeight
+
+    public void increaseZoomLevel() {
+        if (zoomLevel < 5) {
+            zoomLevel++;
+            resized = true;
+        }//end if
+        ref.getSettingsManager().writeSettings();
+    }//end increaseZoomLevel
+
+    public void decreaseZoomLevel() {
+        if (zoomLevel > 0) {
+            zoomLevel--;
+            resized = true;
+        }//end if
+        ref.getSettingsManager().writeSettings();
+    }//end decreaseZoomLevel
+    
+        public void setZoomLevel(int in){
+        if(in < 0){
+            zoomLevel = 0;
+        }//end if
+        else if(in > 5){
+            zoomLevel = 5;
+        }//end else if
+        else{
+            zoomLevel = in;
+        }//end else
+    }//end setZoomLevel
+    
+    public int getZoomLevel(){
+        return zoomLevel;
+    }//end getZoomLevel
+
+    public void adjustZoom() {
+        pointSize = minPointSize + (zoomLevel * 2);
+        spacing = minSpacing + (zoomLevel * 4);
+    }//end adjustZoom
 
     public int getWindowX() {
         return windowX;
@@ -311,4 +367,7 @@ public class Canvas extends JPanel {
         gridPicture = in;
     }//end setGridPicture
 
+    public void setResized(boolean in) {
+        resized = in;
+    }//end setResized
 }//end Canvas

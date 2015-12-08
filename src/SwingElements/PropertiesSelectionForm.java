@@ -16,6 +16,7 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         canvas = ref.getCanvas();
         graph = ref.getGraph();
         ref.setRun(false);
+        ref.getLoop().setText("Run");
         initComponents();
         setUpUIFields();
     }//end constructor
@@ -404,10 +405,8 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void ApplyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyButtonActionPerformed
-        canvas.setSpacing(checkTextField(PointSpacingTextField, "Point Spacing", canvas.getSpacing()));
-        canvas.setMinSpacing(canvas.getSpacing());
-        canvas.setPointSize(checkTextField(PointSizeTextField, "Point Size", canvas.getPointSize()));
-        canvas.setMinPointSize(canvas.getPointSize());
+        canvas.setMinSpacing(checkTextField(PointSpacingTextField, "Point Spacing", canvas.getMinSpacing()));
+        canvas.setMinPointSize(checkTextField(PointSizeTextField, "Point Size", canvas.getMinPointSize()));
         graph.setTrim(TrimComboBox.getSelectedIndex() == 0);
         graph.setConsume(ConsumeComboBox.getSelectedIndex() == 0);
         graph.setGrowthType(GrowthTypeComboBox.getSelectedIndex());
@@ -417,7 +416,8 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         graph.setSeed2(OnePairCheckBox.isSelected());
         graph.setSeed4(TwoPairsCheckBox.isSelected());
         graph.setSeed8(FourPairsCheckBox.isSelected());
-        graph.resizeGrid();
+        canvas.setResized(true);
+        ref.getSettingsManager().writeSettings();
         this.dispose();
     }//GEN-LAST:event_ApplyButtonActionPerformed
 

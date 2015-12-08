@@ -100,21 +100,11 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
     public void mouseWheelMoved(MouseWheelEvent e) {
         Canvas canvas = ref.getCanvas();
         if (e.getPreciseWheelRotation() > 0) {
-            if (canvas.getPointSize() > canvas.getMinPointSize()) {
-                canvas.setPointSize((int) Math.max(canvas.getPointSize() - (e.getPreciseWheelRotation() * 2), canvas.getMinPointSize()));
-            }//end if
-            if (canvas.getSpacing() > canvas.getMinSpacing()) {
-                canvas.setSpacing((int) Math.max(canvas.getSpacing() - (e.getPreciseWheelRotation() * 2), canvas.getMinSpacing()));
-            }//end if
+            canvas.decreaseZoomLevel();
         }//end if
         else if (e.getPreciseWheelRotation() < 0) {
-            if (canvas.getPointSize() < canvas.getMinPointSize() * 5) {
-                canvas.setPointSize((int) Math.max(canvas.getPointSize() - (e.getPreciseWheelRotation() * 2), canvas.getMinPointSize()));
-            }//end if
-            if (canvas.getSpacing() < canvas.getMinSpacing() + (canvas.getMinPointSize() * 5) - canvas.getMinPointSize()) {
-                canvas.setSpacing((int) Math.max(canvas.getSpacing() - (e.getPreciseWheelRotation() * 2), canvas.getMinSpacing()));
-            }//end if
+            canvas.increaseZoomLevel();
         }//end else if
-        ref.getGraph().resizeGrid();
+        canvas.resizeGrid();
     }//end mouseWheelMoved
 }//end CanvasMouseListener
