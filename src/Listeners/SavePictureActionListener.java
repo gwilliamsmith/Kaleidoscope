@@ -22,7 +22,7 @@ public class SavePictureActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean tempRun = ref.getRun();
-        ref.setRun(false);
+        ref.pause();
         JFileChooser fileChooser = new JFileChooser();
         FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
         fileChooser.addChoosableFileFilter(imageFilter);

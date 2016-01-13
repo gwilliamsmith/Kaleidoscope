@@ -16,8 +16,9 @@ public class FolderSelectFileChooser extends JFileChooser{
             in.setBookDirectory(getSelectedFile());
         }//end if
         if(run){
-            in.setRun(true);
+            in.run();
         }//end if
+        //in.getSettingsManager().writeSettings();
     }//end constructor
     
 }//end FolderSelectFileChooser

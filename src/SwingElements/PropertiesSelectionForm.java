@@ -15,8 +15,7 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         ref = b;
         canvas = ref.getCanvas();
         graph = ref.getGraph();
-        ref.setRun(false);
-        ref.getLoop().setText("Run");
+        ref.pause();
         initComponents();
         setUpUIFields();
     }//end constructor
@@ -54,9 +53,13 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         MutateColorComboBox = new javax.swing.JComboBox();
         TrimComboBox = new javax.swing.JComboBox();
         ConsumeComboBox = new javax.swing.JComboBox();
+        RefreshSeedLabel = new javax.swing.JLabel();
+        RefreshSeedsComboBox = new javax.swing.JComboBox();
+        IntervalPauseLabel = new javax.swing.JLabel();
+        IntervalPauseComboBox = new javax.swing.JComboBox();
         ButtonsPanel = new javax.swing.JPanel();
-        ApplyButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
+        ApplyButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Properties");
@@ -128,7 +131,7 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
                     .addComponent(PointSizeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addComponent(ResizeGridButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         SeedingVariablePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -276,35 +279,57 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         ConsumeComboBox.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         ConsumeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "True", "False" }));
 
+        RefreshSeedLabel.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        RefreshSeedLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        RefreshSeedLabel.setText("Refresh Seeds");
+
+        RefreshSeedsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "True", "False" }));
+        RefreshSeedsComboBox.setMinimumSize(new java.awt.Dimension(51, 20));
+        RefreshSeedsComboBox.setPreferredSize(new java.awt.Dimension(51, 20));
+
+        IntervalPauseLabel.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        IntervalPauseLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        IntervalPauseLabel.setText("Pause on Interval");
+
+        IntervalPauseComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "True", "False" }));
+
         javax.swing.GroupLayout RuntimeVariablePanelLayout = new javax.swing.GroupLayout(RuntimeVariablePanel);
         RuntimeVariablePanel.setLayout(RuntimeVariablePanelLayout);
         RuntimeVariablePanelLayout.setHorizontalGroup(
             RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(GraphRuntimeVariablesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RuntimeVariablePanelLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TrimLinesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TrimComboBox, 0, 82, Short.MAX_VALUE))
-                .addGap(38, 38, 38)
-                .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ConsumeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ConsumeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(GrowthTypeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(GrowthTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(37, 37, 37))
+            .addComponent(GraphRuntimeVariablesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
             .addGroup(RuntimeVariablePanelLayout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(MutateHealthComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(MutateHealthLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(MutateColorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(MutateColorComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 74, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(RuntimeVariablePanelLayout.createSequentialGroup()
+                        .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TrimLinesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(TrimComboBox, 0, 100, Short.MAX_VALUE))
+                        .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(RuntimeVariablePanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ConsumeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RuntimeVariablePanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ConsumeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(RuntimeVariablePanelLayout.createSequentialGroup()
+                        .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(MutateHealthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MutateHealthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(MutateColorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MutateColorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(IntervalPauseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(IntervalPauseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(GrowthTypeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addComponent(GrowthTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(RefreshSeedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RefreshSeedsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37))
         );
         RuntimeVariablePanelLayout.setVerticalGroup(
             RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,24 +349,30 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MutateHealthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MutateColorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MutateColorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RefreshSeedLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MutateHealthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MutateColorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(MutateColorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RefreshSeedsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(IntervalPauseLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(IntervalPauseComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        ApplyButton.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        ApplyButton.setText("Apply");
-        ApplyButton.setMaximumSize(new java.awt.Dimension(75, 25));
-        ApplyButton.setMinimumSize(new java.awt.Dimension(75, 25));
-        ApplyButton.setPreferredSize(new java.awt.Dimension(75, 25));
-        ApplyButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ApplyButtonActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout ButtonsPanelLayout = new javax.swing.GroupLayout(ButtonsPanel);
+        ButtonsPanel.setLayout(ButtonsPanelLayout);
+        ButtonsPanelLayout.setHorizontalGroup(
+            ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        ButtonsPanelLayout.setVerticalGroup(
+            ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 25, Short.MAX_VALUE)
+        );
 
         CancelButton.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         CancelButton.setText("Cancel");
@@ -354,21 +385,16 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
             }
         });
 
-        javax.swing.GroupLayout ButtonsPanelLayout = new javax.swing.GroupLayout(ButtonsPanel);
-        ButtonsPanel.setLayout(ButtonsPanelLayout);
-        ButtonsPanelLayout.setHorizontalGroup(
-            ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ButtonsPanelLayout.createSequentialGroup()
-                .addComponent(ApplyButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        ButtonsPanelLayout.setVerticalGroup(
-            ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ButtonsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(ApplyButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        ApplyButton.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        ApplyButton.setText("Apply");
+        ApplyButton.setMaximumSize(new java.awt.Dimension(75, 25));
+        ApplyButton.setMinimumSize(new java.awt.Dimension(75, 25));
+        ApplyButton.setPreferredSize(new java.awt.Dimension(75, 25));
+        ApplyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApplyButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -381,20 +407,29 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
                 .addComponent(RuntimeVariablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(SeedingVariablePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 807, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(ButtonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ApplyButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ButtonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(300, 300, 300))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(RuntimeVariablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CanvasVariablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CanvasVariablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RuntimeVariablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
                 .addComponent(SeedingVariablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(ButtonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ApplyButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -412,6 +447,8 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         graph.setGrowthType(GrowthTypeComboBox.getSelectedIndex());
         graph.setMutateHealth(MutateHealthComboBox.getSelectedIndex() == 0);
         graph.setMutateColor(MutateColorComboBox.getSelectedIndex() == 0);
+        ref.setRefreshOn(RefreshSeedsComboBox.getSelectedIndex() == 0);
+        ref.setIntervalPause(IntervalPauseComboBox.getSelectedIndex() == 0);
         graph.setSeed1(OneLineCheckBox.isSelected());
         graph.setSeed2(OnePairCheckBox.isSelected());
         graph.setSeed4(TwoPairsCheckBox.isSelected());
@@ -422,7 +459,9 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
     }//GEN-LAST:event_ApplyButtonActionPerformed
 
     private void ResizeGridButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResizeGridButtonActionPerformed
-        SwingUtilities.invokeLater(new GridSelectionFrame(ref));
+        GridSelectionFrame frame = new GridSelectionFrame(ref);
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        SwingUtilities.invokeLater(frame);
     }//GEN-LAST:event_ResizeGridButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -439,6 +478,8 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
     private javax.swing.JLabel GraphRuntimeVariablesLabel;
     private javax.swing.JComboBox GrowthTypeComboBox;
     private javax.swing.JLabel GrowthTypeLabel;
+    private javax.swing.JComboBox IntervalPauseComboBox;
+    private javax.swing.JLabel IntervalPauseLabel;
     private javax.swing.JComboBox MutateColorComboBox;
     private javax.swing.JLabel MutateColorLabel;
     private javax.swing.JComboBox MutateHealthComboBox;
@@ -451,6 +492,8 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
     private javax.swing.JTextField PointSizeTextField;
     private javax.swing.JLabel PointSpacingLabel;
     private javax.swing.JTextField PointSpacingTextField;
+    private javax.swing.JLabel RefreshSeedLabel;
+    private javax.swing.JComboBox RefreshSeedsComboBox;
     private javax.swing.JButton ResizeGridButton;
     private javax.swing.JPanel RuntimeVariablePanel;
     private javax.swing.JPanel SeedingVariablePanel;
@@ -483,6 +526,12 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         }//end if
         if (!graph.getConsume()) {
             ConsumeComboBox.setSelectedIndex(1);
+        }//end if
+        if(!ref.isRefreshOn()){
+            RefreshSeedsComboBox.setSelectedIndex(1);
+        }//end if
+        if(!ref.isIntervalPause()){
+            IntervalPauseComboBox.setSelectedIndex(1);
         }//end if
         switch (graph.getGrowthType()) {
             case 0:

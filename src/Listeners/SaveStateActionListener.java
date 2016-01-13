@@ -27,7 +27,7 @@ public class SaveStateActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evt) {
         boolean tempRun = ref.getRun();
-        ref.setRun(false);
+        ref.pause();
         saveState();
         ref.setRun(tempRun);
     }//actionPerformed

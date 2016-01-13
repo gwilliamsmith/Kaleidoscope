@@ -40,7 +40,6 @@ public class MyQueue<T>{
     public void out(){
             QueueNode<T> current = front;
             while(current != null){
-                    System.out.println(current.data);
                     current = current.next;
             }//end while
     }//end out

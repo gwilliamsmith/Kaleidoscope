@@ -74,6 +74,14 @@ public class Graph {
         cycleCount = 0;
         seeded = false;
     }//end reset
+    
+    public void refreshSeed(){
+        clearGrid();
+        stepCount = 0;
+        cycleBase = 0;
+        cycleCount = 0;
+        generateSeeds();
+    }//end refreshSeed
 
     private void add(GraphNode gn, int i, int j) {
         nodes.add(gn);
@@ -920,4 +928,8 @@ public class Graph {
     public boolean getConnect() {
         return connect;
     }//end getConnect
+    
+    public Camera getCamera(){
+        return camera;
+    }//end getCamera
 }//end Graph

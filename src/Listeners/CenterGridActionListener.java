@@ -19,7 +19,6 @@ public class CenterGridActionListener implements ActionListener{
         Canvas canvas = ref.getCanvas();
         int halfColumns = ref.getGraph().getMatrix().length/2; 
         int halfRows = ref.getGraph().getMatrix()[0].length/2;
-        System.out.println(halfColumns);
         canvas.resetCanvasWindow();
         canvas.modifyWindowX(canvas.getWidth()/2 - (canvas.getPointSize()/2 + canvas.getSpacing() * halfColumns));
         canvas.modifyWindowY(canvas.getHeight()/2- (canvas.getPointSize()/2 + canvas.getSpacing() * halfRows));

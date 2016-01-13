@@ -23,9 +23,19 @@ public class Base extends JFrame {
     
     //Repaints the grid on an interval
     private Timer timer;
+    private TimerActionListener timerListener;
     
     //Interval for repainting
     private int stepTime;
+    
+    //Is the seed refreshed after each picture interval?
+    private boolean refreshOn = true;
+    
+    //Number of pictures in a seed cycle
+    private int pictureInterval = 5;
+    
+    //Pause grid after interval?
+    private boolean intervalPause = false;
     
     //Folder location where generated pictures are to be saved
     private File bookDirectory;
@@ -66,7 +76,7 @@ public class Base extends JFrame {
      * @param r The number of rows in the grid
      * @param st The time in between TimerActionLister events
      */
-    public Base(int c, int r, int st) {
+    public Base(int c, int r, int st, int pc) {
         canvas = new Canvas(this);
         graph = new Graph(r, c, this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -82,19 +92,24 @@ public class Base extends JFrame {
         this.add(canvas);
         
         stepTime = st;
+        pictureInterval = pc;
         //Repaints on an interval
-        timer = new Timer(stepTime, new TimerActionListener(this));
+        timerListener = new TimerActionListener(this);
+        timer = new Timer(stepTime, timerListener);
         timer.start();
     }//end constructor
     
-    public void resizeGrid(int c, int r, int st){
+    public void resizeGrid(int c, int r, int st, int pc){
         timer.stop();
         //canvas = new Canvas(this);
+        int tempPictureCount = graph.getCamera().getPictureCount();
         graph = new Graph(r, c, this);
+        graph.getCamera().setPictureCount(tempPictureCount);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.add(canvas);
 
         stepTime = st;
+        pictureInterval = pc;
         //Repaints on an interval
         timer = new Timer(stepTime, new TimerActionListener(this));
         timer.start();
@@ -149,8 +164,23 @@ public class Base extends JFrame {
      * Inverts the run boolean, used in the TimerActionListener
      */
     public void flipRun(){
-        run = !run;
+        if(run){
+            pause();
+        }//end if
+        else{
+            run();
+        }//end else
     }//end flipRun
+    
+    public void run(){
+        run = true;
+        loop.setText("Pause");
+    }//end run
+    
+    public void pause(){
+        run = false;
+        loop.setText("Run");
+    }//end pause;
 
     //////////////////////////////
     //     Setters/Getters      //
@@ -170,7 +200,14 @@ public class Base extends JFrame {
      * @param in The new value for run
      */
     public void setRun(boolean in) {
-        run = in;
+        if(in){
+            System.out.println("1");
+            pause();
+        }//end if
+        else{
+            System.out.append("2");
+            run();
+        }//end else
     }//end setRun
 
     /**
@@ -231,5 +268,33 @@ public class Base extends JFrame {
     public SettingsFileManipulator getSettingsManager(){
         return settingsManager;
     }//end getSettingsManager
+    
+    public int getPictureInterval(){
+        return pictureInterval;
+    }//end getPictureInterval
+    
+    public void setPictureInterval(int in){
+        pictureInterval = in;
+    }//end setPictureInterval
+    
+    public TimerActionListener getTimerListener(){
+        return timerListener;
+    } //end getTimerListener
+    
+    public boolean isRefreshOn(){
+        return refreshOn;
+    }//end isRefreshOn
+    
+    public void setRefreshOn(boolean in){
+        refreshOn = in;
+    }//end setRefreshOn
+    
+    public boolean isIntervalPause(){
+        return intervalPause;
+    }//end isIntervalPause
+    
+    public void setIntervalPause(boolean in){
+        intervalPause = in;
+    }//end setIntervalPause
     
 }//end Base class

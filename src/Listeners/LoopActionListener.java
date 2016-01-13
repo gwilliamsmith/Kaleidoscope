@@ -28,11 +28,5 @@ public class LoopActionListener implements ActionListener {
         else {
             ref.flipRun();
         }//end else
-        if (ref.getRun()) {
-            ref.getLoop().setText("Pause");
-        }//end if
-        else {
-            ref.getLoop().setText("Run");
-        }//end else
     }//endActionPerformed
 }//end LoopActionListener

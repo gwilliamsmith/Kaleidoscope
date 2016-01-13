@@ -131,7 +131,6 @@ public class CustomLineForm extends javax.swing.JFrame implements Runnable {
             }//end if
         }//end if
         store.edge = EdgeCheckBox.isSelected();
-        System.out.println(EdgeCheckBox.isSelected());
         if (complete) {
             ref.getCanvas().setGtiStorage(store);
             this.dispose();

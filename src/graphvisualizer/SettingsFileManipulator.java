@@ -69,6 +69,11 @@ public class SettingsFileManipulator extends GenericFileManipulator {
                 case "Seed8":
                     graph.setSeed8(Boolean.parseBoolean(entry.getValue()));
                     break;
+                    /*
+                case "File Location":
+                    ref.setBookDirectory(new File(entry.getValue()));
+                    break;
+                            */
             }//end switch
         }//end for
         ref.getCanvas().setResized(true);
@@ -90,6 +95,7 @@ public class SettingsFileManipulator extends GenericFileManipulator {
             out.println("Seed2:" + Boolean.toString(graph.getSeed2()));
             out.println("Seed4:" + Boolean.toString(graph.getSeed4()));
             out.println("Seed8:" + Boolean.toString(graph.getSeed8()));
+            //out.println("File Location:" + ref.getBookDirectory().getAbsolutePath());
             out.flush();
         } catch (FileNotFoundException ex) {
         } catch (IOException ex) {

@@ -34,66 +34,94 @@ public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
         SubmitButton = new javax.swing.JButton();
         TimeBetweenStepsLabel = new javax.swing.JLabel();
         StepTimeTextField = new javax.swing.JTextField();
+        PictureCycleLabel = new javax.swing.JLabel();
+        PictureCycleTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(300, 155));
+        setPreferredSize(new java.awt.Dimension(300, 155));
+        setResizable(false);
 
+        NumberOfColumnsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         NumberOfColumnsLabel.setText("Number of Columns");
+        NumberOfColumnsLabel.setMaximumSize(new java.awt.Dimension(93, 15));
+        NumberOfColumnsLabel.setMinimumSize(new java.awt.Dimension(93, 15));
+        NumberOfColumnsLabel.setPreferredSize(new java.awt.Dimension(93, 15));
 
+        NumberOfRowsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         NumberOfRowsLabel.setText("Number of Rows");
 
         SubmitButton.setText("Ok");
+        SubmitButton.setMaximumSize(new java.awt.Dimension(50, 25));
+        SubmitButton.setMinimumSize(new java.awt.Dimension(50, 25));
+        SubmitButton.setPreferredSize(new java.awt.Dimension(50, 25));
         SubmitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SubmitButtonActionPerformed(evt);
             }
         });
 
+        TimeBetweenStepsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TimeBetweenStepsLabel.setText("Time between steps");
+        TimeBetweenStepsLabel.setMaximumSize(new java.awt.Dimension(96, 15));
+        TimeBetweenStepsLabel.setMinimumSize(new java.awt.Dimension(96, 15));
+
+        PictureCycleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PictureCycleLabel.setText("Picture Cycle Length");
+
+        PictureCycleTextField.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(NumberOfColumnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PictureCycleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NumberOfRowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(NumberOfColumnsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(NumberOfRowsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(NumberOfColumnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(StepTimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(NumberOfRowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(PictureCycleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(TimeBetweenStepsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(NumberOfColumnsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(NumberOfRowsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
             .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(SubmitButton)
+                .addGap(115, 115, 115)
+                .addComponent(SubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TimeBetweenStepsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(StepTimeTextField))
-                .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NumberOfColumnsLabel)
-                    .addComponent(NumberOfRowsLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(NumberOfColumnsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NumberOfRowsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NumberOfColumnsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NumberOfRowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TimeBetweenStepsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(StepTimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(SubmitButton))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TimeBetweenStepsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PictureCycleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(StepTimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PictureCycleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addComponent(SubmitButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -103,11 +131,12 @@ public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
         int c = checkTextField(NumberOfColumnsTextField, "Columns");
         int r = checkTextField(NumberOfRowsTextField, "Rows");
         int st = checkTextField(StepTimeTextField, "Step Time");
+        int pc = checkTextField(PictureCycleTextField,"Cycle Length");
         if (c != -1 && r != -1) {
             if (ref == null) {
-                new Base(c, r, st).setVisible(true);
+                new Base(c, r, st, pc).setVisible(true);
             } else {
-                ref.resizeGrid(c, r, st);
+                ref.resizeGrid(c, r, st, pc);
             }//end else
             this.dispose();
         }//end if
@@ -134,6 +163,8 @@ public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
     private javax.swing.JTextField NumberOfColumnsTextField;
     private javax.swing.JLabel NumberOfRowsLabel;
     private javax.swing.JTextField NumberOfRowsTextField;
+    private javax.swing.JLabel PictureCycleLabel;
+    private javax.swing.JTextField PictureCycleTextField;
     private javax.swing.JTextField StepTimeTextField;
     private javax.swing.JButton SubmitButton;
     private javax.swing.JLabel TimeBetweenStepsLabel;
