@@ -118,6 +118,10 @@ public class Canvas extends JPanel {
         if (ref.getGraph().getCycleBase() > 0) {
             drawString("Cycles: " + ref.getGraph().getCycleCount(), 1, 4, g);
         }//end if
+        GraphNode lastHovered = ref.getGraph().getLastHovered();
+        if (lastHovered != null) {
+            drawString("(" + lastHovered.getILoc() + "," + lastHovered.getJLoc() + ")", 0, 3, g);
+        }//end if
         g.dispose();
         return picture;
     }//end producePicture
@@ -164,6 +168,7 @@ public class Canvas extends JPanel {
         }//end else if
         else if (corner == 3) {
 
+            g.drawString(in, 5, this.getHeight() - (fontSize.getHeight() * (lineOffset)) - 5);
         }//end else if
         else if (corner == 4) {
             g.drawString(in, this.getWidth() - textWidth - 5, this.getHeight() - (fontSize.getHeight() * (lineOffset)) - 5);
@@ -219,20 +224,20 @@ public class Canvas extends JPanel {
         }//end if
         ref.getSettingsManager().writeSettings();
     }//end decreaseZoomLevel
-    
-        public void setZoomLevel(int in){
-        if(in < 0){
+
+    public void setZoomLevel(int in) {
+        if (in < 0) {
             zoomLevel = 0;
         }//end if
-        else if(in > 5){
+        else if (in > 5) {
             zoomLevel = 5;
         }//end else if
-        else{
+        else {
             zoomLevel = in;
         }//end else
     }//end setZoomLevel
-    
-    public int getZoomLevel(){
+
+    public int getZoomLevel() {
         return zoomLevel;
     }//end getZoomLevel
 

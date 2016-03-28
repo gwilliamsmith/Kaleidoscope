@@ -4,6 +4,9 @@ import Listeners.*;
 import graphvisualizer.Graph;
 import graphvisualizer.SettingsFileManipulator;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JMenuItem;
@@ -60,6 +63,7 @@ public class Base extends JFrame {
     private final JMenuItem centerGrid = new JMenuItem("Center the grid on the screen");
     private final JMenuItem toggleDrag = new JMenuItem("Disable drag to reposition");
     private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");
+    private final JMenuItem databaseConnect = new JMenuItem("Connect to local database");
             
     //Determines if Graph.takeStep() should be executed inside the TimerActionListener
     private boolean run = false;
@@ -68,6 +72,11 @@ public class Base extends JFrame {
 
     //Displays average color of all lines
     private AverageColorDisplay averageDisplay = new AverageColorDisplay();
+    
+    //MySQL variables
+    private Connection conn = null;
+    private Statement stmt;
+    private ResultSet rs;
 
     /**
      * Constructor for Base class.&nbsp;Determines grid dimensions, as well as the interval for steps and repaint actions
@@ -139,6 +148,7 @@ public class Base extends JFrame {
         centerGrid.addActionListener(new CenterGridActionListener(this));
         toggleDrag.addActionListener(new ToggleDragActionListener(this));
         folderSelect.addActionListener(new FolderSelectActionListener(this));
+        databaseConnect.addActionListener(new DatabaseConnectListener(this));
     }//end addMenuListeners
 
     /**
@@ -158,6 +168,7 @@ public class Base extends JFrame {
         rightClickMenu.add(centerGrid);
         rightClickMenu.add(toggleDrag);
         rightClickMenu.add(folderSelect);
+        rightClickMenu.add(databaseConnect);
     }//end createRightClickMenu
     
     /**
@@ -201,11 +212,9 @@ public class Base extends JFrame {
      */
     public void setRun(boolean in) {
         if(in){
-            System.out.println("1");
             pause();
         }//end if
         else{
-            System.out.append("2");
             run();
         }//end else
     }//end setRun
@@ -296,5 +305,21 @@ public class Base extends JFrame {
     public void setIntervalPause(boolean in){
         intervalPause = in;
     }//end setIntervalPause
+    
+    public Connection getConn(){
+        return conn;
+    }//end getConn
+    
+    public void setConn(Connection in){
+        conn = in;
+    }//end setConn
+    
+    public Statement getStatement(){
+        return stmt;
+    }//end getStatement
+    
+    public ResultSet getResultSet(){
+        return rs;
+    }//end getResultSet
     
 }//end Base class

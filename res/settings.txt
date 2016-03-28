@@ -1,6 +1,6 @@
 Min Spacing:10
 Min Point Size:2
-Zoom Level:1
+Zoom Level:2
 Trim:true
 Consume:false
 Growth Type:0

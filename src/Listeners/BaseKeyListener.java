@@ -1,5 +1,6 @@
 package Listeners;
 
+import Statistics.FamilyStatisticsTuple;
 import SwingElements.Base;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -26,6 +27,12 @@ public class BaseKeyListener implements KeyListener {
         }//end else if
         else if (e.getKeyChar() == 'a'){
             ref.getCanvas().decreaseZoomLevel();
+        }//end else if
+        else if(e.getKeyChar() == 'f'){
+            for(int i=1;i<=ref.getGraph().getFamilyCount();i++){
+                System.out.println(new FamilyStatisticsTuple(ref.getGraph().pullFamily(i),i,ref.getGraph()).outputPureStatistics());
+                ref.getGraph().showFamilyColorGradient(i-1);
+            }//end for
         }//end else if
     }//end keyPressed
 

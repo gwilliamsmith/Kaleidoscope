@@ -17,6 +17,7 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
     private Base ref;
     private int startY;
     private int startX;
+    private GraphNode lastHovered;
 
     public CanvasMouseListener(Base in) {
         ref = in;
@@ -39,18 +40,18 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
                 }//end for
                 if (graph.getConnectB() != null && graph.getConnectA() != null) {
                     if (canvas.getGtiStorage() != null) {
-                        graph.connector(graph.getConnectA(), graph.getConnectB(), canvas.getGtiStorage());
+                        graph.createNewFamily(graph.getConnectA(), graph.getConnectB(), canvas.getGtiStorage());
                         //ref.setGtiStorage(null);
                     }//end if
                     else {
                         if (canvas.getTempColor() != null) {
                             GraphTupleInfo gtiOut = new GraphTupleInfo();
                             gtiOut.color = canvas.getTempColor();
-                            graph.connector(graph.getConnectA(), graph.getConnectB(), gtiOut);
+                            graph.createNewFamily(graph.getConnectA(), graph.getConnectB(), gtiOut);
                             canvas.setTempColor(null);
                         }//end if 
                         else {
-                            graph.connector(graph.getConnectA(), graph.getConnectB(), new GraphTupleInfo());
+                            graph.createNewFamily(graph.getConnectA(), graph.getConnectB(), new GraphTupleInfo());
                         }//end else
                     }//end else
                 }//end if
@@ -95,6 +96,24 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
             startY = e.getYOnScreen();
         }//end if
     }//end mouseDragged
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        Canvas canvas = ref.getCanvas();
+        Graph graph = ref.getGraph();
+        GraphNode selected = null;
+        for (GraphNode gn : graph.getGraphNodes()) {
+            if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint()) && gn != lastHovered) {
+                System.out.println("Parent Coordinates: (" + gn.getILoc() + "," + gn.getJLoc() + ")");
+                selected = gn;
+                lastHovered = gn;
+            }//end if
+            else if(gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint()) && gn == lastHovered){
+                selected = gn;
+            }//end else if
+        }//end for
+        graph.setLastHovered(selected);
+    }//end mouseMoved
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {

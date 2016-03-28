@@ -14,6 +14,7 @@ public class GraphTuple {
     private int startReproductionClock = 1;
     private int reproductionClock = startReproductionClock;
     private boolean edge = false;
+    private int family;
 
     public GraphTuple(GraphNode to, GraphNode from, GraphTupleInfo gti) {
         toLocation = to;
@@ -25,17 +26,18 @@ public class GraphTuple {
         startReproductionClock = gti.reproductionClock;
         reproductionClock = startReproductionClock;
         edge = gti.edge;
+        family = gti.family;
     }//end constructor
 
     public GraphTupleInfo generateGTI() {
         GraphTupleInfo out = new GraphTupleInfo(this.startHealth, this.color, this.mutatePercentage, this.startReproductionClock);
         return out;
     }//end generateGTI
-    
-    public void resetReproductionClock(){
+
+    public void resetReproductionClock() {
         reproductionClock = startReproductionClock;
     }//end resetReproductionClock
-    
+
     public void setColor(Color in) {
         color = in;
     }//end setColor
@@ -63,16 +65,16 @@ public class GraphTuple {
     public boolean isEdge() {
         return ((toLocation.isEdgeNode() && fromLocation.isEdgeNode()) || edge);
     }//end isEdge
-    
-    public boolean isAlive(){
+
+    public boolean isAlive() {
         return (health > 0);
     }//return isAlive
 
     public GraphNode getToLocation() {
         return toLocation;
     }//end getLocation
-    
-    public GraphNode getFromLocation(){
+
+    public GraphNode getFromLocation() {
         return fromLocation;
     }//end fromLocation
 
@@ -83,28 +85,32 @@ public class GraphTuple {
     public void setStartHealth(int in) {
         startHealth = in;
     }//end setStartHealth
-    
-    public int getHealth(){
+
+    public int getHealth() {
         return health;
     }//return getHealth
-    
-    public void decay(){
+
+    public void decay() {
         health = health - decayRate;
     }//end decay
-    
-    public int getMutatePercentage(){
+
+    public int getMutatePercentage() {
         return mutatePercentage;
     }//end getMutatePercentage
-    
-    public int getStartReproductionClock(){
+
+    public int getStartReproductionClock() {
         return startReproductionClock;
     }//end getStartReproductionClock
-    
-    public int getReproductionClock(){
+
+    public int getReproductionClock() {
         return reproductionClock;
     }//end getReproductionClock
-    
-    public void setReproductionClock(int in){
+
+    public void setReproductionClock(int in) {
         reproductionClock = in;
     }//end setReproductionClock
+
+    public int getFamily() {
+        return family;
+    }//end getFamily
 }//end GraphTuple

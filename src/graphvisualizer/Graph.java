@@ -1,12 +1,18 @@
 package graphvisualizer;
 
+import Statistics.FamilyStatisticsTuple;
 import SwingElements.Base;
+import SwingElements.FamilyAverageColorGradient;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 public class Graph {
+
+    private ArrayList<FamilyAverageColorGradient> familyAverageColorGradients = new ArrayList<>();
 
     private final ArrayList<GraphNode> nodes = new ArrayList<>();
     private final GraphNode[][] matrix;
@@ -32,6 +38,9 @@ public class Graph {
     private boolean mutateHealth = true;
     private int growthType = 0;
 
+    //Number of line families
+    private int familyCount = 0;
+
     //true if grid has been seeded
     private boolean seeded = false;
 
@@ -51,6 +60,14 @@ public class Graph {
     private boolean seed8 = true;
 
     private int midCount = 0;
+    
+    //Node coordinate variable
+    private GraphNode lastHovered;
+    
+    //Test name
+    private final String testName = "test1";
+    
+    //email stuff
 
     public Graph(int r, int c, Base in) {
         matrix = new GraphNode[r][c];
@@ -62,8 +79,48 @@ public class Graph {
     public void takeStep() {
         stepForward();
         stepCount++;
+        int totalLines = 0;
+        ArrayList<FamilyStatisticsTuple> familyStatisticsHolder = new ArrayList<>();
         if (cycleBase > 0) {
             cycleCount = stepCount / cycleBase;
+        }//end if
+        if (stepCount % 50 == 0) {
+            for (int i = 1; i <= ref.getGraph().getFamilyCount(); i++) {
+                familyStatisticsHolder.add(new FamilyStatisticsTuple(ref.getGraph().pullFamily(i), i, this));
+                totalLines += familyStatisticsHolder.get(i - 1).familyMembers.size();
+            }//end for
+            for (FamilyStatisticsTuple fst : familyStatisticsHolder) {
+                fst.proportionOfTotalLines = (double) fst.familyMembers.size() / totalLines;
+                if (ref.getConn() != null) {
+                    try {
+                        Statement stmt = ref.getConn().createStatement();
+                        int recordID = (int) (stepCount / 50);
+                        String updateString = "INSERT INTO statistics VALUES (0,"
+                                + "'" + testName + "',"
+                                + recordID + ","
+                                + fst.familyID + ","
+                                + fst.familyMembers.size() + ","
+                                + fst.proportionOfTotalLines + ","
+                                + fst.averageLifespan + ","
+                                + fst.lifespanVariation + ","
+                                + fst.lifespanDeviation + ","
+                                + fst.meanDeviation + ","
+                                + fst.averageColor.getRed() + ","
+                                + fst.averageColor.getGreen() + ","
+                                + fst.averageColor.getBlue()
+                                + ");";
+                        System.out.println(updateString);
+                        updateString = updateString.replace("NaN", "0.0");
+                        System.out.println(updateString);
+                        stmt.executeUpdate(updateString);
+                    } catch (SQLException ex) {
+                        System.out.println(ex.toString());
+                    }//end try catch
+                }//end if
+            }//end for
+        }//end if
+        if(stepCount == 1000000){
+            ref.pause();
         }//end if
     }//end takeStep
 
@@ -74,8 +131,8 @@ public class Graph {
         cycleCount = 0;
         seeded = false;
     }//end reset
-    
-    public void refreshSeed(){
+
+    public void refreshSeed() {
         clearGrid();
         stepCount = 0;
         cycleBase = 0;
@@ -101,22 +158,33 @@ public class Graph {
     }//end biconnect
 
     //Connect one node with any number of other nodes
-    public void connector(GraphNode start, GraphNode[] targets, GraphTupleInfo gti) {
+    private boolean connector(GraphNode start, GraphNode[] targets, GraphTupleInfo gti) {
+        boolean out = true;
         for (GraphNode gn : targets) {
             if (gn != start && start.isAdjacentTo(gn)) {
                 biconnect(start, gn, gti);
             }//end if
+            else {
+                out = false;
+            }//end else
         }//end for
+        return out;
     }//end connectTo
 
     //Connect one node to another node
-    public boolean connector(GraphNode start, GraphNode target, GraphTupleInfo gti) {
+    private boolean connector(GraphNode start, GraphNode target, GraphTupleInfo gti) {
         if (target != start && start.isAdjacentTo(target)) {
             biconnect(start, target, gti);
             return true;
         }//end if
         return false;
     }//end connectTo
+
+    public void createNewFamily(GraphNode node1, GraphNode node2, GraphTupleInfo gti) {
+        gti.family = newFamilyID();
+        familyAverageColorGradients.add(new FamilyAverageColorGradient());
+        connector(node1, node2, gti);
+    }//end createNewFamily
 
     private void initializeGrid() {
         int pointSize = ref.getCanvas().getPointSize();
@@ -207,9 +275,11 @@ public class Graph {
             if (cycleSteps <= 0) {
                 cycleSteps = stepCount;
             }//end if
-            camera.setPictureTaken(true);
-            camera.takePicture();
-            midCount = 0;
+            /* Janky work around so that it doesn't reset on an interval
+             camera.setPictureTaken(true);
+             camera.takePicture();
+             midCount = 0;
+             */
         }//end if
         else if (!noNewGrowth && camera.isPictureTaken()) {
             if (midCount >= cycleSteps) {
@@ -244,6 +314,7 @@ public class Graph {
         parent.setReproductionClock(reproductionClock - 1);
         if (parent.getReproductionClock() <= 0) {
             GraphTupleInfo gti = new GraphTupleInfo(parent.getStartHealth(), parent.getColor(), parent.getMutatePercentage(), parent.getStartReproductionClock());
+            gti.family = parent.getFamily();
             normalRules(temp, gti, xCompare, yCompare);
             parent.resetReproductionClock();
         }//end if
@@ -261,6 +332,7 @@ public class Graph {
             else {
                 gti = new GraphTupleInfo(parent.getStartHealth(), parent.getColor(), parent.getMutatePercentage(), parent.getStartReproductionClock());
             }//end else
+            gti.family = parent.getFamily();
             normalRules(temp, gti, xCompare, yCompare);
             parent.resetReproductionClock();
         }//end if
@@ -407,7 +479,7 @@ public class Graph {
     private int generateMutatedHealth(GraphTuple parent, Random rand) {
         if (mutateHealth && parent.getStartHealth() > 1) {
             int healthInfluence;
-            double deviation = .05;
+            double deviation = .1;
             int variance = (int) (parent.getStartHealth() * deviation);
             if (variance <= 1) {
                 variance = 1;
@@ -609,6 +681,11 @@ public class Graph {
         return out;
     }//end newID
 
+    public int newFamilyID() {
+        familyCount++;
+        return familyCount;
+    }//end new FamilyID
+
     public void generateSeeds() {
         Random rand = new Random();
         HashMap<String, Integer> seedsOut = new HashMap<>();
@@ -774,6 +851,28 @@ public class Graph {
         }//end for
     }//end seedGraph
 
+    public ArrayList<GraphTuple> pullFamily(int familyID) {
+        ArrayList<GraphTuple> family = new ArrayList<>();
+        for (GraphNode gn : nodes) {
+            for (int i = 0; i < gn.getNumberOfConnections(); i++) {
+                GraphTuple gt = gn.getConnection(i);
+                if (gt.getFamily() == familyID) {
+                    family.add(gt);
+                }//end if
+            }//end for
+        }//end for
+        return family;
+    }//end pullFamily
+
+    public void updateFamilyColorGradient(int familyID, Color colorIn) {
+        familyAverageColorGradients.get(familyID).addNewColor(colorIn);
+        familyAverageColorGradients.get(familyID).refresh();
+    }//end updateFamilyColorGradient
+
+    public void showFamilyColorGradient(int familyID) {
+        familyAverageColorGradients.get(familyID).setVisible(true);
+    }//end showFamilyColorGradient
+
     public GraphNode[][] getMatrix() {
         return matrix;
     }//end getMatrix
@@ -928,8 +1027,20 @@ public class Graph {
     public boolean getConnect() {
         return connect;
     }//end getConnect
-    
-    public Camera getCamera(){
+
+    public Camera getCamera() {
         return camera;
     }//end getCamera
+
+    public int getFamilyCount() {
+        return familyCount;
+    }//end getFamilyCount
+    
+    public GraphNode getLastHovered(){
+        return lastHovered;
+    }//end getLastHovered
+    
+    public void setLastHovered(GraphNode in){
+        lastHovered = in;
+    }//end setLastHovered
 }//end Graph
