@@ -65,7 +65,7 @@ public class Graph {
     private GraphNode lastHovered;
     
     //Test name
-    private final String testName = "test1";
+    private final String testName = "test16";
     
     //email stuff
 
@@ -109,7 +109,6 @@ public class Graph {
                                 + fst.averageColor.getGreen() + ","
                                 + fst.averageColor.getBlue()
                                 + ");";
-                        System.out.println(updateString);
                         updateString = updateString.replace("NaN", "0.0");
                         System.out.println(updateString);
                         stmt.executeUpdate(updateString);

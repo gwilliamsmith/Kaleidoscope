@@ -104,7 +104,6 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
         GraphNode selected = null;
         for (GraphNode gn : graph.getGraphNodes()) {
             if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint()) && gn != lastHovered) {
-                System.out.println("Parent Coordinates: (" + gn.getILoc() + "," + gn.getJLoc() + ")");
                 selected = gn;
                 lastHovered = gn;
             }//end if

@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Statistics/FamilyStatisticsTuple.java</file>
             <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/SwingElements/Base.java</file>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/SwingElements/FamilyAverageColorGradient.java</file>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/graphvisualizer/Graph.java</file>
-            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Listeners/DatabaseConnectListener.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Listeners/SavePictureActionListener.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Listeners/BaseKeyListener.java</file>
+            <file>file:/C:/Users/Redpox/Documents/NetBeansProjects/GraphVisualizer/src/Listeners/SaveStateActionListener.java</file>
         </group>
     </open-files>
 </project-private>

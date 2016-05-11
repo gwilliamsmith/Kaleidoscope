@@ -24,11 +24,9 @@ public class DatabaseConnectListener implements ActionListener {
             Statement stmt = ref.getConn().createStatement();
             stmt.executeQuery("Use sys");
             System.out.println("Success");
-        } catch (ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }//end try catch block
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.err.println(ex.toString());
+        } //end try catch block
 
     }//end actionPerformed
 

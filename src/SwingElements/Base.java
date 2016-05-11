@@ -211,12 +211,7 @@ public class Base extends JFrame {
      * @param in The new value for run
      */
     public void setRun(boolean in) {
-        if(in){
-            pause();
-        }//end if
-        else{
-            run();
-        }//end else
+        run = in;
     }//end setRun
 
     /**
