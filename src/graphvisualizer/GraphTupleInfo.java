@@ -1,6 +1,8 @@
 package graphvisualizer;
 
+import SwingElements.Base;
 import java.awt.Color;
+import java.util.Random;
 
 public class GraphTupleInfo {
 
@@ -53,5 +55,21 @@ public class GraphTupleInfo {
         edge = edgeIn;
         family = familyID;
     }//end constructor
+    
+    //TODO: Add in ability to tune this
+    public static GraphTupleInfo generateRandomGTI(Base ref){
+        Random rand = new Random();
+        GraphTupleInfo out = new GraphTupleInfo();
+        out.startHealth = rand.nextInt();
+        if(out.startHealth <0){
+            out.startHealth *= -1;
+        }
+        out.color = new Color(rand.nextFloat(),rand.nextFloat(),rand.nextFloat());
+        out.mutationPercentage = rand.nextInt(10001);
+        out.reproductionClock = rand.nextInt(out.startHealth)+1;
+        out.family = ref.getGraph().newFamilyID();
+        out.edge = false;
+        return out;
+    }//end generateRandomGTI
 
 }//end GraphTupleInfo class

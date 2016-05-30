@@ -1,11 +1,8 @@
 package graphvisualizer;
 
-import Statistics.FamilyStatisticsTuple;
 import SwingElements.Base;
 import SwingElements.FamilyAverageColorGradient;
 import java.awt.Color;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -27,6 +24,10 @@ public class Graph {
     private GraphNode connectA;
     private GraphNode connectB;
     private boolean connect = false;
+    
+    //Line Place event variables
+    private GraphNode lineEventNode1;
+    private GraphNode lineEventNode2;
 
     //////////////////////////////
     //    Runtime Variables     //
@@ -60,15 +61,14 @@ public class Graph {
     private boolean seed8 = true;
 
     private int midCount = 0;
-    
+
     //Node coordinate variable
     private GraphNode lastHovered;
-    
-    //Test name
-    private final String testName = "test16";
-    
-    //email stuff
 
+    //Test name
+    private String testName = "test16";
+
+    //email stuff
     public Graph(int r, int c, Base in) {
         matrix = new GraphNode[r][c];
         ref = in;
@@ -79,48 +79,13 @@ public class Graph {
     public void takeStep() {
         stepForward();
         stepCount++;
-        int totalLines = 0;
-        ArrayList<FamilyStatisticsTuple> familyStatisticsHolder = new ArrayList<>();
         if (cycleBase > 0) {
             cycleCount = stepCount / cycleBase;
         }//end if
-        if (stepCount % 50 == 0) {
-            for (int i = 1; i <= ref.getGraph().getFamilyCount(); i++) {
-                familyStatisticsHolder.add(new FamilyStatisticsTuple(ref.getGraph().pullFamily(i), i, this));
-                totalLines += familyStatisticsHolder.get(i - 1).familyMembers.size();
-            }//end for
-            for (FamilyStatisticsTuple fst : familyStatisticsHolder) {
-                fst.proportionOfTotalLines = (double) fst.familyMembers.size() / totalLines;
-                if (ref.getConn() != null) {
-                    try {
-                        Statement stmt = ref.getConn().createStatement();
-                        int recordID = (int) (stepCount / 50);
-                        String updateString = "INSERT INTO statistics VALUES (0,"
-                                + "'" + testName + "',"
-                                + recordID + ","
-                                + fst.familyID + ","
-                                + fst.familyMembers.size() + ","
-                                + fst.proportionOfTotalLines + ","
-                                + fst.averageLifespan + ","
-                                + fst.lifespanVariation + ","
-                                + fst.lifespanDeviation + ","
-                                + fst.meanDeviation + ","
-                                + fst.averageColor.getRed() + ","
-                                + fst.averageColor.getGreen() + ","
-                                + fst.averageColor.getBlue()
-                                + ");";
-                        updateString = updateString.replace("NaN", "0.0");
-                        System.out.println(updateString);
-                        stmt.executeUpdate(updateString);
-                    } catch (SQLException ex) {
-                        System.out.println(ex.toString());
-                    }//end try catch
-                }//end if
-            }//end for
-        }//end if
-        if(stepCount == 1000000){
+        if (stepCount == 1000000) { //Replace this with Event
             ref.pause();
         }//end if
+        ref.scheduler.checkSchedule(ref.getGraph().getStepCount());
     }//end takeStep
 
     public void reset() {
@@ -128,6 +93,7 @@ public class Graph {
         stepCount = 0;
         cycleBase = 0;
         cycleCount = 0;
+        familyCount = 0;
         seeded = false;
     }//end reset
 
@@ -157,7 +123,7 @@ public class Graph {
     }//end biconnect
 
     //Connect one node with any number of other nodes
-    private boolean connector(GraphNode start, GraphNode[] targets, GraphTupleInfo gti) {
+    public boolean connector(GraphNode start, GraphNode[] targets, GraphTupleInfo gti) {
         boolean out = true;
         for (GraphNode gn : targets) {
             if (gn != start && start.isAdjacentTo(gn)) {
@@ -171,7 +137,7 @@ public class Graph {
     }//end connectTo
 
     //Connect one node to another node
-    private boolean connector(GraphNode start, GraphNode target, GraphTupleInfo gti) {
+    public boolean connector(GraphNode start, GraphNode target, GraphTupleInfo gti) {
         if (target != start && start.isAdjacentTo(target)) {
             biconnect(start, target, gti);
             return true;
@@ -261,6 +227,9 @@ public class Graph {
         }//end for
     }//end outlineGrid
 
+    //TODO: 
+    //    Move picture taking to Event
+    //    Look into making this more efficent
     private void buildQueue() {
         for (GraphNode[] matrix1 : matrix) {
             for (GraphNode temp : matrix1) {
@@ -318,6 +287,17 @@ public class Graph {
             parent.resetReproductionClock();
         }//end if
     }//end regularStep
+
+    private void mutation(GraphNode temp, int xCompare, int yCompare) {
+        Random rand = new Random();
+        int mutator = rand.nextInt(1000) + 1;
+        if (mutator <= temp.getParentLine().getMutatePercentage()) {
+            mutateStep(temp, xCompare, yCompare);
+        }//end if
+        else {
+            regularStep(temp, xCompare, yCompare);
+        }//end else
+    }//end mutation
 
     private void mutateStep(GraphNode temp, int xCompare, int yCompare) {
         GraphTuple parent = temp.getParentLine();
@@ -576,14 +556,7 @@ public class Graph {
                     regularStep(temp, xCompare, yCompare);
                 }//end if
                 else {
-                    Random rand = new Random();
-                    int mutator = rand.nextInt(1000) + 1;
-                    if (mutator <= temp.getParentLine().getMutatePercentage()) {
-                        mutateStep(temp, xCompare, yCompare);
-                    }//end if
-                    else {
-                        regularStep(temp, xCompare, yCompare);
-                    }//end else
+                    mutation(temp, xCompare, yCompare);
                 }//end else
             }//end while
         }//end if
@@ -600,34 +573,42 @@ public class Graph {
             eat();
         }//end if
     }//end stepForward
+    
+    public void highlightNode(GraphNode in, Color highlightColor){
+        in.setColor(highlightColor);
+    }//end highlightNode
+    
+    public void clearNodeHighlight(GraphNode in){
+        in.setColor(GraphNode.DEFAULT_COLOR);
+    }//end clearNodeHighlight
 
-    public void highlightNodeSelection(GraphNode in) {
-        in.setColor(GraphNode.SELECTED_COLOR);
+    public void highlightNodeSelection(GraphNode in, Color selectionColor, Color adjacentColor) {
+        in.setColor(selectionColor);
         int iLoc = in.getILoc();
         int jLoc = in.getJLoc();
         if (iLoc > 0) {
-            matrix[iLoc - 1][jLoc].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+            matrix[iLoc - 1][jLoc].setColor(adjacentColor);
             if (jLoc > 0) {
-                matrix[iLoc - 1][jLoc - 1].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+                matrix[iLoc - 1][jLoc - 1].setColor(adjacentColor);
             }//end if
             if (jLoc < matrix[iLoc].length - 1) {
-                matrix[iLoc - 1][jLoc + 1].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+                matrix[iLoc - 1][jLoc + 1].setColor(adjacentColor);
             }//end if
         }//end if
         if (iLoc < matrix.length - 1) {
-            matrix[iLoc + 1][jLoc].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+            matrix[iLoc + 1][jLoc].setColor(adjacentColor);
             if (jLoc > 0) {
-                matrix[iLoc + 1][jLoc - 1].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+                matrix[iLoc + 1][jLoc - 1].setColor(adjacentColor);
             }//end if
             if (jLoc < matrix[iLoc].length - 1) {
-                matrix[iLoc + 1][jLoc + 1].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+                matrix[iLoc + 1][jLoc + 1].setColor(adjacentColor);
             }//end if
         }//end if
         if (jLoc > 0) {
-            matrix[iLoc][jLoc - 1].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+            matrix[iLoc][jLoc - 1].setColor(adjacentColor);
         }//end if
         if (jLoc < matrix[iLoc].length - 1) {
-            matrix[iLoc][jLoc + 1].setColor(GraphNode.SELECTED_ADJACENT_COLOR);
+            matrix[iLoc][jLoc + 1].setColor(adjacentColor);
         }//end if
     }//end highlightNodeSelection
 
@@ -669,6 +650,37 @@ public class Graph {
             in.setColor(GraphNode.DEFAULT_COLOR);
         }//end else
     }//end resetNodeColor
+    
+    public ArrayList<GraphNode> findAdjacentNodes(GraphNode in){
+        ArrayList<GraphNode> out = new ArrayList<>();
+        int iLoc = in.getILoc();
+        int jLoc = in.getJLoc();
+        if (iLoc > 0) {
+            out.add(matrix[iLoc - 1][jLoc]);
+            if (jLoc > 0) {
+                out.add(matrix[iLoc - 1][jLoc - 1]);
+            }//end if
+            if (jLoc < matrix[iLoc].length - 1) {
+                out.add(matrix[iLoc - 1][jLoc + 1]);
+            }//end if
+        }//end if
+        if (iLoc < matrix.length - 1) {
+            out.add(matrix[iLoc + 1][jLoc]);
+            if (jLoc > 0) {
+                out.add(matrix[iLoc + 1][jLoc - 1]);
+            }//end if
+            if (jLoc < matrix[iLoc].length - 1) {
+                out.add(matrix[iLoc + 1][jLoc + 1]);
+            }//end if
+        }//end if
+        if (jLoc > 0) {
+            out.add(matrix[iLoc][jLoc - 1]);
+        }//end if
+        if (jLoc < matrix[iLoc].length - 1) {
+            out.add(matrix[iLoc][jLoc + 1]);
+        }//end if
+        return out;
+    }//end findAdjacentNodes
 
     public boolean nodeIsMiddle(GraphNode in) {
         return (in.getILoc() == matrix.length / 2 || in.getJLoc() == matrix[0].length / 2);
@@ -871,6 +883,16 @@ public class Graph {
     public void showFamilyColorGradient(int familyID) {
         familyAverageColorGradients.get(familyID).setVisible(true);
     }//end showFamilyColorGradient
+    
+    //Note: this won't work if the matrix isn't rectangular
+    public int getGraphWidth(){
+        return matrix[0].length;
+    }//end getGraphWidth
+    
+    //Note: this won't work if the matrix isn't rectangular
+    public int getGraphHeight(){
+        return matrix.length;
+    }//end getGraphHeight
 
     public GraphNode[][] getMatrix() {
         return matrix;
@@ -879,6 +901,10 @@ public class Graph {
     public ArrayList<GraphNode> getGraphNodes() {
         return nodes;
     }//end getGraphNodes
+    
+    public GraphNode getNode(int x, int y){
+        return matrix[y][x];
+    }//end getNode
 
     public boolean getTrim() {
         return trim;
@@ -1034,12 +1060,36 @@ public class Graph {
     public int getFamilyCount() {
         return familyCount;
     }//end getFamilyCount
-    
-    public GraphNode getLastHovered(){
+
+    public GraphNode getLastHovered() {
         return lastHovered;
     }//end getLastHovered
-    
-    public void setLastHovered(GraphNode in){
+
+    public void setLastHovered(GraphNode in) {
         lastHovered = in;
     }//end setLastHovered
+    
+    public String getTestName(){
+        return testName;
+    }//end getTestName
+    
+    public void setTestName(String in){
+        testName = in;
+    }//end setTestName
+    
+    public GraphNode getLineEventNode1(){
+        return lineEventNode1;
+    }//end getLineEventNode1
+    
+    public void setLineEventNode1(GraphNode in){
+        lineEventNode1 = in;
+    }//end setLineEventNode1
+    
+    public GraphNode getLineEventNode2(){
+        return lineEventNode2;
+    }//end getLineEventNode1
+    
+    public void setLineEventNode2(GraphNode in){
+        lineEventNode2 = in;
+    }//end setLineEventNode1
 }//end Graph

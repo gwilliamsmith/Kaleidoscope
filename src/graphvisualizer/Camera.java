@@ -10,6 +10,8 @@ public class Camera {
     private Base ref;
 
     private boolean pictureTaken;
+    
+    private boolean cameraOn = false;
 
     private int pictureCount = 0;
 

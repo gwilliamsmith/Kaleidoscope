@@ -41,7 +41,7 @@ public class Canvas extends JPanel {
     public Canvas(Base in) {
         ref = in;
         this.setBackground(Color.white);
-        this.setSize(in.getWidth(), in.getHeight());
+        this.setSize(ref.getWidth(), ref.getHeight());
         CanvasMouseListener mouseListener = new CanvasMouseListener(ref);
         this.addMouseListener(mouseListener);
         this.addMouseWheelListener(mouseListener);

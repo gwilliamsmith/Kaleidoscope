@@ -1,6 +1,23 @@
 package SwingElements;
 
-import Listeners.*;
+import EventScheduler.EventScheduler;
+import Listeners.AverageColorActionListener;
+import Listeners.BaseKeyListener;
+import Listeners.CenterGridActionListener;
+import Listeners.CustomLineActionListener;
+import Listeners.DatabaseConnectListener;
+import Listeners.FolderSelectActionListener;
+import Listeners.LoopActionListener;
+import Listeners.PropertiesActionListener;
+import Listeners.ResetActionListener;
+import Listeners.SavePictureActionListener;
+import Listeners.SaveStateActionListener;
+import Listeners.SchedulerMenuActionListener;
+import Listeners.SeedColoringBookListener;
+import Listeners.StepActionListener;
+import Listeners.TimerActionListener;
+import Listeners.ToggleDragActionListener;
+import Listeners.WhiteOutGridActionListener;
 import graphvisualizer.Graph;
 import graphvisualizer.SettingsFileManipulator;
 import java.io.File;
@@ -9,9 +26,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.Timer;
+
 /**
  * Initializes both the Graph and the Canvas.&nbsp;Attaches mouse and key listeners, for user interaction.
  * @author Redpox
@@ -44,26 +64,41 @@ public class Base extends JFrame {
     private File bookDirectory;
 
     //////////////////////////////
-    //Right-Click Menu Variables//
+    //      Menu Variables      //
     //////////////////////////////
+    
     //Right-Click Menu
     private final JPopupMenu rightClickMenu = new JPopupMenu();
+    
+    //Menu Bar
+    private final JMenuBar menuBar = new JMenuBar();
+    
+    //Menu Bar Items
+    private final JMenu gridOptions = new JMenu("Grid Options");
+    private final JMenu propertiesMenu = new JMenu("Properties");
+    private final JMenu save = new JMenu("Save");
+    private final JMenu schedulerMenu = new JMenu("Scheduler");
 
     //Menu buttons
-    private final JMenuItem step = new JMenuItem("Step forward");
-    private final JMenuItem loop = new JMenuItem("Run");
-    private final JMenuItem reset = new JMenuItem("Reset grid");
-    private final JMenuItem whiteOutGrid = new JMenuItem("Turn all grid points white");
-    private final JMenuItem properties = new JMenuItem("Edit properties");
-    private final JMenuItem averageColor = new JMenuItem("Show average connection color");
-    private final JMenuItem customLine = new JMenuItem("Set properties for next line");
-    private final JMenuItem saveState = new JMenuItem("Save state");
-    private final JMenuItem savePicture = new JMenuItem("Save Picture");
-    private final JMenuItem seedColoringBook  = new JMenuItem("Set up starting coloring book seed");
-    private final JMenuItem centerGrid = new JMenuItem("Center the grid on the screen");
-    private final JMenuItem toggleDrag = new JMenuItem("Disable drag to reposition");
-    private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");
-    private final JMenuItem databaseConnect = new JMenuItem("Connect to local database");
+    private final JMenuItem step = new JMenuItem("Step forward");                                       //Right-click
+    private final JMenuItem loop = new JMenuItem("Run");                                                //Right-click    
+    private final JMenuItem averageColor = new JMenuItem("Show average connection color");              //Right-click
+    private final JMenuItem databaseConnect = new JMenuItem("Connect to local database");               //Right-click   
+    
+    private final JMenuItem reset = new JMenuItem("Reset grid");                                        //Grid options
+    private final JMenuItem whiteOutGrid = new JMenuItem("Turn all grid points white");                 //Grid options
+    private final JMenuItem centerGrid = new JMenuItem("Center the grid on the screen");                //Grid options
+    
+    private final JMenuItem propertiesItem = new JMenuItem("Edit properties");                          //Properties
+    private final JMenuItem customLine = new JMenuItem("Set properties for next line");                 //Properties
+    private final JMenuItem seedColoringBook  = new JMenuItem("Set up starting coloring book seed");    //Properties
+    private final JMenuItem toggleDrag = new JMenuItem("Disable drag to reposition");                   //Properties
+  
+    private final JMenuItem saveState = new JMenuItem("Save state");                                    //Save
+    private final JMenuItem savePicture = new JMenuItem("Save Picture");                                //Save
+    private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");       //Save
+
+
             
     //Determines if Graph.takeStep() should be executed inside the TimerActionListener
     private boolean run = false;
@@ -74,9 +109,12 @@ public class Base extends JFrame {
     private AverageColorDisplay averageDisplay = new AverageColorDisplay();
     
     //MySQL variables
-    private Connection conn = null;
+    private static Connection conn = null;
     private Statement stmt;
     private ResultSet rs;
+    
+    //Event scheduler
+    public EventScheduler scheduler = new EventScheduler();
 
     /**
      * Constructor for Base class.&nbsp;Determines grid dimensions, as well as the interval for steps and repaint actions
@@ -84,6 +122,7 @@ public class Base extends JFrame {
      * @param c The number of columns in the grid
      * @param r The number of rows in the grid
      * @param st The time in between TimerActionLister events
+     * @param pc Number of pictures before resetting the seed (Currently unused)
      */
     public Base(int c, int r, int st, int pc) {
         canvas = new Canvas(this);
@@ -95,6 +134,12 @@ public class Base extends JFrame {
 
         addMenuListeners();
         createRightClickMenu();
+        createGridOptionsMenu();
+        createPropertiesMenu();
+        createSaveMenu();
+        createMenuBar();
+        
+        setJMenuBar(menuBar);
 
         this.addKeyListener(new BaseKeyListener(this));
         this.setSize(500, 500);
@@ -139,7 +184,7 @@ public class Base extends JFrame {
         loop.addActionListener(new LoopActionListener(this));
         reset.addActionListener(new ResetActionListener(this));
         whiteOutGrid.addActionListener(new WhiteOutGridActionListener(this));
-        properties.addActionListener(new PropertiesActionListener(this));
+        propertiesItem.addActionListener(new PropertiesActionListener(this));
         averageColor.addActionListener(new AverageColorActionListener(this));
         customLine.addActionListener(new CustomLineActionListener(this));
         saveState.addActionListener(new SaveStateActionListener(this));
@@ -149,6 +194,7 @@ public class Base extends JFrame {
         toggleDrag.addActionListener(new ToggleDragActionListener(this));
         folderSelect.addActionListener(new FolderSelectActionListener(this));
         databaseConnect.addActionListener(new DatabaseConnectListener(this));
+        schedulerMenu.addMouseListener(new SchedulerMenuActionListener(this));
     }//end addMenuListeners
 
     /**
@@ -157,22 +203,38 @@ public class Base extends JFrame {
     private void createRightClickMenu() {
         rightClickMenu.add(step);
         rightClickMenu.add(loop);
-        rightClickMenu.add(reset);
-        rightClickMenu.add(whiteOutGrid);
-        rightClickMenu.add(properties);
         rightClickMenu.add(averageColor);
-        rightClickMenu.add(customLine);
-        rightClickMenu.add(saveState);
-        rightClickMenu.add(savePicture);
-        rightClickMenu.add(seedColoringBook);
-        rightClickMenu.add(centerGrid);
-        rightClickMenu.add(toggleDrag);
-        rightClickMenu.add(folderSelect);
         rightClickMenu.add(databaseConnect);
     }//end createRightClickMenu
     
+    private void createGridOptionsMenu(){
+        gridOptions.add(reset);
+        gridOptions.add(whiteOutGrid);
+        gridOptions.add(centerGrid);
+    }//end createGridOptionsMenu
+    
+    private void createPropertiesMenu(){
+        propertiesMenu.add(propertiesItem);
+        propertiesMenu.add(customLine);
+        propertiesMenu.add(seedColoringBook);
+        propertiesMenu.add(toggleDrag);
+    }//end createPropertiesMenu
+    
+    private void createSaveMenu(){
+        save.add(saveState);
+        save.add(savePicture);
+        save.add(folderSelect);
+    }//end createSaveMenu
+    
+    private void createMenuBar(){
+        menuBar.add(gridOptions);
+        menuBar.add(propertiesMenu);
+        menuBar.add(save);
+        menuBar.add(schedulerMenu);
+    }//end createMenuBar
+    
     /**
-     * Inverts the run boolean, used in the TimerActionListener
+     * Inverts the run boolean, used in the loop menu button
      */
     public void flipRun(){
         if(run){
@@ -193,6 +255,10 @@ public class Base extends JFrame {
         loop.setText("Run");
     }//end pause;
 
+    public static boolean checkConnection(){
+        return conn == null;
+    }//end checkConnection
+    
     //////////////////////////////
     //     Setters/Getters      //
     //////////////////////////////
@@ -316,5 +382,9 @@ public class Base extends JFrame {
     public ResultSet getResultSet(){
         return rs;
     }//end getResultSet
+    
+    public JMenu getSchedulerMenu(){
+        return schedulerMenu;
+    }
     
 }//end Base class

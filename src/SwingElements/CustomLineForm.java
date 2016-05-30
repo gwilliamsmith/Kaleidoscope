@@ -9,11 +9,19 @@ public class CustomLineForm extends javax.swing.JFrame implements Runnable {
     private GraphTupleInfo store;
     private boolean complete = true;
     private Base ref;
+    private LineEventDetailsInputForm parent;
 
     public CustomLineForm(Base simIn) {
         ref = simIn;
+        parent = null;
         store = ref.getCanvas().getGtiStorage();
         //initComponents();
+    }//end constructor
+
+    public CustomLineForm(LineEventDetailsInputForm in) {
+        parent = in;
+        ref = null;
+        store = parent.gti;
     }//end constructor
 
     /**
@@ -132,11 +140,15 @@ public class CustomLineForm extends javax.swing.JFrame implements Runnable {
         }//end if
         store.edge = EdgeCheckBox.isSelected();
         if (complete) {
-            ref.getCanvas().setGtiStorage(store);
+            if (ref != null && parent == null) {
+                ref.getCanvas().setGtiStorage(store);
+            }//end if
+            else if (parent != null && ref == null) {
+                parent.gti = store;
+            }//end else if
             this.dispose();
         }//end if
     }//GEN-LAST:event_SubmitButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox CycleBaseCheckBox;
@@ -172,11 +184,16 @@ public class CustomLineForm extends javax.swing.JFrame implements Runnable {
 
     @Override
     public void run() {
-        if (ref != null) {
+        if (ref != null && parent == null) {
             store = ref.getCanvas().getGtiStorage();
             initComponents();
             this.setVisible(true);
         }//end if
+        else if (ref == null && parent != null) {
+            store = parent.gti;
+            initComponents();
+            this.setVisible(true);
+        }//end else if
     }//end run
 
 }//end CustomLineForm

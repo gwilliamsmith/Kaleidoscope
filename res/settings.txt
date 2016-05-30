@@ -1,12 +1,12 @@
 Min Spacing:10
 Min Point Size:2
-Zoom Level:5
+Zoom Level:1
 Trim:true
 Consume:false
 Growth Type:0
 Mutate Color:true
 Mutate Health:true
-Seed1:true
-Seed2:true
-Seed4:true
+Seed1:false
+Seed2:false
+Seed4:false
 Seed8:true

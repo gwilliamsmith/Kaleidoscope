@@ -11,6 +11,9 @@ public class GraphNode extends Rectangle {
     public static final Color DEFAULT_MIDDLE_EDGE_COLOR = Color.black;
     public static final Color SELECTED_COLOR = Color.green;
     public static final Color SELECTED_ADJACENT_COLOR = Color.cyan;
+    public static final Color LINE_EVENT_NODE1_COLOR = Color.yellow;
+    public static final Color LINE_EVENT_NODE1_ADJACENT_COLOR = new Color(200,200,0);
+    public static final Color LINE_EVENT_NODE2_COLOR = Color.orange;
 
     private final ArrayList<GraphTuple> connections = new ArrayList<>();
     private final int id;
@@ -60,6 +63,10 @@ public class GraphNode extends Rectangle {
         }//end for
         System.out.println();
     }//end print
+    
+    public String printCoordinates(){
+        return (jLoc +","+ iLoc);
+    }
 
     public Rectangle mapMovement(int x, int y){
         return new Rectangle(this.x + x,this.y + y, this.width, this.height);
@@ -137,7 +144,7 @@ public class GraphNode extends Rectangle {
                 regenFood();
             }//end if
         }//end for
-    }
+    }//end consume
 
     //////////////////////////////
     //     Setters/Getters      //
