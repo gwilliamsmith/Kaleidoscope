@@ -11,7 +11,7 @@ public class PauseEvent extends Event{
 
     @Override
     public void takeAction() {
-        ref.run();
+        ref.pause();
     }//end takeAction
     
 }//end RunEvent class
