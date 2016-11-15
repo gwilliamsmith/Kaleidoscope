@@ -1,7 +1,6 @@
 /*TODO:
-    Break up saveState()
-*/
-
+ Break up saveState()
+ */
 package Listeners;
 
 import SwingElements.Base;
@@ -16,15 +15,28 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import javax.swing.JFileChooser;
 
+/**
+ * {@link ActionListener} child, used to save the grid state when the
+ * corresponding menu button is pressed in the {@link Base} class.
+ */
 public class SaveStateActionListener implements ActionListener {
 
-    private Base ref;
+    private Base ref;                                                           //Base object, used for reference
 
+    /**
+     * Constructor.
+     *
+     * @param in {@link Base} object, used for reference
+     */
     public SaveStateActionListener(Base in) {
         ref = in;
     }//end constructor
 
     @Override
+    /**
+     * Method performed on trigger. Pauses step auto-running, records the grid
+     * state, then returns the grid to its previous auto-run setting.
+     */
     public void actionPerformed(ActionEvent evt) {
         boolean tempRun = ref.getRun();
         ref.pause();
@@ -32,6 +44,10 @@ public class SaveStateActionListener implements ActionListener {
         ref.setRun(tempRun);
     }//actionPerformed
 
+    /**
+     * Records all global grid information (rows, columns, step count, point
+     * size/spacing), then records information for all graph nodes and lines.
+     */
     private void saveState() {
 
         GraphNode[][] refMatrix = ref.getGraph().getMatrix();
@@ -39,7 +55,7 @@ public class SaveStateActionListener implements ActionListener {
         double itemsDone = 0;
         Canvas canvas = ref.getCanvas();
         Graph graph = ref.getGraph();
-        
+
         //File saving code
         JFileChooser fileChooser = new JFileChooser();
         int returnVal = fileChooser.showSaveDialog(ref);
@@ -50,23 +66,23 @@ public class SaveStateActionListener implements ActionListener {
         else if (returnVal == JFileChooser.CANCEL_OPTION) {
             return;
         }//end saveState
-        
+
         //Record global variable states
         String globals = "Spacing: " + canvas.getSpacing() + "\n";
         globals += "Point size: " + canvas.getPointSize() + "\n";
         globals += "Step count: " + graph.getStepCount() + "\n";
         globals += "Cycle base: " + graph.getCycleBase() + "\n";
         globals += "Cycle count: " + graph.getCycleCount() + "\n";
-        globals += "Trim: " + graph.getTrim() + "\n";
-        globals += "Mutate: " + graph.getMutate() + "\n";
-        globals += "Mutate Color: " + graph.getMutateColor() + "\n";
-        globals += "Mutate Health: " + graph.getMutateHealth() + "\n";
-        globals += "Growth Type: " + graph.getGrowthType()+ "\n";
-        
+        globals += "Trim: " + Graph.TRIM + "\n";
+        globals += "Mutate: " + Graph.MUTATE + "\n";
+        globals += "Mutate Color: " + Graph.MUTATE_COLOR + "\n";
+        globals += "Mutate Health: " + Graph.MUTATE_HEALTH + "\n";
+        globals += "Growth Type: " + graph.getGrowthType() + "\n";
+
         //Seems magic, but is actually the number of global variables. Not likely to change
         itemsTotal += 10;
         itemsDone += 10;
-        
+
         System.out.println("Percent done: " + (itemsDone / itemsTotal) * 100 + "%");
 
         //Walk through matrix, record nodes, and connections w/ life totals

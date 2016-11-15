@@ -1,16 +1,27 @@
 package SwingElements;
 
+import graphvisualizer.GraphTuple;
 import graphvisualizer.GraphTupleInfo;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+/**
+ * Form used to input settings for a new line to be created.
+ */
 public class CustomLineForm extends javax.swing.JFrame implements Runnable {
 
-    private GraphTupleInfo store;
-    private boolean complete = true;
-    private Base ref;
-    private LineEventDetailsInputForm parent;
+    private GraphTupleInfo store;                               //The GraphTupleInfo object used to describe the line being created
+    private boolean complete = true;                            //Boolean, checking to see if all input has been correctly entered after validation
+    private Base ref;                                           //Base object, used to access other objects as needed
+    private LineEventDetailsInputForm parent;                   //If set, the LineEventDetailsInputForm asking for a GraphTupleInfo object describing the line to be created
 
+    /**
+     * Constructor. Used when the user describes a line to be created by the
+     * user.
+     *
+     * @param simIn The {@link Base} object used to access other objects as
+     * needed
+     */
     public CustomLineForm(Base simIn) {
         ref = simIn;
         parent = null;
@@ -18,6 +29,12 @@ public class CustomLineForm extends javax.swing.JFrame implements Runnable {
         //initComponents();
     }//end constructor
 
+    /**
+     * Constructor. Used when the user describes a line to be created by a
+     * {@link PlaceLineEvent}.
+     *
+     * @param in The {@link LineEventDetailsInputForm} asking for user input
+     */
     public CustomLineForm(LineEventDetailsInputForm in) {
         parent = in;
         ref = null;
@@ -50,7 +67,7 @@ public class CustomLineForm extends javax.swing.JFrame implements Runnable {
 
         HealthLabel.setText("Health: ");
 
-        MutationLabel.setText("Mutation Chance(out of 1000): ");
+        MutationLabel.setText("Mutation Chance(out of " + GraphTuple.MUTATION_DIVISOR + "):");
 
         SubmitButton.setText("OK");
         SubmitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -105,17 +122,16 @@ public class CustomLineForm extends javax.swing.JFrame implements Runnable {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(EdgeCheckBox)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(HealthLabel)
-                            .addComponent(HealthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MutationLabel)
-                            .addComponent(MutationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CycleBaseLable)
-                            .addComponent(ReproductionClockLabel)
-                            .addComponent(ReproductionClockTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EdgeLabel)))
+                    .addComponent(EdgeCheckBox)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(HealthLabel)
+                        .addComponent(HealthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(MutationLabel)
+                        .addComponent(MutationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CycleBaseLable)
+                        .addComponent(ReproductionClockLabel)
+                        .addComponent(ReproductionClockTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EdgeLabel))
                     .addComponent(CycleBaseCheckBox))
                 .addGap(5, 5, 5)
                 .addComponent(jColorChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -127,6 +143,10 @@ public class CustomLineForm extends javax.swing.JFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action method for the submit button. Validates input, enters it into a
+     * {@link GraphTupleInfo} object, to be used when a line is created.
+     */
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         complete = true;
         store.startHealth = checkTextField(HealthTextField, "Starting Health");
@@ -165,6 +185,14 @@ public class CustomLineForm extends javax.swing.JFrame implements Runnable {
     private javax.swing.JColorChooser jColorChooser1;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Checks a given {@link JTextField} to ensure that the input is numerical
+     * and greater than 0.
+     *
+     * @param field The {@link JTextField} to be checked.
+     * @param title The title for the error message, should it be generated.
+     * @return The final integer value after checking is performed
+     */
     private int checkTextField(JTextField field, String title) {
         int out;
         try {
@@ -183,6 +211,9 @@ public class CustomLineForm extends javax.swing.JFrame implements Runnable {
     }//end checkTextField
 
     @Override
+    /**
+     * Runs the form.
+     */
     public void run() {
         if (ref != null && parent == null) {
             store = ref.getCanvas().getGtiStorage();

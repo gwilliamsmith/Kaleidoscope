@@ -2,8 +2,15 @@ package SwingElements;
 
 import java.awt.Color;
 
-public class AverageColorDisplay extends javax.swing.JFrame {
+/**
+ * Simple {@link JFrame} extension, used to display the average color of all
+ * lines on the grid.
+ */
+public class AverageColorDisplay extends javax.swing.JFrame implements Runnable {
 
+    /**
+     * Constructor.
+     */
     public AverageColorDisplay() {
         initComponents();
     }
@@ -47,10 +54,22 @@ public class AverageColorDisplay extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ColorDisplay;
     // End of variables declaration//GEN-END:variables
-    
-    
-    public void updateColor(Color in){
+
+    /**
+     * Updates the color displayed.
+     * 
+     * @param in The new color to display
+     */
+    public void updateColor(Color in) {
         ColorDisplay.setBackground(in);
         ColorDisplay.repaint();
     }//end updateColor
+
+    /**
+     * Runner.
+     */
+    @Override
+    public void run() {
+        setVisible(true);
+    }//end run
 }//end AverageColorDisplay

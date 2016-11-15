@@ -215,3 +215,5 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 /src/changelog
+/src/changelog.txt
+/src/notes.txt

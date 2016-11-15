@@ -4,19 +4,36 @@ import EventScheduler.Events.Event;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class EventDetailsInputForm extends javax.swing.JFrame {
+/**
+ * Form used to input the details for the creation/editing of most {@link Event}
+ * objects.
+ */
+public class EventDetailsInputForm extends javax.swing.JFrame implements Runnable {
 
-    private SchedulerForm ref;
-    public int stepCount;
-    public String eventName;
-    public boolean repeat;
-    private Event temp;
+    private SchedulerForm ref;                                      //The SchedulerForm that generated the EventDetailsInputForm
+    public int stepCount;                                           //The step count at which to execute the event in question
+    public String eventName;                                        //The name of the event in question
+    public boolean repeat;                                          //Determines if the event is a repeat event or a single event
+    private Event temp;                                             //The event to be created/edited
 
+    /**
+     * Constructor. Used when an event is being created.
+     *
+     * @param in The {@link SchedulerForm} generating the
+     * {@link EventDetailsInputForm}
+     */
     public EventDetailsInputForm(SchedulerForm in) {
         ref = in;
         initComponents();
     }//end constructor
 
+    /**
+     * Constructor. Used when an event is being edited.
+     *
+     * @param in The {@link SchedulerForm} generating the
+     * {@link EventDetailsInputForm}
+     * @param e The{@link Event} to be edited
+     */
     public EventDetailsInputForm(SchedulerForm in, Event e) {
         ref = in;
         temp = e;
@@ -34,6 +51,14 @@ public class EventDetailsInputForm extends javax.swing.JFrame {
         }//end else
     }//end constructor
 
+    /**
+     * Checks a given {@link JTextField} to ensure that the input is numerical
+     * and greater than 0.
+     *
+     * @param field The {@link JTextField} to be checked.
+     * @param title The title for the error message, should it be generated.
+     * @return The final integer value after checking is performed
+     */
     private int checkTextField(JTextField field, String title) {
         int out;
         try {
@@ -158,6 +183,10 @@ public class EventDetailsInputForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action method for the create event button. Either creates a new event, or
+     * updates the event to be edited.
+     */
     private void CreateEventButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateEventButtonActionPerformed
         stepCount = checkTextField(TriggerStepTextField, "Trigger Step");
         eventName = EventNameTextField.getText();
@@ -187,4 +216,14 @@ public class EventDetailsInputForm extends javax.swing.JFrame {
     private javax.swing.JTextField TriggerStepTextField;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    /**
+     * Runs the form.
+     */
+    public void run() {
+        if (ref != null) {
+            setVisible(true);
+        }//end if
+    }//end run
 }

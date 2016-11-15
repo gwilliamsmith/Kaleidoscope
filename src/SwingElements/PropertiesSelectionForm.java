@@ -5,12 +5,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-public class PropertiesSelectionForm extends javax.swing.JFrame implements Runnable{
+/**
+ * Form to change global runtime settings.
+ */
+public class PropertiesSelectionForm extends javax.swing.JFrame implements Runnable {
 
-    private Base ref;
-    private Canvas canvas;
-    private Graph graph;
+    private Base ref;                                       //Base object, used for reference
+    private Canvas canvas;                                  //Canvas object, draws grid nodes/lines
+    private Graph graph;                                    //Graph object, stores information regarding lines and nodes
 
+    /**
+     * Constructor.
+     *
+     * @param b {@link Base} object for reference
+     */
     public PropertiesSelectionForm(Base b) {
         ref = b;
         canvas = ref.getCanvas();
@@ -435,10 +443,17 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action method for the cancel button. Closes the form.
+     */
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         this.dispose();
     }//GEN-LAST:event_CancelButtonActionPerformed
 
+    /**
+     * Action method for the apply button. Updates settings, and closes the
+     * form.
+     */
     private void ApplyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyButtonActionPerformed
         canvas.setMinSpacing(checkTextField(PointSpacingTextField, "Point Spacing", canvas.getMinSpacing()));
         canvas.setMinPointSize(checkTextField(PointSizeTextField, "Point Size", canvas.getMinPointSize()));
@@ -458,6 +473,11 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         this.dispose();
     }//GEN-LAST:event_ApplyButtonActionPerformed
 
+    /**
+     * Action method for the resize grid button. Opens the
+     * {@link GridSelectionFrame}, to be used in setting new grid dimensions, as
+     * well as a new interval between steps when auto-running steps.
+     */
     private void ResizeGridButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResizeGridButtonActionPerformed
         GridSelectionFrame frame = new GridSelectionFrame(ref);
         frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -503,6 +523,16 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
     private javax.swing.JLabel TwoPairsLabel;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Checks a given {@link JTextField} to ensure that the input is numerical
+     * and greater than 0.
+     *
+     * @param field The {@link JTextField} to be checked.
+     * @param title The title for the error message, should it be generated.
+     * @param emptyValue The default value, should a non-numerical value be
+     * entered.
+     * @return The final integer value after checking is performed
+     */
     private int checkTextField(JTextField field, String title, int emptyValue) {
         int out;
         try {
@@ -518,19 +548,22 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         return out;
     }//end checkTextField
 
+    /**
+     * Sets up UI fields to reflect the current grid settings.
+     */
     private void setUpUIFields() {
         PointSpacingTextField.setText("" + canvas.getMinSpacing());
         PointSizeTextField.setText("" + canvas.getMinPointSize());
-        if (!graph.getTrim()) {
+        if (!Graph.TRIM) {
             TrimComboBox.setSelectedIndex(1);
         }//end if
-        if (!graph.getConsume()) {
+        if (!Graph.CONSUME) {
             ConsumeComboBox.setSelectedIndex(1);
         }//end if
-        if(!ref.isRefreshOn()){
+        if (!ref.isRefreshOn()) {
             RefreshSeedsComboBox.setSelectedIndex(1);
         }//end if
-        if(!ref.isIntervalPause()){
+        if (!ref.isIntervalPause()) {
             IntervalPauseComboBox.setSelectedIndex(1);
         }//end if
         switch (graph.getGrowthType()) {
@@ -543,10 +576,10 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
             default:
                 break;
         }//end switch
-        if (!graph.getMutateHealth()) {
+        if (!Graph.MUTATE_HEALTH) {
             MutateHealthComboBox.setSelectedIndex(1);
         }//end if
-        if (!graph.getMutateColor()) {
+        if (!Graph.MUTATE_COLOR) {
             MutateColorComboBox.setSelectedIndex(1);
         }//end if
         if (graph.getSeed1()) {
@@ -564,8 +597,11 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
     }//end setUpUIFields
 
     @Override
+    /**
+     * Runs the form.
+     */
     public void run() {
-        if(ref != null){
+        if (ref != null) {
             this.setVisible(true);
         }//end if
     }//end run

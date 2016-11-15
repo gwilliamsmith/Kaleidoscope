@@ -9,32 +9,41 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class FamilyAverageColorGradient extends javax.swing.JFrame {
+/**
+ * Frame responsible for displaying a gradient of average family colors over
+ * time. Each instance displays the gradient for one family.
+ */
+public class FamilyAverageColorGradient extends javax.swing.JFrame implements Runnable {
 
-    private ArrayList<Color> colors = new ArrayList<>();
+    private ArrayList<Color> colors = new ArrayList<>();                    //List of colors recorded
 
+    /**
+     * Internal class used to draw and manipulate the gradient.
+     */
     private class GCanvas extends JPanel {
 
-        public int windowX = 0;
-        public int windowY = 0;
+        public int windowX = 0;             //Used to record the distance the mouse has been dragged on the X axis
 
-        public int startX;
-        public int startY;
+        public int startX;                  //Variable used to record the starting mouse X position on mouse pressed/dragged
 
         @Override
+        /**
+         * Painter method.
+         */
         public void paint(Graphics g) {
             super.paint(g);
             this.setBackground(Color.WHITE);
             for (int i = 0; i < colors.size(); i++) {
+                //TODO: Don't draw colors that aren't visible
                 g.setColor(colors.get(i));
-                g.fillRect(i * 2 + windowX, 0 + windowY, 2, 1000);
+                g.fillRect(i * 2 + windowX, 0, 2, 1000);
             }//end for
         }//end paint
     }
-    private GCanvas canvas = new GCanvas();
+    private GCanvas canvas = new GCanvas();                                 //Implementation of the GCanvas internal class
 
     /**
-     * Creates new form AverageFamilyColorGradient
+     * Constructor.
      */
     public FamilyAverageColorGradient() {
         initComponents();
@@ -43,46 +52,65 @@ public class FamilyAverageColorGradient extends javax.swing.JFrame {
         canvas.addMouseListener(new MouseListener() {
 
             @Override
+            /**
+             * Mouse clicked method. Only present because it is required.
+             */
             public void mouseClicked(MouseEvent e) {
             }
 
             @Override
+            /**
+             * Mouse pressed method. Records the initial x coordinate of the
+             * mouse.
+             */
             public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    canvas.startY = e.getYOnScreen();
                     canvas.startX = e.getXOnScreen();
                 }//end if
             }//end mousePressed
 
             @Override
+            /**
+             * Mouse released method. Only present because it is required.
+             */
             public void mouseReleased(MouseEvent e) {
             }
 
             @Override
+            /**
+             * Mouse entered method. Only present because it is required.
+             */
             public void mouseEntered(MouseEvent e) {
             }
 
             @Override
+            /**
+             * Mouse Exited method. Only present because it is required.
+             */
             public void mouseExited(MouseEvent e) {
             }
 
         });
         canvas.addMouseMotionListener(new MouseMotionListener() {
-
+            //TODO: Disable left motion when at the beginning of the gradient.
             @Override
+            /**
+             * Mouse dragged method. Moves the gradient along the x axis, to
+             * shift what colors are displayed.
+             */
             public void mouseDragged(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     canvas.windowX += (e.getXOnScreen() - canvas.startX);
-                    //canvas.windowY += (e.getYOnScreen() - canvas.startY);
                     canvas.startX = e.getXOnScreen();
-                    canvas.startY = e.getYOnScreen();
                     canvas.repaint();
                 }//end if
             }
 
             @Override
+            /**
+             * Mouse moved method. Only present because it is required.
+             */
             public void mouseMoved(MouseEvent e) {
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }//end mouseMoved
 
         });
@@ -90,10 +118,18 @@ public class FamilyAverageColorGradient extends javax.swing.JFrame {
         canvas.setBackground(Color.WHITE);
     }//end constructor
 
+    /**
+     * Adds a new color to the gradient.
+     *
+     * @param in The color to be added
+     */
     public void addNewColor(Color in) {
         colors.add(in);
     }//end addNewColor
 
+    /**
+     * External method to cause the window to update with a new color.
+     */
     public void refresh() {
         canvas.repaint();
     }//end refresh
@@ -125,4 +161,12 @@ public class FamilyAverageColorGradient extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+    @Override
+    /**
+     * Runs the window.
+     */
+    public void run() {
+        setVisible(true);
+    }//end for
+
 }//end FamilyAverageColorGradient

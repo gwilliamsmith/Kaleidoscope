@@ -4,38 +4,49 @@ import EventScheduler.Events.PlaceLineEvent;
 import graphvisualizer.GraphNode;
 import graphvisualizer.GraphTupleInfo;
 import java.util.ArrayList;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
-public class LineEventDetailsInputForm extends javax.swing.JFrame {
+/**
+ * Form used to input the details for a line creation event.
+ */
+public class LineEventDetailsInputForm extends javax.swing.JFrame implements Runnable {
 
-    private SchedulerForm parent;
-    private Base sim;
-    public int stepCount;
-    public String eventName;
-    public boolean repeat;
-    public GraphTupleInfo gti = new GraphTupleInfo();
-    public GraphNode selectedNode1 = null;
-    public GraphNode selectedNode2 = null;
-    private ArrayList<GraphNode> adjacentNodes;
-    private PlaceLineEvent temp = null;
+    private SchedulerForm parent;                                   //The SchedulerForm that spawned this form
+    private Base sim;                                               //Base object for reference
+    public int stepCount;                                           //The step count at which to execute the generated event
+    public String eventName;                                        //The name of the event
+    public boolean repeat;                                          //Repeat event or single event
+    public GraphTupleInfo gti = new GraphTupleInfo();               //GraphTupleInfo object describing the line to be created
+    public GraphNode selectedNode1 = null;                          //The first node used for line creation
+    public GraphNode selectedNode2 = null;                          //The second node used for line creation
+    private ArrayList<GraphNode> adjacentNodes;                     //ArrayList of nodes adjacent to the first selected node
+    private PlaceLineEvent temp = null;                             //The event to be created/edited ***Rename this***
 
+    /**
+     * Constructor.
+     *
+     * @param in The {@link SchedulerForm} that spawned the form
+     * @param simIn The {@link Base} object used to access other objects as
+     * needed
+     */
     public LineEventDetailsInputForm(SchedulerForm in, Base simIn) {
         parent = in;
         sim = simIn;
         initComponents();
-        SpinnerNumberModel node1XModel = new SpinnerNumberModel(0, 0, simIn.getGraph().getMatrix()[0].length - 1, 1);
-        SpinnerNumberModel node1YModel = new SpinnerNumberModel(0, 0, simIn.getGraph().getMatrix().length - 1, 1);
-        Node1XSpinner.setModel(node1XModel);
-        Node1YSpinner.setModel(node1YModel);
+        setupNode1Spinners();
         selectedNode1 = sim.getGraph().getNode(0, 0);
-        sim.getGraph().highlightNodeSelection(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
+        sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
         updateNode2ComboBox();
     }//end constructor
 
+    /**
+     * Constructor.
+     *
+     * @param in The {@link SchedulerForm} that spawned the form
+     * @param simIn The {@link Base} object used to access other objects as
+     * needed
+     * @param e The {@link PlaceLineEvent} to be created/edited
+     */
     public LineEventDetailsInputForm(SchedulerForm in, Base simIn, PlaceLineEvent e) {
         parent = in;
         sim = simIn;
@@ -56,10 +67,7 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame {
             RepeatEventComboBox.setSelectedIndex(1);
         }//end else
 
-        SpinnerNumberModel node1XModel = new SpinnerNumberModel(0, 0, simIn.getGraph().getMatrix()[0].length - 1, 1);
-        SpinnerNumberModel node1YModel = new SpinnerNumberModel(0, 0, simIn.getGraph().getMatrix().length - 1, 1);
-        Node1XSpinner.setModel(node1XModel);
-        Node1YSpinner.setModel(node1YModel);
+        setupNode1Spinners();
 
         selectedNode1 = e.getNode1();
         Node1XSpinner.setValue(selectedNode1.getJLoc());
@@ -68,9 +76,9 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame {
         selectedNode2 = e.getNode2();
         Node2SelectionComboBox.setSelectedItem(selectedNode2.printCoordinates());
 
-        sim.getGraph().highlightNodeSelection(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
+        sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
         sim.getGraph().highlightNode(selectedNode2, GraphNode.LINE_EVENT_NODE2_COLOR);
-    }//end 
+    }//end constructor
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -101,7 +109,6 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame {
         CreateEventButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(null);
         setMinimumSize(null);
 
         jPanel2.setMaximumSize(new java.awt.Dimension(210, 100));
@@ -303,11 +310,6 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame {
                 Node2SelectionComboBoxItemStateChanged(evt);
             }
         });
-        Node2SelectionComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                Node2SelectionComboBoxPropertyChange(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -450,6 +452,10 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action method for the create button. Checks, then enters all information
+     * into the {@link PlaceLineEvent} object.
+     */
     private void CreateEventButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateEventButtonActionPerformed
         stepCount = checkTextField(TriggerStepTextField, "Trigger Step");
         eventName = EventNameTextField.getText();
@@ -472,31 +478,43 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame {
         }//end if
     }//GEN-LAST:event_CreateEventButtonActionPerformed
 
+    /**
+     * Action method for the change line properties button. Generates a
+     * {@link CustomLineForm}.
+     */
     private void ChangeLinePropertiesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeLinePropertiesButtonActionPerformed
         SwingUtilities.invokeLater(new CustomLineForm(this));
     }//GEN-LAST:event_ChangeLinePropertiesButtonActionPerformed
 
+    /**
+     * Change method for the Node1X Spinner. Changes which nodes are highlighted
+     * on the grid.
+     */
     private void Node1XSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Node1XSpinnerStateChanged
-        sim.getGraph().resetSelectionHighlight(selectedNode1);
+        sim.getGraph().resetNodeAdjacents(selectedNode1);
         selectedNode1 = sim.getGraph().getNode((int) Node1XSpinner.getValue(), (int) Node1YSpinner.getValue());
-        sim.getGraph().highlightNodeSelection(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
+        sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
         updateNode2ComboBox();
     }//GEN-LAST:event_Node1XSpinnerStateChanged
 
+    /**
+     * Change method for the Node1Y Spinner. Changes which nodes are highlighted
+     * on the grid.
+     */
     private void Node1YSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Node1YSpinnerStateChanged
-        sim.getGraph().resetSelectionHighlight(selectedNode1);
+        sim.getGraph().resetNodeAdjacents(selectedNode1);
         selectedNode1 = sim.getGraph().getNode((int) Node1XSpinner.getValue(), (int) Node1YSpinner.getValue());
-        sim.getGraph().highlightNodeSelection(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
+        sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
         updateNode2ComboBox();
     }//GEN-LAST:event_Node1YSpinnerStateChanged
 
-    private void Node2SelectionComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_Node2SelectionComboBoxPropertyChange
-
-    }//GEN-LAST:event_Node2SelectionComboBoxPropertyChange
-
+    /**
+     * Change method for the Node2 combo box. Sets which node is the second node
+     * for line creation, and highlights that node on the grid.
+     */
     private void Node2SelectionComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Node2SelectionComboBoxItemStateChanged
         if (selectedNode2 != null) {
-            sim.getGraph().highlightNodeSelection(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
+            sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
         }//end if
         if (Node2SelectionComboBox.getSelectedIndex() != -1) {
             GraphNode gn = adjacentNodes.get(Node2SelectionComboBox.getSelectedIndex());
@@ -507,6 +525,14 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame {
         }//end if
     }//GEN-LAST:event_Node2SelectionComboBoxItemStateChanged
 
+    /**
+     * Checks a given {@link JTextField} to ensure that the input is numerical
+     * and greater than 0.
+     *
+     * @param field The {@link JTextField} to be checked.
+     * @param title The title for the error message, should it be generated.
+     * @return The final integer value after checking is performed
+     */
     private int checkTextField(JTextField field, String title) {
         int out;
         try {
@@ -522,6 +548,10 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame {
         return out;
     }//end checkTextField
 
+    /**
+     * UPdates the contents of the Node2 selection combo box to fit nodes
+     * adjacent to the selected Node1.
+     */
     private void updateNode2ComboBox() {
         adjacentNodes = sim.getGraph().findAdjacentNodes(selectedNode1);
         ArrayList<String> adjacentNodesStrings = new ArrayList<>();
@@ -533,9 +563,22 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame {
         Node2SelectionComboBox.setSelectedIndex(-1);
     }//end updateNode2ComboBox
 
+    /**
+     * Populates the Node1 X and Y spinners with possible values.
+     */
+    private void setupNode1Spinners() {
+        SpinnerNumberModel node1XModel = new SpinnerNumberModel(0, 0, sim.getGraph().getMatrix()[0].length - 1, 1);
+        SpinnerNumberModel node1YModel = new SpinnerNumberModel(0, 0, sim.getGraph().getMatrix().length - 1, 1);
+        Node1XSpinner.setModel(node1XModel);
+        Node1YSpinner.setModel(node1YModel);
+    }//end setupNode1Spinners
+
     @Override
+    /**
+     * Resets node color on window close.
+     */
     public void dispose() {
-        sim.getGraph().resetSelectionHighlight(selectedNode1);
+        sim.getGraph().resetNodeAdjacents(selectedNode1);
         super.dispose();
     }//end dispose
 
@@ -559,10 +602,19 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    /**
+     * Runs the form.
+     */
+    public void run() {
+        if (sim != null && parent != null) {
+            setVisible(true);
+        }//end if
+    }//end run
 }

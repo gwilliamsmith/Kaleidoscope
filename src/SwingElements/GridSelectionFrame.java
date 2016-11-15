@@ -3,10 +3,19 @@ package SwingElements;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+/**
+ * Form used to define the number of rows/columns of nodes, as well as the time
+ * in milliseconds between steps when auto-running steps.
+ */
 public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
 
-    private Base ref;
+    private Base ref;                   //Used to access other objects as needed
 
+    /**
+     * Constructor.
+     *
+     * @param in {@link Base} object used to access other objects as needed
+     */
     public GridSelectionFrame(Base in) {
         ref = in;
         initComponents();
@@ -127,21 +136,34 @@ public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action method for the submit button. Checks input, then creates a new
+     * {@link Base} object with the validated input.
+     */
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
         int c = checkTextField(NumberOfColumnsTextField, "Columns");
         int r = checkTextField(NumberOfRowsTextField, "Rows");
         int st = checkTextField(StepTimeTextField, "Step Time");
-        int pc = checkTextField(PictureCycleTextField,"Cycle Length");
+        int pc = checkTextField(PictureCycleTextField, "Cycle Length");
         if (c != -1 && r != -1) {
             if (ref == null) {
                 new Base(c, r, st, pc).setVisible(true);
-            } else {
+            }
+            else {
                 ref.resizeGrid(c, r, st, pc);
             }//end else
             this.dispose();
         }//end if
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
+    /**
+     * Checks a given {@link JTextField} to ensure that the input is numerical
+     * and greater than 0.
+     *
+     * @param field The {@link JTextField} to be checked.
+     * @param title The title for the error message, should it be generated.
+     * @return The final integer value after checking is performed
+     */
     private int checkTextField(JTextField field, String title) {
         int out;
         try {
@@ -171,6 +193,9 @@ public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
     // End of variables declaration//GEN-END:variables
 
     @Override
+    /**
+     * Runs the form.
+     */
     public void run() {
         if (ref != null) {
             this.setVisible(true);

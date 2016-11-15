@@ -2,26 +2,31 @@ package graphvisualizer;
 
 import SwingElements.Base;
 import SwingElements.Canvas;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Handles all manipulation of the global settings file
+ */
 public class SettingsFileManipulator extends GenericFileManipulator {
 
     private File settingsFile;
     private Base ref;
 
+    /**
+     * @param fileName the name of the settings file
+     * @param in the {@link Base} object the global settings are for
+     */
     public SettingsFileManipulator(String fileName, Base in) {
         settingsFile = new File(fileName);
         ref = in;
     }//end constructor
 
+    /**
+     * Reads the global settings from the specified file
+     */
     public void readSettingsIn() {
         ArrayList<String> lines = super.readFile(settingsFile);
         HashMap<String, String> values = new HashMap<>();
@@ -69,16 +74,19 @@ public class SettingsFileManipulator extends GenericFileManipulator {
                 case "Seed8":
                     graph.setSeed8(Boolean.parseBoolean(entry.getValue()));
                     break;
-                    /*
-                case "File Location":
-                    ref.setBookDirectory(new File(entry.getValue()));
-                    break;
-                            */
+                /*
+                 case "File Location":
+                 ref.setBookDirectory(new File(entry.getValue()));
+                 break;
+                 */
             }//end switch
         }//end for
         ref.getCanvas().setResized(true);
     }//end readSettingsIn
-
+    
+    /**
+     * Writes global settings to the settings file
+     */
     public void writeSettings() {
         Canvas canvas = ref.getCanvas();
         Graph graph = ref.getGraph();
@@ -86,11 +94,11 @@ public class SettingsFileManipulator extends GenericFileManipulator {
             out.println("Min Spacing:" + Integer.toString(canvas.getMinSpacing()));
             out.println("Min Point Size:" + Integer.toString(canvas.getMinPointSize()));
             out.println("Zoom Level:" + Integer.toString(canvas.getZoomLevel()));
-            out.println("Trim:" + Boolean.toString(graph.getTrim()));
-            out.println("Consume:" + Boolean.toString(graph.getConnect()));
+            out.println("Trim:" + Boolean.toString(Graph.TRIM));
+            out.println("Consume:" + Boolean.toString(Graph.CONSUME));
             out.println("Growth Type:" + Integer.toString(graph.getGrowthType()));
-            out.println("Mutate Color:" + Boolean.toString(graph.getMutateColor()));
-            out.println("Mutate Health:" + Boolean.toString(graph.getMutateHealth()));
+            out.println("Mutate Color:" + Boolean.toString(Graph.MUTATE_COLOR));
+            out.println("Mutate Health:" + Boolean.toString(Graph.MUTATE_HEALTH));
             out.println("Seed1:" + Boolean.toString(graph.getSeed1()));
             out.println("Seed2:" + Boolean.toString(graph.getSeed2()));
             out.println("Seed4:" + Boolean.toString(graph.getSeed4()));

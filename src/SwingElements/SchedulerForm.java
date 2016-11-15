@@ -1,26 +1,27 @@
 package SwingElements;
 
 import EventScheduler.EventScheduler;
-import EventScheduler.Events.Event;
-import EventScheduler.Events.GatherStatisticsEvent;
-import EventScheduler.Events.GenerateRandomLineEvent;
-import EventScheduler.Events.OutputStatisticsEvent;
-import EventScheduler.Events.PauseEvent;
-import EventScheduler.Events.PlaceLineEvent;
-import EventScheduler.Events.RefreshSeedEvent;
-import EventScheduler.Events.ResetGridEvent;
-import EventScheduler.Events.RunEvent;
+import EventScheduler.Events.*;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.SwingUtilities;
 
-public class SchedulerForm extends javax.swing.JFrame {
+/**
+ * A form for creating, editing, and deleting {@link Event} objects.
+ */
+public class SchedulerForm extends javax.swing.JFrame implements Runnable {
 
-    private Base ref;
-    private EventScheduler scheduler;
-    private EventDetailsInputForm createEventForm;
-    private LineEventDetailsInputForm createLineEventForm;
+    private Base ref;                                                   //Base object for accessing other needed objects
+    private EventScheduler scheduler;                                   //Event scheduler object
+    private EventDetailsInputForm createEventForm;                      //Form used to input information for most events
+    private LineEventDetailsInputForm createLineEventForm;              //Form used to input information for line creation events
 
+    /**
+     * Constructor
+     *
+     * @param in Reference {@link Base} object
+     */
     public SchedulerForm(Base in) {
         ref = in;
         scheduler = ref.scheduler;
@@ -284,6 +285,12 @@ public class SchedulerForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action method for the create event button. Determines which event was
+     * selected, and presents the user with the appropriate input form. Most
+     * events prompt {@link EventDetailsInputForm}, but the Place Line event
+     * prompts a {@link CustomLineForm}.
+     */
     private void CreateEventButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateEventButtonActionPerformed
         String selected = (String) CreateEventComboBox.getSelectedItem();
         createEventForm = null;
@@ -308,6 +315,10 @@ public class SchedulerForm extends javax.swing.JFrame {
         }//end switch
     }//GEN-LAST:event_CreateEventButtonActionPerformed
 
+    /**
+     * Mouse event used when users double click on the Repeat Event List. Brings
+     * up the form to edit event details.
+     */
     private void RepeatEventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RepeatEventListMouseClicked
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
@@ -323,44 +334,62 @@ public class SchedulerForm extends javax.swing.JFrame {
         }//end if
     }//GEN-LAST:event_RepeatEventListMouseClicked
 
+    /**
+     * Mouse event used when users double click on the Single Event List. Brings
+     * up the form to edit event details.
+     */
     private void SingleEventListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SingleEventListMouseClicked
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
             Event e = scheduler.getSingleEvents().get(list.getSelectedIndex());
             if (!(e instanceof PlaceLineEvent)) {
                 createEventForm = new EventDetailsInputForm(this, e);
-                createEventForm.setVisible(true);
+                SwingUtilities.invokeLater(createEventForm);
             }//end if
             else {
                 createLineEventForm = new LineEventDetailsInputForm(this, ref, (PlaceLineEvent) e);
+                SwingUtilities.invokeLater(createLineEventForm);
                 createLineEventForm.setVisible(true);
             }//end else 
         }//end if
     }//GEN-LAST:event_SingleEventListMouseClicked
 
+    /**
+     * Action method used when the user click the delete events button. Deletes
+     * selected events from both the single and repeat event lists.
+     */
     private void DeleteSelectedEventsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteSelectedEventsButtonActionPerformed
         ArrayList<Event> doomedEvents = new ArrayList<>();
         ArrayList<Event> repeatEvents = scheduler.getRepeatedEvents();
         ArrayList<Event> singleEvents = scheduler.getSingleEvents();
-        for(int i : RepeatEventList.getSelectedIndices()){
+        for (int i : RepeatEventList.getSelectedIndices()) {
             doomedEvents.add(repeatEvents.get(i));
         }//end for
-        for(int i : SingleEventList.getSelectedIndices()){
+        for (int i : SingleEventList.getSelectedIndices()) {
             doomedEvents.add(singleEvents.get(i));
         }//end for
-        for(Event e: doomedEvents){
+        for (Event e : doomedEvents) {
             scheduler.removeEvent(e);
         }//end for
         updateRepeatEventList();
         updateSingleEventList();
     }//GEN-LAST:event_DeleteSelectedEventsButtonActionPerformed
 
+    /**
+     * Action method for the clear events button. Empties both the single and
+     * repeat event lists.
+     */
     private void ClearEventsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearEventsButtonActionPerformed
         scheduler.clearSchedule();
         updateRepeatEventList();
         updateSingleEventList();
     }//GEN-LAST:event_ClearEventsButtonActionPerformed
 
+    /**
+     * Adds an event to the {@link EventScheduler}, and to the event lists for
+     * this form. Gathers information from the forms created by
+     * {@link SchedulerForm#CreateEventButton}.
+     */
     public void generateEvent() {
         String selected = (String) CreateEventComboBox.getSelectedItem();
         switch (selected) {
@@ -431,14 +460,26 @@ public class SchedulerForm extends javax.swing.JFrame {
         updateSingleEventList();
     }//end generateBaseEvent
 
+    /**
+     * Returns the CreateEventComboBox.
+     * @return CreateEventComboBox
+     */
     public JComboBox getCreateEventComboBox() {
         return CreateEventComboBox;
     }//end getCreateEventComboBox
 
+    /**
+     * Looks for repeat events in the {@link EventScheduler}, and displays them
+     * in the {@link JList} for repeat events.
+     */
     public final void updateRepeatEventList() {
         RepeatEventList.setListData(scheduler.getRepeatedEventsDisplayList().toArray());
     }//end updateRepeatEventList
 
+    /**
+     * Looks for single events in the {@link EventScheduler}, and displays them
+     * in the {@link JList} for single events.
+     */
     public final void updateSingleEventList() {
         SingleEventList.setListData(scheduler.getSingleEventsDisplayList().toArray());
     }//end updateRepeatEventList
@@ -462,4 +503,14 @@ public class SchedulerForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    /**
+     * Runs the form.
+     */
+    public void run() {
+        if (ref != null) {
+            setVisible(true);
+        }//end if
+    }//end run
 }
