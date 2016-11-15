@@ -13,7 +13,6 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  * Initializes both the Graph and the Canvas. Attaches mouse and key listeners,
  * for user interaction.
  * 
- * hello
  */
 public class Base extends JFrame {
 
