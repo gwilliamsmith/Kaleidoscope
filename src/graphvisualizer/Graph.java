@@ -143,6 +143,13 @@ public class Graph {
         }//end else
         return false;
     }//end biconnect
+    
+    private void disconnect(GraphNode n1, GraphNode n2){
+        if(n1.isConnected(n2) && n2.isConnected(n1)){
+            n1.severConnection(n2);
+            n2.severConnection(n1);
+        }//end if
+    }//end disconnect
 
     /**
      * Connects one node with any number of other nodes
@@ -319,7 +326,7 @@ public class Graph {
                     if (!gt.isEdge(this)) {
                         gt.decay();
                         if (!gt.isAlive()) {                                    //Remove the connection if it has no health left
-                            temp.severConnection(gt.getToLocation());
+                            disconnect(gt.getFromLocation(), gt.getToLocation());
                             i--;                                                //Decrement the index so that the loop still works properly
                         }//end if
                     }//end if

@@ -180,14 +180,12 @@ public class GraphNode extends Rectangle {
      */
     public void severConnection(GraphNode gn) {
         if (isConnected(gn)) {
-            boolean breakout = false;
-            for (int i = 0; i < connections.size() && !breakout; i++) {
+            for (int i = 0; i < connections.size(); i++) {
                 if (connections.get(i).getToLocation() == gn) {                 //Uses toLocation because hte node calling severConnection is always the fromLocation
                     connections.remove(i);
-                    breakout = true;
+                    break;
                 }//end if
             }//end for
-            gn.severConnection(this);
         }//end if
     }//removeConnection
 
