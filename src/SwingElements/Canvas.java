@@ -37,9 +37,9 @@ public class Canvas extends JPanel {
 
     private GraphTupleInfo gtiStorage = new GraphTupleInfo();           //Info for next line
 
-    public static boolean curveEnabled = true;                          //Toggles drawing of lines or curves between nodes
+    public static boolean curveEnabled = false;                          //Toggles drawing of lines or curves between nodes
 
-    private int curveMaxSeverity = spacing / 2;
+    private int curveMaxSeverity = spacing / 4;
 
     /**
      * Constructor.
@@ -101,6 +101,12 @@ public class Canvas extends JPanel {
     private void drawGrid(Graphics2D g2) {
         drawNodes(g2);
         drawConnections(g2);
+        g2.setColor(Color.CYAN);
+        Rectangle boundingRectangle = ref.getGraph().getBoundingRectangle();
+        g2.drawRect(boundingRectangle.x + windowX,
+                boundingRectangle.y + windowY,
+                boundingRectangle.width,
+                boundingRectangle.height);
     }//end drawGrid
 
     private void drawNodes(Graphics2D g2) {

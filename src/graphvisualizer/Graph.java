@@ -3,6 +3,7 @@ package graphvisualizer;
 import SwingElements.Base;
 import SwingElements.FamilyAverageColorGradient;
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.SwingUtilities;
@@ -56,6 +57,8 @@ public class Graph {
     private GraphNode lastHovered;                                              //The node the mouse is hovering over. For displaying its coordinates on the canvas. (Maybe move to CanvasMouseListener?)
 
     private String testName = "test16";                                         //Name of the test when gathering statistics
+    
+    private Rectangle boundingRectangle;
 
     /**
      * @param r Number of rows in the matrix
@@ -68,6 +71,7 @@ public class Graph {
         ref = in;
         camera = new Camera(ref);
         familyAverageColorGradients = new ArrayList<>();
+        boundingRectangle = new Rectangle(0,0,300,300);
         initializeGrid();
     }//end constructor
 
@@ -947,6 +951,26 @@ public class Graph {
         return new Color(Color.OPAQUE);
     }//end getAverageColor
 
+    public Rectangle getBoundingRectangle(){
+        return boundingRectangle;
+    }//end getBoundingRectangle
+    
+    public void setBoundingRectangleWidth(int in){
+        boundingRectangle.width = in;
+    }//end setBoundingRectangleWidth
+    
+    public int getBoundingRectangleWidth(){
+        return boundingRectangle.width;
+    }//end getBoundingRectangleWidth
+    
+    public void setBoundingRectangleHeight(int in){
+        boundingRectangle.height = in;
+    }//end setBoundingRectangleHeight
+    
+    public int getBoundingRectangleHeight(){
+        return boundingRectangle.height;
+    }//end getBoundingRectangleHeight
+    
     //Note: this won't be accurate if the matrix isn't rectangular
     /**
      * Gets the width of a rectangular {@link GraphNode} matrix.
