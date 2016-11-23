@@ -129,7 +129,7 @@ public class Graph {
      * @param n2
      * @param gti
      */
-    private boolean biconnect(GraphNode n1, GraphNode n2, GraphTupleInfo gti, int direction, double severity) {
+    public boolean biconnect(GraphNode n1, GraphNode n2, GraphTupleInfo gti, int direction, double severity) {
         if (nodes.contains(n1) && nodes.contains(n2)) {
             if (!n1.isConnected(n2) && !n2.isConnected(n1)) {
                 if (n1.connect(n2, gti,direction, severity, false) 
@@ -144,7 +144,7 @@ public class Graph {
         return false;
     }//end biconnect
     
-    private void disconnect(GraphNode n1, GraphNode n2){
+    public void disconnect(GraphNode n1, GraphNode n2){
         if(n1.isConnected(n2) && n2.isConnected(n1)){
             n1.severConnection(n2);
             n2.severConnection(n1);

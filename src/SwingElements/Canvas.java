@@ -73,7 +73,7 @@ public class Canvas extends JPanel {
     public void paintGraph(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         resizeGrid();
-        g2.setStroke(new BasicStroke(pointSize / 2));
+        g2.setStroke(new BasicStroke(zoomLevel));
         drawGrid(g2);
     }//end paint
 
@@ -103,8 +103,8 @@ public class Canvas extends JPanel {
         drawConnections(g2);
         g2.setColor(Color.CYAN);
         Rectangle boundingRectangle = ref.getGraph().getBoundingRectangle();
-        g2.drawRect(boundingRectangle.x + windowX,
-                boundingRectangle.y + windowY,
+        g2.drawRect(boundingRectangle.x + pointSize/2 + windowX,
+                boundingRectangle.y + pointSize/2 + windowY,
                 boundingRectangle.width,
                 boundingRectangle.height);
     }//end drawGrid

@@ -197,7 +197,7 @@ public class GraphNode extends Rectangle {
         for (int i = 0; i < connections.size(); i++) {
             GraphTuple gt = connections.get(i);
             if (!gt.isEdge(Base.graph)) {
-                gt.getToLocation().severConnection(this);
+                Base.graph.disconnect(gt.getFromLocation(),gt.getToLocation());
                 i--;
             }//end if
         }//end for
