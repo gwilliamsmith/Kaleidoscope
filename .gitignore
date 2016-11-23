@@ -220,3 +220,6 @@ pip-log.txt
 /res/settings.txt
 res/settings.txt
 *.class
+build/
+dist/
+nbproject/
