@@ -122,7 +122,7 @@ public class Graph {
     }//end add
 
     /**
-     * Internal connect method. Checks to ensure both nodes are in the Graph,
+     * Connect method. Checks to ensure both nodes are in the Graph,
      * and that they are not already connected.
      *
      * @param n1
@@ -216,8 +216,8 @@ public class Graph {
     private void initializeGrid() {
         int pointSize = ref.getCanvas().getPointSize();
         int spacing = ref.getCanvas().getSpacing();
-        for (int i = 0, ySpace = pointSize / 2; i < matrix.length; i++, ySpace += spacing) {
-            for (int j = 0, xSpace = pointSize / 2; j < matrix[i].length; j++, xSpace += spacing) {
+        for (int i = 0, ySpace = 0; i < matrix.length; i++, ySpace += (spacing + pointSize)) {
+            for (int j = 0, xSpace = 0; j < matrix[i].length; j++, xSpace += (spacing + pointSize)) {
                 GraphNode temp = new GraphNode(xSpace - pointSize / 2, ySpace - pointSize / 2, pointSize, pointSize, newID(), i, j, CONSUME);
                 addNode(temp, i, j);
                 resetNodeColor(temp);
