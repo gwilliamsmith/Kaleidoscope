@@ -181,7 +181,7 @@ public class GraphNode extends Rectangle {
     public void severConnection(GraphNode gn) {
         if (isConnected(gn)) {
             for (int i = 0; i < connections.size(); i++) {
-                if (connections.get(i).getToLocation() == gn) {                 //Uses toLocation because hte node calling severConnection is always the fromLocation
+                if (connections.get(i).getToLocation() == gn) {                 //Uses toLocation because the node calling severConnection is always the fromLocation
                     connections.remove(i);
                     break;
                 }//end if
@@ -196,10 +196,8 @@ public class GraphNode extends Rectangle {
     public void clearConnections() {
         for (int i = 0; i < connections.size(); i++) {
             GraphTuple gt = connections.get(i);
-            if (!gt.isEdge(Base.graph)) {
                 Base.graph.disconnect(gt.getFromLocation(),gt.getToLocation());
                 i--;
-            }//end if
         }//end for
     }//end clearConnections
 

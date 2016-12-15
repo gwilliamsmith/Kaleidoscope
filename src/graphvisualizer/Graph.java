@@ -57,7 +57,7 @@ public class Graph {
     private GraphNode lastHovered;                                              //The node the mouse is hovering over. For displaying its coordinates on the canvas. (Maybe move to CanvasMouseListener?)
 
     private String testName = "test16";                                         //Name of the test when gathering statistics
-    
+
     private Rectangle boundingRectangle;
 
     /**
@@ -71,7 +71,7 @@ public class Graph {
         ref = in;
         camera = new Camera(ref);
         familyAverageColorGradients = new ArrayList<>();
-        boundingRectangle = new Rectangle(0,0,300,300);
+        boundingRectangle = new Rectangle(0, 0, 300, 300);
         initializeGrid();
     }//end constructor
 
@@ -122,8 +122,7 @@ public class Graph {
     }//end add
 
     /**
-     * Connect method. Checks to ensure both nodes are in the Graph,
-     * and that they are not already connected.
+     * Connect method. Checks to ensure both nodes are in the Graph.
      *
      * @param n1
      * @param n2
@@ -131,21 +130,19 @@ public class Graph {
      */
     public boolean biconnect(GraphNode n1, GraphNode n2, GraphTupleInfo gti, int direction, double severity) {
         if (nodes.contains(n1) && nodes.contains(n2)) {
-            if (!n1.isConnected(n2) && !n2.isConnected(n1)) {
-                if (n1.connect(n2, gti,direction, severity, false) 
-                            && n2.connect(n1, gti,direction, severity,true)) {               //Only return true if both n1.connect() and n2.connect() are successful
+                if (n1.connect(n2, gti, direction, severity, false)
+                        && n2.connect(n1, gti, direction, severity, true)) {               //Only return true if both n1.connect() and n2.connect() are successful
                     return true;
                 }//end if
-            }//end if
         }//end if
         else {
             System.err.println("One or more nodes is not in the node list!");
         }//end else
         return false;
     }//end biconnect
-    
-    public void disconnect(GraphNode n1, GraphNode n2){
-        if(n1.isConnected(n2) && n2.isConnected(n1)){
+
+    public void disconnect(GraphNode n1, GraphNode n2) {
+        if (n1.isConnected(n2) && n2.isConnected(n1)) {
             n1.severConnection(n2);
             n2.severConnection(n1);
         }//end if
@@ -163,11 +160,11 @@ public class Graph {
     public boolean[] connector(GraphNode start, GraphNode[] targets, GraphTupleInfo gti) {
         boolean[] out = new boolean[targets.length];
         int outIndex = 0;
-        int direction  = GraphTuple.generateCurveDirection();
+        int direction = GraphTuple.generateCurveDirection();
         double severity = GraphTuple.generateCurveSeverity();
         for (GraphNode gn : targets) {
             if (gn != start && start.isAdjacentTo(gn)) {
-                out[outIndex++] = biconnect(start, gn, gti, direction,severity);
+                out[outIndex++] = biconnect(start, gn, gti, direction, severity);
             }//end if
             else {
                 out[outIndex++] = false;
@@ -187,7 +184,7 @@ public class Graph {
      */
     public boolean connector(GraphNode start, GraphNode target, GraphTupleInfo gti) {
         if (target != start && start.isAdjacentTo(target)) {
-            biconnect(start, target, gti,GraphTuple.generateCurveDirection(),GraphTuple.generateCurveSeverity());
+            biconnect(start, target, gti, GraphTuple.generateCurveDirection(), GraphTuple.generateCurveSeverity());
             return true;
         }//end if
         return false;
@@ -203,7 +200,7 @@ public class Graph {
      */
     public void createNewFamily(GraphNode node1, GraphNode node2, GraphTupleInfo gti) {
         gti.family = newFamilyID();
-        familyAverageColorGradients.add(new FamilyAverageColorGradient());      //Adds a new FamilyAverageColorGradient to the list, so that this family's changes in average color can be tracked
+        familyAverageColorGradients.add(new FamilyAverageColorGradient(gti.family));      //Adds a new FamilyAverageColorGradient to the list, so that this family's changes in average color can be tracked
         connector(node1, node2, gti);
     }//end createNewFamily
 
@@ -218,7 +215,7 @@ public class Graph {
         int spacing = ref.getCanvas().getSpacing();
         for (int i = 0, ySpace = 0; i < matrix.length; i++, ySpace += (spacing + pointSize)) {
             for (int j = 0, xSpace = 0; j < matrix[i].length; j++, xSpace += (spacing + pointSize)) {
-                GraphNode temp = new GraphNode(xSpace - pointSize / 2, ySpace - pointSize / 2, pointSize, pointSize, newID(), i, j, CONSUME);
+                GraphNode temp = new GraphNode(xSpace, ySpace, pointSize, pointSize, newID(), i, j, CONSUME);
                 addNode(temp, i, j);
                 resetNodeColor(temp);
             }//end for
@@ -492,7 +489,7 @@ public class Graph {
         int yCompare = start.compareY();
         int iLoc = start.getILoc();
         int jLoc = start.getJLoc();
-        
+
         if (xCompare == 1 && yCompare == 1) {
             connector(start, new GraphNode[]{matrix[iLoc][jLoc + 1], matrix[iLoc + 1][jLoc]}, gti);
         }//end if
@@ -574,6 +571,7 @@ public class Graph {
         if (CONSUME || growthType == 1) {
             eat();                                                              //Connections eat the food on relevant nodes
         }//end if
+        queue.empty();
     }//end stepForward
 
     //TODO: Change to enum for GraphNode color
@@ -881,7 +879,7 @@ public class Graph {
                 n1x = steps;
                 n2x = n1x - 1;
             }//end if
-            biconnect(getNode(n1x, n1y), getNode(n2x, n2y), new GraphTupleInfo(matrix.length + matrix[0].length, Color.black, 0, 0), GraphTuple.generateCurveDirection(),GraphTuple.generateCurveSeverity());
+            biconnect(getNode(n1x, n1y), getNode(n2x, n2y), new GraphTupleInfo(matrix.length + matrix[0].length, Color.black, 0, 0), GraphTuple.generateCurveDirection(), GraphTuple.generateCurveSeverity());
         }//end if
     }//end findSeedNodes
 
@@ -958,26 +956,26 @@ public class Graph {
         return new Color(Color.OPAQUE);
     }//end getAverageColor
 
-    public Rectangle getBoundingRectangle(){
+    public Rectangle getBoundingRectangle() {
         return boundingRectangle;
     }//end getBoundingRectangle
-    
-    public void setBoundingRectangleWidth(int in){
+
+    public void setBoundingRectangleWidth(int in) {
         boundingRectangle.width = in;
     }//end setBoundingRectangleWidth
-    
-    public int getBoundingRectangleWidth(){
+
+    public int getBoundingRectangleWidth() {
         return boundingRectangle.width;
     }//end getBoundingRectangleWidth
-    
-    public void setBoundingRectangleHeight(int in){
+
+    public void setBoundingRectangleHeight(int in) {
         boundingRectangle.height = in;
     }//end setBoundingRectangleHeight
-    
-    public int getBoundingRectangleHeight(){
+
+    public int getBoundingRectangleHeight() {
         return boundingRectangle.height;
     }//end getBoundingRectangleHeight
-    
+
     //Note: this won't be accurate if the matrix isn't rectangular
     /**
      * Gets the width of a rectangular {@link GraphNode} matrix.
@@ -1322,6 +1320,7 @@ public class Graph {
 
     /**
      * Gets the first node considered for a line creation event.
+     *
      * @return The first node considered for a line creation event
      */
     public GraphNode getLineEventNode1() {
@@ -1330,6 +1329,7 @@ public class Graph {
 
     /**
      * Sets the first node considered for a line creation event.
+     *
      * @param in The first node considered for a line creation event
      */
     public void setLineEventNode1(GraphNode in) {
@@ -1338,6 +1338,7 @@ public class Graph {
 
     /**
      * Gets the second node considered for a line creation event.
+     *
      * @return The second node considered for a line creation event
      */
     public GraphNode getLineEventNode2() {
@@ -1346,6 +1347,7 @@ public class Graph {
 
     /**
      * Sets the second node considered for a line creation event.
+     *
      * @param in The second node considered for a line creation event
      */
     public void setLineEventNode2(GraphNode in) {

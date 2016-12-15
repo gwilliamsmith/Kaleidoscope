@@ -25,6 +25,7 @@ public class EventDetailsInputForm extends javax.swing.JFrame implements Runnabl
     public EventDetailsInputForm(SchedulerForm in) {
         ref = in;
         initComponents();
+        this.setTitle("Event Input Form");
     }//end constructor
 
     /**

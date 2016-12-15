@@ -45,7 +45,7 @@ public class FamilyAverageColorGradient extends javax.swing.JFrame implements Ru
     /**
      * Constructor.
      */
-    public FamilyAverageColorGradient() {
+    public FamilyAverageColorGradient(int familyID) {
         initComponents();
         this.add(canvas);
         canvas.setSize(this.getWidth(), this.getHeight());
@@ -116,6 +116,7 @@ public class FamilyAverageColorGradient extends javax.swing.JFrame implements Ru
         });
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         canvas.setBackground(Color.WHITE);
+        this.setTitle("Average Color Gradient for Family " + familyID);
     }//end constructor
 
     /**

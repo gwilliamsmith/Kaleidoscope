@@ -78,6 +78,7 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame implements Run
 
         sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
         sim.getGraph().highlightNode(selectedNode2, GraphNode.LINE_EVENT_NODE2_COLOR);
+        this.setTitle("Line Event Details Input");
     }//end constructor
 
     @SuppressWarnings("unchecked")

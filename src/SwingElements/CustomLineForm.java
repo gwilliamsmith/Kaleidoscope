@@ -26,6 +26,7 @@ public class CustomLineForm extends javax.swing.JFrame implements Runnable {
         ref = simIn;
         parent = null;
         store = ref.getCanvas().getGtiStorage();
+        this.setTitle("Custom Line Form");
         //initComponents();
     }//end constructor
 

@@ -13,6 +13,7 @@ public class AverageColorDisplay extends javax.swing.JFrame implements Runnable 
      */
     public AverageColorDisplay() {
         initComponents();
+        this.setTitle("Average Color Display");
     }
 
     /**

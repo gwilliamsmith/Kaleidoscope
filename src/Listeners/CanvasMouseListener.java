@@ -53,7 +53,6 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
                     }//end else
                 }//end if
                 graph.resetNodeAdjacents(graph.getConnectA());
-                canvas.repaint();
                 connect  = false;
                 graph.setConnectA(null);
                 graph.setConnectB(null);
@@ -72,7 +71,7 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
         else if (SwingUtilities.isRightMouseButton(e)) {
             ref.getRightClickMenu().show(canvas, e.getX(), e.getY());
         }//end else if
-        ref.repaint();
+        canvas.repaint();
     }//end MouseClicked
 
     @Override
@@ -120,6 +119,6 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
         else if (e.getPreciseWheelRotation() < 0) {
             canvas.increaseZoomLevel();
         }//end else if
-        canvas.resizeGrid();
+        canvas.setResized(true);
     }//end mouseWheelMoved
 }//end CanvasMouseListener

@@ -101,10 +101,11 @@ public class Canvas extends JPanel {
     private void drawGrid(Graphics2D g2) {
         drawNodes(g2);
         drawConnections(g2);
+        /*      This draws the testing bounding rectangle */
         g2.setColor(Color.CYAN);
         Rectangle boundingRectangle = ref.getGraph().getBoundingRectangle();
-        g2.drawRect(boundingRectangle.x + pointSize/2 + windowX,
-                boundingRectangle.y + pointSize/2 + windowY,
+        g2.drawRect(boundingRectangle.x + windowX,
+                boundingRectangle.y + windowY,
                 boundingRectangle.width,
                 boundingRectangle.height);
     }//end drawGrid
@@ -112,9 +113,11 @@ public class Canvas extends JPanel {
     private void drawNodes(Graphics2D g2) {
         for (GraphNode gn : ref.getGraph().getGraphNodes()) {
             g2.setColor(gn.getColor());
-            if (gn.getFood() <= 0) {
-                g2.setColor(Color.WHITE);
-            }//end if
+            /* Food isn't used right now, so this is commented out so as to reduce # of method calls
+             if (gn.getFood() <= 0) {
+             g2.setColor(Color.WHITE);
+             }//end if
+             */
             g2.fillRect(gn.x + windowX, gn.y + windowY, gn.height, gn.width);
         }//end for
     }//end drawNodes
@@ -124,7 +127,9 @@ public class Canvas extends JPanel {
             for (int i = 0; i < gn.getNumberOfConnections(); i++) {
                 GraphTuple gt = gn.getConnection(i);
                 if (gt.isEdge(ref.getGraph()) || !curveEnabled) {
-                    drawLine(g2, gt);
+                    if (!gt.redundant) {
+                        drawLine(g2, gt);
+                    }//end if
                 }//end if
                 else {
                     if (!gt.redundant) {
@@ -139,12 +144,10 @@ public class Canvas extends JPanel {
         g2.setColor(gt.getColor());
         GraphNode n1 = gt.getFromLocation();
         GraphNode n2 = gt.getToLocation();
-        if (n1.isConnected(n2) && n2.isConnected(n1)) {
-            g2.drawLine(n1.x + windowX + n1.width / 2,
-                    n1.y + windowY + n1.height / 2,
-                    n2.x + windowX + n2.width / 2,
-                    n2.y + windowY + n2.height / 2);
-        }//end if
+        g2.drawLine(n1.x + windowX + n1.width / 2,
+                n1.y + windowY + n1.height / 2,
+                n2.x + windowX + n2.width / 2,
+                n2.y + windowY + n2.height / 2);
     }//end drawLine
 
     private void drawCurve(Graphics2D g2, GraphTuple gt) {
@@ -267,8 +270,8 @@ public class Canvas extends JPanel {
         if (resized) {
             adjustZoom();
             Graph graph = ref.getGraph();
-            for (int i = 0, ySpace = pointSize / 2; i < graph.getMatrix().length; i++, ySpace += spacing) {
-                for (int j = 0, xSpace = pointSize / 2; j < graph.getMatrix()[i].length; j++, xSpace += spacing) {
+            for (int i = 0, ySpace = 0; i < graph.getMatrix().length; i++, ySpace += (spacing + pointSize)) {
+                for (int j = 0, xSpace = 0; j < graph.getMatrix()[i].length; j++, xSpace += (spacing + pointSize)) {
                     GraphNode temp = graph.getMatrix()[i][j];
                     temp.x = xSpace - pointSize / 2;
                     temp.y = ySpace - pointSize / 2;
@@ -276,6 +279,7 @@ public class Canvas extends JPanel {
                     temp.height = pointSize;
                 }//end for
             }//end for
+            resized = false;
         }//end if
     }//end resizeGrid
 

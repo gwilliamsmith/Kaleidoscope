@@ -24,6 +24,7 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         canvas = ref.getCanvas();
         graph = ref.getGraph();
         ref.pause();
+        this.setTitle("Properties");
         initComponents();
         setUpUIFields();
     }//end constructor

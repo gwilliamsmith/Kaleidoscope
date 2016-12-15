@@ -12,7 +12,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 /**
  * Initializes both the Graph and the Canvas. Attaches mouse and key listeners,
  * for user interaction.
- * 
+ *
  */
 public class Base extends JFrame {
 
@@ -41,6 +41,7 @@ public class Base extends JFrame {
     private final JMenu propertiesMenu = new JMenu("Properties");
     private final JMenu save = new JMenu("Save");
     private final JMenu schedulerMenu = new JMenu("Scheduler");
+    private final JMenu coloringBookMenu = new JMenu("Coloring Book Options");
 
     private final JMenuItem step = new JMenuItem("Step forward");                                       //Right-click button
     private final JMenuItem loop = new JMenuItem("Run");                                                //Right-click button   
@@ -69,7 +70,7 @@ public class Base extends JFrame {
     private static Connection conn = null;                                      //MySQL connection variable
 
     public EventScheduler scheduler = new EventScheduler();                     //Event scheduler
-    
+
     public boolean curveSwitcher = false;                                        //Handles determining if the curve toggle boolean should be switched between steps.
 
     /**
@@ -100,6 +101,7 @@ public class Base extends JFrame {
 
         this.addKeyListener(new BaseKeyListener(this));
         this.setSize(500, 500);
+        this.setTitle("Kaleidoscope v .1");
         this.add(canvas);
 
         stepTime = st;
@@ -138,7 +140,9 @@ public class Base extends JFrame {
      * Changes the color of the AverageColorDisplay
      */
     public void updateAverageColor() {
-        averageDisplay.updateColor(graph.getAverageColor());
+        if (averageDisplay.isVisible()) {
+            averageDisplay.updateColor(graph.getAverageColor());
+        }//end if
     }//end updateAverageColor
 
     /**

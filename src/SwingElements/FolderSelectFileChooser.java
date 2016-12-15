@@ -21,6 +21,7 @@ public class FolderSelectFileChooser extends JFileChooser {
         setDialogTitle("Choose location to save coloring book pictures");
         setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         setAcceptAllFileFilterUsed(false);
+        this.setDialogTitle("Save Location");
         if (showOpenDialog(in) == JFileChooser.APPROVE_OPTION) {
             in.setBookDirectory(getSelectedFile());
         }//end if

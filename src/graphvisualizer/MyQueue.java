@@ -15,6 +15,7 @@ public class MyQueue<T> {
 
     /**
      * Enters data into the queue
+     *
      * @param input The data to put into the queue
      */
     public void enqueue(T input) {
@@ -32,24 +33,21 @@ public class MyQueue<T> {
             length++;
         }//end else
     }//end enqueue
-    
+
     /**
      * @return The data at the front of the queue
      */
     public T dequeue() {
-        if (front != null) {
-            T out = front.data;
-            front = front.next;
-            length--;
-            return out;
-        }//end if
-        else {
-            return null;
-        }//end else
-    }//end dequeue
-    
-    /** @return True if the front of the queue is not null */
-    public boolean hasFront() {
+        T out = front.data;
+        front = front.next;
+        length--;
+        return out;
+}//end dequeue
+
+/**
+ * @return True if the front of the queue is not null
+ */
+public boolean hasFront() {
         return front != null;
     }//end hasFront
 

@@ -29,6 +29,7 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
         updateRepeatEventList();
         updateSingleEventList();
         toFront();
+        this.setTitle("Event Scheduler");
     }//end constructor
 
     /**
