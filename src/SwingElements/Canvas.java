@@ -101,13 +101,14 @@ public class Canvas extends JPanel {
     private void drawGrid(Graphics2D g2) {
         drawNodes(g2);
         drawConnections(g2);
-        /*      This draws the testing bounding rectangle */
+        /*      This draws the testing bounding rectangle 
         g2.setColor(Color.CYAN);
         Rectangle boundingRectangle = ref.getGraph().getBoundingRectangle();
         g2.drawRect(boundingRectangle.x + windowX,
                 boundingRectangle.y + windowY,
                 boundingRectangle.width,
                 boundingRectangle.height);
+        */
     }//end drawGrid
 
     private void drawNodes(Graphics2D g2) {

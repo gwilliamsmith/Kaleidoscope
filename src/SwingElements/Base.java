@@ -80,6 +80,8 @@ public class Base extends JFrame {
      * @param st The time in between TimerActionLister events
      */
     public Base(int c, int r, int st) {
+        BoxLayout layout = new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS);
+        this.setLayout(layout);
         canvas = new Canvas(this);
         graph = new Graph(r, c, this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -100,6 +102,12 @@ public class Base extends JFrame {
         this.setSize(500, 500);
         this.setTitle("Kaleidoscope v .1");
         this.add(canvas);
+
+        JSlider slider = new JSlider(1, 1000, st);
+        slider.addChangeListener(new SliderChangeListener((this)));
+        slider.setMajorTickSpacing(100);
+        slider.setMinorTickSpacing(1);
+        this.add(slider);
 
         stepTime = st;
         //Repaints on an interval
@@ -138,6 +146,18 @@ public class Base extends JFrame {
             averageDisplay.updateColor(graph.getAverageColor());
         }//end if
     }//end updateAverageColor
+
+    /**
+     * Updates the time between steps.
+     *
+     * @param st the new stepTime
+     */
+    public void updateStepTime(int st) {
+        stepTime = st;
+        timer.stop();
+        timer = new Timer(stepTime, new TimerActionListener(this));
+        timer.start();
+    }//end updateStepTime
 
     /**
      * Adds the ActionListeners to the right-click menu buttons
