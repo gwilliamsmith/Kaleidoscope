@@ -147,7 +147,7 @@ public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
         int c = checkTextField(NumberOfColumnsTextField, "Columns");
         int r = checkTextField(NumberOfRowsTextField, "Rows");
         int st = checkTextField(StepTimeTextField, "Step Time");
-        if (c != -1 && r != -1) {
+        if (c != -1 && r != -1 && st != -1) {
             if (ref == null) {
                 new Base(c, r, st).setVisible(true);
             }

@@ -4,6 +4,8 @@ import EventScheduler.EventScheduler;
 import Listeners.*;
 import graphvisualizer.Graph;
 import graphvisualizer.SettingsFileManipulator;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.sql.Connection;
 import javax.swing.*;
@@ -22,6 +24,8 @@ public class Base extends JFrame {
 
     private Timer timer;                                                        //Repaints the grid on an interval
     private TimerActionListener timerListener;                                  //Action listener for the Timer
+    
+    private Timer painter;
 
     private int stepTime;                                                       //Interval for repainting
 
@@ -110,10 +114,20 @@ public class Base extends JFrame {
         this.add(slider);
 
         stepTime = st;
-        //Repaints on an interval
+        //Takes steps on an interval
         timerListener = new TimerActionListener(this);
         timer = new Timer(stepTime, timerListener);
         timer.start();
+        
+        painter = new  Timer(1,new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                canvas.repaint();
+            }
+        });
+        painter.start();
+        //Repaints on an interval
     }//end constructor
 
     /**

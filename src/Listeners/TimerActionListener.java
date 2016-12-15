@@ -30,7 +30,6 @@ public class TimerActionListener implements ActionListener {
         if (ref.getRun()) {
             ref.getGraph().takeStep();
         }//end if
-        ref.getCanvas().repaint();
     }//actionPerformed
 
 }//end TimerActionListner
