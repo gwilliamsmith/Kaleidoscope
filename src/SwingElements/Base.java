@@ -27,8 +27,6 @@ public class Base extends JFrame {
 
     private boolean refreshOn = false;                                          //Is the seed refreshed after each picture interval?
 
-    private int pictureInterval = 5;                                            //Number of pictures in a seed cycle
-
     private boolean intervalPause = false;                                      //Pause grid after interval?
 
     private File bookDirectory;                                                 //Folder location where generated pictures are to be saved
@@ -80,9 +78,8 @@ public class Base extends JFrame {
      * @param c The number of columns in the grid
      * @param r The number of rows in the grid
      * @param st The time in between TimerActionLister events
-     * @param pc Number of pictures before resetting the seed (Currently unused)
      */
-    public Base(int c, int r, int st, int pc) {
+    public Base(int c, int r, int st) {
         canvas = new Canvas(this);
         graph = new Graph(r, c, this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -105,7 +102,6 @@ public class Base extends JFrame {
         this.add(canvas);
 
         stepTime = st;
-        pictureInterval = pc;
         //Repaints on an interval
         timerListener = new TimerActionListener(this);
         timer = new Timer(stepTime, timerListener);
@@ -119,9 +115,8 @@ public class Base extends JFrame {
      * @param c The number of columns
      * @param r The number of rows
      * @param st The amount of time in ms between steps when auto-running steps
-     * @param pc The number of pictures in a cycle before re-seeding the grid
      */
-    public void resizeGrid(int c, int r, int st, int pc) {
+    public void resizeGrid(int c, int r, int st) {
         timer.stop();
         int tempPictureCount = graph.getCamera().getPictureCount();
         graph = new Graph(r, c, this);
@@ -130,7 +125,6 @@ public class Base extends JFrame {
         this.add(canvas);
 
         stepTime = st;
-        pictureInterval = pc;
 
         timer = new Timer(stepTime, new TimerActionListener(this));
         timer.start();
@@ -370,26 +364,6 @@ public class Base extends JFrame {
     public SettingsFileManipulator getSettingsManager() {
         return settingsManager;
     }//end getSettingsManager
-
-    /**
-     * Gets the interval used to re-seed the graph when taking pictures for a
-     * coloring book.
-     *
-     * @return The number of pictures to be taken before the graph is re-seeded
-     */
-    public int getPictureInterval() {
-        return pictureInterval;
-    }//end getPictureInterval
-
-    /**
-     * Sets the number of pictures to be taken before the graph is re-seeded.
-     *
-     * @param in The new number of pictures to be taken before the graph is
-     * re-seeded
-     */
-    public void setPictureInterval(int in) {
-        pictureInterval = in;
-    }//end setPictureInterval
 
     /**
      * Returns the {@link TimerActionListener} used to auto-run steps.

@@ -33,14 +33,6 @@ public class Camera {
                 ImageIO.write(ref.getCanvas().produceTrimmedImage(ref.getCanvas().getGridPicture()), "jpg", new File(ref.getBookDirectory().getAbsolutePath() + "\\" + pictureCount + ".jpg"));
             }//end if
         } catch (IOException ex) {
-        } finally {
-            pictureCount++;
-            if(pictureCount % ref.getPictureInterval() == 0){
-                ref.setRun(ref.isIntervalPause());
-                if(ref.isRefreshOn()){
-                    ref.getGraph().refreshSeed();
-                }//end if
-            }//end if
         }//end try catch block
     }//end takePicture
 

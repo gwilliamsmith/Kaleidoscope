@@ -32,20 +32,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="NumberOfColumnsTextField" min="-2" pref="120" max="-2" attributes="0"/>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="PictureCycleLabel" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="NumberOfRowsTextField" min="-2" pref="120" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="StepTimeTextField" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="PictureCycleTextField" min="-2" pref="120" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="TimeBetweenStepsLabel" min="-2" pref="120" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="NumberOfRowsTextField" min="-2" pref="120" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="NumberOfColumnsLabel" min="-2" pref="120" max="-2" attributes="0"/>
@@ -56,9 +44,17 @@
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
               <Component id="SubmitButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="75" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="StepTimeTextField" min="-2" pref="120" max="-2" attributes="0"/>
+                  <Component id="TimeBetweenStepsLabel" min="-2" pref="120" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,17 +71,11 @@
                   <Component id="NumberOfColumnsTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="NumberOfRowsTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="TimeBetweenStepsLabel" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
-                  <Component id="PictureCycleLabel" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="StepTimeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="PictureCycleTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="TimeBetweenStepsLabel" min="-2" pref="15" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+              <Component id="StepTimeTextField" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="SubmitButton" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -147,17 +137,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="StepTimeTextField">
-    </Component>
-    <Component class="javax.swing.JLabel" name="PictureCycleLabel">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Picture Cycle Length"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="PictureCycleTextField">
-      <Properties>
-        <Property name="requestFocusEnabled" type="boolean" value="false"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>
