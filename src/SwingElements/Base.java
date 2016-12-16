@@ -30,10 +30,6 @@ public class Base extends JFrame {
 
     private int stepTime;                                                       //Interval for repainting
 
-    private boolean refreshOn = false;                                          //Is the seed refreshed after each picture interval?
-
-    private boolean intervalPause = false;                                      //Pause grid after interval?
-
     private File bookDirectory;                                                 //Folder location where generated pictures are to be saved
 
     private final JPopupMenu rightClickMenu = new JPopupMenu();                 //Right-Click Menu
@@ -397,45 +393,6 @@ public class Base extends JFrame {
     public TimerActionListener getTimerListener() {
         return timerListener;
     } //end getTimerListener
-
-    /**
-     * Returns the value of refreshOn, the boolean determining if the seed
-     * should be refreshed after each picture interval.
-     *
-     * @return True if the seed should be refreshed, false if not
-     */
-    public boolean isRefreshOn() {
-        return refreshOn;
-    }//end isRefreshOn
-
-    /**
-     * Sets the value of refreshOn, the boolean determining if the seed should
-     * be refreshed after each picture interval.
-     *
-     * @param in The new value of refreshOn
-     */
-    public void setRefreshOn(boolean in) {
-        refreshOn = in;
-    }//end setRefreshOn
-
-    /**
-     * Does step auto-running pause after the picture interval?
-     *
-     * @return True if yes, false if no
-     */
-    public boolean isIntervalPause() {
-        return intervalPause;
-    }//end isIntervalPause
-
-    /**
-     * Sets the variable determining if step auto-running should pause after
-     * each picture interval.
-     *
-     * @param in True if yes, false if no
-     */
-    public void setIntervalPause(boolean in) {
-        intervalPause = in;
-    }//end setIntervalPause
 
     /**
      * Returns the {@link Connection} used to communicate with the MySQL
