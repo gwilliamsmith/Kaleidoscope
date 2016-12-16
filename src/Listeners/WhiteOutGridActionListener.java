@@ -14,6 +14,8 @@ public class WhiteOutGridActionListener implements ActionListener {
 
     private Base ref;                                                           //Base object, used for reference
 
+    private boolean toggle = false;
+
     /**
      * Constructor.
      *
@@ -29,11 +31,23 @@ public class WhiteOutGridActionListener implements ActionListener {
      * their color to white.
      */
     public void actionPerformed(ActionEvent e) {
-        for (GraphNode[] matrix1 : ref.getGraph().getMatrix()) {
-            for (GraphNode gn : matrix1) {
-                gn.setColor(new Color(255, 255, 255));
-                ref.getCanvas().repaint();
+        if (!toggle) {
+            for (GraphNode[] matrix1 : ref.getGraph().getMatrix()) {
+                for (GraphNode gn : matrix1) {
+                    gn.setColor(new Color(255, 255, 255));
+                }//end for
             }//end for
-        }//end for
+            ref.getWhiteOutGrid().setText("Restore all grid point colors");
+            toggle = true;
+        }//end if
+        else{
+            for(GraphNode[] matrix1 : ref.getGraph().getMatrix()){
+                for(GraphNode gn : matrix1){
+                    ref.getGraph().resetNodeColor(gn);
+                }//end 
+            }//end for
+            ref.getWhiteOutGrid().setText("Turn all grid points white");
+            toggle = false;
+        }//end else
     }//end actionPerformed
 }//end WhiteOutGridActionListener

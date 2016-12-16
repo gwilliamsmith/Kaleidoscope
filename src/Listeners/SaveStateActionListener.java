@@ -38,10 +38,12 @@ public class SaveStateActionListener implements ActionListener {
      * state, then returns the grid to its previous auto-run setting.
      */
     public void actionPerformed(ActionEvent evt) {
-        boolean tempRun = ref.getRun();
+        boolean tempRun = ref.isRunning();
         ref.pause();
         saveState();
-        ref.setRun(tempRun);
+        if (tempRun) {
+            ref.run();
+        }//end if
     }//actionPerformed
 
     /**

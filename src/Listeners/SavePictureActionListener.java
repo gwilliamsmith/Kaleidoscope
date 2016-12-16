@@ -34,7 +34,7 @@ public class SavePictureActionListener implements ActionListener {
      * saved. Once both have been done, saves the picture.
      */
     public void actionPerformed(ActionEvent e) {
-        boolean tempRun = ref.getRun();
+        boolean tempRun = ref.isRunning();
         ref.pause();
         JFileChooser fileChooser = new JFileChooser();
         FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
@@ -47,7 +47,9 @@ public class SavePictureActionListener implements ActionListener {
                 System.err.println("Error Saving file: " + fileChooser.getSelectedFile().getAbsolutePath() + ".jpg");
             }//end try catch block
         }//end if
-        ref.setRun(tempRun);
+        if(tempRun){
+            ref.run();
+        }//end if
     }//end actionPerformed
 
 }//end SavePictureActionListener

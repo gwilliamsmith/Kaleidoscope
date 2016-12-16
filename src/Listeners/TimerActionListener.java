@@ -27,9 +27,9 @@ public class TimerActionListener implements ActionListener {
      * {@link Graph#takeStep}. Also repaints the Canvas.
      */
     public void actionPerformed(ActionEvent evt) {
-        if (ref.getRun()) {
+        //if (ref.isRunning()) {
             ref.getGraph().takeStep();
-        }//end if
+        //}//end if
     }//actionPerformed
 
 }//end TimerActionListner

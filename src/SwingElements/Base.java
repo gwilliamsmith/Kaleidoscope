@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.sql.Connection;
+import java.util.Hashtable;
 import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
@@ -63,8 +64,6 @@ public class Base extends JFrame {
     private final JMenuItem savePicture = new JMenuItem("Save Picture");                                //Save menu
     private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");       //Save menu
 
-    private boolean run = false;                                                //Determines if Graph.takeStep() should be executed inside the TimerActionListener
-
     private SettingsFileManipulator settingsManager;                            //Settings manager, reads the persistent settings in from the file
 
     private AverageColorDisplay averageDisplay = new AverageColorDisplay();     //Displays average color of all lines
@@ -111,13 +110,17 @@ public class Base extends JFrame {
         slider.addChangeListener(new SliderChangeListener((this)));
         slider.setMajorTickSpacing(100);
         slider.setMinorTickSpacing(1);
+        Hashtable<Integer, JLabel> sliderLabels =  new Hashtable<>();
+        sliderLabels.put(20, new JLabel("Slower"));
+        sliderLabels.put(980, new JLabel("Faster"));
+        slider.setLabelTable(sliderLabels);
+        slider.setPaintLabels(true);
         this.add(slider);
 
         stepTime = st;
         //Takes steps on an interval
         timerListener = new TimerActionListener(this);
         timer = new Timer(stepTime, timerListener);
-        timer.start();
         
         painter = new  Timer(1,new ActionListener() {
 
@@ -144,12 +147,9 @@ public class Base extends JFrame {
         graph = new Graph(r, c, this);
         graph.getCamera().setPictureCount(tempPictureCount);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.add(canvas);
 
         stepTime = st;
-
         timer = new Timer(stepTime, new TimerActionListener(this));
-        timer.start();
     }//end resizeGrid
 
     /**
@@ -170,7 +170,6 @@ public class Base extends JFrame {
         stepTime = st;
         timer.stop();
         timer = new Timer(stepTime, new TimerActionListener(this));
-        timer.start();
     }//end updateStepTime
 
     /**
@@ -246,7 +245,7 @@ public class Base extends JFrame {
      * Inverts the run boolean, used in the loop menu button
      */
     public void flipRun() {
-        if (run) {
+        if (timer.isRunning()) {
             pause();
         }//end if
         else {
@@ -259,7 +258,7 @@ public class Base extends JFrame {
      * item.
      */
     public void run() {
-        run = true;
+        timer.start();
         loop.setText("Pause");
     }//end run
 
@@ -268,7 +267,7 @@ public class Base extends JFrame {
      * item.
      */
     public void pause() {
-        run = false;
+        timer.stop();
         loop.setText("Run");
     }//end pause;
 
@@ -292,22 +291,13 @@ public class Base extends JFrame {
     }//end getCanvas
 
     /**
-     * Sets the value for the run variable
+     * Returns true if steps are being run
      *
-     * @param in The new value for run
+     * @return True if timer is started
      */
-    public void setRun(boolean in) {
-        run = in;
-    }//end setRun
-
-    /**
-     * Returns the value of the run variable
-     *
-     * @return The value of run
-     */
-    public boolean getRun() {
-        return run;
-    }//end getRun
+    public boolean isRunning() {
+        return timer.isRunning();
+    }//end isRunning
 
     /**
      * Shows the {@link AverageColorDisplay} window
@@ -468,5 +458,9 @@ public class Base extends JFrame {
     public void setConn(Connection in) {
         conn = in;
     }//end setConn
+    
+    public JMenuItem getWhiteOutGrid(){
+        return whiteOutGrid;
+    }//end getWhiteOutGrid
 
 }//end Base class

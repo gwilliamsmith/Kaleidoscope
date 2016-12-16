@@ -30,7 +30,7 @@ public class LoopActionListener implements ActionListener {
      * patterns generated.
      */
     public void actionPerformed(ActionEvent e) {
-        if (!ref.getRun() && ref.getBookDirectory() == null) {
+        if (!ref.isRunning() && ref.getBookDirectory() == null) {
             int choice = JOptionPane.showConfirmDialog(ref, "Do you want to save generated pictures?", "No folder selected!", JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.NO_OPTION) {
                 ref.flipRun();
