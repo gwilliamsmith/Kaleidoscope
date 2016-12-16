@@ -25,7 +25,7 @@ public class Base extends JFrame {
 
     private Timer timer;                                                        //Repaints the grid on an interval
     private TimerActionListener timerListener;                                  //Action listener for the Timer
-    
+
     private Timer painter;
 
     private int stepTime;                                                       //Interval for repainting
@@ -80,10 +80,11 @@ public class Base extends JFrame {
      */
     public Base(int c, int r, int st) {
         BoxLayout layout = new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS);
-        this.setLayout(layout);
+        setLayout(layout);
         canvas = new Canvas(this);
         graph = new Graph(r, c, this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        addKeyListener(new BaseKeyListener(this));
 
         settingsManager = new SettingsFileManipulator("./res/settings.txt", this);
         settingsManager.readSettingsIn();
@@ -96,29 +97,30 @@ public class Base extends JFrame {
         createMenuBar();
 
         setJMenuBar(menuBar);
+        menuBar.addKeyListener(new BaseKeyListener((this)));
 
-        this.addKeyListener(new BaseKeyListener(this));
-        this.setSize(500, 500);
-        this.setTitle("Kaleidoscope v .1");
-        this.add(canvas);
+        setSize(500, 500);
+        setTitle("Kaleidoscope v 0.2.1");
+        add(canvas);
 
         JSlider slider = new JSlider(1, 1000, st);
         slider.addChangeListener(new SliderChangeListener((this)));
         slider.setMajorTickSpacing(100);
         slider.setMinorTickSpacing(1);
-        Hashtable<Integer, JLabel> sliderLabels =  new Hashtable<>();
-        sliderLabels.put(20, new JLabel("Slower"));
-        sliderLabels.put(980, new JLabel("Faster"));
+        Hashtable<Integer, JLabel> sliderLabels = new Hashtable<>();
+        sliderLabels.put(20, new JLabel("Faster"));
+        sliderLabels.put(980, new JLabel("Slower"));
         slider.setLabelTable(sliderLabels);
         slider.setPaintLabels(true);
-        this.add(slider);
+        slider.addKeyListener(new BaseKeyListener((this)));
+        add(slider);
 
         stepTime = st;
         //Takes steps on an interval
         timerListener = new TimerActionListener(this);
         timer = new Timer(stepTime, timerListener);
-        
-        painter = new  Timer(1,new ActionListener() {
+
+        painter = new Timer(1, new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -415,8 +417,8 @@ public class Base extends JFrame {
     public void setConn(Connection in) {
         conn = in;
     }//end setConn
-    
-    public JMenuItem getWhiteOutGrid(){
+
+    public JMenuItem getWhiteOutGrid() {
         return whiteOutGrid;
     }//end getWhiteOutGrid
 

@@ -19,6 +19,7 @@ public class SliderChangeListener implements ChangeListener{
         JSlider slider = (JSlider) e.getSource();
         int newStepTime = slider.getValue();
         ref.updateStepTime(newStepTime);
+        ref.run();
     }//end stateChanged
 
 }//end SliderChangeListener class

@@ -1,5 +1,6 @@
 package SwingElements;
 
+import Listeners.BaseKeyListener;
 import Listeners.CanvasMouseListener;
 import SwingElements.Canvas;
 import graphvisualizer.Graph;
@@ -9,6 +10,8 @@ import graphvisualizer.GraphTupleInfo;
 import java.awt.*;
 import java.awt.geom.QuadCurve2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 import javax.swing.JPanel;
 
 /**
@@ -40,7 +43,7 @@ public class Canvas extends JPanel {
     public static boolean curveEnabled = false;                          //Toggles drawing of lines or curves between nodes
 
     private int curveMaxSeverity = spacing / 4;
-    
+
     private static final int MAX_ZOOM_LEVEL = 7;
 
     /**
@@ -50,12 +53,13 @@ public class Canvas extends JPanel {
      */
     public Canvas(Base in) {
         ref = in;
-        this.setBackground(Color.white);
-        this.setSize(ref.getWidth(), ref.getHeight());
+        setBackground(Color.white);
+        setSize(ref.getWidth(), ref.getHeight());
         CanvasMouseListener mouseListener = new CanvasMouseListener(ref);
-        this.addMouseListener(mouseListener);
-        this.addMouseWheelListener(mouseListener);
-        this.addMouseMotionListener(mouseListener);
+        addMouseListener(mouseListener);
+        addMouseWheelListener(mouseListener);
+        addMouseMotionListener(mouseListener);
+        addKeyListener(new BaseKeyListener(ref));
     }//end constructor
 
     @Override
@@ -249,10 +253,10 @@ public class Canvas extends JPanel {
             drawString("(" + lastHovered.getJLoc() + "," + lastHovered.getILoc() + ")", 0, 3, g);
         }//end if
         /*Center lines for debugging
-        g.setColor(Color.RED);
-        g.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
-        g.drawLine(0, getHeight() / 2, getWidth(), getHeight() / 2);
-        */
+         g.setColor(Color.RED);
+         g.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
+         g.drawLine(0, getHeight() / 2, getWidth(), getHeight() / 2);
+         */
         g.dispose();
         return picture;
     }//end producePicture
@@ -267,9 +271,18 @@ public class Canvas extends JPanel {
     public BufferedImage produceTrimmedImage(BufferedImage in) {
         BufferedImage out = new BufferedImage(trimImageWidth(in) + 2, trimImageHeight(in) + 2, BufferedImage.TYPE_3BYTE_BGR);
         Graphics g = out.createGraphics();
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, out.getWidth(), out.getHeight());
         g.drawImage(in, 0, 0, null);
         return out;
     }//endGetTrimmedImage
+
+    private BufferedImage deepCopy(BufferedImage bi) {
+        ColorModel cm = bi.getColorModel();
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = bi.copyData(null);
+        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+    }//end deepCopy
 
     /**
      * Changes grid nodes to match new point size and spacing settings.
