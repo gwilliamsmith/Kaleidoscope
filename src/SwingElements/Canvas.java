@@ -102,13 +102,13 @@ public class Canvas extends JPanel {
         drawNodes(g2);
         drawConnections(g2);
         /*      This draws the testing bounding rectangle 
-        g2.setColor(Color.CYAN);
-        Rectangle boundingRectangle = ref.getGraph().getBoundingRectangle();
-        g2.drawRect(boundingRectangle.x + windowX,
-                boundingRectangle.y + windowY,
-                boundingRectangle.width,
-                boundingRectangle.height);
-        */
+         g2.setColor(Color.CYAN);
+         Rectangle boundingRectangle = ref.getGraph().getBoundingRectangle();
+         g2.drawRect(boundingRectangle.x + windowX,
+         boundingRectangle.y + windowY,
+         boundingRectangle.width,
+         boundingRectangle.height);
+         */
     }//end drawGrid
 
     private void drawNodes(Graphics2D g2) {
@@ -246,6 +246,9 @@ public class Canvas extends JPanel {
         if (lastHovered != null) {
             drawString("(" + lastHovered.getJLoc() + "," + lastHovered.getILoc() + ")", 0, 3, g);
         }//end if
+        g.setColor(Color.RED);
+        g.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
+        g.drawLine(0, getHeight() / 2, getWidth(), getHeight() / 2);
         g.dispose();
         return picture;
     }//end producePicture
