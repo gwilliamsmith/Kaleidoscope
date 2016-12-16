@@ -40,6 +40,8 @@ public class Canvas extends JPanel {
     public static boolean curveEnabled = false;                          //Toggles drawing of lines or curves between nodes
 
     private int curveMaxSeverity = spacing / 4;
+    
+    private static final int MAX_ZOOM_LEVEL = 7;
 
     /**
      * Constructor.
@@ -246,9 +248,11 @@ public class Canvas extends JPanel {
         if (lastHovered != null) {
             drawString("(" + lastHovered.getJLoc() + "," + lastHovered.getILoc() + ")", 0, 3, g);
         }//end if
+        /*Center lines for debugging
         g.setColor(Color.RED);
         g.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
         g.drawLine(0, getHeight() / 2, getWidth(), getHeight() / 2);
+        */
         g.dispose();
         return picture;
     }//end producePicture
@@ -371,7 +375,7 @@ public class Canvas extends JPanel {
      * Increments the zoom level, if it is not already at the maximum value.
      */
     public void increaseZoomLevel() {
-        if (zoomLevel < 5) {
+        if (zoomLevel < MAX_ZOOM_LEVEL) {
             zoomLevel++;
             resized = true;
         }//end if
@@ -398,8 +402,8 @@ public class Canvas extends JPanel {
         if (in < 0) {
             zoomLevel = 0;
         }//end if
-        else if (in > 5) {
-            zoomLevel = 5;
+        else if (in > MAX_ZOOM_LEVEL) {
+            zoomLevel = MAX_ZOOM_LEVEL;
         }//end else if
         else {
             zoomLevel = in;
