@@ -71,7 +71,7 @@ public class Graph {
         ref = in;
         camera = new Camera(ref);
         familyAverageColorGradients = new ArrayList<>();
-        boundingRectangle = new Rectangle(0, 0, 300, 300);
+        boundingRectangle = new Rectangle(0, 0, 305, 305);
         initializeGrid();
     }//end constructor
 
