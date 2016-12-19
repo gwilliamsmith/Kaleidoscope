@@ -145,7 +145,9 @@ public class Base extends JFrame {
         graph = new Graph(r, c, this);
         graph.getCamera().setPictureCount(tempPictureCount);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        if("Restore all grid point colors".equals(whiteOutGrid.getText())){
+            whiteOutGrid.getActionListeners()[0].actionPerformed(null);
+        }//end if
         stepTime = st;
         timer = new Timer(stepTime, new TimerActionListener(this));
     }//end resizeGrid

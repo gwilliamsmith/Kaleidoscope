@@ -30,6 +30,8 @@ public class ResetActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         ref.pause();
         ref.getGraph().reset();
-        ref.getWhiteOutGrid().getActionListeners()[0].actionPerformed(e);
+        if ("Restore all grid point colors".equals(ref.getWhiteOutGrid().getText())) {
+            ref.getWhiteOutGrid().getActionListeners()[0].actionPerformed(e);
+        }//end if
     }//endActionPerformed
 }//end LoopActionListener
