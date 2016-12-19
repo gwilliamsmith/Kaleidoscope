@@ -73,6 +73,8 @@ public class SaveStateActionListener implements ActionListener {
         String globals = "Spacing: " + canvas.getSpacing() + "\n";
         globals += "Point size: " + canvas.getPointSize() + "\n";
         globals += "Step count: " + graph.getStepCount() + "\n";
+        globals += "Step time: " + ref.getStepTime() + "\n";
+        globals += "Zoom level: " + canvas.getZoomLevel() + "\n";
         globals += "Cycle base: " + graph.getCycleBase() + "\n";
         globals += "Cycle count: " + graph.getCycleCount() + "\n";
         globals += "Trim: " + Graph.TRIM + "\n";
@@ -82,10 +84,8 @@ public class SaveStateActionListener implements ActionListener {
         globals += "Growth Type: " + graph.getGrowthType() + "\n";
 
         //Seems magic, but is actually the number of global variables. Not likely to change
-        itemsTotal += 10;
-        itemsDone += 10;
-
-        System.out.println("Percent done: " + (itemsDone / itemsTotal) * 100 + "%");
+        itemsTotal += 12;
+        itemsDone += 12;
 
         //Walk through matrix, record nodes, and connections w/ life totals
         String connectionOutString = "";
@@ -93,20 +93,35 @@ public class SaveStateActionListener implements ActionListener {
         for (int i = 0; i < refMatrix.length; i++) {
             for (int j = 0; j < refMatrix[i].length; j++) {
                 String tempString = "";
-                tempString += "Node: " + i + " " + j + "\n";
                 for (int k = 0; k < refMatrix[i][j].getNumberOfConnections(); k++) {
                     GraphTuple gt = refMatrix[i][j].getConnection(k);
                     GraphNode gn = gt.getToLocation();
-                    tempString += "Connection: " + gn.getILoc() + " " + gn.getJLoc() + " " + gt.getColor().getRed() + " " + gt.getColor().getGreen() + " " + gt.getColor().getBlue() + "\n";
+                    GraphNode gn2 = gt.getFromLocation();
+                    tempString += gn.getILoc() +" "+ 
+                                  gn.getJLoc() + " "+
+                                  gn2.getILoc() + " "+
+                                  gn2.getJLoc() + " "+
+                                  gt.getRed() + " " +
+                                  gt.getGreen() + " " + 
+                                  gt.getBlue() + " " + 
+                                  gt.getHealth() + " " +
+                                  gt.getStartHealth() + " " +
+                                  gt.getMutatePercentage() + " "+ 
+                                  gt.getReproductionClock() + " "+
+                                  gt.getStartReproductionClock() +" "+
+                                  gt.isEdge(graph) +" "+
+                                  gt.isCurve() +" "+
+                                  gt.getCurveDirection() +" "+
+                                  gt.getCurveSeverity() + "\n";
                 }//end for
                 connectionOutString += tempString;
                 itemsDone++;
-                System.out.println("Percent done: " + (itemsDone / itemsTotal) * 100 + "%");
             }//end for
         }//end for
         PrintWriter writer = null;
         try {
             writer = new PrintWriter(fileName, "UTF-8");
+            writer.print(globals);
             writer.print(nodeListOutString);
             writer.print(connectionOutString);
         } catch (FileNotFoundException | UnsupportedEncodingException ex) {

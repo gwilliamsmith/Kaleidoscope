@@ -145,7 +145,7 @@ public class Base extends JFrame {
         graph = new Graph(r, c, this);
         graph.getCamera().setPictureCount(tempPictureCount);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        if("Restore all grid point colors".equals(whiteOutGrid.getText())){
+        if ("Restore all grid point colors".equals(whiteOutGrid.getText())) {
             whiteOutGrid.getActionListeners()[0].actionPerformed(null);
         }//end if
         stepTime = st;
@@ -168,8 +168,12 @@ public class Base extends JFrame {
      */
     public void updateStepTime(int st) {
         stepTime = st;
+        boolean resume = timer.isRunning();
         timer.stop();
         timer = new Timer(stepTime, new TimerActionListener(this));
+        if(resume){
+            timer.start();
+        }//end if
     }//end updateStepTime
 
     /**
@@ -258,8 +262,10 @@ public class Base extends JFrame {
      * item.
      */
     public void run() {
-        timer.start();
-        loop.setText("Pause");
+        if (!timer.isRunning()) {
+            timer.start();
+            loop.setText("Pause");
+        }//end if
     }//end run
 
     /**
