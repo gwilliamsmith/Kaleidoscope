@@ -30,5 +30,6 @@ public class ResetActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         ref.pause();
         ref.getGraph().reset();
+        ref.getWhiteOutGrid().getActionListeners()[0].actionPerformed(e);
     }//endActionPerformed
 }//end LoopActionListener

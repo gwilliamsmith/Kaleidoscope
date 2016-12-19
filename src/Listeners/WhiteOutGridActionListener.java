@@ -50,4 +50,8 @@ public class WhiteOutGridActionListener implements ActionListener {
             toggle = false;
         }//end else
     }//end actionPerformed
+    
+    public void setToggle(boolean in){
+        toggle = in;
+    }//end setToggle
 }//end WhiteOutGridActionListener

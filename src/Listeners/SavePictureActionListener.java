@@ -42,8 +42,7 @@ public class SavePictureActionListener implements ActionListener {
         int returnVal = fileChooser.showSaveDialog(ref);
         if (returnVal == JFileChooser.APPROVE_OPTION && fileChooser.getSelectedFile().getName() != null) {
             try {
-                ImageIO.write(ref.getCanvas().produceTrimmedImage(), "jpg", new File(fileChooser.getSelectedFile().getAbsolutePath() + "t.jpg"));
-                ImageIO.write(ref.getCanvas().producePicture(), "jpg", new File(fileChooser.getSelectedFile().getAbsolutePath() + ".jpg"));
+                ImageIO.write(ref.getCanvas().produceTrimmedImage(), "jpg", new File(fileChooser.getSelectedFile().getAbsolutePath() + ".jpg"));
             } catch (IOException ex) {
                 System.err.println("Error Saving file: " + fileChooser.getSelectedFile().getAbsolutePath() + ".jpg");
             }//end try catch block
