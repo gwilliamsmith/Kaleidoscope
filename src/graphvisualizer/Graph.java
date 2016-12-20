@@ -130,16 +130,53 @@ public class Graph {
      */
     public boolean biconnect(GraphNode n1, GraphNode n2, GraphTupleInfo gti, int direction, double severity) {
         if (nodes.contains(n1) && nodes.contains(n2)) {
-                if (n1.connect(n2, gti, direction, severity, false)
-                        && n2.connect(n1, gti, direction, severity, true)) {               //Only return true if both n1.connect() and n2.connect() are successful
-                    return true;
-                }//end if
+            if (n1.connect(n2, gti, direction, severity, false)
+                    && n2.connect(n1, gti, direction, severity, true)) {               //Only return true if both n1.connect() and n2.connect() are successful
+                return true;
+            }//end if
         }//end if
         else {
             System.err.println("One or more nodes is not in the node list!");
         }//end else
         return false;
     }//end biconnect
+
+    public void createConnection(int n1y, int n1x, int n2y, int n2x, int red, int green, int blue, int health, int startHealth, int mutatePercentage, int reproductionClock, int startReproductionClock, boolean edge, boolean curved, int curveDirection, double curveSeverity) {
+        GraphNode n1 = matrix[n1y][n1x];
+        GraphNode n2 = matrix[n2y][n2x];
+        GraphTuple gt1 = new GraphTuple();
+        GraphTuple gt2 = new GraphTuple();
+        if (!n1.isConnected(n2) && !n2.isConnected(n1)) {
+            gt1.setToLocation(n2);
+            gt1.setFromLocation(n1);
+            gt1.setStartHealth(startHealth);
+            gt1.setHealth(health);
+            gt1.setMutatePercentage(mutatePercentage);
+            gt1.setReproductionClock(reproductionClock);
+            gt1.setStartReproductionClock(startReproductionClock);
+            gt1.setEdge(edge);
+            gt1.setCurve(curved);
+            gt1.setCurveDirection(curveDirection);
+            gt1.setCurveSeverity(curveSeverity);
+            gt1.redundant = false;
+            gt1.setColor(new Color(red, green, blue));
+            gt2.setToLocation(n1);
+            gt2.setFromLocation(n2);
+            gt2.setStartHealth(startHealth);
+            gt2.setHealth(health);
+            gt2.setMutatePercentage(mutatePercentage);
+            gt2.setReproductionClock(reproductionClock);
+            gt2.setStartReproductionClock(startReproductionClock);
+            gt2.setEdge(edge);
+            gt2.setCurve(curved);
+            gt2.setCurveDirection(curveDirection);
+            gt2.setCurveSeverity(curveSeverity);
+            gt2.redundant = true;
+            gt2.setColor(new Color(red, green, blue));
+            n1.addConnection(gt1);
+            n2.addConnection(gt2);
+        }//end if
+    }//end creteConnections
 
     public void disconnect(GraphNode n1, GraphNode n2) {
         if (n1.isConnected(n2) && n2.isConnected(n1)) {
@@ -1098,6 +1135,10 @@ public class Graph {
         return stepCount;
     }//end getStepCount
 
+    public void setStepCount(long in) {
+        stepCount = in;
+    }//end setStepCount
+
     /**
      * Sets the number of steps in a reproduction cycle. Only useful if there is
      * no mutation enabled
@@ -1126,6 +1167,10 @@ public class Graph {
     public long getCycleCount() {
         return cycleCount;
     }//end getCycleCount
+
+    public void setCycleCount(long in) {
+        cycleCount = in;
+    }//end setCycleCount
 
     /**
      * Gets if the last step produced any new lines.

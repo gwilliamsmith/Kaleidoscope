@@ -10,12 +10,12 @@ public class GraphTuple {
 
     public static int MUTATION_DIVISOR = 20000;
 
-    private final GraphNode toLocation;
-    private final GraphNode fromLocation;                                       //The node housing the object
+    private GraphNode toLocation;
+    private GraphNode fromLocation;                                       //The node housing the object
     private int startHealth = 50;
     private int health = startHealth;
     private int decayRate = 1;
-    private int mutatePercentage = 50;                                          //Out of MUTATION_DIVISOR
+    private int mutatePercentage = 0;                                          //Out of MUTATION_DIVISOR
     private Color color = Color.BLACK;
     private int startReproductionClock = 1;
     private int reproductionClock = startReproductionClock;
@@ -28,6 +28,7 @@ public class GraphTuple {
     
     public boolean redundant = false;
     
+    public GraphTuple(){}
 
     /**
      * @param to One of the {@link GraphNode} locations for the connection
@@ -301,6 +302,10 @@ public class GraphTuple {
                 || (toLocation.getJLoc() == fromLocation.getJLoc())))
                 || edge);
     }//end isEdge
+    
+    public void setEdge(boolean in){
+        edge = in;
+    }//end setEdge
 
     /**
      * Checks to see if the connection has health remaining
@@ -319,6 +324,10 @@ public class GraphTuple {
     public GraphNode getToLocation() {
         return toLocation;
     }//end getLocation
+    
+    public void setToLocation(GraphNode in){
+        toLocation = in;
+    }//end setToLocation
 
     /**
      * Returns the from location for this connection
@@ -328,6 +337,10 @@ public class GraphTuple {
     public GraphNode getFromLocation() {
         return fromLocation;
     }//end fromLocation
+    
+    public void setFromLocation(GraphNode in){
+        fromLocation = in;
+    }//end setFromLocation
 
     /**
      * Returns the health this connection begins with. startHealth is also a
@@ -357,16 +370,24 @@ public class GraphTuple {
     public int getHealth() {
         return health;
     }//return getHealth
+    
+    public void setHealth(int in){
+        health = in;
+    }//end setHealth
 
     /**
-     * Gets the probability (out of 1000) that the connection will mutate on
+     * Gets the probability (out of {@link GraphTuple#MUTATION_DIVISIOR) that the connection will mutate on
      * reproduction
      *
-     * @return The chance for mutation * 1000
+     * @return The chance for mutation / {@link GraphTuple#MUTATION_DIVISIOR)
      */
     public int getMutatePercentage() {
         return mutatePercentage;
     }//end getMutatePercentage
+    
+    public void setMutatePercentage(int in){
+        mutatePercentage = in;
+    }//end setMutatePercentage
 
     /**
      * Gets the number of turns it takes for the connection to reproduce
@@ -376,6 +397,10 @@ public class GraphTuple {
     public int getStartReproductionClock() {
         return startReproductionClock;
     }//end getStartReproductionClock
+    
+    public void setStartReproductionClock(int in){
+        startReproductionClock = in;
+    }//end setStartReproductionClock
 
     /**
      * Gets the remaining turn count for connection reproduction
@@ -467,4 +492,8 @@ public class GraphTuple {
     public boolean isCurve() {
         return curved;
     }//end isCurve
+    
+    public void setCurve(boolean in){
+        curved = in;
+    }//end setCurve
 }//end GraphTuple

@@ -70,18 +70,18 @@ public class SaveStateActionListener implements ActionListener {
         }//end saveState
 
         //Record global variable states
-        String globals = "Spacing: " + canvas.getSpacing() + "\n";
-        globals += "Point size: " + canvas.getPointSize() + "\n";
-        globals += "Step count: " + graph.getStepCount() + "\n";
-        globals += "Step time: " + ref.getStepTime() + "\n";
-        globals += "Zoom level: " + canvas.getZoomLevel() + "\n";
-        globals += "Cycle base: " + graph.getCycleBase() + "\n";
-        globals += "Cycle count: " + graph.getCycleCount() + "\n";
-        globals += "Trim: " + Graph.TRIM + "\n";
-        globals += "Mutate: " + Graph.MUTATE + "\n";
-        globals += "Mutate Color: " + Graph.MUTATE_COLOR + "\n";
-        globals += "Mutate Health: " + Graph.MUTATE_HEALTH + "\n";
-        globals += "Growth Type: " + graph.getGrowthType() + "\n";
+        String globals = "Spacing:" + canvas.getMinSpacing() + "\n";
+        globals += "Point size:" + canvas.getMinPointSize() + "\n";
+        globals += "Step count:" + graph.getStepCount() + "\n";
+        globals += "Step time:" + ref.getStepTime() + "\n";
+        globals += "Zoom level:" + canvas.getZoomLevel() + "\n";
+        globals += "Cycle base:" + graph.getCycleBase() + "\n";
+        globals += "Cycle count:" + graph.getCycleCount() + "\n";
+        globals += "Trim:" + Graph.TRIM + "\n";
+        globals += "Mutate:" + Graph.MUTATE + "\n";
+        globals += "Mutate Color:" + Graph.MUTATE_COLOR + "\n";
+        globals += "Mutate Health:" + Graph.MUTATE_HEALTH + "\n";
+        globals += "Growth Type:" + graph.getGrowthType() + "\n";
 
         //Seems magic, but is actually the number of global variables. Not likely to change
         itemsTotal += 12;
@@ -97,22 +97,22 @@ public class SaveStateActionListener implements ActionListener {
                     GraphTuple gt = refMatrix[i][j].getConnection(k);
                     GraphNode gn = gt.getToLocation();
                     GraphNode gn2 = gt.getFromLocation();
-                    tempString += gn.getILoc() +" "+ 
-                                  gn.getJLoc() + " "+
-                                  gn2.getILoc() + " "+
-                                  gn2.getJLoc() + " "+
-                                  gt.getRed() + " " +
-                                  gt.getGreen() + " " + 
-                                  gt.getBlue() + " " + 
-                                  gt.getHealth() + " " +
-                                  gt.getStartHealth() + " " +
-                                  gt.getMutatePercentage() + " "+ 
-                                  gt.getReproductionClock() + " "+
-                                  gt.getStartReproductionClock() +" "+
-                                  gt.isEdge(graph) +" "+
-                                  gt.isCurve() +" "+
-                                  gt.getCurveDirection() +" "+
-                                  gt.getCurveSeverity() + "\n";
+                    tempString += gn.getILoc() + " "
+                            + gn.getJLoc() + " "
+                            + gn2.getILoc() + " "
+                            + gn2.getJLoc() + " "
+                            + gt.getRed() + " "
+                            + gt.getGreen() + " "
+                            + gt.getBlue() + " "
+                            + gt.getHealth() + " "
+                            + gt.getStartHealth() + " "
+                            + gt.getMutatePercentage() + " "
+                            + gt.getReproductionClock() + " "
+                            + gt.getStartReproductionClock() + " "
+                            + gt.isEdge(graph) + " "
+                            + gt.isCurve() + " "
+                            + gt.getCurveDirection() + " "
+                            + gt.getCurveSeverity() + "\n";
                 }//end for
                 connectionOutString += tempString;
                 itemsDone++;
@@ -121,8 +121,8 @@ public class SaveStateActionListener implements ActionListener {
         PrintWriter writer = null;
         try {
             writer = new PrintWriter(fileName, "UTF-8");
-            writer.print(globals);
             writer.print(nodeListOutString);
+            writer.print(globals);
             writer.print(connectionOutString);
         } catch (FileNotFoundException | UnsupportedEncodingException ex) {
         } finally {

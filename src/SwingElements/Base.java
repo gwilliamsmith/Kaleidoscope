@@ -40,7 +40,6 @@ public class Base extends JFrame {
     private final JMenu propertiesMenu = new JMenu("Properties");
     private final JMenu save = new JMenu("Save");
     private final JMenu schedulerMenu = new JMenu("Scheduler");
-    private final JMenu coloringBookMenu = new JMenu("Coloring Book Options");
 
     private final JMenuItem step = new JMenuItem("Step forward");                                       //Right-click button
     private final JMenuItem loop = new JMenuItem("Run");                                                //Right-click button   
@@ -57,8 +56,11 @@ public class Base extends JFrame {
     private final JMenuItem toggleDrag = new JMenuItem("Disable drag to reposition");                   //Properties menu
 
     private final JMenuItem saveState = new JMenuItem("Save state");                                    //Save menu
-    private final JMenuItem savePicture = new JMenuItem("Save Picture");                                //Save menu
+    private final JMenuItem loadState = new JMenuItem("Load state");                                    //Save menu
+    private final JMenuItem savePicture = new JMenuItem("Save picture");                                //Save menu
     private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");       //Save menu
+    
+    private JSlider stepTimeSlider;
 
     private SettingsFileManipulator settingsManager;                            //Settings manager, reads the persistent settings in from the file
 
@@ -103,17 +105,17 @@ public class Base extends JFrame {
         setTitle("Kaleidoscope v 0.2.1");
         add(canvas);
 
-        JSlider slider = new JSlider(1, 1000, st);
-        slider.addChangeListener(new SliderChangeListener((this)));
-        slider.setMajorTickSpacing(100);
-        slider.setMinorTickSpacing(1);
+        stepTimeSlider = new JSlider(1, 1000, st);
+        stepTimeSlider.addChangeListener(new SliderChangeListener((this)));
+        stepTimeSlider.setMajorTickSpacing(100);
+        stepTimeSlider.setMinorTickSpacing(1);
         Hashtable<Integer, JLabel> sliderLabels = new Hashtable<>();
         sliderLabels.put(20, new JLabel("Faster"));
         sliderLabels.put(980, new JLabel("Slower"));
-        slider.setLabelTable(sliderLabels);
-        slider.setPaintLabels(true);
-        slider.addKeyListener(new BaseKeyListener((this)));
-        add(slider);
+        stepTimeSlider.setLabelTable(sliderLabels);
+        stepTimeSlider.setPaintLabels(true);
+        stepTimeSlider.addKeyListener(new BaseKeyListener((this)));
+        add(stepTimeSlider);
 
         stepTime = st;
         //Takes steps on an interval
@@ -188,6 +190,7 @@ public class Base extends JFrame {
         averageColor.addActionListener(new AverageColorActionListener(this));
         customLine.addActionListener(new CustomLineActionListener(this));
         saveState.addActionListener(new SaveStateActionListener(this));
+        loadState.addActionListener(new LoadStateActionListener(this));
         savePicture.addActionListener(new SavePictureActionListener(this));
         seedColoringBook.addActionListener(new SeedColoringBookListener(this));
         centerGrid.addActionListener(new CenterGridActionListener(this));
@@ -231,6 +234,7 @@ public class Base extends JFrame {
      */
     private void createSaveMenu() {
         save.add(saveState);
+        save.add(loadState);
         save.add(savePicture);
         save.add(folderSelect);
     }//end createSaveMenu
@@ -382,7 +386,7 @@ public class Base extends JFrame {
      * @param in The number of ms to wait between steps when auto-running
      */
     public void setStepTime(int in) {
-        stepTime = in;
+        updateStepTime(in);
     }//end setStepTime
 
     /**
@@ -429,5 +433,9 @@ public class Base extends JFrame {
     public JMenuItem getWhiteOutGrid() {
         return whiteOutGrid;
     }//end getWhiteOutGrid
+    
+    public void setStepTimeSliderLocation(int location){
+        stepTimeSlider.setValue(location);
+    }//end setSliderLocation
 
 }//end Base class

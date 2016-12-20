@@ -80,6 +80,10 @@ public class GraphNode extends Rectangle {
         }//end if
         return false;
     }//end connect
+    
+    public void addConnection(GraphTuple in){
+        connections.add(in);
+    }//end addConnection
 
     /**
      * Regenerates food on this node
