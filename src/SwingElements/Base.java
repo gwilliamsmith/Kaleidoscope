@@ -19,7 +19,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  */
 public class Base extends JFrame {
 
-    public static Graph graph;                                                        //The grid
+    public static Graph graph;                                                  //The grid
 
     private Canvas canvas;                                                      //Canvas for displaying stuff
 
@@ -52,7 +52,7 @@ public class Base extends JFrame {
 
     private final JMenuItem propertiesItem = new JMenuItem("Edit properties");                          //Properties menu
     private final JMenuItem customLine = new JMenuItem("Set properties for next line");                 //Properties menu
-    private final JMenuItem seedColoringBook = new JMenuItem("Set up starting coloring book seed");    //Properties menu
+    private final JMenuItem seedColoringBook = new JMenuItem("Set up starting coloring book seed");     //Properties menu
     private final JMenuItem toggleDrag = new JMenuItem("Disable drag to reposition");                   //Properties menu
 
     private final JMenuItem saveState = new JMenuItem("Save state");                                    //Save menu
@@ -102,7 +102,7 @@ public class Base extends JFrame {
         menuBar.addKeyListener(new BaseKeyListener((this)));
 
         setSize(500, 500);
-        setTitle("Kaleidoscope v 0.3");
+        setTitle("Kaleidoscope v 0.3.1");
         add(canvas);
 
         stepTimeSlider = new JSlider(1, 1000, st);
