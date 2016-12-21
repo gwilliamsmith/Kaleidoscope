@@ -84,9 +84,6 @@ public class SettingsFileManipulator extends GenericFileManipulator {
             }//end for
             ref.getCanvas().setResized(true);
         }//end if
-        else{
-            writeSettings();
-        }//end else
     }//end readSettingsIn
 
     /**

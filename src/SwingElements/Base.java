@@ -88,7 +88,7 @@ public class Base extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         addKeyListener(new BaseKeyListener(this));
 
-        settingsManager = new SettingsFileManipulator("./kaleidoscopesettings.ksf", this);
+        settingsManager = new SettingsFileManipulator("./res/settings.txt", this);
         settingsManager.readSettingsIn();
 
         addMenuListeners();
@@ -102,7 +102,7 @@ public class Base extends JFrame {
         menuBar.addKeyListener(new BaseKeyListener((this)));
 
         setSize(500, 500);
-        setTitle("Kaleidoscope v 0.3");
+        setTitle("Kaleidoscope v 0.2.1");
         add(canvas);
 
         stepTimeSlider = new JSlider(1, 1000, st);
