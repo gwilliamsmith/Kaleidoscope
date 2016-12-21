@@ -37,6 +37,15 @@ public class Camera {
         }//end try catch block
     }//end takePicture
 
+    public void takePicture(String name) {
+        try {
+            if (name != null) {
+                ImageIO.write(ref.getCanvas().produceTrimmedImage(), "jpg", new File(name));
+            }//end if
+        } catch (IOException ex) {
+        }//end try catch block
+    }//end takePicture
+
     /**
      * Returns the value of the pictureTaken variable.
      *

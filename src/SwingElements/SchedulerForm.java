@@ -16,6 +16,7 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
     private EventScheduler scheduler;                                   //Event scheduler object
     private EventDetailsInputForm createEventForm;                      //Form used to input information for most events
     private LineEventDetailsInputForm createLineEventForm;              //Form used to input information for line creation events
+    private SavePictureEventDetailsForm savePictureEventDetailsForm;
 
     /**
      * Constructor
@@ -60,7 +61,6 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
         SingleEventListLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(700, 300));
         setMinimumSize(new java.awt.Dimension(700, 300));
 
         RepeatEventList.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,7 +95,7 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
         EventTypeLabel.setMinimumSize(new java.awt.Dimension(25, 23));
         EventTypeLabel.setPreferredSize(new java.awt.Dimension(25, 23));
 
-        CreateEventComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gather Statistics", "Output Statistics", "Run", "Pause", "Refresh Seed", "Reset Grid", "Place Line", "Generate Random Line" }));
+        CreateEventComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gather Statistics", "Output Statistics", "Run", "Pause", "Refresh Seed", "Reset Grid", "Place Line", "Generate Random Line", "Save Picture" }));
         CreateEventComboBox.setMaximumSize(new java.awt.Dimension(140, 23));
         CreateEventComboBox.setMinimumSize(new java.awt.Dimension(140, 23));
         CreateEventComboBox.setPreferredSize(new java.awt.Dimension(140, 23));
@@ -306,11 +306,15 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
             case "Reset Grid":
             case "Generate Random Line":
                 createEventForm = new EventDetailsInputForm(this);
-                createEventForm.setVisible(true);
+                createEventForm.run();
                 break;
             case "Place Line":
                 createLineEventForm = new LineEventDetailsInputForm(this, ref);
-                createLineEventForm.setVisible(true);
+                createLineEventForm.run();
+                break;
+            case "Save Picture":
+                savePictureEventDetailsForm = new SavePictureEventDetailsForm(this);
+                savePictureEventDetailsForm.run();
                 break;
             default:
                 System.err.println("Invalid CreateEventComboBox option selected!");
@@ -325,13 +329,18 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
             Event e = scheduler.getRepeatedEvents().get(list.getSelectedIndex());
-            if (!(e instanceof PlaceLineEvent)) {
-                createEventForm = new EventDetailsInputForm(this, e);
-                createEventForm.setVisible(true);
-            }//end if
-            else {
+            if (e instanceof PlaceLineEvent) {
                 createLineEventForm = new LineEventDetailsInputForm(this, ref, (PlaceLineEvent) e);
-                createLineEventForm.setVisible(true);
+                SwingUtilities.invokeLater(createLineEventForm);
+                //createLineEventForm.setVisible(true);
+            }//end if
+            else if (e instanceof SavePictureEvent) {
+                savePictureEventDetailsForm = new SavePictureEventDetailsForm(this, (SavePictureEvent) e);
+                SwingUtilities.invokeLater(savePictureEventDetailsForm);
+            }//end else if
+            else {
+                createEventForm = new EventDetailsInputForm(this, e);
+                SwingUtilities.invokeLater(createEventForm);
             }//end else 
         }//end if
     }//GEN-LAST:event_RepeatEventListMouseClicked
@@ -344,14 +353,18 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
             Event e = scheduler.getSingleEvents().get(list.getSelectedIndex());
-            if (!(e instanceof PlaceLineEvent)) {
-                createEventForm = new EventDetailsInputForm(this, e);
-                SwingUtilities.invokeLater(createEventForm);
-            }//end if
-            else {
+            if (e instanceof PlaceLineEvent) {
                 createLineEventForm = new LineEventDetailsInputForm(this, ref, (PlaceLineEvent) e);
                 SwingUtilities.invokeLater(createLineEventForm);
-                createLineEventForm.setVisible(true);
+                //createLineEventForm.setVisible(true);
+            }//end if
+            else if (e instanceof SavePictureEvent) {
+                savePictureEventDetailsForm = new SavePictureEventDetailsForm(this, (SavePictureEvent) e);
+                SwingUtilities.invokeLater(savePictureEventDetailsForm);
+            }//end else if
+            else {
+                createEventForm = new EventDetailsInputForm(this, e);
+                SwingUtilities.invokeLater(createEventForm);
             }//end else 
         }//end if
     }//GEN-LAST:event_SingleEventListMouseClicked
@@ -455,6 +468,14 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
                         createLineEventForm.selectedNode2,
                         createLineEventForm.gti));
                 break;
+            case "Save Picture":
+                ref.scheduler.addEvent(new SavePictureEvent(
+                        savePictureEventDetailsForm.stepCount,
+                        savePictureEventDetailsForm.eventName,
+                        savePictureEventDetailsForm.repeat,
+                        ref,
+                        savePictureEventDetailsForm.location));
+                break;
             default:
                 System.err.println("Invalid CreateEventComboBox option selected!");
         }//end switch
@@ -464,6 +485,7 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
 
     /**
      * Returns the CreateEventComboBox.
+     *
      * @return CreateEventComboBox
      */
     public JComboBox getCreateEventComboBox() {
