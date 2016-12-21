@@ -297,7 +297,7 @@ public class GraphTuple {
      * the connection has been set as an edge by the user
      */
     public boolean isEdge(Graph graph) {
-        return (((graph.nodeIsEdge(toLocation) && graph.nodeIsEdge(fromLocation))
+        return ((graph.nodeIsEdge(toLocation) && graph.nodeIsEdge(fromLocation)
                 && ((toLocation.getILoc() == fromLocation.getILoc())
                 || (toLocation.getJLoc() == fromLocation.getJLoc())))
                 || edge);

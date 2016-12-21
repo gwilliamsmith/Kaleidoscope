@@ -22,7 +22,7 @@ public class GatherStatisticsEvent extends Event {
         }//end for
         for (FamilyStatisticsTuple fst : familyStatisticsHolder) {
             fst.proportionOfTotalLines = (double) fst.familyMembers.size() / totalLines;
-            if (!Base.checkConnection()) {
+            if (Base.checkConnection()) {
                 try {
                     Statement stmt = ref.getConn().createStatement();
                     int recordID = (int) (ref.getGraph().getStepCount() / 50);
