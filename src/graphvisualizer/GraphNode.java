@@ -12,16 +12,6 @@ import java.util.Random;
  */
 public class GraphNode extends Rectangle {
 
-    //Colors for nodes
-    public static final Color DEFAULT_COLOR = Color.blue;
-    public static final Color DEFAULT_EDGE_COLOR = Color.black;
-    public static final Color DEFAULT_MIDDLE_COLOR = Color.darkGray;
-    public static final Color SELECTED_COLOR = Color.green;
-    public static final Color SELECTED_ADJACENT_COLOR = Color.cyan;
-    public static final Color LINE_EVENT_NODE1_COLOR = Color.yellow;
-    public static final Color LINE_EVENT_NODE1_ADJACENT_COLOR = new Color(200, 200, 0);
-    public static final Color LINE_EVENT_NODE2_COLOR = Color.orange;
-
     private final ArrayList<GraphTuple> connections = new ArrayList<>();    //Node-specific adjacency list. GraphTuple items hold both nodes, as well as other information
     //  This node is the fromLocation, while the other node is the toLocation
     private final int id;                                                   //Node ID #
@@ -278,8 +268,8 @@ public class GraphNode extends Rectangle {
      *
      * @param in The new color for the node
      */
-    public void setColor(Color in) {
-        color = in;
+    public void setColor(GraphNodeColors in) {
+        color = in.getColor();
     }//end setColor
 
     /**

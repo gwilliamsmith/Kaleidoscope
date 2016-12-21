@@ -4,6 +4,7 @@ import SwingElements.Base;
 import SwingElements.Canvas;
 import graphvisualizer.Graph;
 import graphvisualizer.GraphNode;
+import graphvisualizer.GraphNodeColors;
 import graphvisualizer.GraphTupleInfo;
 import java.awt.event.*;
 import javax.swing.SwingUtilities;
@@ -62,7 +63,7 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
                     if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint())) {
                         graph.setConnectA(gn);
                         connect = true;
-                        graph.highlightNodeAdjacents(gn,GraphNode.SELECTED_COLOR,GraphNode.SELECTED_ADJACENT_COLOR);
+                        graph.highlightNodeAdjacents(gn,GraphNodeColors.SELECTED_COLOR,GraphNodeColors.SELECTED_ADJACENT_COLOR);
                         break;
                     }//end else
                 }//end for

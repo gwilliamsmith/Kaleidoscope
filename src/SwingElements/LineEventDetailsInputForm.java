@@ -2,6 +2,7 @@ package SwingElements;
 
 import EventScheduler.Events.PlaceLineEvent;
 import graphvisualizer.GraphNode;
+import graphvisualizer.GraphNodeColors;
 import graphvisualizer.GraphTupleInfo;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -35,7 +36,7 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame implements Run
         initComponents();
         setupNode1Spinners();
         selectedNode1 = sim.getGraph().getNode(0, 0);
-        sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
+        sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNodeColors.LINE_EVENT_NODE1_COLOR, GraphNodeColors.LINE_EVENT_NODE1_ADJACENT_COLOR);
         updateNode2ComboBox();
     }//end constructor
 
@@ -76,8 +77,8 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame implements Run
         selectedNode2 = e.getNode2();
         Node2SelectionComboBox.setSelectedItem(selectedNode2.printCoordinates());
 
-        sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
-        sim.getGraph().highlightNode(selectedNode2, GraphNode.LINE_EVENT_NODE2_COLOR);
+        sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNodeColors.LINE_EVENT_NODE1_COLOR, GraphNodeColors.LINE_EVENT_NODE1_ADJACENT_COLOR);
+        sim.getGraph().highlightNode(selectedNode2, GraphNodeColors.LINE_EVENT_NODE2_COLOR);
         this.setTitle("Line Event Details Input");
     }//end constructor
 
@@ -494,7 +495,7 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame implements Run
     private void Node1XSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Node1XSpinnerStateChanged
         sim.getGraph().resetNodeAdjacents(selectedNode1);
         selectedNode1 = sim.getGraph().getNode((int) Node1XSpinner.getValue(), (int) Node1YSpinner.getValue());
-        sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
+        sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNodeColors.LINE_EVENT_NODE1_COLOR, GraphNodeColors.LINE_EVENT_NODE1_ADJACENT_COLOR);
         updateNode2ComboBox();
     }//GEN-LAST:event_Node1XSpinnerStateChanged
 
@@ -505,7 +506,7 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame implements Run
     private void Node1YSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Node1YSpinnerStateChanged
         sim.getGraph().resetNodeAdjacents(selectedNode1);
         selectedNode1 = sim.getGraph().getNode((int) Node1XSpinner.getValue(), (int) Node1YSpinner.getValue());
-        sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
+        sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNodeColors.LINE_EVENT_NODE1_COLOR, GraphNodeColors.LINE_EVENT_NODE1_ADJACENT_COLOR);
         updateNode2ComboBox();
     }//GEN-LAST:event_Node1YSpinnerStateChanged
 
@@ -515,12 +516,12 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame implements Run
      */
     private void Node2SelectionComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Node2SelectionComboBoxItemStateChanged
         if (selectedNode2 != null) {
-            sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNode.LINE_EVENT_NODE1_COLOR, GraphNode.LINE_EVENT_NODE1_ADJACENT_COLOR);
+            sim.getGraph().highlightNodeAdjacents(selectedNode1, GraphNodeColors.LINE_EVENT_NODE1_COLOR, GraphNodeColors.LINE_EVENT_NODE1_ADJACENT_COLOR);
         }//end if
         if (Node2SelectionComboBox.getSelectedIndex() != -1) {
             GraphNode gn = adjacentNodes.get(Node2SelectionComboBox.getSelectedIndex());
             System.out.println(adjacentNodes.get(Node2SelectionComboBox.getSelectedIndex()).printCoordinates());
-            sim.getGraph().highlightNode(adjacentNodes.get(Node2SelectionComboBox.getSelectedIndex()), GraphNode.LINE_EVENT_NODE2_COLOR);
+            sim.getGraph().highlightNode(adjacentNodes.get(Node2SelectionComboBox.getSelectedIndex()), GraphNodeColors.LINE_EVENT_NODE2_COLOR);
             selectedNode2 = gn;
             System.out.println("hit");
         }//end if

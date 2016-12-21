@@ -264,7 +264,7 @@ public class Graph {
      * Creates edge connections for the nodes at the edges of the matrix.
      */
     private void outlineGrid() {
-        GraphTupleInfo gti = new GraphTupleInfo(50, GraphNode.DEFAULT_EDGE_COLOR, 0, 1);
+        GraphTupleInfo gti = new GraphTupleInfo(50, Color.BLACK, 0, 1);
         for (int modi = 0; modi < matrix.length; modi++) {                      //Looks through the left and right edges of a rectangular grid
             if (matrix[0].length > 0) {                                         //Ensures that the node matrix has at least one column
                 GraphNode temp1 = matrix[modi][0];                              // The node from the left edge of the rectangle
@@ -618,7 +618,7 @@ public class Graph {
      * @param in The node to be highlighted
      * @param highlightColor The new color for the given node
      */
-    public void highlightNode(GraphNode in, Color highlightColor) {
+    public void highlightNode(GraphNode in, GraphNodeColors highlightColor) {
         in.setColor(highlightColor);
     }//end highlightNode
 
@@ -632,7 +632,7 @@ public class Graph {
      * @param selectionColor The color for the given node
      * @param adjacentColor The color for nodes adjacent to the given node
      */
-    public void highlightNodeAdjacents(GraphNode in, Color selectionColor, Color adjacentColor) {
+    public void highlightNodeAdjacents(GraphNode in, GraphNodeColors selectionColor, GraphNodeColors adjacentColor) {
         in.setColor(selectionColor);
         int iLoc = in.getILoc();
         int jLoc = in.getJLoc();
@@ -707,13 +707,13 @@ public class Graph {
      */
     public void resetNodeColor(GraphNode in) {
         if (nodeIsMiddle(in)) {
-            in.setColor(GraphNode.DEFAULT_MIDDLE_COLOR);
+            in.setColor(GraphNodeColors.DEFAULT_MIDDLE_COLOR);
         }//end if
         else if (nodeIsEdge(in)) {
-            in.setColor(GraphNode.DEFAULT_EDGE_COLOR);
+            in.setColor(GraphNodeColors.DEFAULT_EDGE_COLOR);
         }//end else if
         else {
-            in.setColor(GraphNode.DEFAULT_COLOR);
+            in.setColor(GraphNodeColors.DEFAULT_COLOR);
         }//end else
     }//end resetNodeColor
 

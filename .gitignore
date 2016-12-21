@@ -228,3 +228,5 @@ manifest.mf
 nbproject/private/
 nbproject/genfiles.properties
 nbproject/private/private.properties
+*.ksf
+kaleidoscopesettings.ksf
