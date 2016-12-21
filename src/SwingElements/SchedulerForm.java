@@ -302,6 +302,7 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
             case "Run":
             case "Pause":
             case "Refresh Grid":
+            case "Refresh Seed":
             case "Reset Grid":
             case "Generate Random Line":
                 createEventForm = new EventDetailsInputForm(this);
