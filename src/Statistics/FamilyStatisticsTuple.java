@@ -30,6 +30,7 @@ public class FamilyStatisticsTuple {
      * @param fieldIn The {@link Graph} where the family is located, used for
      */
     public FamilyStatisticsTuple(ArrayList<GraphTuple> familyIn, int familyIDIn, Graph fieldIn) {
+        field = fieldIn;
         familyMembers = familyIn;
         familyID = familyIDIn;
         averageLifespan = calculateAverageLifespan();
@@ -37,7 +38,6 @@ public class FamilyStatisticsTuple {
         lifespanDeviation = calculateLifespanDeviation();
         meanDeviation = calculateMeanDeviation();
         averageColor = calculateAverageColor();
-        field = fieldIn;
         field.updateFamilyColorGradient(familyID - 1, averageColor);
     }//end public
 
