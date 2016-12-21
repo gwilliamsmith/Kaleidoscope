@@ -224,3 +224,6 @@ build/
 dist/
 nbproject/
 *.ksf
+manifest.mf
+nbproject/private/private.properties
+nbproject/genfiles.properties
