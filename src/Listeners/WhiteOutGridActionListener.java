@@ -1,8 +1,6 @@
 package Listeners;
 
 import SwingElements.Base;
-import graphvisualizer.GraphNode;
-import graphvisualizer.GraphNodeColors;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,21 +29,14 @@ public class WhiteOutGridActionListener implements ActionListener {
      * their color to white.
      */
     public void actionPerformed(ActionEvent e) {
+        System.out.println("toggled");
         if (!toggle) {
-            for (GraphNode[] matrix1 : ref.getGraph().getMatrix()) {
-                for (GraphNode gn : matrix1) {
-                    gn.setColor(GraphNodeColors.WHITE);
-                }//end for
-            }//end for
+            ref.getGraph().whiteOutNodeColors();
             ref.getWhiteOutGrid().setText("Restore all grid point colors");
             toggle = true;
         }//end if
         else{
-            for(GraphNode[] matrix1 : ref.getGraph().getMatrix()){
-                for(GraphNode gn : matrix1){
-                    ref.getGraph().resetNodeColor(gn);
-                }//end 
-            }//end for
+            ref.getGraph().resetNodeColors();
             ref.getWhiteOutGrid().setText("Turn all grid points white");
             toggle = false;
         }//end else

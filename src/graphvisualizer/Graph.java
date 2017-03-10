@@ -110,6 +110,7 @@ public class Graph {
      */
     public void refreshSeed() {
         reset();
+        whiteOutNodeColors();
         generateSeeds();
     }//end refreshSeed
 
@@ -360,6 +361,22 @@ public class Graph {
             midCount++;
         }//end if
     }//end checkPicture
+
+    public void whiteOutNodeColors() {
+        for (GraphNode[] matrix1 : matrix) {
+            for (GraphNode gn : matrix1) {
+                gn.setColor(GraphNodeColors.WHITE);
+            }//end for
+        }//end for
+    }//end whiteOutNodeColors
+
+    public void resetNodeColors() {
+        for (GraphNode[] matrix1 : matrix) {
+            for (GraphNode gn : matrix1) {
+                resetNodeColor(gn);
+            }//end 
+        }//end for
+    }//end resetNodeColors
 
     /**
      * Reduces the health of all non-edge connections

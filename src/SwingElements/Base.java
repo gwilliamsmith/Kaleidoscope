@@ -106,7 +106,7 @@ public class Base extends JFrame {
         menuBar.addKeyListener(new BaseKeyListener((this)));
 
         setSize(500, 500);
-        setTitle("Kaleidoscope v 0.4");
+        setTitle("Kaleidoscope v 0.4.1");
         add(canvas);
 
         stepTimeSlider = new JSlider(1, 1000, st);
@@ -267,7 +267,11 @@ public class Base extends JFrame {
     
     public void triggerLoop(){
         loop.getActionListeners()[0].actionPerformed(null);
-    }
+    }//end triggerLoop
+    
+    public void triggerWhiteOutGrid(){
+        whiteOutGrid.getActionListeners()[0].actionPerformed(null);
+    }//end triggerWhiteOutGrid
     
     /**
      * Inverts the run boolean, used in the loop menu button
