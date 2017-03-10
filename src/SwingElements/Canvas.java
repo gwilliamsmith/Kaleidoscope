@@ -30,6 +30,7 @@ public class Canvas extends JPanel {
     private int spacing = 10;                                           //Current amount of spacing between two nodes (in pixels)
     private int pointSize = 2;                                          //Current size (length of width/height) of a graph node (in pixels)
     private int zoomLevel = 0;                                          //Level of zoom
+    private int prevZoomLevel = zoomLevel;                              //Previous value of zoomLevel, used to move the mouse when zooming
     private boolean resized = false;
 
     private boolean drag = true;                                        //Determines if the drag to reposition is enabled/disabled
@@ -45,8 +46,11 @@ public class Canvas extends JPanel {
     private int curveMaxSeverity = spacing / 4;
 
     private static final int MAX_ZOOM_LEVEL = 7;
-    
-    private static boolean DEBUG = false;
+
+    public static boolean DEBUG = false;
+
+    private int mouseX = 0;
+    private int mouseY = 0;
 
     /**
      * Constructor.
@@ -107,18 +111,41 @@ public class Canvas extends JPanel {
      * @param g2 The {@link Graphics2D} object to draw the grid.
      */
     private void drawGrid(Graphics2D g2, boolean windowMod) {
+        if (DEBUG) {
+            drawDebug(g2);
+        }//end if
         drawNodes(g2, windowMod);
         drawConnections(g2, windowMod);
-        if(DEBUG){
-         g2.setColor(Color.CYAN);
-         Rectangle boundingRectangle = ref.getGraph().getBoundingRectangle();
-         g2.drawRect(boundingRectangle.x + windowX,
-         boundingRectangle.y + windowY,
-         boundingRectangle.width,
-         boundingRectangle.height);
-        }//end if
-         
     }//end drawGrid
+    
+    private void drawGridOffset(Graphics2D g2, int xOff, int yOff){
+        
+    }//end drawGridOffset
+
+    private void drawDebug(Graphics2D g2) {
+        Stroke temp = g2.getStroke();
+        g2.setStroke(new BasicStroke(1));
+        for (int i = 0; i < getWidth(); i += 5) {
+            g2.setColor(Color.lightGray);
+            g2.drawLine(i, 0, i, getHeight());
+        }//end for
+        for (int i = 0; i < getHeight(); i += 5) {
+            g2.setColor(Color.lightGray);
+            g2.drawLine(0, i, getWidth(), i);
+        }//end for
+        g2.setColor(Color.RED);
+        g2.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
+        g2.drawLine(0, getHeight() / 2, getWidth(), getHeight() / 2);
+        g2.setColor(Color.CYAN);
+        Rectangle boundingRectangle = ref.getGraph().getBoundingRectangle();
+        g2.drawRect(boundingRectangle.x + windowX,
+                boundingRectangle.y + windowY,
+                boundingRectangle.width,
+                boundingRectangle.height);
+        g2.setStroke(temp);
+        g2.setColor(Color.black);
+        drawString("(" + mouseX + "," + mouseY + ")", 0, 1, g2);
+    }//end drawDebug
 
     private void drawNodes(Graphics2D g2, boolean windowMod) {
         int windowMultiplier = windowMod ? 1 : 0;
@@ -258,11 +285,6 @@ public class Canvas extends JPanel {
         if (lastHovered != null) {
             drawString("(" + lastHovered.getJLoc() + "," + lastHovered.getILoc() + ")", 0, 3, g);
         }//end if
-        /*Center lines for debugging
-         g.setColor(Color.RED);
-         g.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
-         g.drawLine(0, getHeight() / 2, getWidth(), getHeight() / 2);
-         */
         g.dispose();
         return picture;
     }//end producePicture
@@ -277,8 +299,8 @@ public class Canvas extends JPanel {
     public BufferedImage produceTrimmedImage() {
         int columns = ref.getGraph().getMatrix()[0].length;
         int rows = ref.getGraph().getMatrix().length;
-        BufferedImage out = new BufferedImage(((columns * pointSize) + ((columns-1) * spacing)),
-                ((rows * pointSize) + ((rows-1) * spacing)), BufferedImage.TYPE_3BYTE_BGR);
+        BufferedImage out = new BufferedImage((((columns -1) * pointSize) + ((columns - 1) * spacing)),
+                (((rows -1) * pointSize) + ((rows - 1) * spacing)), BufferedImage.TYPE_3BYTE_BGR);
         Graphics g = out.createGraphics();
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, out.getWidth(), out.getHeight());
@@ -300,8 +322,8 @@ public class Canvas extends JPanel {
         if (resized) {
             adjustZoom();
             Graph graph = ref.getGraph();
-            for (int i = 0, ySpace = 0; i < graph.getMatrix().length; i++, ySpace += (spacing + pointSize)) {
-                for (int j = 0, xSpace = 0; j < graph.getMatrix()[i].length; j++, xSpace += (spacing + pointSize)) {
+            for (int i = 0, ySpace = -(pointSize / 2); i < graph.getMatrix().length; i++, ySpace += (spacing + pointSize)) {
+                for (int j = 0, xSpace = -(pointSize / 2); j < graph.getMatrix()[i].length; j++, xSpace += (spacing + pointSize)) {
                     GraphNode temp = graph.getMatrix()[i][j];
                     temp.x = xSpace;
                     temp.y = ySpace;
@@ -334,7 +356,7 @@ public class Canvas extends JPanel {
         FontMetrics fontSize = g.getFontMetrics();
         int textWidth = fontSize.stringWidth(in);
         if (corner == 1) {
-
+            g.drawString(in, 5, (fontSize.getHeight() * (lineOffset + 1)));
         }//end if
         else if (corner == 2) {
 
@@ -398,6 +420,7 @@ public class Canvas extends JPanel {
      */
     public void increaseZoomLevel() {
         if (zoomLevel < MAX_ZOOM_LEVEL) {
+            prevZoomLevel = zoomLevel;
             zoomLevel++;
             resized = true;
         }//end if
@@ -409,6 +432,7 @@ public class Canvas extends JPanel {
      */
     public void decreaseZoomLevel() {
         if (zoomLevel > 0) {
+            prevZoomLevel = zoomLevel;
             zoomLevel--;
             resized = true;
         }//end if
@@ -445,6 +469,7 @@ public class Canvas extends JPanel {
      * Sets the new point size and spacing, using the zoom level.
      */
     public void adjustZoom() {
+
         pointSize = minPointSize + (zoomLevel * 2);
         spacing = minSpacing + (zoomLevel * 4);
     }//end adjustZoom
@@ -569,6 +594,7 @@ public class Canvas extends JPanel {
      */
     public void setMinSpacing(int in) {
         minSpacing = in;
+        spacing = minSpacing;
     }//end setMinSpacing
 
     /**
@@ -587,6 +613,7 @@ public class Canvas extends JPanel {
      */
     public void setMinPointSize(int in) {
         minPointSize = in;
+        pointSize = minPointSize;
     }//end setMinPointSize
 
     /**
@@ -665,4 +692,12 @@ public class Canvas extends JPanel {
     public void toggleCurve() {
         curveEnabled = !curveEnabled;
     }//end toggleCurve
+
+    public void setMouseX(int in) {
+        mouseX = in;
+    }//end setMouseX
+
+    public void setMouseY(int in) {
+        mouseY = in;
+    }//end setMouseY
 }//end Canvas

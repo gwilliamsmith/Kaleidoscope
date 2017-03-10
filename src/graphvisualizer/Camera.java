@@ -31,7 +31,7 @@ public class Camera {
     public void takePicture() {
         try {
             if (ref.getBookDirectory() != null) {
-                ImageIO.write(ref.getCanvas().produceTrimmedImage(), "jpg", new File(ref.getBookDirectory().getAbsolutePath() + "\\" + pictureCount + ".jpg"));
+                ImageIO.write(ref.getCanvas().produceTrimmedImage(), "png", new File(ref.getBookDirectory().getAbsolutePath() + "\\" + pictureCount++ + ".png"));
             }//end if
         } catch (IOException ex) {
         }//end try catch block
@@ -40,7 +40,7 @@ public class Camera {
     public void takePicture(String name) {
         try {
             if (name != null) {
-                ImageIO.write(ref.getCanvas().produceTrimmedImage(), "jpg", new File(name));
+                ImageIO.write(ref.getCanvas().produceTrimmedImage(), "png", new File(name));
             }//end if
         } catch (IOException ex) {
         }//end try catch block

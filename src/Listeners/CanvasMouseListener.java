@@ -99,6 +99,8 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
         Canvas canvas = ref.getCanvas();
         Graph graph = ref.getGraph();
         GraphNode selected = null;
+        canvas.setMouseX(e.getX());
+        canvas.setMouseY(e.getY());
         for (GraphNode gn : graph.getGraphNodes()) {
             if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint()) && gn != lastHovered) {
                 selected = gn;

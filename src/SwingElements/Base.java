@@ -41,24 +41,26 @@ public class Base extends JFrame {
     private final JMenu save = new JMenu("Save");
     private final JMenu schedulerMenu = new JMenu("Scheduler");
 
-    private final JMenuItem step = new JMenuItem("Step forward");                                       //Right-click button
-    private final JMenuItem loop = new JMenuItem("Run");                                                //Right-click button   
-    private final JMenuItem averageColor = new JMenuItem("Show average connection color");              //Right-click button
-    private final JMenuItem databaseConnect = new JMenuItem("Connect to local database");               //Right-click button  
+    private final JMenuItem step = new JMenuItem("Step forward");                                           //Right-click button
+    private final JMenuItem loop = new JMenuItem("Run");                                                    //Right-click button   
+    private final JMenuItem averageColor = new JMenuItem("Show average connection color");                  //Right-click button
+    private final JMenuItem databaseConnect = new JMenuItem("Connect to local database");                   //Right-click button  
 
-    private final JMenuItem reset = new JMenuItem("Reset grid");                                        //Grid options menu
-    private final JMenuItem whiteOutGrid = new JMenuItem("Turn all grid points white");                 //Grid options menu
-    private final JMenuItem centerGrid = new JMenuItem("Center the grid on the screen");                //Grid options menu
+    private final JMenuItem reset = new JMenuItem("Reset grid");                                            //Grid options menu
+    private final JMenuItem whiteOutGrid = new JMenuItem("Turn all grid points white");                     //Grid options menu
+    private final JMenuItem centerGrid = new JMenuItem("Center the grid on the screen");                    //Grid options menu
 
-    private final JMenuItem propertiesItem = new JMenuItem("Edit properties");                          //Properties menu
-    private final JMenuItem customLine = new JMenuItem("Set properties for next line");                 //Properties menu
-    private final JMenuItem seedColoringBook = new JMenuItem("Set up starting coloring book seed");    //Properties menu
-    private final JMenuItem toggleDrag = new JMenuItem("Disable drag to reposition");                   //Properties menu
+    private final JMenuItem propertiesItem = new JMenuItem("Edit properties");                              //Properties menu
+    private final JMenuItem customLine = new JMenuItem("Set properties for next line");                     //Properties menu
+    private final JMenuItem seedColoringBook = new JMenuItem("Set up starting coloring book seed");         //Properties menu
+    private final JMenuItem toggleDrag = new JMenuItem("Disable drag to reposition");                       //Properties menu
 
-    private final JMenuItem saveState = new JMenuItem("Save state");                                    //Save menu
-    private final JMenuItem loadState = new JMenuItem("Load state");                                    //Save menu
-    private final JMenuItem savePicture = new JMenuItem("Save picture");                                //Save menu
-    private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");       //Save menu
+    private final JMenuItem saveState = new JMenuItem("Save state");                                        //Save menu
+    private final JMenuItem loadState = new JMenuItem("Load state");                                        //Save menu
+    private final JMenuItem savePicture = new JMenuItem("Save picture");                                    //Save menu
+    private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");           //Save menu
+    private final JMenuItem toggleSaveInterval = new JMenuItem("Disable saving pictures on interval");       //Save menu
+    private final JMenuItem togglePauseInterval = new JMenuItem("Enable pausing after interval picture");   //Save menu
     
     private JSlider stepTimeSlider;
 
@@ -90,6 +92,8 @@ public class Base extends JFrame {
 
         settingsManager = new SettingsFileManipulator("./kaleidoscopesettings.ksf", this);
         settingsManager.readSettingsIn();
+        
+        graph.initializeGrid();
 
         addMenuListeners();
         createRightClickMenu();
@@ -102,7 +106,7 @@ public class Base extends JFrame {
         menuBar.addKeyListener(new BaseKeyListener((this)));
 
         setSize(500, 500);
-        setTitle("Kaleidoscope v 0.3");
+        setTitle("Kaleidoscope v 0.4");
         add(canvas);
 
         stepTimeSlider = new JSlider(1, 1000, st);
@@ -198,6 +202,8 @@ public class Base extends JFrame {
         folderSelect.addActionListener(new FolderSelectActionListener(this));
         databaseConnect.addActionListener(new DatabaseConnectListener(this));
         schedulerMenu.addMouseListener(new SchedulerMenuActionListener(this));
+        toggleSaveInterval.addActionListener(new ToggleSaveIntervalActionListener((this)));
+        togglePauseInterval.addActionListener(new TogglePauseIntervalActionListener(this));
     }//end addMenuListeners
 
     /**
@@ -237,6 +243,8 @@ public class Base extends JFrame {
         save.add(loadState);
         save.add(savePicture);
         save.add(folderSelect);
+        save.add(toggleSaveInterval);
+        save.add(togglePauseInterval);
     }//end createSaveMenu
 
     /**
@@ -249,6 +257,18 @@ public class Base extends JFrame {
         menuBar.add(schedulerMenu);
     }//end createMenuBar
 
+    public void triggerSaveAction(){
+        savePicture.getActionListeners()[0].actionPerformed(null);
+    }//end triggerSaveAction
+    
+    public void triggerSaveStateAction(){
+        saveState.getActionListeners()[0].actionPerformed(null);
+    }//end triggerSaveStateAction
+    
+    public void triggerLoop(){
+        loop.getActionListeners()[0].actionPerformed(null);
+    }
+    
     /**
      * Inverts the run boolean, used in the loop menu button
      */
@@ -289,6 +309,14 @@ public class Base extends JFrame {
     public static boolean checkConnection() {
         return conn == null;
     }//end checkConnection
+    
+    public void setSaveIntervalToggleText(String in){
+        toggleSaveInterval.setText(in);
+    }//end setSaveIntervalToggleText
+    
+    public void setPauseIntervalToggleText(String in){
+        togglePauseInterval.setText(in);
+    }//end setSaveIntervalToggleText
 
     /**
      * Returns the {@link Canvas} object

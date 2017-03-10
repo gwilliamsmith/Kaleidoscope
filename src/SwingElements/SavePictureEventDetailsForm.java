@@ -12,7 +12,7 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
     public int stepCount;
     public String eventName;
     public boolean repeat;
-    public String location = "";
+    public String location = ".";
     private SavePictureEvent temp = null;
 
     /**

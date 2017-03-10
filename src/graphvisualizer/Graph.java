@@ -60,6 +60,10 @@ public class Graph {
 
     private Rectangle boundingRectangle;
 
+    private boolean pictureSaveToggle = true;
+
+    private boolean picturePauseToggle = false;
+
     /**
      * @param r Number of rows in the matrix
      * @param c Number of columns in the matric
@@ -71,8 +75,8 @@ public class Graph {
         ref = in;
         camera = new Camera(ref);
         familyAverageColorGradients = new ArrayList<>();
-        boundingRectangle = new Rectangle(0, 0, 305, 305);
-        initializeGrid();
+        boundingRectangle = new Rectangle(0, 0, 2550, 2550);
+        //initializeGrid();
     }//end constructor
 
     /**
@@ -141,6 +145,7 @@ public class Graph {
         return false;
     }//end biconnect
 
+    //TODO: Clean this up
     public void createConnection(int n1y, int n1x, int n2y, int n2x, int red, int green, int blue, int health, int startHealth, int mutatePercentage, int reproductionClock, int startReproductionClock, boolean edge, boolean curved, int curveDirection, double curveSeverity) {
         GraphNode n1 = matrix[n1y][n1x];
         GraphNode n2 = matrix[n2y][n2x];
@@ -247,11 +252,11 @@ public class Graph {
      * {@link GraphNode} objects, and places them on the {@link Canvas} at the
      * appropriate coordinates
      */
-    private void initializeGrid() {
+    public void initializeGrid() {
         int pointSize = ref.getCanvas().getPointSize();
         int spacing = ref.getCanvas().getSpacing();
-        for (int i = 0, ySpace = 0; i < matrix.length; i++, ySpace += (spacing + pointSize)) {
-            for (int j = 0, xSpace = 0; j < matrix[i].length; j++, xSpace += (spacing + pointSize)) {
+        for (int i = 0, ySpace = -(pointSize / 2); i < matrix.length; i++, ySpace += (spacing + pointSize)) {
+            for (int j = 0, xSpace = -(pointSize / 2); j < matrix[i].length; j++, xSpace += (spacing + pointSize)) {
                 GraphNode temp = new GraphNode(xSpace, ySpace, pointSize, pointSize, newID(), i, j, CONSUME);
                 addNode(temp, i, j);
                 resetNodeColor(temp);
@@ -327,17 +332,24 @@ public class Graph {
             }//end for
         }//end for
         noNewGrowth = queue.isEmpty();                                          //True if no nodes are found to be valid targets for growth
+        if (pictureSaveToggle) {
+            checkPicture();
+        }//end if
+    }//end buildQueue
 
-        //Below here is for picture taking, replace it with an Event at some point
+    private void checkPicture() {
+        //Used for picture taking on an interval, replace it with an Event at some point
         if (noNewGrowth && !camera.isPictureTaken()) {                          //Only take a picture if there has been no growth, and the camera is ready
             if (cycleSteps <= 0) {
                 cycleSteps = stepCount;
             }//end if
-            /* Janky work around so that it doesn't reset on an interval
-             camera.setPictureTaken(true);
-             camera.takePicture();
-             midCount = 0;
-             */
+            camera.setPictureTaken(true);
+            camera.takePicture();
+            midCount = 0;
+            if (picturePauseToggle) {
+                ref.pause();
+            }//end if
+
         }//end if
         else if (!noNewGrowth && camera.isPictureTaken()) {
             if (midCount >= cycleSteps) {
@@ -347,7 +359,7 @@ public class Graph {
         if (camera.isPictureTaken()) {
             midCount++;
         }//end if
-    }//end buildQueue
+    }//end checkPicture
 
     /**
      * Reduces the health of all non-edge connections
@@ -1399,4 +1411,19 @@ public class Graph {
         lineEventNode2 = in;
     }//end setLineEventNode1
 
+    public boolean getPictureSaveToggle() {
+        return pictureSaveToggle;
+    }//end getPictureSaveToggle
+
+    public void setPictureSaveToggle(boolean in) {
+        pictureSaveToggle = in;
+    }//end getPictureSaveToggle
+
+    public boolean getPicturePauseToggle() {
+        return picturePauseToggle;
+    }//end getPictureSaveToggle
+
+    public void setPicturePauseToggle(boolean in) {
+        picturePauseToggle = in;
+    }//end getPictureSaveToggle
 }//end Graph

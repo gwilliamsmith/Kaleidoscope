@@ -60,6 +60,7 @@ public class SaveStateActionListener implements ActionListener {
 
         //File saving code
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Save State");
         int returnVal = fileChooser.showSaveDialog(ref);
         String fileName = "";
         if (returnVal == JFileChooser.APPROVE_OPTION && fileChooser.getSelectedFile().getName() != null) {
