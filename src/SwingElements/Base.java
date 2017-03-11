@@ -49,6 +49,7 @@ public class Base extends JFrame {
     private final JMenuItem reset = new JMenuItem("Reset grid");                                            //Grid options menu
     private final JMenuItem whiteOutGrid = new JMenuItem("Turn all grid points white");                     //Grid options menu
     private final JMenuItem centerGrid = new JMenuItem("Center the grid on the screen");                    //Grid options menu
+    private final JMenuItem resetZoom = new JMenuItem("Reset zoom level");                                  //Grid options menu
 
     private final JMenuItem propertiesItem = new JMenuItem("Edit properties");                              //Properties menu
     private final JMenuItem customLine = new JMenuItem("Set properties for next line");                     //Properties menu
@@ -149,6 +150,7 @@ public class Base extends JFrame {
         timer.stop();
         int tempPictureCount = graph.getCamera().getPictureCount();
         graph = new Graph(r, c, this);
+        graph.initializeGrid();
         graph.getCamera().setPictureCount(tempPictureCount);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         if ("Restore all grid point colors".equals(whiteOutGrid.getText())) {
@@ -206,6 +208,7 @@ public class Base extends JFrame {
         schedulerMenu.addMouseListener(new SchedulerMenuActionListener(this));
         toggleSaveInterval.addActionListener(new ToggleSaveIntervalActionListener((this)));
         togglePauseInterval.addActionListener(new TogglePauseIntervalActionListener(this));
+        resetZoom.addActionListener(new ResetZoomActionListener(this));
     }//end addMenuListeners
 
     /**
@@ -225,6 +228,7 @@ public class Base extends JFrame {
         gridOptions.add(reset);
         gridOptions.add(whiteOutGrid);
         gridOptions.add(centerGrid);
+        gridOptions.add(resetZoom);
     }//end createGridOptionsMenu
 
     /**

@@ -85,7 +85,7 @@ public class Canvas extends JPanel {
     public void paintGraph(Graphics g, boolean windowMod) {
         Graphics2D g2 = (Graphics2D) g;
         resizeGrid();
-        g2.setStroke(new BasicStroke(zoomLevel));
+        g2.setStroke(new BasicStroke(Math.max(zoomLevel, 1)));
         drawGrid(g2, windowMod);
     }//end paint
 
@@ -117,9 +117,9 @@ public class Canvas extends JPanel {
         drawNodes(g2, windowMod);
         drawConnections(g2, windowMod);
     }//end drawGrid
-    
-    private void drawGridOffset(Graphics2D g2, int xOff, int yOff){
-        
+
+    private void drawGridOffset(Graphics2D g2, int xOff, int yOff) {
+
     }//end drawGridOffset
 
     private void drawDebug(Graphics2D g2) {
@@ -299,8 +299,8 @@ public class Canvas extends JPanel {
     public BufferedImage produceTrimmedImage() {
         int columns = ref.getGraph().getMatrix()[0].length;
         int rows = ref.getGraph().getMatrix().length;
-        BufferedImage out = new BufferedImage((((columns -1) * pointSize) + ((columns - 1) * spacing)),
-                (((rows -1) * pointSize) + ((rows - 1) * spacing)), BufferedImage.TYPE_3BYTE_BGR);
+        BufferedImage out = new BufferedImage((((columns - 1) * pointSize) + ((columns - 1) * spacing)),
+                (((rows - 1) * pointSize) + ((rows - 1) * spacing)), BufferedImage.TYPE_3BYTE_BGR);
         Graphics g = out.createGraphics();
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, out.getWidth(), out.getHeight());
@@ -419,23 +419,20 @@ public class Canvas extends JPanel {
      * Increments the zoom level, if it is not already at the maximum value.
      */
     public void increaseZoomLevel() {
-        if (zoomLevel < MAX_ZOOM_LEVEL) {
-            prevZoomLevel = zoomLevel;
-            zoomLevel++;
-            resized = true;
-        }//end if
+        prevZoomLevel = zoomLevel;
+        zoomLevel = zoomLevel < MAX_ZOOM_LEVEL ? zoomLevel + 1 : zoomLevel;
+        resized = prevZoomLevel != zoomLevel;
         ref.getSettingsManager().writeSettings();
     }//end increaseZoomLevel
 
     /**
-     * Decrements the zoom level, if it is not already at 0.
+     * Decrements the zoom level, if the grid is not already zoomed all the way
+     * out.
      */
     public void decreaseZoomLevel() {
-        if (zoomLevel > 0) {
-            prevZoomLevel = zoomLevel;
-            zoomLevel--;
-            resized = true;
-        }//end if
+        prevZoomLevel = zoomLevel;
+        zoomLevel = (pointSize == 1 && spacing == 1) ? zoomLevel : zoomLevel - 1;
+        resized = prevZoomLevel != zoomLevel;
         ref.getSettingsManager().writeSettings();
     }//end decreaseZoomLevel
 
@@ -445,15 +442,10 @@ public class Canvas extends JPanel {
      * @param in The new value for zoom level
      */
     public void setZoomLevel(int in) {
-        if (in < 0) {
-            zoomLevel = 0;
-        }//end if
-        else if (in > MAX_ZOOM_LEVEL) {
-            zoomLevel = MAX_ZOOM_LEVEL;
-        }//end else if
-        else {
-            zoomLevel = in;
-        }//end else
+        prevZoomLevel = zoomLevel;
+        zoomLevel = (Math.max(minPointSize + (in * 2), 1) == 1 && Math.max(minSpacing + (zoomLevel * 4), 1) == 1) ? zoomLevel : in;
+        zoomLevel = zoomLevel > MAX_ZOOM_LEVEL ? MAX_ZOOM_LEVEL : zoomLevel;
+        resized = prevZoomLevel != zoomLevel;
     }//end setZoomLevel
 
     /**
@@ -469,9 +461,8 @@ public class Canvas extends JPanel {
      * Sets the new point size and spacing, using the zoom level.
      */
     public void adjustZoom() {
-
-        pointSize = minPointSize + (zoomLevel * 2);
-        spacing = minSpacing + (zoomLevel * 4);
+        pointSize = Math.max(minPointSize + (zoomLevel * 2), 1);
+        spacing = Math.max(minSpacing + (zoomLevel * 4), 1);
     }//end adjustZoom
 
     /**
