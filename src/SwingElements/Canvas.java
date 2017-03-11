@@ -322,8 +322,8 @@ public class Canvas extends JPanel {
         if (resized) {
             adjustZoom();
             Graph graph = ref.getGraph();
-            for (int i = 0, ySpace = -(pointSize / 2); i < graph.getMatrix().length; i++, ySpace += (spacing + pointSize)) {
-                for (int j = 0, xSpace = -(pointSize / 2); j < graph.getMatrix()[i].length; j++, xSpace += (spacing + pointSize)) {
+            for (int i = 0, xSpace = -(pointSize / 2); i < graph.getMatrix().length; i++, xSpace += (spacing + pointSize)) {
+                for (int j = 0, ySpace = -(pointSize / 2); j < graph.getMatrix()[i].length; j++, ySpace += (spacing + pointSize)) {
                     GraphNode temp = graph.getMatrix()[i][j];
                     temp.x = xSpace;
                     temp.y = ySpace;

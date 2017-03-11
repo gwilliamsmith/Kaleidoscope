@@ -177,6 +177,8 @@ public class Base extends JFrame {
         boolean resume = timer.isRunning();
         timer.stop();
         timer = new Timer(stepTime, new TimerActionListener(this));
+        int sliderVal = (stepTime <= 0 ? 0:st);
+        stepTimeSlider.setValue(sliderVal);
         if(resume){
             timer.start();
         }//end if

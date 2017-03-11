@@ -10,6 +10,9 @@ import javax.swing.JTextField;
 public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
 
     private Base ref;                   //Used to access other objects as needed
+    private int c = 0;
+    private int r = 0;
+    private int st = 0;
 
     /**
      * Constructor.
@@ -24,6 +27,9 @@ public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
             NumberOfColumnsTextField.setText(ref.getGraph().getMatrix()[0].length + "");
             StepTimeTextField.setText(ref.getStepTime() + "");
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            c = ref.getGraph().getMatrix()[0].length;
+            r = ref.getGraph().getMatrix().length;
+            st = ref.getStepTime();
         }//end if
         this.setTitle("Grid Settings");
     }//end constructor
@@ -152,7 +158,14 @@ public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
                 new Base(c, r, st).setVisible(true);
             }
             else {
-                ref.resizeGrid(c, r, st);
+                if(!(c == this.c && r == this.r)){
+                    ref.resizeGrid(c, r, st);
+                }//end if
+                else{
+                    if(st != this.st){
+                        ref.setStepTime(st);
+                    }//end if
+                }//end else
             }//end else
             this.dispose();
         }//end if
