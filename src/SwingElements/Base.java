@@ -60,8 +60,10 @@ public class Base extends JFrame {
     private final JMenuItem loadState = new JMenuItem("Load state");                                        //Save menu
     private final JMenuItem savePicture = new JMenuItem("Save picture");                                    //Save menu
     private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");           //Save menu
-    private final JMenuItem toggleSaveInterval = new JMenuItem("Disable saving pictures on interval");       //Save menu
+    private final JMenuItem toggleSaveInterval = new JMenuItem("Disable saving pictures on interval");      //Save menu
     private final JMenuItem togglePauseInterval = new JMenuItem("Enable pausing after interval picture");   //Save menu
+
+    private final DebugMenuForm debugMenu;                                      //Menu for debug settings
     
     private JSlider stepTimeSlider;
 
@@ -88,6 +90,7 @@ public class Base extends JFrame {
         setLayout(layout);
         canvas = new Canvas(this);
         graph = new Graph(r, c, this);
+        debugMenu = new DebugMenuForm(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         addKeyListener(new BaseKeyListener(this));
 

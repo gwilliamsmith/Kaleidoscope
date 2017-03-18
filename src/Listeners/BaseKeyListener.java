@@ -2,20 +2,21 @@ package Listeners;
 
 import SwingElements.Base;
 import SwingElements.Canvas;
+import SwingElements.DebugMenuForm;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class BaseKeyListener implements KeyListener {
 
     private int debugCount = 0;
-    
+
     private static int DEBUG_TOGGLE_COUNT = 5;
-    
+
     private Base ref;
 
     public BaseKeyListener(Base in) {
         ref = in;
-        debugCount = Canvas.DEBUG ? DEBUG_TOGGLE_COUNT:0;
+        debugCount = Canvas.DEBUG ? DEBUG_TOGGLE_COUNT : 0;
     }//end constructor
 
     @Override
@@ -35,13 +36,11 @@ public class BaseKeyListener implements KeyListener {
             return;
         }//end if
         if ((e.getKeyCode() == KeyEvent.VK_D) && ((e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) != 0)) {
-            if (Canvas.DEBUG){
-                Canvas.DEBUG = (--debugCount != 0);
+
+            if (++debugCount == DEBUG_TOGGLE_COUNT) {
+                new DebugMenuForm(ref).setVisible(true);
+                debugCount = 0;
             }//end if
-            else{
-                Canvas.DEBUG = (++debugCount == DEBUG_TOGGLE_COUNT);
-            }//end else
-            System.out.println(Canvas.DEBUG + " " + debugCount);
             return;
         }//end if
         switch (e.getKeyCode()) {

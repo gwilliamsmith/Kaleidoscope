@@ -41,13 +41,21 @@ public class Canvas extends JPanel {
 
     private GraphTupleInfo gtiStorage = new GraphTupleInfo();           //Info for next line
 
-    public static boolean curveEnabled = false;                          //Toggles drawing of lines or curves between nodes
+    public static boolean curveEnabled = false;                         //Toggles drawing of lines or curves between nodes
 
     private int curveMaxSeverity = spacing / 4;
 
     private static final int MAX_ZOOM_LEVEL = 7;
 
-    public static boolean DEBUG = false;
+    public static boolean DEBUG = false;                                //Master toggle for debug features
+
+    public static boolean DEBUG_GRID_LINES = false;                     //Debug toggle for grey lines drawn every five pixels along x and y axis
+    public static boolean DEBUG_CENTER_LINES = false;                   //Debug toggle for red lines drawn down center of window on x and y axis
+    public static boolean DEBUG_BOUNDING_RECTANGLE = false;             //Debug toggle for showing the bounding rectangle in cyan
+    public static boolean DEBUG_MOUSE_COORDINATES = false;              //Debug toggle for showing the mouse coordinates in top-left corner
+
+    public static int BOUNDING_RECTANGLE_WIDTH = 2550;                  //Width of bounding rectangle
+    public static int BOUNDING_RECTANGLE_HEIGHT = 2550;                 //Height of bounding rectangle
 
     private int mouseX = 0;
     private int mouseY = 0;
@@ -118,34 +126,54 @@ public class Canvas extends JPanel {
         drawConnections(g2, windowMod);
     }//end drawGrid
 
-    private void drawGridOffset(Graphics2D g2, int xOff, int yOff) {
-
-    }//end drawGridOffset
-
     private void drawDebug(Graphics2D g2) {
         Stroke temp = g2.getStroke();
         g2.setStroke(new BasicStroke(1));
-        for (int i = 0; i < getWidth(); i += 5) {
-            g2.setColor(Color.lightGray);
-            g2.drawLine(i, 0, i, getHeight());
-        }//end for
-        for (int i = 0; i < getHeight(); i += 5) {
-            g2.setColor(Color.lightGray);
-            g2.drawLine(0, i, getWidth(), i);
-        }//end for
-        g2.setColor(Color.RED);
-        g2.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
-        g2.drawLine(0, getHeight() / 2, getWidth(), getHeight() / 2);
-        g2.setColor(Color.CYAN);
-        Rectangle boundingRectangle = ref.getGraph().getBoundingRectangle();
-        g2.drawRect(boundingRectangle.x + windowX,
-                boundingRectangle.y + windowY,
-                boundingRectangle.width,
-                boundingRectangle.height);
+        drawDebugGridLines(g2);
+        drawDebugCenterLines(g2);
+        drawDebugBoundingRectangle(g2);
+        drawDebugMouseCoordinates(g2);
         g2.setStroke(temp);
-        g2.setColor(Color.black);
-        drawString("(" + mouseX + "," + mouseY + ")", 0, 1, g2);
     }//end drawDebug
+
+    private void drawDebugGridLines(Graphics2D g2) {
+        if (DEBUG_GRID_LINES) {
+            for (int i = 0; i < getWidth(); i += 5) {
+                g2.setColor(Color.lightGray);
+                g2.drawLine(i, 0, i, getHeight());
+            }//end for
+            for (int i = 0; i < getHeight(); i += 5) {
+                g2.setColor(Color.lightGray);
+                g2.drawLine(0, i, getWidth(), i);
+            }//end for
+        }//end if
+    }//end drawDebugGridLines
+
+    private void drawDebugCenterLines(Graphics2D g2) {
+        if (DEBUG_CENTER_LINES) {
+            g2.setColor(Color.RED);
+            g2.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight());
+            g2.drawLine(0, getHeight() / 2, getWidth(), getHeight() / 2);
+        }//end if
+    }//end drawDebugCenterLines
+
+    private void drawDebugBoundingRectangle(Graphics2D g2) {
+        if (DEBUG_BOUNDING_RECTANGLE) {
+            g2.setColor(Color.CYAN);
+            Rectangle boundingRectangle = new Rectangle(0, 0, BOUNDING_RECTANGLE_WIDTH, BOUNDING_RECTANGLE_HEIGHT);
+            g2.drawRect(boundingRectangle.x + windowX,
+                    boundingRectangle.y + windowY,
+                    boundingRectangle.width,
+                    boundingRectangle.height);
+        }//end if
+    }//end drawDebugBoundingRectangle
+
+    private void drawDebugMouseCoordinates(Graphics2D g2) {
+        if (DEBUG_MOUSE_COORDINATES) {
+            g2.setColor(Color.black);
+            drawString("(" + mouseX + "," + mouseY + ")", 0, 1, g2);
+        }//end if
+    }//end drawDebugMouseCoordinates
 
     private void drawNodes(Graphics2D g2, boolean windowMod) {
         int windowMultiplier = windowMod ? 1 : 0;
