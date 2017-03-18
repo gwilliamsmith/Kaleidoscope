@@ -66,5 +66,8 @@ public class BaseKeyListener implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if((e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) == 0){
+            debugCount = 0;
+        }//end if
     }//end keyReleased
 }//end BaseKeyListener
