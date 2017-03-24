@@ -110,7 +110,7 @@ public class Base extends JFrame {
         menuBar.addKeyListener(new BaseKeyListener((this)));
 
         setSize(500, 500);
-        setTitle("Kaleidoscope v 0.4.1");
+        setTitle("Kaleidoscope v 0.5");
         add(canvas);
 
         stepTimeSlider = new JSlider(1, 1000, st);
