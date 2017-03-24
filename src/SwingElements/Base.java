@@ -123,6 +123,7 @@ public class Base extends JFrame {
         stepTimeSlider.setLabelTable(sliderLabels);
         stepTimeSlider.setPaintLabels(true);
         stepTimeSlider.addKeyListener(new BaseKeyListener((this)));
+        stepTimeSlider.setFocusable(false);
         add(stepTimeSlider);
 
         stepTime = st;

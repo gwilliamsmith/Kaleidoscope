@@ -68,7 +68,7 @@ public class Graph {
      * variables
      */
     public Graph(int r, int c, Base in) {
-        matrix = new GraphNode[r][c];
+        matrix = new GraphNode[c][r];
         ref = in;
         camera = new Camera(ref);
         familyAverageColorGradients = new ArrayList<>();
@@ -834,83 +834,161 @@ public class Graph {
     public void generateSeeds() {
         Random rand = new Random();
         int seeds = rand.nextInt(9);
-        boolean seedCheck = (seeds == 1 && !seeded && seed1) || (seeds == 2 && seed2) || (seeds == 4 && seed4) || (seeds == 8 && seed8);
+        boolean evenSwitch = ((matrix.length % 2) == 0) && ((matrix[0].length % 2) == 0);               //Checks to see if the matrix has an even # of rows and columns
+        boolean seedCheck = (seeds == 1 && !seeded && seed1) || (seeds == 2 && seed2) || (seeds == 4 && seed4) || ((seeds == 8 && seed8) && !evenSwitch);
         while (!seedCheck) {                                                    //Ensures that the number of seeds is any of the following values: (1,2,4,8). Some values may not be used if the user has disabled them.
             seeds = rand.nextInt(9);
-            seedCheck = (seeds == 1 && !seeded && seed1) || (seeds == 2 && seed2) || (seeds == 4 && seed4) || (seeds == 8 && seed8);
+            seedCheck = (seeds == 1 && !seeded && seed1) || (seeds == 2 && seed2) || (seeds == 4 && seed4) || ((seeds == 8 && seed8) && !evenSwitch);
         }//end while
         switch (seeds) {                                                        //Switches between numbers of seed cases                                                       //
             case 1:                                                             //One seed line
-                int steps = rand.nextInt(matrix.length / 2) + 1;                //Determines the number of steps in from the edge to place the seed line(s)
-                switch (rand.nextInt(9) + 1) {                                  //Determines which line of symmetry the seed line will be placed on
-                    case 1:
-                        findSeedNodes(new int[][]{{1, 0}}, steps);              //Top
-                        break;
-                    case 2:
-                        findSeedNodes(new int[][]{{-1, 0}}, steps);             //Bottom
-                        break;
-                    case 3:
-                        findSeedNodes(new int[][]{{0, -1}}, steps);             //Left
-                        break;
-                    case 4:
-                        findSeedNodes(new int[][]{{0, 1}}, steps);              //Right
-                        break;
-                    case 5:
-                        findSeedNodes(new int[][]{{1, -1}}, steps);             //Top-Left
-                        break;
-                    case 6:
-                        findSeedNodes(new int[][]{{1, 1}}, steps);              //Top-Right
-                        break;
-                    case 7:
-                        findSeedNodes(new int[][]{{-1, -1}}, steps);            //Bottom-Left
-                        break;
-                    case 8:
-                        findSeedNodes(new int[][]{{-1, 1}}, steps);             //Bottom-Right
-                        break;
-                }//end switch
+                if (!evenSwitch) {
+                    oddOneSeed();
+                }//end if
+                else {
+                    evenOneSeed();
+                }//end else
                 break;
             case 2:                                                             //One pair of seed lines, placed on the same line of symmetry
-                steps = rand.nextInt(matrix.length / 2) + 1;
-                switch (rand.nextInt(4)) {                                      //Determines which of the four lines of symmetry the seed lines are placed on
-                    case 0:
-                        findSeedNodes(new int[][]{{1, 0}, {-1, 0}}, steps);       //Top, Bottom
-                        break;
-                    case 1:
-                        findSeedNodes(new int[][]{{0, -1}, {0, 1}}, steps);       //Left, Right
-                        break;
-                    case 2:
-                        findSeedNodes(new int[][]{{1, -1}, {-1, 1}}, steps);      //Top-Left, Bottom-Right
-                        break;
-                    case 3:
-                        findSeedNodes(new int[][]{{1, 1}, {-1, -1}}, steps);      //Top-Right, Bottom-Left
-                        break;
-                    default:
-                        break;
-                }//end switch
+                if (!evenSwitch) {
+                    oddTwoSeeds();
+                }//end if
+                else {
+                    evenTwoSeeds();
+                }//end else 
                 break;
             case 4:                                                             //Four seed lines, on similar lines of symmetry (Top-Bottom + Left-Right, and TopLeft-BottomRight + TopRight-BottomLeft)
-                steps = rand.nextInt(matrix.length / 2) + 1;
-                switch (rand.nextInt(2)) {                                      //Determines which pair of lines of symmetry is used
-                    case 0:
-                        findSeedNodes(new int[][]{{1, 0}, {-1, 0}}, steps);       //Top, Bottom
-                        steps = rand.nextInt(matrix[0].length / 2) + 1;
-                        findSeedNodes(new int[][]{{0, -1}, {0, 1}}, steps);       //Left, Right
-                        break;
-                    case 1:
-                        findSeedNodes(new int[][]{{1, -1}, {-1, 1}}, steps);      //Top-Left, Bottom-Right
-                        steps = rand.nextInt(Math.min(matrix[0].length, matrix.length) / 2) + 1;
-                        findSeedNodes(new int[][]{{1, 1}, {-1, -1}}, steps);      //Top-Right, Bottom-Left
-                        break;
-                }//end switch
+                if (!evenSwitch) {
+                    oddFourSeeds();
+                }//end if
+                else {
+                    evenFourSeeds();
+                }//end else 
                 break;
             case 8:                                                             //Seed lines on all eight lines of symmetry
-                steps = rand.nextInt(matrix.length / 2) + 1;
-                findSeedNodes(new int[][]{{1, 0}, {-1, 0}, {0, -1}, {0, 1}}, steps); //Top, Bottom, Left, Right
-                steps = rand.nextInt(Math.min(matrix[0].length, matrix.length) / 2) + 1;
-                findSeedNodes(new int[][]{{1, -1}, {-1, 1}, {1, 1}, {-1, -1}}, steps);      //Top-Left, Bottom-Right, Top-Right, Bottom-Left
+                oddEightSeeds();
                 break;
         }//end switch
     }//end generateSeeds
+
+    private void oddOneSeed() {
+        Random rand = new Random();
+        int steps = rand.nextInt(matrix.length / 2) + 1;                //Determines the number of steps in from the edge to place the seed line(s)
+        switch (rand.nextInt(9)) {                                  //Determines which line of symmetry the seed line will be placed on
+            case 0:
+                findSeedNodes(new int[][]{{1, 0}}, steps);              //Top
+                break;
+            case 1:
+                findSeedNodes(new int[][]{{-1, 0}}, steps);             //Bottom
+                break;
+            case 2:
+                findSeedNodes(new int[][]{{0, -1}}, steps);             //Left
+                break;
+            case 3:
+                findSeedNodes(new int[][]{{0, 1}}, steps);              //Right
+                break;
+            case 4:
+                findSeedNodes(new int[][]{{1, -1}}, steps);             //Top-Left
+                break;
+            case 5:
+                findSeedNodes(new int[][]{{1, 1}}, steps);              //Top-Right
+                break;
+            case 6:
+                findSeedNodes(new int[][]{{-1, -1}}, steps);            //Bottom-Left
+                break;
+            case 7:
+                findSeedNodes(new int[][]{{-1, 1}}, steps);             //Bottom-Right
+                break;
+        }//end switch
+    }//end oddOneSeed
+
+    private void oddTwoSeeds() {
+        Random rand = new Random();
+        int steps = rand.nextInt(matrix.length / 2) + 1;
+        switch (rand.nextInt(4)) {                                      //Determines which of the four lines of symmetry the seed lines are placed on
+            case 0:
+                findSeedNodes(new int[][]{{1, 0}, {-1, 0}}, steps);       //Top, Bottom
+                break;
+            case 1:
+                findSeedNodes(new int[][]{{0, -1}, {0, 1}}, steps);       //Left, Right
+                break;
+            case 2:
+                findSeedNodes(new int[][]{{1, -1}, {-1, 1}}, steps);      //Top-Left, Bottom-Right
+                break;
+            case 3:
+                findSeedNodes(new int[][]{{1, 1}, {-1, -1}}, steps);      //Top-Right, Bottom-Left
+                break;
+            default:
+                break;
+        }//end switch
+    }//end oddTwoSeeds
+
+    private void oddFourSeeds() {
+        Random rand = new Random();
+        int steps = rand.nextInt(matrix.length / 2) + 1;
+        switch (rand.nextInt(2)) {                                      //Determines which pair of lines of symmetry is used
+            case 0:
+                findSeedNodes(new int[][]{{1, 0}, {-1, 0}}, steps);       //Top, Bottom
+                steps = rand.nextInt(matrix[0].length / 2) + 1;
+                findSeedNodes(new int[][]{{0, -1}, {0, 1}}, steps);       //Left, Right
+                break;
+            case 1:
+                findSeedNodes(new int[][]{{1, -1}, {-1, 1}}, steps);      //Top-Left, Bottom-Right
+                steps = rand.nextInt(Math.min(matrix[0].length, matrix.length) / 2) + 1;
+                findSeedNodes(new int[][]{{1, 1}, {-1, -1}}, steps);      //Top-Right, Bottom-Left
+                break;
+        }//end switch
+    }//end oddFourSeeds
+
+    private void oddEightSeeds() {
+        Random rand = new Random();
+        int steps = rand.nextInt(matrix.length / 2) + 1;
+        findSeedNodes(new int[][]{{1, 0}, {-1, 0}, {0, -1}, {0, 1}}, steps); //Top, Bottom, Left, Right
+        steps = rand.nextInt(Math.min(matrix[0].length, matrix.length) / 2) + 1;
+        findSeedNodes(new int[][]{{1, -1}, {-1, 1}, {1, 1}, {-1, -1}}, steps);      //Top-Left, Bottom-Right, Top-Right, Bottom-Left
+    }///end oddEightSeeds
+
+    private void evenOneSeed() {
+        Random rand = new Random();
+        int steps = rand.nextInt(matrix.length / 2) + 1;                //Determines the number of steps in from the edge to place the seed line(s)
+        switch (rand.nextInt(3)) {                                  //Determines which line of symmetry the seed line will be placed on
+            case 0:
+                findSeedNodes(new int[][]{{1, -1}}, steps);             //Top-Left
+                break;
+            case 1:
+                findSeedNodes(new int[][]{{1, 1}}, steps);              //Top-Right
+                break;
+            case 2:
+                findSeedNodes(new int[][]{{-1, -1}}, steps);            //Bottom-Left
+                break;
+            case 3:
+                findSeedNodes(new int[][]{{-1, 1}}, steps);             //Bottom-Right
+                break;
+        }//end switch
+    }//end evenOneSeed
+
+    private void evenTwoSeeds() {
+        Random rand = new Random();
+        int steps = rand.nextInt(matrix.length / 2) + 1;
+        switch (rand.nextInt(1)) {                                      //Determines which of the four lines of symmetry the seed lines are placed on
+            case 0:
+                findSeedNodes(new int[][]{{1, -1}, {-1, 1}}, steps);      //Top-Left, Bottom-Right
+                break;
+            case 1:
+                findSeedNodes(new int[][]{{1, 1}, {-1, -1}}, steps);      //Top-Right, Bottom-Left
+                break;
+            default:
+                break;
+        }//end switch
+    }//end evenTwoSeeds
+
+    private void evenFourSeeds() {
+        Random rand = new Random();
+        int steps = rand.nextInt(matrix.length / 2) + 1;
+        findSeedNodes(new int[][]{{1, -1}, {-1, 1}}, steps);      //Top-Left, Bottom-Right
+        steps = rand.nextInt(Math.min(matrix[0].length, matrix.length) / 2) + 1;
+        findSeedNodes(new int[][]{{1, 1}, {-1, -1}}, steps);      //Top-Right, Bottom-Left
+    }//evenFourSeeds
 
     /**
      * Finds nodes on lines of symmetry for coloring book seeding.

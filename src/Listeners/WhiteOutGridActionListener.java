@@ -29,7 +29,6 @@ public class WhiteOutGridActionListener implements ActionListener {
      * their color to white.
      */
     public void actionPerformed(ActionEvent e) {
-        System.out.println("toggled");
         if (!toggle) {
             ref.getGraph().whiteOutNodeColors();
             ref.getWhiteOutGrid().setText("Restore all grid point colors");
