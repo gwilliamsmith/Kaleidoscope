@@ -23,10 +23,10 @@ public class Base extends JFrame {
 
     private Canvas canvas;                                                      //Canvas for displaying stuff
 
-    private Timer timer;                                                        //Repaints the grid on an interval
+    private Timer timer;                                                        //Takes steps on an interval
     private TimerActionListener timerListener;                                  //Action listener for the Timer
 
-    private Timer painter;
+    private Timer painter;                                                      //Repaints the grid every millisecond
 
     private int stepTime;                                                       //Interval for repainting
 
@@ -40,6 +40,7 @@ public class Base extends JFrame {
     private final JMenu propertiesMenu = new JMenu("Properties");
     private final JMenu save = new JMenu("Save");
     private final JMenu schedulerMenu = new JMenu("Scheduler");
+    private final JMenu calculateSizeMenu = new JMenu("Calculate grid size");
 
     private final JMenuItem step = new JMenuItem("Step forward");                                           //Right-click button
     private final JMenuItem loop = new JMenuItem("Run");                                                    //Right-click button   
@@ -62,8 +63,6 @@ public class Base extends JFrame {
     private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");           //Save menu
     private final JMenuItem toggleSaveInterval = new JMenuItem("Disable saving pictures on interval");      //Save menu
     private final JMenuItem togglePauseInterval = new JMenuItem("Enable pausing after interval picture");   //Save menu
-
-    private final DebugMenuForm debugMenu;                                      //Menu for debug settings
     
     private JSlider stepTimeSlider;
 
@@ -90,7 +89,6 @@ public class Base extends JFrame {
         setLayout(layout);
         canvas = new Canvas(this);
         graph = new Graph(r, c, this);
-        debugMenu = new DebugMenuForm(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         addKeyListener(new BaseKeyListener(this));
 
@@ -113,7 +111,25 @@ public class Base extends JFrame {
         setTitle("Kaleidoscope v 0.5");
         add(canvas);
 
-        stepTimeSlider = new JSlider(1, 1000, st);
+        initializeStepTimer();
+
+        stepTime = st;
+        //Takes steps on an interval
+        timerListener = new TimerActionListener(this);
+        timer = new Timer(stepTime, timerListener);
+
+        painter = new Timer(1, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                canvas.repaint();
+            }
+        });
+        painter.start();
+        //Repaints on an interval
+    }//end constructor
+    
+    private void initializeStepTimer(){
+        stepTimeSlider = new JSlider(1, 1000, stepTime);
         stepTimeSlider.addChangeListener(new SliderChangeListener((this)));
         stepTimeSlider.setMajorTickSpacing(100);
         stepTimeSlider.setMinorTickSpacing(1);
@@ -125,22 +141,7 @@ public class Base extends JFrame {
         stepTimeSlider.addKeyListener(new BaseKeyListener((this)));
         stepTimeSlider.setFocusable(false);
         add(stepTimeSlider);
-
-        stepTime = st;
-        //Takes steps on an interval
-        timerListener = new TimerActionListener(this);
-        timer = new Timer(stepTime, timerListener);
-
-        painter = new Timer(1, new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                canvas.repaint();
-            }
-        });
-        painter.start();
-        //Repaints on an interval
-    }//end constructor
+    }//end initializeStepTimer
 
     /**
      * Re-sizes the grid dimensions, as well as the step interval, and the
@@ -265,6 +266,7 @@ public class Base extends JFrame {
         menuBar.add(propertiesMenu);
         menuBar.add(save);
         menuBar.add(schedulerMenu);
+        menuBar.add(calculateSizeMenu);
     }//end createMenuBar
 
     public void triggerSaveAction(){
