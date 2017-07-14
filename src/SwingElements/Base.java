@@ -63,7 +63,7 @@ public class Base extends JFrame {
     private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");           //Save menu
     private final JMenuItem toggleSaveInterval = new JMenuItem("Disable saving pictures on interval");      //Save menu
     private final JMenuItem togglePauseInterval = new JMenuItem("Enable pausing after interval picture");   //Save menu
-    
+
     private JSlider stepTimeSlider;
 
     private SettingsFileManipulator settingsManager;                            //Settings manager, reads the persistent settings in from the file
@@ -94,7 +94,7 @@ public class Base extends JFrame {
 
         settingsManager = new SettingsFileManipulator("./kaleidoscopesettings.ksf", this);
         settingsManager.readSettingsIn();
-        
+
         graph.initializeGrid();
 
         addMenuListeners();
@@ -111,9 +111,8 @@ public class Base extends JFrame {
         setTitle("Kaleidoscope v 0.5");
         add(canvas);
 
-        initializeStepTimer();
-
         stepTime = st;
+        initializeStepTimer();
         //Takes steps on an interval
         timerListener = new TimerActionListener(this);
         timer = new Timer(stepTime, timerListener);
@@ -127,8 +126,8 @@ public class Base extends JFrame {
         painter.start();
         //Repaints on an interval
     }//end constructor
-    
-    private void initializeStepTimer(){
+
+    private void initializeStepTimer() {
         stepTimeSlider = new JSlider(1, 1000, stepTime);
         stepTimeSlider.addChangeListener(new SliderChangeListener((this)));
         stepTimeSlider.setMajorTickSpacing(100);
@@ -184,9 +183,9 @@ public class Base extends JFrame {
         boolean resume = timer.isRunning();
         timer.stop();
         timer = new Timer(stepTime, new TimerActionListener(this));
-        int sliderVal = (stepTime <= 0 ? 0:st);
+        int sliderVal = (stepTime <= 0 ? 0 : st);
         stepTimeSlider.setValue(sliderVal);
-        if(resume){
+        if (resume) {
             timer.start();
         }//end if
     }//end updateStepTime
@@ -214,6 +213,7 @@ public class Base extends JFrame {
         toggleSaveInterval.addActionListener(new ToggleSaveIntervalActionListener((this)));
         togglePauseInterval.addActionListener(new TogglePauseIntervalActionListener(this));
         resetZoom.addActionListener(new ResetZoomActionListener(this));
+        calculateSizeMenu.addMouseListener(new CalculateSizeActionListener(this));
     }//end addMenuListeners
 
     /**
@@ -269,22 +269,22 @@ public class Base extends JFrame {
         menuBar.add(calculateSizeMenu);
     }//end createMenuBar
 
-    public void triggerSaveAction(){
+    public void triggerSaveAction() {
         savePicture.getActionListeners()[0].actionPerformed(null);
     }//end triggerSaveAction
-    
-    public void triggerSaveStateAction(){
+
+    public void triggerSaveStateAction() {
         saveState.getActionListeners()[0].actionPerformed(null);
     }//end triggerSaveStateAction
-    
-    public void triggerLoop(){
+
+    public void triggerLoop() {
         loop.getActionListeners()[0].actionPerformed(null);
     }//end triggerLoop
-    
-    public void triggerWhiteOutGrid(){
+
+    public void triggerWhiteOutGrid() {
         whiteOutGrid.getActionListeners()[0].actionPerformed(null);
     }//end triggerWhiteOutGrid
-    
+
     /**
      * Inverts the run boolean, used in the loop menu button
      */
@@ -325,12 +325,12 @@ public class Base extends JFrame {
     public static boolean checkConnection() {
         return conn == null;
     }//end checkConnection
-    
-    public void setSaveIntervalToggleText(String in){
+
+    public void setSaveIntervalToggleText(String in) {
         toggleSaveInterval.setText(in);
     }//end setSaveIntervalToggleText
-    
-    public void setPauseIntervalToggleText(String in){
+
+    public void setPauseIntervalToggleText(String in) {
         togglePauseInterval.setText(in);
     }//end setSaveIntervalToggleText
 
@@ -477,8 +477,8 @@ public class Base extends JFrame {
     public JMenuItem getWhiteOutGrid() {
         return whiteOutGrid;
     }//end getWhiteOutGrid
-    
-    public void setStepTimeSliderLocation(int location){
+
+    public void setStepTimeSliderLocation(int location) {
         stepTimeSlider.setValue(location);
     }//end setSliderLocation
 
