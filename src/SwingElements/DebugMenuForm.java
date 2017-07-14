@@ -1,5 +1,7 @@
 package SwingElements;
 
+import graphvisualizer.GraphTuple;
+
 public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
 
     Base ref;
@@ -44,6 +46,9 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
         DebugToggleCheckBox = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         ApplyButton = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        DepthBasedColorIntervalLabel = new javax.swing.JLabel();
+        DepthBasedColorIntervalComboBox = new javax.swing.JComboBox();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -172,27 +177,53 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(142, 142, 142)
+                .addGap(140, 140, 140)
                 .addComponent(ApplyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(142, 142, 142))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(ApplyButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        DepthBasedColorIntervalLabel.setText("Depth-Based Coloring Interval");
+
+        DepthBasedColorIntervalComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "3", "5", "15", "17", "51", "85", "255" }));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(DepthBasedColorIntervalLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DepthBasedColorIntervalComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DepthBasedColorIntervalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DepthBasedColorIntervalComboBox))
+                .addGap(0, 0, 0))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,8 +235,10 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -221,6 +254,7 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
         String heightText = BoundingRectangleHeightTextField.getText();
         Canvas.BOUNDING_RECTANGLE_WIDTH = isValidInteger(widthText) ? Integer.parseInt(widthText) : Canvas.BOUNDING_RECTANGLE_WIDTH;
         Canvas.BOUNDING_RECTANGLE_HEIGHT = isValidInteger(heightText) ? Integer.parseInt(heightText) : Canvas.BOUNDING_RECTANGLE_HEIGHT;
+        GraphTuple.setDepthBasedColorInterval(Integer.parseInt((String)DepthBasedColorIntervalComboBox.getSelectedItem()));
         this.dispose();
     }//GEN-LAST:event_ApplyButtonActionPerformed
 
@@ -232,6 +266,7 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
     }//end run
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ApplyButton;
+    private javax.swing.JButton ApplyButton1;
     private javax.swing.JCheckBox BoundingRectangleCheckBox;
     private javax.swing.JLabel BoundingRectangleHeightLabel;
     private javax.swing.JTextField BoundingRectangleHeightTextField;
@@ -240,6 +275,8 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
     private javax.swing.JCheckBox CenterLinesCheckBox;
     private javax.swing.JLabel DebugMenuLabel;
     private javax.swing.JCheckBox DebugToggleCheckBox;
+    private javax.swing.JComboBox DepthBasedColorIntervalComboBox;
+    private javax.swing.JLabel DepthBasedColorIntervalLabel;
     private javax.swing.JCheckBox GridLinesCheckBox;
     private javax.swing.JCheckBox MouseCoordinatesCheckBox;
     private javax.swing.JComboBox jComboBox1;
@@ -247,6 +284,8 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 
     public boolean isValidInteger(String str) {

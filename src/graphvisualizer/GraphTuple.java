@@ -8,6 +8,9 @@ import java.util.Random;
  */
 public class GraphTuple {
 
+    private static int DEPTH_COLOR_INTERVAL = 3;
+    private int depthColorIndex = 0;
+
     public static int MUTATION_DIVISOR = 20000;
 
     private GraphNode toLocation;
@@ -25,10 +28,11 @@ public class GraphTuple {
     private int curveDirecton = 0;                                              //Determines the direction of a curve between two nodes
     private double curveSeverity = 0;                                           //Determines the severity of a curve between two nodes
     private static boolean curved = false;                                      //Tells other objects if this tuple is curved
-    
+
     public boolean redundant = false;
-    
-    public GraphTuple(){}
+
+    public GraphTuple() {
+    }
 
     /**
      * @param to One of the {@link GraphNode} locations for the connection
@@ -47,6 +51,7 @@ public class GraphTuple {
         reproductionClock = startReproductionClock;
         edge = gti.edge;
         family = gti.family;
+        depthColorIndex = gti.depthColorIndex;
     }//end constructor
 
     /**
@@ -59,6 +64,7 @@ public class GraphTuple {
     public GraphTupleInfo generateGTI() {
         GraphTupleInfo out = new GraphTupleInfo(this.startHealth, this.color, this.mutatePercentage, this.startReproductionClock);
         out.family = this.family;
+        out.depthColorIndex = (++depthColorIndex/(255/DEPTH_COLOR_INTERVAL) < 3) ? depthColorIndex : 0;
         return out;
     }//end generateGTI
 
@@ -207,9 +213,9 @@ public class GraphTuple {
      * curved to true.
      */
     public void generateCurve(int direction, double severity) {
-       curveDirecton = direction;
-       curveSeverity = severity;
-       curved = true;
+        curveDirecton = direction;
+        curveSeverity = severity;
+        curved = true;
     }//end generateCurve
 
     /**
@@ -302,8 +308,8 @@ public class GraphTuple {
                 || (toLocation.getJLoc() == fromLocation.getJLoc())))
                 || edge);
     }//end isEdge
-    
-    public void setEdge(boolean in){
+
+    public void setEdge(boolean in) {
         edge = in;
     }//end setEdge
 
@@ -324,8 +330,8 @@ public class GraphTuple {
     public GraphNode getToLocation() {
         return toLocation;
     }//end getLocation
-    
-    public void setToLocation(GraphNode in){
+
+    public void setToLocation(GraphNode in) {
         toLocation = in;
     }//end setToLocation
 
@@ -337,8 +343,8 @@ public class GraphTuple {
     public GraphNode getFromLocation() {
         return fromLocation;
     }//end fromLocation
-    
-    public void setFromLocation(GraphNode in){
+
+    public void setFromLocation(GraphNode in) {
         fromLocation = in;
     }//end setFromLocation
 
@@ -370,8 +376,8 @@ public class GraphTuple {
     public int getHealth() {
         return health;
     }//return getHealth
-    
-    public void setHealth(int in){
+
+    public void setHealth(int in) {
         health = in;
     }//end setHealth
 
@@ -384,8 +390,8 @@ public class GraphTuple {
     public int getMutatePercentage() {
         return mutatePercentage;
     }//end getMutatePercentage
-    
-    public void setMutatePercentage(int in){
+
+    public void setMutatePercentage(int in) {
         mutatePercentage = in;
     }//end setMutatePercentage
 
@@ -397,8 +403,8 @@ public class GraphTuple {
     public int getStartReproductionClock() {
         return startReproductionClock;
     }//end getStartReproductionClock
-    
-    public void setStartReproductionClock(int in){
+
+    public void setStartReproductionClock(int in) {
         startReproductionClock = in;
     }//end setStartReproductionClock
 
@@ -492,8 +498,53 @@ public class GraphTuple {
     public boolean isCurve() {
         return curved;
     }//end isCurve
-    
-    public void setCurve(boolean in){
+
+    public void setCurve(boolean in) {
         curved = in;
     }//end setCurve
+
+    public Color getDepthColor() {
+        int maxSegments = 255 / DEPTH_COLOR_INTERVAL;
+        int segmentNumber = depthColorIndex / maxSegments;
+        int segmentStep = depthColorIndex % maxSegments;
+        int segmentValue = segmentStep * DEPTH_COLOR_INTERVAL;
+        int red = 0;
+        int green = 0;
+        int blue = 0;
+        switch (segmentNumber){
+            case 0:
+                red = 255 - segmentValue;
+                green = segmentValue;
+                break;
+            case 1:
+                green = 255 - segmentValue;
+                blue = segmentValue;
+                break;
+            case 2:
+                red = segmentValue;
+                blue = 255 - segmentValue;
+                break;
+        }//end switch
+        return new Color(red,green,blue);
+    }//end getDepthColor
+    
+    public static int getDepthBasedColorInterval(){
+        return DEPTH_COLOR_INTERVAL;
+    }//end getDepthBasedColorInterval
+    
+    public static void setDepthBasedColorInterval(int in){
+        int[] factors = {1,3,5,15,17,51,85,255};
+        boolean contains = false;
+        for(int i=0;i<factors.length&&!contains;i++){
+            if(in == factors[i]){
+                contains = true;
+            }//end if
+        }//end for
+        if(contains){
+            DEPTH_COLOR_INTERVAL = in;
+        }//end if
+        else{
+            System.err.println(in + " is not a factor of 255!");
+        }//end else
+    }//end setDepthBasedColorInterval
 }//end GraphTuple
