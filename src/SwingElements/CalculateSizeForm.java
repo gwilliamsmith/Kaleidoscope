@@ -7,6 +7,7 @@ package SwingElements;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import javax.swing.DefaultListModel;
 
 /**
@@ -20,6 +21,17 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
     public CalculateSizeForm(Base in) {
         ref = in;
         initComponents();
+        setTitle("Calculate Grid Size");
+        BoundingSquareSizeTextField.setText(Integer.toString(Canvas.BOUNDING_RECTANGLE_WIDTH));
+        updateNodeCountList();
+        if(findFactors(Integer.parseInt(BoundingSquareSizeTextField.getText())).contains(ref.getGraph().getMatrix().length)){
+            DefaultListModel model = (DefaultListModel) NodeCountList.getModel();
+            for(int i=0;i<model.getSize();i++){
+                if(Integer.parseInt((String) model.get(i)) == ref.getGraph().getMatrix().length){
+                    NodeCountList.setSelectedIndex(i);
+                }//end if
+            }//end for
+        }//end if
     }//end constructor
 
     /**
@@ -42,7 +54,7 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
         NodeSizeSpacingLabel = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         NodeSizeSpacingList = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
+        ApplyButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(null);
@@ -140,13 +152,13 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Apply");
-        jButton1.setMaximumSize(new java.awt.Dimension(60, 25));
-        jButton1.setMinimumSize(new java.awt.Dimension(60, 25));
-        jButton1.setPreferredSize(new java.awt.Dimension(60, 25));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ApplyButton.setText("Apply");
+        ApplyButton.setMaximumSize(new java.awt.Dimension(60, 25));
+        ApplyButton.setMinimumSize(new java.awt.Dimension(60, 25));
+        ApplyButton.setPreferredSize(new java.awt.Dimension(60, 25));
+        ApplyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ApplyButtonActionPerformed(evt);
             }
         });
 
@@ -165,7 +177,7 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(162, 162, 162)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ApplyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -177,7 +189,7 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ApplyButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -192,36 +204,45 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
             DefaultListModel model = (DefaultListModel) NodeSizeSpacingList.getModel();
             model.removeAllElements();
             for (Integer i : values.keySet()) {
-                model.addElement(i + "," + values.get(i));
+                model.addElement("Node size: " + i + ", Spacing: " + values.get(i));
             }//end for
         }//end if
     }//GEN-LAST:event_NodeCountListValueChanged
 
     private void BoundingSquareSizeTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BoundingSquareSizeTextFieldKeyReleased
-        String text = BoundingSquareSizeTextField.getText();
-        NodeCountList.clearSelection();
-        NodeSizeSpacingList.clearSelection();
-        DefaultListModel temp = (DefaultListModel)NodeSizeSpacingList.getModel();
-        temp.removeAllElements();
-        try {
-            ArrayList<Integer> listItems = findFactors(Integer.parseInt(text));
-            DefaultListModel model = (DefaultListModel) (NodeCountList.getModel());
-            model.removeAllElements();
-            for (Integer i : listItems) {
-                model.addElement(Integer.toString(i));
-            }//end for
-        } catch (NumberFormatException e) {
-        }//end catch
+        updateNodeCountList();
     }//GEN-LAST:event_BoundingSquareSizeTextFieldKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ApplyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyButtonActionPerformed
         if (NodeCountList.getSelectedValue() != null && NodeSizeSpacingList.getSelectedValue() != null) {
-            System.out.println(NodeCountList.getSelectedValue() + " " + NodeSizeSpacingList.getSelectedValue());
+            String count = (String) NodeCountList.getSelectedValue();
+            String sizing = (String) NodeSizeSpacingList.getSelectedValue();
+            int nodeSize = 0;
+            int nodeSpacing = 0;
+            int nodes = Integer.parseInt(count);
+            Scanner scan  = new Scanner(sizing);
+            while(scan.hasNext()){
+                String test = scan.next();
+                if(test.equals("size:")){
+                    String temp = scan.next();
+                    temp = temp.substring(0,temp.length()-1);
+                    nodeSize = Integer.parseInt(temp);
+                }//end if
+                if(test.equals("Spacing:")){
+                    nodeSpacing = Integer.parseInt(scan.next());
+                }//end if
+            }//end while
+            ref.getCanvas().setMinPointSize(nodeSize);
+            ref.getCanvas().setMinSpacing(nodeSpacing);
+            ref.getCanvas().setResized(true);
+            if(ref.getGraph().getMatrix().length != nodes){
+                ref.resizeGrid(nodes, nodes, ref.getStepTime());
+            }
         }//end if
         else {
             System.out.println("Something isn't selected");
         }//end else
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ApplyButtonActionPerformed
 
     private ArrayList<Integer> findFactors(int in) {
         ArrayList<Integer> factors = new ArrayList<>();
@@ -234,6 +255,7 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
     }//end findFactors
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ApplyButton;
     private javax.swing.JButton ApplyButton1;
     private javax.swing.JLabel BoundingSquareSizeLabel;
     private javax.swing.JTextField BoundingSquareSizeTextField;
@@ -241,7 +263,6 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel NodeNumberLabel;
     private javax.swing.JLabel NodeSizeSpacingLabel;
     private javax.swing.JList NodeSizeSpacingList;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -269,6 +290,23 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
         }//end if
     }//end run
 
+    private void updateNodeCountList(){
+        String text = BoundingSquareSizeTextField.getText();
+        NodeCountList.clearSelection();
+        NodeSizeSpacingList.clearSelection();
+        DefaultListModel temp = (DefaultListModel)NodeSizeSpacingList.getModel();
+        temp.removeAllElements();
+        try {
+            ArrayList<Integer> listItems = findFactors(Integer.parseInt(text));
+            DefaultListModel model = (DefaultListModel) (NodeCountList.getModel());
+            model.removeAllElements();
+            for (Integer i : listItems) {
+                model.addElement(Integer.toString(i));
+            }//end for
+        } catch (NumberFormatException e) {
+        }//end catch
+    }//end updateNodeCountList
+    
     private HashMap<Integer, Integer> calculateNodeWidths(double rectangleSide, double nodes) {
         HashMap<Integer, Integer> out = new HashMap<>();
         double width;
