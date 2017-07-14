@@ -27,9 +27,9 @@ public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
             NumberOfColumnsTextField.setText(ref.getGraph().getMatrix()[0].length + "");
             StepTimeTextField.setText(ref.getStepTime() + "");
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            c = ref.getGraph().getMatrix()[0].length;
-            r = ref.getGraph().getMatrix().length;
-            st = ref.getStepTime();
+            this.c = ref.getGraph().getMatrix()[0].length;
+            this.r = ref.getGraph().getMatrix().length;
+            this.st = ref.getStepTime();
         }//end if
         this.setTitle("Grid Settings");
     }//end constructor
