@@ -277,7 +277,7 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         GrowthTypeLabel.setPreferredSize(new java.awt.Dimension(82, 14));
 
         GrowthTypeComboBox.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        GrowthTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Regular", "Growth" }));
+        GrowthTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Regular", "Mutation", "Depth-Based Coloring", "Growth" }));
 
         MutateColorLabel.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
         MutateColorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -317,7 +317,7 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
                             .addComponent(ConsumeLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(RuntimeVariablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(GrowthTypeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(GrowthTypeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(GrowthTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(RuntimeVariablePanelLayout.createSequentialGroup()
                         .addGap(51, 51, 51)
@@ -443,7 +443,7 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         canvas.setMinPointSize(checkTextField(PointSizeTextField, "Point Size", canvas.getMinPointSize()));
         graph.setTrim(TrimComboBox.getSelectedIndex() == 0);
         graph.setConsume(ConsumeComboBox.getSelectedIndex() == 0);
-        graph.setGrowthType(GrowthTypeComboBox.getSelectedIndex());
+        graph.setMode(GrowthTypeComboBox.getSelectedIndex());
         graph.setMutateHealth(MutateHealthComboBox.getSelectedIndex() == 0);
         graph.setMutateColor(MutateColorComboBox.getSelectedIndex() == 0);
         graph.setSeed1(OneLineCheckBox.isSelected());
@@ -538,12 +538,18 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
         if (!Graph.CONSUME) {
             ConsumeComboBox.setSelectedIndex(1);
         }//end if
-        switch (graph.getGrowthType()) {
+        switch (graph.getMode()) {
             case 0:
                 GrowthTypeComboBox.setSelectedIndex(0);
                 break;
             case 1:
                 GrowthTypeComboBox.setSelectedIndex(1);
+                break;
+            case 2:
+                GrowthTypeComboBox.setSelectedIndex(2);
+                break;
+            case 3:
+                GrowthTypeComboBox.setSelectedIndex(3);
                 break;
             default:
                 break;

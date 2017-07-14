@@ -79,10 +79,9 @@ public class SaveStateActionListener implements ActionListener {
         globals += "Cycle base:" + graph.getCycleBase() + "\n";
         globals += "Cycle count:" + graph.getCycleCount() + "\n";
         globals += "Trim:" + Graph.TRIM + "\n";
-        globals += "Mutate:" + Graph.MUTATE + "\n";
         globals += "Mutate Color:" + Graph.MUTATE_COLOR + "\n";
         globals += "Mutate Health:" + Graph.MUTATE_HEALTH + "\n";
-        globals += "Growth Type:" + graph.getGrowthType() + "\n";
+        globals += "Growth Type:" + graph.getMode() + "\n";
 
         //Seems magic, but is actually the number of global variables. Not likely to change
         itemsTotal += 12;

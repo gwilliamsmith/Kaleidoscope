@@ -15,9 +15,9 @@ public class Graph {
 
     public static boolean TRIM = true;                                          //Determines if connection health decreases over time
     public static boolean CONSUME = false;                                      //Determines if GraphNode food is consumed by connections
-    public static boolean MUTATE = true;                                        //Determines if connection mutation is possible
     public static boolean MUTATE_COLOR = true;                                  //Determines if, when mutation is possible, connections can MUTATE colors
     public static boolean MUTATE_HEALTH = true;                                 //Determines if, when mutation is possible, connections can MUTATE starting health
+    public static GrowthMode MODE = GrowthMode.REGULAR;
 
     private ArrayList<FamilyAverageColorGradient> familyAverageColorGradients;  //FamilyAverageColorGradient objects, one for each family
     private final ArrayList<GraphNode> nodes = new ArrayList<>();               //The list of nodes contained in the graph
@@ -33,8 +33,6 @@ public class Graph {
     //Line Place event variables
     private GraphNode lineEventNode1;                                           //The first node being considered for a line creation event
     private GraphNode lineEventNode2;                                           //The second node being considered for a line creation event
-
-    private int growthType = 0;                                                 //Determines what growth pattern to use. Currently, only 0 is reliable
 
     private int familyCount = 0;                                                //Number of line families
 
@@ -240,6 +238,9 @@ public class Graph {
     public void createNewFamily(GraphNode node1, GraphNode node2, GraphTupleInfo gti) {
         gti.family = newFamilyID();
         familyAverageColorGradients.add(new FamilyAverageColorGradient(gti.family));      //Adds a new FamilyAverageColorGradient to the list, so that this family's changes in average color can be tracked
+        if (MODE == GrowthMode.DEPTH_BASED) {
+            gti.color = new Color(255, 0, 0);
+        }//end if
         connector(node1, node2, gti);
     }//end createNewFamily
 
@@ -395,21 +396,6 @@ public class Graph {
     }//end decay
 
     /**
-     * Sets up the growth-eligible node for connection reproduction
-     *
-     * @param temp The node housing the connection to grow
-     */
-    private void regularStep(GraphNode temp) {                                  //Maybe come up with a new name for this?
-        GraphTuple parent = temp.getParentLine();
-        parent.setReproductionClock(parent.getReproductionClock() - 1);
-        if (parent.getReproductionClock() <= 0 && !parent.isEdge(this)) {       //Connections should only reproduce if their reproduction clock is 0, and it's not an edge connection
-            GraphTupleInfo gti = parent.generateGTI();
-            normalRules(temp, gti);                                             //Now that the setup has been done, actually have the connection reproduce
-            parent.resetReproductionClock();
-        }//end if
-    }//end regularStep
-
-    /**
      * Middle step used when mutation is enabled. Determines if a connection
      * should or should not MUTATE when reproducing
      *
@@ -425,6 +411,21 @@ public class Graph {
     }//end mutation
 
     /**
+     * Sets up the growth-eligible node for connection reproduction
+     *
+     * @param temp The node housing the connection to grow
+     */
+    private void regularStep(GraphNode temp) {                                  //Maybe come up with a new name for this?
+        GraphTuple parent = temp.getParentLine();
+        parent.setReproductionClock(parent.getReproductionClock() - 1);
+        if (parent.getReproductionClock() <= 0 && !parent.isEdge(this)) {       //Connections should only reproduce if their reproduction clock is 0, and it's not an edge connection
+            GraphTupleInfo gti = parent.generateGTI();
+            normalRules(temp, gti);                                             //Now that the setup has been done, actually have the connection reproduce
+            parent.resetReproductionClock();
+        }//end if
+    }//end regularStep
+
+    /**
      * Sets up the growth-eligible node for connection reproduction, generating
      * a mutated {@link GraphTupleInfo} object if required
      *
@@ -435,7 +436,7 @@ public class Graph {
         parent.setReproductionClock(parent.getReproductionClock() - 1);
         if (parent.getReproductionClock() <= 0) {
             GraphTupleInfo gti;
-            if (MUTATE) {
+            if (MODE == GrowthMode.MUTATION) {
                 gti = parent.generateMutatedGti(parent);
             }//end if
             else {
@@ -445,6 +446,18 @@ public class Graph {
             parent.resetReproductionClock();
         }//end if
     }//end mutateStep
+
+    private void depthStep(GraphNode temp) {
+        GraphTuple parent = temp.getParentLine();
+        parent.setReproductionClock(parent.getReproductionClock() - 1);
+        if (parent.getReproductionClock() <= 0 && !parent.isEdge(this)) {       //Connections should only reproduce if their reproduction clock is 0, and it's not an edge connection
+            Color newColor = parent.getDepthColor();
+            GraphTupleInfo gti = parent.generateGTI();
+            gti.color = newColor;
+            normalRules(temp, gti);                                             //Now that the setup has been done, actually have the connection reproduce
+            parent.resetReproductionClock();
+        }//end if
+    }//end depthStep
 
     //TODO: Simplify/clean this method
     /**
@@ -615,22 +628,25 @@ public class Graph {
         buildQueue();                                                           //Builds the queue of nodes, each of which houses a connection to reproduce
         while (queue.hasFront()) {
             GraphNode temp = queue.dequeue();
-            if (growthType == 0) {
-                if (!MUTATE) {
+            switch (MODE) {
+                case REGULAR:
                     regularStep(temp);
-                }//end if
-                else {
+                    break;
+                case MUTATION:
                     mutation(temp);
-                }//end else
-            }//end if
-            else if (growthType == 1) {
-                growthStep(temp);
-            }//end else if
+                    break;
+                case DEPTH_BASED:
+                    depthStep(temp);
+                    break;
+                case GROWTH:
+                    growthStep(temp);
+                    break;
+            }//end switch
         }//end while
         if (TRIM) {
             decayConnections();                                                 //Reduces the health of each non-edge connection
         }//end if
-        if (CONSUME || growthType == 1) {
+        if (CONSUME || MODE == GrowthMode.GROWTH) {
             eat();                                                              //Connections eat the food on relevant nodes
         }//end if
         queue.empty();
@@ -1165,15 +1181,6 @@ public class Graph {
     }//end setConsume
 
     /**
-     * Sets the mutate static variable
-     *
-     * @param in The new value for mutate
-     */
-    public void setMutate(boolean in) {
-        MUTATE = in;
-    }//end setMutate
-
-    /**
      * Sets the mutate_color static variable
      *
      * @param in The new value for mutate_color
@@ -1190,24 +1197,6 @@ public class Graph {
     public void setMutateHealth(boolean in) {
         MUTATE_HEALTH = in;
     }//end setMutateHealth
-
-    /**
-     * Gets the growth type for connection reproduction
-     *
-     * @return The value of growthType
-     */
-    public int getGrowthType() {
-        return growthType;
-    }//end getGrowthType
-
-    /**
-     * Sets the growth type for connection reproduction
-     *
-     * @param in The new value for growthType
-     */
-    public void setGrowthType(int in) {
-        growthType = in;
-    }//end setGrowthType
 
     /**
      * Gets the current number of steps that have been taken
@@ -1497,4 +1486,42 @@ public class Graph {
     public void setPicturePauseToggle(boolean in) {
         picturePauseToggle = in;
     }//end getPictureSaveToggle
+
+    public void setMode(int in) {
+        switch (in) {
+            case 0:
+                MODE = GrowthMode.REGULAR;
+                break;
+            case 1:
+                MODE = GrowthMode.MUTATION;
+                break;
+            case 2:
+                MODE = GrowthMode.DEPTH_BASED;
+                break;
+            case 3:
+                MODE = GrowthMode.GROWTH;
+                break;
+            default:
+                System.err.println("Invalid mode!");
+        }//end switch
+    }//end setMode
+
+    public int getMode() {
+        int out = 0;
+        switch (MODE) {
+            case REGULAR:
+                out = 0;
+                break;
+            case MUTATION:
+                out = 1;
+                break;
+            case DEPTH_BASED:
+                out = 2;
+                break;
+            case GROWTH:
+                out = 3;
+                break;
+        }//end switch
+        return out;
+    }
 }//end Graph

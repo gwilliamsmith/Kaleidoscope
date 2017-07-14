@@ -82,9 +82,6 @@ public class LoadStateActionListener implements ActionListener {
                 case "Trim":
                     ref.getGraph().setTrim(Boolean.parseBoolean(entry.getValue()));
                     break;
-                case "Mutate":
-                    ref.getGraph().setMutate(Boolean.parseBoolean(entry.getValue()));
-                    break;
                 case "Mutate Color":
                     ref.getGraph().setMutateColor(Boolean.parseBoolean(entry.getValue()));
                     break;
@@ -92,7 +89,7 @@ public class LoadStateActionListener implements ActionListener {
                     ref.getGraph().setMutateHealth(Boolean.parseBoolean(entry.getValue()));
                     break;
                 case "Growth Type":
-                    ref.getGraph().setGrowthType(Integer.parseInt(entry.getValue()));
+                    ref.getGraph().setMode(Integer.parseInt(entry.getValue()));
                     break;
             }//end switch
         }//end for

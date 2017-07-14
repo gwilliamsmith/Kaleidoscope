@@ -15,6 +15,7 @@ public class GraphTupleInfo {
     public int reproductionClock = 1;
     public boolean edge;
     public int family;
+    public int depthColorIndex;
 
     public GraphTupleInfo() {
         startHealth = 50;
@@ -89,6 +90,24 @@ public class GraphTupleInfo {
         reproductionClock = reproductionClockIn;
         edge = edgeIn;
         family = familyID;
+    }//end constructor
+    
+    /**
+     * @param startHealthIn The starting health in turns{@link GraphTuple} of the {@link GraphTuple} line to be created
+     * @param colorIn The starting color of the {@link GraphTuple} line to be created
+     * @param mutationPercentageIn The mutation chance (out of 1000) of the {@link GraphTuple} line to be created
+     * @param reproductionClockIn The number of turns it takes the {@link GraphTuple} line to be created to create children
+     * @param edgeIn If the {@link GraphTuple} line to be created is an edge line
+     * @param familyID the familyID of the {@link GraphTuple} line to be created
+     */
+    public GraphTupleInfo(int startHealthIn, Color colorIn, int mutationPercentageIn, int reproductionClockIn, boolean edgeIn, int familyID, int depthColorIndexIn) {
+        startHealth = startHealthIn;
+        color = colorIn;
+        mutationPercentage = mutationPercentageIn;
+        reproductionClock = reproductionClockIn;
+        edge = edgeIn;
+        family = familyID;
+        depthColorIndex = depthColorIndexIn;
     }//end constructor
 
     //TODO: Add in ability to tune this

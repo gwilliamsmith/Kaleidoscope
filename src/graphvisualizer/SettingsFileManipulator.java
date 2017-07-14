@@ -54,8 +54,8 @@ public class SettingsFileManipulator extends GenericFileManipulator {
                     case "Consume":
                         graph.setConsume(Boolean.parseBoolean(entry.getValue()));
                         break;
-                    case "Growth Type":
-                        graph.setGrowthType(Integer.parseInt(entry.getValue()));
+                    case "Mode Type":
+                        graph.setMode(Integer.parseInt(entry.getValue()));
                         break;
                     case "Mutate Color":
                         graph.setMutateColor(Boolean.parseBoolean(entry.getValue()));
@@ -101,7 +101,7 @@ public class SettingsFileManipulator extends GenericFileManipulator {
             out.println("Zoom Level:" + Integer.toString(canvas.getZoomLevel()));
             out.println("Trim:" + Boolean.toString(Graph.TRIM));
             out.println("Consume:" + Boolean.toString(Graph.CONSUME));
-            out.println("Growth Type:" + Integer.toString(graph.getGrowthType()));
+            out.println("Mode Type:" + Integer.toString(graph.getMode()));
             out.println("Mutate Color:" + Boolean.toString(Graph.MUTATE_COLOR));
             out.println("Mutate Health:" + Boolean.toString(Graph.MUTATE_HEALTH));
             out.println("Seed1:" + Boolean.toString(graph.getSeed1()));
