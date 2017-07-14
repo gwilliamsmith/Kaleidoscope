@@ -19,6 +19,7 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
         BoundingRectangleCheckBox.setSelected(Canvas.DEBUG_BOUNDING_RECTANGLE);
         BoundingRectangleWidthTextField.setText(Integer.toString(Canvas.BOUNDING_RECTANGLE_WIDTH));
         BoundingRectangleHeightTextField.setText(Integer.toString(Canvas.BOUNDING_RECTANGLE_HEIGHT));
+        
     }//end constructor
 
     /**
@@ -255,7 +256,7 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
         Canvas.BOUNDING_RECTANGLE_WIDTH = isValidInteger(widthText) ? Integer.parseInt(widthText) : Canvas.BOUNDING_RECTANGLE_WIDTH;
         Canvas.BOUNDING_RECTANGLE_HEIGHT = isValidInteger(heightText) ? Integer.parseInt(heightText) : Canvas.BOUNDING_RECTANGLE_HEIGHT;
         GraphTuple.setDepthBasedColorInterval(Integer.parseInt((String)DepthBasedColorIntervalComboBox.getSelectedItem()));
-        this.dispose();
+        this.hide();
     }//GEN-LAST:event_ApplyButtonActionPerformed
 
     @Override

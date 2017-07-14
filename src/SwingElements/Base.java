@@ -63,6 +63,8 @@ public class Base extends JFrame {
     private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");           //Save menu
     private final JMenuItem toggleSaveInterval = new JMenuItem("Disable saving pictures on interval");      //Save menu
     private final JMenuItem togglePauseInterval = new JMenuItem("Enable pausing after interval picture");   //Save menu
+    
+    private final DebugMenuForm debugMenu;
 
     private JSlider stepTimeSlider;
 
@@ -111,6 +113,8 @@ public class Base extends JFrame {
         setTitle("Kaleidoscope v 0.5");
         add(canvas);
 
+        debugMenu = new DebugMenuForm(this);
+        
         stepTime = st;
         initializeStepTimer();
         //Takes steps on an interval
@@ -316,6 +320,16 @@ public class Base extends JFrame {
         timer.stop();
         loop.setText("Run");
     }//end pause;
+    
+    public void showDebugMenu(){
+        debugMenu.setVisible(true);
+        debugMenu.toFront();
+        debugMenu.requestFocus();
+    }//end showDebugMenu
+    
+    public void hideDebugMenu(){
+        debugMenu.setVisible(false);
+    }
 
     /**
      * Checks to see if the connection variable has been created.

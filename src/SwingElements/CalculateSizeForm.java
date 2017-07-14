@@ -237,7 +237,9 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
             ref.getCanvas().setResized(true);
             if(ref.getGraph().getMatrix().length != nodes){
                 ref.resizeGrid(nodes, nodes, ref.getStepTime());
-            }
+            }//end if
+            Canvas.BOUNDING_RECTANGLE_HEIGHT = Integer.parseInt(BoundingSquareSizeTextField.getText());
+            Canvas.BOUNDING_RECTANGLE_WIDTH = Integer.parseInt(BoundingSquareSizeTextField.getText());
         }//end if
         else {
             System.out.println("Something isn't selected");

@@ -2,7 +2,6 @@ package Listeners;
 
 import SwingElements.Base;
 import SwingElements.Canvas;
-import SwingElements.DebugMenuForm;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -38,7 +37,7 @@ public class BaseKeyListener implements KeyListener {
         if ((e.getKeyCode() == KeyEvent.VK_D) && ((e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) != 0)) {
 
             if (++debugCount == DEBUG_TOGGLE_COUNT) {
-                new DebugMenuForm(ref).setVisible(true);
+                ref.showDebugMenu();
                 debugCount = 0;
             }//end if
             return;
