@@ -1523,5 +1523,5 @@ public class Graph {
                 break;
         }//end switch
         return out;
-    }
+    }//end getMode
 }//end Graph

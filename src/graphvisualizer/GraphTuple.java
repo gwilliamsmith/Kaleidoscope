@@ -527,4 +527,24 @@ public class GraphTuple {
         }//end switch
         return new Color(red,green,blue);
     }//end getDepthColor
+    
+    public static int getDepthBasedColorInterval(){
+        return DEPTH_COLOR_INTERVAL;
+    }//end getDepthBasedColorInterval
+    
+    public static void setDepthBasedColorInterval(int in){
+        int[] factors = {1,3,5,15,17,51,85,255};
+        boolean contains = false;
+        for(int i=0;i<factors.length&&!contains;i++){
+            if(in == factors[i]){
+                contains = true;
+            }//end if
+        }//end for
+        if(contains){
+            DEPTH_COLOR_INTERVAL = in;
+        }//end if
+        else{
+            System.err.println(in + " is not a factor of 255!");
+        }//end else
+    }//end setDepthBasedColorInterval
 }//end GraphTuple
