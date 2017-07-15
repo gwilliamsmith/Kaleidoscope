@@ -10,8 +10,6 @@ import graphvisualizer.GraphTupleInfo;
 import java.awt.*;
 import java.awt.geom.QuadCurve2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.WritableRaster;
 import javax.swing.JPanel;
 
 /**
@@ -336,13 +334,6 @@ public class Canvas extends JPanel {
         return out;
     }//endGetTrimmedImage
 
-    private BufferedImage deepCopy(BufferedImage bi) {
-        ColorModel cm = bi.getColorModel();
-        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-        WritableRaster raster = bi.copyData(null);
-        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
-    }//end deepCopy
-
     /**
      * Changes grid nodes to match new point size and spacing settings.
      */
@@ -396,52 +387,6 @@ public class Canvas extends JPanel {
             g.drawString(in, this.getWidth() - textWidth - 5, this.getHeight() - (fontSize.getHeight() * (lineOffset)) - 5);
         }//end else if
     }//end drawString
-
-    /**
-     * Finds the width of a given image, with excess whitespace trimmed.
-     *
-     * @param img The image to find the trimmed width for
-     * @return Width, in pixels, of the trimmed image
-     */
-    private int trimImageWidth(BufferedImage img) {
-        int height = img.getHeight();
-        int width = img.getWidth();
-        int trimmedWidth = 0;
-
-        for (int i = 0; i < height; i++) {
-            for (int j = width - 1; j >= 0; j--) {
-                if (img.getRGB(j, i) != Color.WHITE.getRGB()
-                        && j > trimmedWidth) {
-                    trimmedWidth = j;
-                    break;
-                }//end if
-            }//end for
-        }//end for
-        return trimmedWidth;
-    }//end getTrimmedWidth
-
-    /**
-     * Finds the height of a given image, with excess whitespace trimmed.
-     *
-     * @param img The image to find the trimmed height for
-     * @return Height, in pixels, of the trimmed image
-     */
-    private int trimImageHeight(BufferedImage img) {
-        int width = img.getWidth();
-        int height = img.getHeight();
-        int trimmedHeight = 0;
-
-        for (int i = 0; i < width; i++) {
-            for (int j = height - 1; j >= 0; j--) {
-                if (img.getRGB(i, j) != Color.WHITE.getRGB()
-                        && j > trimmedHeight) {
-                    trimmedHeight = j;
-                    break;
-                }//end if
-            }//end for
-        }//end for
-        return trimmedHeight;
-    }//end getTrimmedHeight
 
     /**
      * Increments the zoom level, if it is not already at the maximum value.
