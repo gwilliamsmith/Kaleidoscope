@@ -128,16 +128,9 @@ public class Graph {
      * @param gti
      */
     public boolean biconnect(GraphNode n1, GraphNode n2, GraphTupleInfo gti, int direction, double severity) {
-        if (nodes.contains(n1) && nodes.contains(n2)) {
-            if (n1.connect(n2, gti, direction, severity, false)
-                    && n2.connect(n1, gti, direction, severity, true)) {               //Only return true if both n1.connect() and n2.connect() are successful
-                return true;
-            }//end if
-        }//end if
-        else {
-            System.err.println("One or more nodes is not in the node list!");
-        }//end else
-        return false;
+        //Only return true if both n1.connect() and n2.connect() are successful
+        return n1.connect(n2, gti, direction, severity, false)
+                && n2.connect(n1, gti, direction, severity, true);
     }//end biconnect
 
     //TODO: Clean this up
@@ -322,8 +315,10 @@ public class Graph {
      * lines that should grow on a given step are given the opportunity
      */
     private void buildQueue() {
-        for (GraphNode[] matrix1 : matrix) {
-            for (GraphNode temp : matrix1) {
+        for (int i=0;i<matrix.length;i++) {
+            GraphNode[] matrix1 = matrix[i];
+            for (int j=0;j<matrix1.length;j++) {
+                GraphNode temp = matrix1[j];
                 if (temp.getNumberOfConnections() == 1) {                       //A node with only one connection indicates that that connection is eligible for growth
                     queue.enqueue(temp);
                 }//end if
@@ -360,16 +355,20 @@ public class Graph {
     }//end checkPicture
 
     public void whiteOutNodeColors() {
-        for (GraphNode[] matrix1 : matrix) {
-            for (GraphNode gn : matrix1) {
+        for (int i=0;i<matrix.length;i++) {
+            GraphNode[] matrix1 = matrix[i];
+            for (int j=0;j<matrix1.length;j++) {
+                GraphNode gn = matrix1[j];
                 gn.setColor(GraphNodeColors.WHITE);
             }//end for
         }//end for
     }//end whiteOutNodeColors
 
     public void resetNodeColors() {
-        for (GraphNode[] matrix1 : matrix) {
-            for (GraphNode gn : matrix1) {
+        for (int i=0;i<matrix.length;i++) {
+            GraphNode[] matrix1 = matrix[i];
+            for (int j=0;j<matrix1.length;j++) {
+                GraphNode gn = matrix1[j];
                 resetNodeColor(gn);
             }//end 
         }//end for
@@ -379,15 +378,17 @@ public class Graph {
      * Reduces the health of all non-edge connections
      */
     private void decayConnections() {
-        for (GraphNode[] matrix1 : matrix) {
-            for (GraphNode temp : matrix1) {
-                for (int i = 0; i < temp.getNumberOfConnections(); i++) {
-                    GraphTuple gt = temp.getConnection(i);
+        for (int i=0;i<matrix.length;i++) {
+            GraphNode[] matrix1 = matrix[i];
+            for (int j=0;j<matrix1.length;j++) {
+                GraphNode temp = matrix1[j];
+                for (int k = 0; k < temp.getNumberOfConnections(); k++) {
+                    GraphTuple gt = temp.getConnection(k);
                     if (!gt.isEdge(this)) {
                         gt.decay();
                         if (!gt.isAlive()) {                                    //Remove the connection if it has no health left
                             disconnect(gt.getFromLocation(), gt.getToLocation());
-                            i--;                                                //Decrement the index so that the loop still works properly
+                            k--;                                                //Decrement the index so that the loop still works properly
                         }//end if
                     }//end if
                 }//end for
@@ -595,8 +596,10 @@ public class Graph {
      * Connections to each node consume food on each one
      */
     private void eat() {
-        for (GraphNode[] matrix1 : matrix) {
-            for (GraphNode gn : matrix1) {
+        for (int i=0;i<matrix.length;i++) {
+            GraphNode[] matrix1 = matrix[i];
+            for (int j=0;j<matrix1.length;j++) {
+                GraphNode gn = matrix1[j];
                 if (gn.getNumberOfConnections() > 0) {
                     gn.consume(this);
                 }//end if
@@ -608,8 +611,10 @@ public class Graph {
      * Removes all connections from all nodes in the {@link Graph}
      */
     public void clearGrid() {
-        for (GraphNode[] matrix1 : matrix) {
-            for (GraphNode gn : matrix1) {
+        for (int i=0;i<matrix.length;i++) {
+            GraphNode[] matrix1 = matrix[i];
+            for (int j=0;j<matrix1.length;j++) {
+                GraphNode gn = matrix1[j];
                 gn.clearConnections();
                 resetNodeColor(gn);
             }//end for

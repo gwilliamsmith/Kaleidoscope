@@ -43,7 +43,8 @@ public class LoadStateActionListener implements ActionListener {
             globals.add(lines.get(i));
         }//end for
         HashMap<String, String> values = new HashMap<>();
-        for (String s : globals) {
+        for (int i=0;i<globals.size();i++) {
+            String s = globals.get(i);
             String[] tokens = s.split("[:]");
             values.put(tokens[0], tokens[1]);
         }//end for

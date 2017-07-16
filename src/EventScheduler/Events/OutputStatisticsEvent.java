@@ -18,18 +18,27 @@ public class OutputStatisticsEvent extends Event {
             familyStatisticsHolder.add(new FamilyStatisticsTuple(ref.getGraph().pullFamily(i), i, ref.getGraph()));
             totalLines += familyStatisticsHolder.get(i - 1).familyMembers.size();
         }//end for
-        for (FamilyStatisticsTuple fst : familyStatisticsHolder) {
+        for (int i=0;i<familyStatisticsHolder.size();i++) {
+            FamilyStatisticsTuple fst = familyStatisticsHolder.get(i);
             fst.proportionOfTotalLines = (double) fst.familyMembers.size() / totalLines;
             int recordID = (int) (ref.getGraph().getStepCount() / 50);
-            String updateString = "FamilyID: " + fst.familyID +
-                    " # of members: "+ fst.familyMembers.size() + 
-                    " Family population proportion: "+ fst.proportionOfTotalLines + 
-                    " Average lifespan: "+ fst.averageLifespan + 
-                    " Lifespan variation: "+ fst.lifespanVariation +  
-                    " Lifespan deviation: "+ fst.lifespanDeviation + 
-                    " Mean deviation: "+ fst.meanDeviation;
-            updateString = updateString.replace("NaN", "0.0");
-            System.out.println(updateString);
+            StringBuilder updateString = new StringBuilder("FamilyID: ");
+            updateString.append(fst.familyID);
+            updateString.append(" # of members: ");
+            updateString.append(fst.familyMembers.size());
+            updateString.append(" Family population proportion: ");
+            updateString.append(fst.proportionOfTotalLines);
+            updateString.append(" Average lifespan: ");
+            updateString.append(fst.averageLifespan);
+            updateString.append(" Lifespan variation: ");
+            updateString.append(fst.lifespanVariation);
+            updateString.append(" Lifespan deviation: ");
+            updateString.append(fst.lifespanDeviation);
+            updateString.append(" Mean deviation: ");
+            updateString.append(fst.meanDeviation);
+            String updateOut = updateString.toString();
+            updateOut = updateOut.replace("NaN", "0.0");
+            System.out.println(updateOut);
         }//end for
     }//end takeAction
 }//end OutputStatisticsEventClass

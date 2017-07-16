@@ -175,21 +175,26 @@ public class Canvas extends JPanel {
 
     private void drawNodes(Graphics2D g2, boolean windowMod) {
         int windowMultiplier = windowMod ? 1 : 0;
-        for (GraphNode gn : ref.getGraph().getGraphNodes()) {
-            g2.setColor(gn.getColor());
-            /* Food isn't used right now, so this is commented out so as to reduce # of method calls
-             if (gn.getFood() <= 0) {
-             g2.setColor(Color.WHITE);
-             }//end if
-             */
-            g2.fillRect(gn.x + windowX * windowMultiplier, gn.y + windowY * windowMultiplier, gn.height, gn.width);
+        for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
+            GraphNode gn = ref.getGraph().getGraphNodes().get(i);
+            if (gn.isUpdated() || !gn.getColor().equals(Color.WHITE)) {
+                g2.setColor(gn.getColor());
+                /* Food isn't used right now, so this is commented out so as to reduce # of method calls
+                 if (gn.getFood() <= 0) {
+                 g2.setColor(Color.WHITE);
+                 }//end if
+                 */
+                g2.fillRect(gn.x + windowX * windowMultiplier, gn.y + windowY * windowMultiplier, gn.height, gn.width);
+                gn.setUpdated(false);
+            }//end if
         }//end for
     }//end drawNodes
 
     private void drawConnections(Graphics2D g2, boolean windowMod) {
-        for (GraphNode gn : ref.getGraph().getGraphNodes()) {
-            for (int i = 0; i < gn.getNumberOfConnections(); i++) {
-                GraphTuple gt = gn.getConnection(i);
+        for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
+            GraphNode gn = ref.getGraph().getGraphNodes().get(i);
+            for (int j = 0; j < gn.getNumberOfConnections(); j++) {
+                GraphTuple gt = gn.getConnection(j);
                 if (gt.isEdge(ref.getGraph()) || !curveEnabled) {
                     if (!gt.redundant) {
                         drawLine(g2, gt, windowMod);

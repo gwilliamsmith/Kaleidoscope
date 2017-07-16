@@ -27,10 +27,12 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
         Graph graph = ref.getGraph();
         if (SwingUtilities.isLeftMouseButton(e)) {
             if (connect) {
-                for (GraphNode gn : graph.getGraphNodes()) {
+                for (int i=0;i<graph.getGraphNodes().size();i++) {
+                    GraphNode gn = graph.getGraphNodes().get(i);
                     if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint())) {
                         if (gn != graph.getConnectA() && !gn.isConnected(graph.getConnectA())) {
                             graph.setConnectB(gn);
+                            gn.setUpdated(true);
                         }//end if
                         connect = false;
                         break;
@@ -59,9 +61,11 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
                 graph.setConnectB(null);
             }//end if
             else {
-                for (GraphNode gn : graph.getGraphNodes()) {
+                for (int i=0;i<graph.getGraphNodes().size();i++) {
+                    GraphNode gn = graph.getGraphNodes().get(i);
                     if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint())) {
                         graph.setConnectA(gn);
+                        gn.setUpdated(true);
                         connect = true;
                         graph.highlightNodeAdjacents(gn,GraphNodeColors.SELECTED_COLOR,GraphNodeColors.SELECTED_ADJACENT_COLOR);
                         break;
@@ -101,7 +105,8 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
         GraphNode selected = null;
         canvas.setMouseX(e.getX());
         canvas.setMouseY(e.getY());
-        for (GraphNode gn : graph.getGraphNodes()) {
+        for (int i=0;i<graph.getGraphNodes().size();i++) {
+            GraphNode gn = graph.getGraphNodes().get(i);
             if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint()) && gn != lastHovered) {
                 selected = gn;
                 lastHovered = gn;

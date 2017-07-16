@@ -30,6 +30,8 @@ public class GraphTuple {
     private static boolean curved = false;                                      //Tells other objects if this tuple is curved
 
     public boolean redundant = false;
+    
+    private boolean updated = true;
 
     public GraphTuple() {
     }
@@ -64,7 +66,7 @@ public class GraphTuple {
     public GraphTupleInfo generateGTI() {
         GraphTupleInfo out = new GraphTupleInfo(this.startHealth, this.color, this.mutatePercentage, this.startReproductionClock);
         out.family = this.family;
-        out.depthColorIndex = (++depthColorIndex/(255/DEPTH_COLOR_INTERVAL) < 3) ? depthColorIndex : 0;
+        out.depthColorIndex = (++depthColorIndex / (255 / DEPTH_COLOR_INTERVAL) < 6) ? depthColorIndex : 0;
         return out;
     }//end generateGTI
 
@@ -511,39 +513,51 @@ public class GraphTuple {
         int red = 0;
         int green = 0;
         int blue = 0;
-        switch (segmentNumber){
+        switch (segmentNumber) {
             case 0:
-                red = 255 - segmentValue;
+                red = 255;
                 green = segmentValue;
                 break;
             case 1:
-                green = 255 - segmentValue;
-                blue = segmentValue;
+                red = 255 - segmentValue;
+                green = 255;
                 break;
             case 2:
+                green = 255;
+                blue = segmentValue;
+                break;
+            case 3:
+                green = 255 - segmentValue;
+                blue = 255;
+                break;
+            case 4:
                 red = segmentValue;
+                blue = 255;
+                break;
+            case 5:
+                red = 255;
                 blue = 255 - segmentValue;
                 break;
         }//end switch
-        return new Color(red,green,blue);
+        return new Color(red, green, blue);
     }//end getDepthColor
-    
-    public static int getDepthBasedColorInterval(){
+
+    public static int getDepthBasedColorInterval() {
         return DEPTH_COLOR_INTERVAL;
     }//end getDepthBasedColorInterval
-    
-    public static void setDepthBasedColorInterval(int in){
-        int[] factors = {1,3,5,15,17,51,85,255};
+
+    public static void setDepthBasedColorInterval(int in) {
+        int[] factors = {1, 3, 5, 15, 17, 51, 85, 255};
         boolean contains = false;
-        for(int i=0;i<factors.length&&!contains;i++){
-            if(in == factors[i]){
+        for (int i = 0; i < factors.length && !contains; i++) {
+            if (in == factors[i]) {
                 contains = true;
             }//end if
         }//end for
-        if(contains){
+        if (contains) {
             DEPTH_COLOR_INTERVAL = in;
         }//end if
-        else{
+        else {
             System.err.println(in + " is not a factor of 255!");
         }//end else
     }//end setDepthBasedColorInterval

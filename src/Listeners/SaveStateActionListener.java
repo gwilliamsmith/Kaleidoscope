@@ -71,17 +71,39 @@ public class SaveStateActionListener implements ActionListener {
         }//end saveState
 
         //Record global variable states
-        String globals = "Spacing:" + canvas.getMinSpacing() + "\n";
-        globals += "Point size:" + canvas.getMinPointSize() + "\n";
-        globals += "Step count:" + graph.getStepCount() + "\n";
-        globals += "Step time:" + ref.getStepTime() + "\n";
-        globals += "Zoom level:" + canvas.getZoomLevel() + "\n";
-        globals += "Cycle base:" + graph.getCycleBase() + "\n";
-        globals += "Cycle count:" + graph.getCycleCount() + "\n";
-        globals += "Trim:" + Graph.TRIM + "\n";
-        globals += "Mutate Color:" + Graph.MUTATE_COLOR + "\n";
-        globals += "Mutate Health:" + Graph.MUTATE_HEALTH + "\n";
-        globals += "Growth Type:" + graph.getMode() + "\n";
+        StringBuilder globals = new StringBuilder("Spacing:");
+        globals.append(canvas.getMinSpacing());
+        globals.append("\n");
+        globals.append("Point size:");
+        globals.append(canvas.getMinPointSize());
+        globals.append("\n");
+        globals.append("Step count:");
+        globals.append(graph.getStepCount());
+        globals.append("\n");
+        globals.append("Step time:");
+        globals.append(ref.getStepTime());
+        globals.append("\n");
+        globals.append("Zoom level:");
+        globals.append(canvas.getZoomLevel());
+        globals.append("\n");
+        globals.append("Cycle base:");
+        globals.append(graph.getCycleBase());
+        globals.append("\n");
+        globals.append("Cycle count:");
+        globals.append(graph.getCycleCount());
+        globals.append("\n");
+        globals.append("Trim:");
+        globals.append(Graph.TRIM);
+        globals.append("\n");
+        globals.append("Mutate Color:");
+        globals.append(Graph.MUTATE_COLOR);
+        globals.append("\n");
+        globals.append("Mutate Health:");
+        globals.append(Graph.MUTATE_HEALTH);
+        globals.append("\n");
+        globals.append("Growth Type:");
+        globals.append(graph.getMode());
+        globals.append("\n");
 
         //Seems magic, but is actually the number of global variables. Not likely to change
         itemsTotal += 12;
@@ -122,7 +144,7 @@ public class SaveStateActionListener implements ActionListener {
         try {
             writer = new PrintWriter(fileName, "UTF-8");
             writer.print(nodeListOutString);
-            writer.print(globals);
+            writer.print(globals.toString());
             writer.print(connectionOutString);
         } catch (FileNotFoundException | UnsupportedEncodingException ex) {
         } finally {

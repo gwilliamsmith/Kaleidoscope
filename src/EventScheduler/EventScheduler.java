@@ -39,7 +39,8 @@ public class EventScheduler {
 
     public ArrayList<Event> getRepeatedEvents() {
         ArrayList<Event> out = new ArrayList<>();
-        for (Event e : events) {
+        for (int i = 0; i < events.size(); i++) {
+            Event e = events.get(i);
             if (e.getRepeat()) {
                 out.add(e);
             }//end if
@@ -49,7 +50,8 @@ public class EventScheduler {
 
     public ArrayList<Event> getSingleEvents() {
         ArrayList<Event> out = new ArrayList<>();
-        for (Event e : events) {
+        for (int i = 0; i < events.size(); i++) {
+            Event e = events.get(i);
             if (!e.getRepeat()) {
                 out.add(e);
             }//end if
@@ -59,10 +61,13 @@ public class EventScheduler {
 
     public ArrayList<String> getRepeatedEventsDisplayList() {
         ArrayList<String> out = new ArrayList<>();
-        for (Event e : events) {
+        for (int i = 0; i < events.size(); i++) {
+            Event e = events.get(i);
             if (e.getRepeat()) {
-                String item = e.getEventName() + " - " + e.getStepTarget();
-                out.add(item);
+                StringBuilder item = new StringBuilder(e.getEventName());
+                item.append(" - ");
+                item.append(e.getStepTarget());
+                out.add(item.toString());
             }//end if
         }//end for
         return out;
@@ -70,10 +75,13 @@ public class EventScheduler {
 
     public ArrayList<String> getSingleEventsDisplayList() {
         ArrayList<String> out = new ArrayList<>();
-        for (Event e : events) {
+        for(int i=0;i<events.size();i++){
+            Event e = events.get(i);
             if (!e.getRepeat()) {
-                String item = e.getEventName() + " - " + e.getStepTarget();
-                out.add(item);
+                StringBuilder item = new StringBuilder(e.getEventName());
+                item.append(" - ");
+                item.append(e.getStepTarget());
+                out.add(item.toString());
             }//end if
         }//end for
         return out;

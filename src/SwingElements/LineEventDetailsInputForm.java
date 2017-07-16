@@ -557,7 +557,8 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame implements Run
     private void updateNode2ComboBox() {
         adjacentNodes = sim.getGraph().findAdjacentNodes(selectedNode1);
         ArrayList<String> adjacentNodesStrings = new ArrayList<>();
-        for (GraphNode gn : adjacentNodes) {
+        for (int i=0;i<adjacentNodes.size();i++) {
+            GraphNode gn = adjacentNodes.get(i);
             adjacentNodesStrings.add(gn.printCoordinates());
         }//end for
         DefaultComboBoxModel model = new DefaultComboBoxModel(adjacentNodesStrings.toArray());

@@ -48,7 +48,8 @@ public class FamilyStatisticsTuple {
      */
     private double calculateAverageLifespan() {
         double out = 0;
-        for (GraphTuple gt : familyMembers) {
+        for (int i = 0; i < familyMembers.size(); i++) {
+            GraphTuple gt = familyMembers.get(i);
             out += gt.getStartHealth();
         }//end for
         out /= familyMembers.size();
@@ -63,7 +64,8 @@ public class FamilyStatisticsTuple {
     private double calculateLifespanVariation() {
         double out;
         double sumOfSquaredDifferences = 0;
-        for (GraphTuple gt : familyMembers) {
+        for (int i = 0; i < familyMembers.size(); i++) {
+            GraphTuple gt = familyMembers.get(i);
             sumOfSquaredDifferences += Math.pow((gt.getStartHealth() - averageLifespan), 2);
         }//end for
         out = sumOfSquaredDifferences / familyMembers.size();
@@ -90,7 +92,8 @@ public class FamilyStatisticsTuple {
      */
     private double calculateMeanDeviation() {
         double out = 0;
-        for (GraphTuple gt : familyMembers) {
+        for (int i = 0; i < familyMembers.size(); i++) {
+            GraphTuple gt = familyMembers.get(i);
             out += Math.abs((gt.getStartHealth() - averageLifespan));
         }//end for
         return out / familyMembers.size();
@@ -106,7 +109,8 @@ public class FamilyStatisticsTuple {
         int greenVal = 0;
         int blueVal = 0;
         int numOfConnections = 0;
-        for (GraphTuple gt : familyMembers) {
+        for (int i = 0; i < familyMembers.size(); i++) {
+            GraphTuple gt = familyMembers.get(i);
             if (!gt.isEdge(field)) {
                 redVal += gt.getRed();
                 greenVal += gt.getGreen();
