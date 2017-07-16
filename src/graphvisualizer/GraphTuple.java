@@ -30,8 +30,6 @@ public class GraphTuple {
     private static boolean curved = false;                                      //Tells other objects if this tuple is curved
 
     public boolean redundant = false;
-    
-    private boolean updated = true;
 
     public GraphTuple() {
     }
