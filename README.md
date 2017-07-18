@@ -50,7 +50,7 @@ encapsulate GraphTuple features for use in reproduction.
  :---: | :---: | :---:
  startHealth | int | Yes
  color | [Color](https://docs.oracle.com/javase/7/docs/api/java/awt/Color.html)| Yes
- mutationPercentage | int | No
+ mutationPercentage | int | No - actual percentage is mutationPercentage/20000
  reprodcutionClock | int | No
  edge | boolean | No
  family | int | No
@@ -79,7 +79,7 @@ illustrate this coming as soon as I have them):
 ### Mutation Growth Mode
 ---
 
-Mutation growth mode is the mode used when you want to allow parent lines to pass on slightly different characterists to their children. Following the rules for [regular](#Regular-Growth-Mode) growth mode, mutation growth mode has toggles for allowing/disallowing both lifespan and color mutation independently. As of right now, lifespan and color are the only two characteristics that have the ability to mutate, though more will likely gain the ability.
+Mutation growth mode is the mode used when you want to allow parent lines to pass on slightly different characterists to their children. Following the rules for [regular](#Regular-Growth-Mode) growth mode, mutation growth mode has toggles for allowing/disallowing both lifespan and color mutation independently. As of right now, lifespan and color are the only two characteristics that have the ability to mutate, though more will likely gain the ability. Mutation percentage is input by the user, and currently is that user-input number/20000
 
 ### Depth-Based Coloring Mode
 ---
