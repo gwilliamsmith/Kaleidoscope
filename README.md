@@ -7,6 +7,24 @@ for both.
 Kaleidoscope has three main growth modes, and one experimental: regular, mutation, and depth-based coloring are the main modes, while 
 growth-based is the experimental mode.
 
+## Table of Contents
+
+1. [Important Threads](#Important-Threads)
+2. [The Graph](#Graph)
+3. [GraphNodes and GraphTuples](#GraphNodes-and-GraphTuples)
+4. [Debug Menu](#Debug-Menu)
+5. [Growth Modes](#Growth-Modes)
+   * [Regular Growth Mode](#Regular-Growth-Mode)
+   * [Mutation Growth Mode](#Mutation-Growth-Mode)
+   * [Depth-Based Growth Mode](#Depth-Based-Growth-Mode)
+   * [Growth Mode](#Growth-Mode)
+6. [Contributing](#Contributing)
+   * [Creating Issues](#Creating-Issues)
+7. [License](#License)
+
+
+## Important Threads
+
 While running, Kaleidoscope currently runs two important threads:
 *  A [Timer](https://docs.oracle.com/javase/7/docs/api/java/util/Timer.html) used to repaint the JPanel where the Graph is displayed, on an
 interval of 1ms
@@ -91,6 +109,13 @@ lines rotate between colors.
 
 For now, the depth-based color interval can be changed in the debug menu, though this is likely to change.
 
+### Growth Mode
+---
+
+First off, I know this needs a new name. I'm open to suggestions.
+
+Other than that, this is an experimental mode, utilizing the `food` property of `GraphNode`. In this mode, lines create one child, in the direction of the node with the highest `food` value. This mode is the least complete, and I'm not currently working in it. I will, however, explore any issues that might be opened regarding it.
+
 ## Contributing
 
 There's no contributors.md for this project as of yet. If you want to contribute, feel free to fork and make your own changes, and I'll 
@@ -100,6 +125,10 @@ The issue tracker is [here](https://github.com/gwilliamsmith/GraphVisualizer/iss
 want it fixed, or want a good place to start, that's the place to look. Try not to open any duplicates issues, please.
 
 Additionally, if there's any information that you think belongs on this readme, let me know! I'm probably not the best at writing these.
+
+### Creating Issues
+
+If you do feel the need to create an issue, please be descriptive, and tag your issue with tags you find relevant. It'll help me (or anyone else) to work the issue to resolution if we have more information on it.
 
 ## License
 
