@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.geom.QuadCurve2D;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  * Object responsible for all drawing on the screen, as well as generating
@@ -58,6 +59,11 @@ public class Canvas extends JPanel {
     private int mouseX = 0;
     private int mouseY = 0;
 
+    private BufferedImage nodeImage = null;
+    private BufferedImage connnectionsImage = null;
+
+    ;
+
     /**
      * Constructor.
      *
@@ -100,6 +106,8 @@ public class Canvas extends JPanel {
      * @return A {@link BufferedImage} of the window
      */
     private BufferedImage produceGridPicture() {
+        drawNodes();
+        drawConnections();
         BufferedImage out = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
         Graphics2D g2 = out.createGraphics();
         resizeGrid();
@@ -118,8 +126,9 @@ public class Canvas extends JPanel {
         if (DEBUG) {
             drawDebug(g2);
         }//end if
-        drawNodes(g2, windowMod);
-        drawConnections(g2, windowMod);
+        GraphNode firstNode = ref.getGraph().getGraphNodes().get(0);
+        g2.drawImage(nodeImage, ((int) firstNode.getX() + windowX * (windowMod ? 1 : 0)), ((int) firstNode.getY() + windowY * (windowMod ? 1 : 0)), null);
+        g2.drawImage(connnectionsImage, ((int) firstNode.getX() + windowX * (windowMod ? 1 : 0)), ((int) firstNode.getY() + windowY * (windowMod ? 1 : 0)), null);
     }//end drawGrid
 
     private void drawDebug(Graphics2D g2) {
@@ -168,15 +177,13 @@ public class Canvas extends JPanel {
         }//end if
     }//end drawDebugMouseCoordinates
 
-    private void drawNodes(Graphics2D g2, final boolean windowMod) {
-        int windowMultiplier = windowMod ? 1 : 0;
+    private void drawNodes() {
         int columns = ref.getGraph().getMatrix()[0].length;
         int rows = ref.getGraph().getMatrix().length;
-        BufferedImage temp = new BufferedImage((((columns) * pointSize) + ((columns - 1) * spacing) + pointSize / 2),
+        nodeImage = new BufferedImage((((columns) * pointSize) + ((columns - 1) * spacing) + pointSize / 2),
                 (((rows) * pointSize) + ((rows - 1) * spacing)), BufferedImage.TYPE_INT_ARGB);
-        final Graphics2D g3 = temp.createGraphics();
-        new Runnable() {
-
+        final Graphics2D g3 = nodeImage.createGraphics();
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
@@ -192,20 +199,17 @@ public class Canvas extends JPanel {
                     }//end if
                 }//end for
             }
-        }.run();
-        GraphNode firstNode = ref.getGraph().getGraphNodes().get(0);
-        g2.drawImage(temp, ((int) firstNode.getX() + windowX * windowMultiplier), ((int) firstNode.getY() + windowY * windowMultiplier), null);
+        });
     }//end drawNodes
 
-    private void drawConnections(Graphics2D g2, final boolean windowMod) {
-        int windowMultiplier = windowMod ? 1 : 0;
+    private void drawConnections() {
         int columns = ref.getGraph().getMatrix()[0].length;
         int rows = ref.getGraph().getMatrix().length;
-        BufferedImage temp = new BufferedImage((((columns) * pointSize) + ((columns - 1) * spacing)),
+        connnectionsImage = new BufferedImage((((columns) * pointSize) + ((columns - 1) * spacing)),
                 (((rows) * pointSize) + ((rows - 1) * spacing)), BufferedImage.TYPE_INT_ARGB);
-        final Graphics2D g3 = temp.createGraphics();
+        final Graphics2D g3 = connnectionsImage.createGraphics();
         g3.setStroke(new BasicStroke(Math.max(zoomLevel, 1)));
-        new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
@@ -214,20 +218,18 @@ public class Canvas extends JPanel {
                         GraphTuple gt = gn.getConnection(j);
                         if (gt.isEdge(ref.getGraph()) || !curveEnabled) {
                             if (!gt.redundant) {
-                                drawLine(g3, gt, windowMod);
+                                drawLine(g3, gt, false);
                             }//end if
                         }//end if
                         else {
                             if (!gt.redundant) {
-                                drawCurve(g3, gt, windowMod);
+                                drawCurve(g3, gt, false);
                             }//end if
                         }//end else
                     }//end for
                 }//end for
             }
-        }.run();
-        GraphNode firstNode = ref.getGraph().getGraphNodes().get(0);
-        g2.drawImage(temp, ((int) firstNode.getX() + windowX * windowMultiplier), ((int) firstNode.getY() + windowY * windowMultiplier), null);
+        });
     }//end drawConnections
 
     private void drawLine(Graphics2D g2, GraphTuple gt, boolean windowMod) {
