@@ -230,3 +230,4 @@ nbproject/genfiles.properties
 nbproject/private/private.properties
 *.ksf
 kaleidoscopesettings.ksf
+nbproject/build-impl.xml
