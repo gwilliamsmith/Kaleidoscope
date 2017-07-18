@@ -9,26 +9,26 @@ growth-based is the experimental mode.
 
 ## Table of Contents
 
-1. [Important Threads](#Important-Threads)
+1. [Important Threads](#important-threads)
 2. [The Graph](#Graph)
-3. [GraphNodes and GraphTuples](#GraphNodes-and-GraphTuples)
-4. [Debug Menu](#Debug-Menu)
-5. [Growth Modes](#Growth-Modes)
-   * [Regular Growth Mode](#Regular-Growth-Mode)
-   * [Mutation Growth Mode](#Mutation-Growth-Mode)
-   * [Depth-Based Growth Mode](#Depth-Based-Growth-Mode)
-   * [Growth Mode](#Growth-Mode)
-6. [Contributing](#Contributing)
-   * [Creating Issues](#Creating-Issues)
-7. [License](#License)
+3. [GraphNodes and GraphTuples](#graphnodes-and-graphtuples)
+4. [Debug Menu](#debug-menu)
+5. [Growth Modes](#growth-modes)
+   * [Regular Growth Mode](#regular-growth-mode)
+   * [Mutation Growth Mode](#mutation-growth-mode)
+   * [Depth-Based Growth Mode](#depth-based-growth-mode)
+   * [Growth Mode](#growth-mode)
+6. [Contributing](#contributing)
+   * [Creating Issues](#creating-issues)
+7. [License](#license)
 
 
 ## Important Threads
 
 While running, Kaleidoscope currently runs two important threads:
-*  A [Timer](https://docs.oracle.com/javase/7/docs/api/java/util/Timer.html) used to repaint the JPanel where the Graph is displayed, on an
+*  A [`Timer`](https://docs.oracle.com/javase/7/docs/api/java/util/Timer.html) used to repaint the `JPanel` where the `Graph` is displayed, on an
 interval of 1ms
-*  Another thread (also a Timer), used to handle the growth logic for the Graph. This Timer has an interval set by the user, and can be 
+*  Another thread (also a Timer), used to handle the growth logic for the `Graph`. This `Timer` has an interval set by the user, and can be 
 controlled using either a slider at the bottom of the window, or by manutally entering the value by using the "Resize Grid" option in the 
 Properties menu.
     * Note: While the timer can be set to an interval larger than 1 second (1000ms), the maximum value of the slider is 
@@ -41,26 +41,25 @@ sizes are more feasible to run.
 ## The [Graph](./src/graphvisualizer/Graph.java)
 
 The Graph class is the most important class within Kaleidoscope, being the class that handles the logic
-running the cellular automaton. Currently, the main parts of the Graph are a matrix of [GraphNode](./src/graphvisualizer)s that make up the
+running the cellular automaton. Currently, the main parts of the Graph are a matrix of [`GraphNode`](./src/graphvisualizer)s that make up the
 grid, and a selection of flags that control how the cellular automaton runs. Additionally, there is an ArrayList containing all nodes in
 the matrix (this will probably change soon, I'm not a huge fan of that structure anymore).
 
-### [GraphNode](./src/graphvisualizer/GraphNode.java)s and [GraphTuple](./src.graphvisualizer/GraphTuple)s
+### [`GraphNode`](./src/graphvisualizer/GraphNode.java)s and [`GraphTuple`](./src.graphvisualizer/GraphTuple)s
 
-The nodes that make up the grid and the lines that connect two nodes, GraphNodes and GraphTuples are also highly important parts of what
-makes Kaleidoscope run. While more simple than the Graph class, the GraphNode and GraphTuple classes contain the logic that allows both
-to be displayed, and to connect to each other. Unlike many Graph implementations, in Kaleidoscope, the nodes in the graph are what store 
-connections between nodes. On a GraphNode, this is an ArrayList of GraphTuples called `connections`. This structure is used so that it is 
-easy to iterate through GraphTuples connecting to the node in question. 
+The nodes that make up the grid and the lines that connect two nodes, `GraphNode`s and `GraphTuple`s are also highly important parts of what
+makes Kaleidoscope run. While more simple than the `Graph` class, the `GraphNode` and `GraphTuple` classes contain the logic that allows both
+to be displayed, and to connect to each other. Unlike many graph implementations, in Kaleidoscope, the nodes in the graph are what store 
+connections between nodes. On a `GraphNode`, this is an ArrayList of `GraphTuple`s called `connections`. This structure is used so that it is 
+easy to iterate through `GraphTuple`s connecting to the node in question. 
 
-GraphTuples serve two purposes: describing the connections between nodes, and generating genetic information to pass down to newly
-created lines. GraphTuples can be asked to simply provide their current genetic information, or mutated genetic information, which will
-mutate the lifespan and the color of the child line, if those options are enabled. Additionally, there are GraphTuples that can be 
-designated as edges. Edge GraphTuples do not have their lifespan reduced with each step of the automaton, and also do not reproduce.
+`GraphTuple`s serve two purposes: describing the connections between nodes, and generating genetic information to pass down to newly
+created lines. `GraphTuple`s can be asked to simply provide their current genetic information, or mutated genetic information, which will
+mutate the lifespan and the color of the child line, if those options are enabled. Additionally, there are `GraphTuple`s that can be 
+designated as edges. Edge `GraphTuple`s do not have their lifespan reduced with each step of the automaton, and also do not reproduce.
 
-Simple passing down of GraphTuple features is done with `GraphTuple.generateGTI()`, and passing down mutated features is done with 
-`GraphTuple.generateMutatedGTI()`. Both functions return a [GraphTupleInfo](./src/graphvisualizer/GraphTupleInfo.java), a class used to 
-encapsulate GraphTuple features for use in reproduction.
+Simple passing down of `GraphTuple` features is done with `GraphTuple.generateGTI()`, and passing down mutated features is done with 
+`GraphTuple.generateMutatedGTI()`. Both functions return a `[GraphTupleInfo](./src/graphvisualizer/GraphTupleInfo.java)`, a class used to encapsulate `GraphTuple` features for use in reproduction.
 
 **Genetic Information Held by GraphTuples**
 
@@ -86,8 +85,7 @@ accessed by holding down the control key, and pressing the 'D' key five times.
 
 Regular growth mode is the default growth mode, and the one used for geometric pattern creation. In regular growth mode, lines reproduce
 and die, but do not mutate, and so never change color or lifespan. In this mode (and modes built off of it like 
-[Mutation](#Mutation-Growth-Mode) and [Depth-Based Coloring](#Depth-Based-Coloring-Mode)), lines follow simple rules for reprouction (images to 
-illustrate this coming as soon as I have them):
+[Mutation](#mutation-growth-mode) and [Depth-Based Coloring](#depth-based-coloring-mode)), lines follow simple rules for reprouction (images to illustrate this coming as soon as I have them):
  
  * Only reproduce if the line does not touch any lines in the direction it is to reproduce.
  * If there is already a line where one would be created, that line is left alone, and is not overwritten.
@@ -97,12 +95,12 @@ illustrate this coming as soon as I have them):
 ### Mutation Growth Mode
 ---
 
-Mutation growth mode is the mode used when you want to allow parent lines to pass on slightly different characterists to their children. Following the rules for [regular](#Regular-Growth-Mode) growth mode, mutation growth mode has toggles for allowing/disallowing both lifespan and color mutation independently. As of right now, lifespan and color are the only two characteristics that have the ability to mutate, though more will likely gain the ability. Mutation percentage is input by the user, and currently is that user-input number/20000
+Mutation growth mode is the mode used when you want to allow parent lines to pass on slightly different characterists to their children. Following the rules for [regular](#regular-growth-mode) growth mode, mutation growth mode has toggles for allowing/disallowing both lifespan and color mutation independently. As of right now, lifespan and color are the only two characteristics that have the ability to mutate, though more will likely gain the ability. Mutation percentage is input by the user, and currently is that user-input number/20000
 
 ### Depth-Based Coloring Mode
 ---
 
-Depth-based coloring mode is the exact same mode as [regular](#Regular-Growth-Mode) growth mode, except lines in this mode get their 
+Depth-based coloring mode is the exact same mode as [regular](#regular-growth-mode) growth mode, except lines in this mode get their 
 color from their generation. In this mode, colors cycle from red to green to blue, then back to red again, passing on colors that are a 
 fixed interval away from their parent's colors. With multiple intervals available (all factors of 255), users can control how quickly 
 lines rotate between colors.
@@ -128,7 +126,7 @@ Additionally, if there's any information that you think belongs on this readme, 
 
 ### Creating Issues
 
-If you do feel the need to create an issue, please be descriptive, and tag your issue with tags you find relevant. It'll help me (or anyone else) to work the issue to resolution if we have more information on it.
+If you do feel the need to create an issue, please be descriptive and tag your issue with tags you find relevant. It'll help me (or anyone else) to work the issue to resolution if we have more information on it.
 
 ## License
 
