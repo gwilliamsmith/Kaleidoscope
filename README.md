@@ -1,4 +1,4 @@
-# GraphVisualizer (Kaleidoscope)
+# Kaleidoscope
 This is a Graph-driven grid based cellular automaton, designed for research and geomertic image generation for the creation of coloring 
 books (shameless plug for [Control Alt Color](https://www.amazon.com/Control-Alt-Color-Shayne-Alexander/dp/1545421331/ref=sr_1_1?ie=UTF8&qid=1500386753&sr=8-1&keywords=control+alt+color) here). Kaleidoscope has a number of features, some useful for changing how line generation works, some for geometric image generation, and some for both.
 
