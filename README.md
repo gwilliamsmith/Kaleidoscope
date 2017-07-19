@@ -70,6 +70,8 @@ Regular growth mode is the default growth mode, and the one used for geometric p
  * If there is already a line where one would be created, that line is left alone, and is not overwritten.
  * If the line is a straight line, create two diagonal lines at each end, each pair forming a right angle.
  * If the line is a diagonal line, create two straight lines at each end, each pair forming a right angle.
+ * Lines lose one health(lifespan) per step, including the step in which they were created.
+ * If a line has no health(lifespan) remaining, it dies and disappears.
 
 ### Mutation Growth Mode
 ---
