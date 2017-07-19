@@ -7,17 +7,18 @@ Kaleidoscope has three main growth modes, and one experimental: regular, mutatio
 ## Table of Contents
 
 1. [Important Threads](#important-threads)
-2. [The Graph](#Graph)
-3. [GraphNodes and GraphTuples](#graphnodes-and-graphtuples)
-4. [Debug Menu](#debug-menu)
-5. [Growth Modes](#growth-modes)
+2. [The Graph](#the-graph)
+3. [The Queue](#the-queue)
+4. [GraphNodes and GraphTuples](#graphnodes-and-graphtuples)
+5. [Debug Menu](#debug-menu)
+6. [Growth Modes](#growth-modes)
    * [Regular Growth Mode](#regular-growth-mode)
    * [Mutation Growth Mode](#mutation-growth-mode)
    * [Depth-Based Growth Mode](#depth-based-growth-mode)
    * [Growth Mode](#growth-mode)
-6. [Contributing](#contributing)
+7. [Contributing](#contributing)
    * [Creating Issues](#creating-issues)
-7. [License](#license)
+8. [License](#license)
 
 
 ## Important Threads
@@ -28,7 +29,7 @@ While running, Kaleidoscope currently runs two important threads:
     * Note: While the timer can be set to an interval larger than 1 second (1000ms), the maximum value of the slider is 
     1000ms.
     
-**Important Note:** While Kaleidoscope runs fairly well at lower numbers of nodes, higher numbers of nodes can slow down the software,  requiring more than 1ms to draw all of the nodes and connections. One of my ongoing efforts is to speed drawing up, so that larger Graph  sizes are more feasible to run.
+**Important Note:** While Kaleidoscope runs fairly well at lower numbers of nodes, higher numbers of nodes can slow down the software,  requiring more than 1ms to draw all of the nodes and connections. One of my ongoing efforts is to speed drawing up, so that larger `Graph`  sizes are more feasible to run.
 
 ## The [Graph](./src/graphvisualizer/Graph.java)
 
@@ -54,9 +55,9 @@ Simple passing down of `GraphTuple` features is done with `GraphTuple.generateGT
  family | int | No
  depthColorIndex | int | No - incremented from line that created it
  
-## Debug Menu
+## The [Queue](./src/graphvisualizer/MyQueue.java)
 
-I've implemented a debug menu into Kaleidoscope, containing some features that may be useful for advanced users. The debug menu can be accessed by holding down the control key, and pressing the 'D' key five times.
+Kaleidoscope uses an implementation of a quque that I've written, to scan the `Graph` for any lines that are eligible to reprouce. By iterating through the nodes in the `Graph`, and tracking all `GraphTuple`s that can reproduce, it guarantees that all lines that should reproduce on a given step do in fact reproduce. The queue is the first thing done when `Graph.takeStep()` is called, and the pre-construction of the queue is what allows patterns to grow symmetrically. 
  
 ## Growth Modes
  
@@ -88,6 +89,10 @@ For now, the depth-based color interval can be changed in the debug menu, though
 First off, I know this needs a new name. I'm open to suggestions.
 
 Other than that, this is an experimental mode, utilizing the `food` property of `GraphNode`. In this mode, lines create one child, in the direction of the node with the highest `food` value. This mode is the least complete, and I'm not currently working in it. I will, however, explore any issues that might be opened regarding it.
+
+## Debug Menu
+
+I've implemented a debug menu into Kaleidoscope, containing some features that may be useful for advanced users. The debug menu can be accessed by holding down the control key, and pressing the 'D' key five times. The debug menu is likely to change - as I add new features and get feed back, new functionality may be added, or I may move functionality out of it into the menu.
 
 ## Contributing
 
