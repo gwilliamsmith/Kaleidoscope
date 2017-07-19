@@ -1,3 +1,4 @@
+nbproject/
 #################
 ## Eclipse
 #################
@@ -222,7 +223,6 @@ res/settings.txt
 *.class
 build/
 dist/
-nbproject/
 *.ksf
 manifest.mf
 nbproject/private/
@@ -230,3 +230,4 @@ nbproject/genfiles.properties
 nbproject/private/private.properties
 *.ksf
 kaleidoscopesettings.ksf
+nbproject/build-impl.xml

@@ -8,30 +8,28 @@ import java.util.Random;
  */
 public class GraphTuple {
 
-    private static int DEPTH_COLOR_INTERVAL = 3;
-    private int depthColorIndex = 0;
+    private static int DEPTH_COLOR_INTERVAL = 1;                                //The amount of color to change from generation to generation in depth-based coloring mode
+    private int depthColorIndex = 0;                                            //The depth-based coloring index. Resets to 0 when (++depthColorIndex / (255 / DEPTH_COLOR_INTERVAL) < 6) is true
 
-    public static int MUTATION_DIVISOR = 20000;
+    public static int MUTATION_DIVISOR = 20000;                                 //The maximum value for mutation percentage. TODO: make this editable, and find a reason why I made it 20000
 
-    private GraphNode toLocation;
-    private GraphNode fromLocation;                                       //The node housing the object
-    private int startHealth = 50;
-    private int health = startHealth;
-    private int decayRate = 1;
-    private int mutatePercentage = 0;                                          //Out of MUTATION_DIVISOR
-    private Color color = Color.BLACK;
-    private int startReproductionClock = 1;
-    private int reproductionClock = startReproductionClock;
-    private boolean edge = false;
-    private int family;
+    private GraphNode toLocation;                                               //The node this line connects to
+    private GraphNode fromLocation;                                             //The node housing the object
+    private int startHealth = 50;                                               //The total amount of steps this line lives for
+    private int health = startHealth;                                           //This line's remaining health
+    private int decayRate = 1;                                                  //The rate at which this line decays. Currently, will always be set to one
+    private int mutatePercentage = 0;                                           //Out of MUTATION_DIVISOR
+    private Color color = Color.BLACK;                                          //This line's color
+    private int startReproductionClock = 1;                                     //The number of turns it takes for this line to attempt reproducing
+    private int reproductionClock = startReproductionClock;                     //The number of turns remaining for this line to attempy reproducing
+    private boolean edge = false;                                               //Determines if this line is an edge
+    private int family;                                                         //The family ID for this line
 
     private int curveDirecton = 0;                                              //Determines the direction of a curve between two nodes
     private double curveSeverity = 0;                                           //Determines the severity of a curve between two nodes
     private static boolean curved = false;                                      //Tells other objects if this tuple is curved
 
-    public boolean redundant = false;
-    
-    private boolean updated = true;
+    public boolean redundant = false;                                           //Boolean that tells the Canvas if this line should be drawn (redundant lines are created by GraphNode.connect and are lines going in the exact opposite direction)
 
     public GraphTuple() {
     }
@@ -66,6 +64,7 @@ public class GraphTuple {
     public GraphTupleInfo generateGTI() {
         GraphTupleInfo out = new GraphTupleInfo(this.startHealth, this.color, this.mutatePercentage, this.startReproductionClock);
         out.family = this.family;
+        //Resets the depthColorIndex once it's reached pure red again
         out.depthColorIndex = (++depthColorIndex / (255 / DEPTH_COLOR_INTERVAL) < 6) ? depthColorIndex : 0;
         return out;
     }//end generateGTI
@@ -84,6 +83,8 @@ public class GraphTuple {
                 generateMutatedColor(rand),
                 parent.getMutatePercentage(),
                 parent.getStartReproductionClock());
+        //Resets the depthColorIndex once it's reached pure red again
+        out.depthColorIndex = (++depthColorIndex / (255 / DEPTH_COLOR_INTERVAL) < 6) ? depthColorIndex : 0;
         out.family = parent.getFamily();
         return out;
     }//end generateMutatedGti
@@ -98,7 +99,7 @@ public class GraphTuple {
      * @return The new color
      */
     private Color generateMutatedColor(Random rand) {
-        if (Graph.MUTATE_COLOR) {                                                      //Only change RGB values if MUTATE_COLOR is true
+        if (Graph.MUTATE_COLOR) {                                               //Only change RGB values if MUTATE_COLOR is true
             int rInfluence = flipInfluenceCheck(rand.nextInt(51), rand);
             int gInfluence = flipInfluenceCheck(rand.nextInt(51), rand);
             int bInfluence = flipInfluenceCheck(rand.nextInt(51), rand);
@@ -110,7 +111,7 @@ public class GraphTuple {
             blue = validateColor(blue);                                         //Ensure the new blue value is within 0-255
             return new Color(red, green, blue);
         }//end if
-        else {
+        else {                                                                  //If MUTATE_COLOR isn't true, return the original color
             return color;
         }//end else
     }//end generateMutatedColor
@@ -126,9 +127,9 @@ public class GraphTuple {
      * @return The new starting health value
      */
     private int generateMutatedHealth(Random rand) {
-        if (Graph.MUTATE_HEALTH && startHealth > 1) {                      //Only modify the starting health value if MUTATE_HEALTH is true, and the partent GraphTuple has enough health
+        if (Graph.MUTATE_HEALTH && startHealth > 1) {                           //Only modify the starting health value if MUTATE_HEALTH is true, and the partent GraphTuple has enough health
             double deviation = .1;
-            int variance = (int) (startHealth * deviation);         //The maximum distance the starting health can change
+            int variance = (int) (startHealth * deviation);                     //The maximum distance the starting health can change
             if (variance <= 1) {
                 variance = 1;
             }//end if
@@ -153,15 +154,9 @@ public class GraphTuple {
      * @return The validated value
      */
     private int validateColor(int in) {
-        if (in > 255) {
-            return 255;
-        }//end if
-        else if (in < 0) {
-            return 0;
-        }//end else if
-        else {
-            return in;
-        }//end else
+        int out = (in > 255) ? 255 : in;
+        out = (out < 0) ? 0 : out;
+        return out;
     }//end validateColor
 
     /**
@@ -173,10 +168,7 @@ public class GraphTuple {
      * @return The new value of the influencing integer
      */
     private int flipInfluenceCheck(int in, Random rand) {
-        if (rand.nextBoolean()) {
-            in *= -1;
-        }//end if
-        return in;
+        return rand.nextBoolean() ? in *= -1 : in;
     }//end flipColorInfluence
 
     /**
@@ -190,10 +182,7 @@ public class GraphTuple {
      * @return The new value for the trait in question
      */
     private int influenceInt(int in, int influencer, Random rand) {
-        if (rand.nextBoolean()) {
-            in += influencer;
-        }//end if
-        return in;
+        return rand.nextBoolean() ? in += influencer : in;
     }//end influenceInt
 
     /**
@@ -207,7 +196,7 @@ public class GraphTuple {
      * Decrements connection health by the decay rate
      */
     public void decay() {
-        health = health - decayRate;
+        health -= decayRate;
     }//end decay
 
     /**
@@ -226,12 +215,7 @@ public class GraphTuple {
     public static int generateCurveDirection() {
         Random rand = new Random();
         boolean direction = rand.nextBoolean();
-        if (direction) {
-            return 1;
-        }//end if
-        else {
-            return -1;
-        }//end else
+        return direction ? 1 : 0;
     }//end generateCurveDirection
 
     /**
@@ -311,6 +295,11 @@ public class GraphTuple {
                 || edge);
     }//end isEdge
 
+    /**
+     * Sets the value for edge
+     *
+     * @param in The new value for edge
+     */
     public void setEdge(boolean in) {
         edge = in;
     }//end setEdge
@@ -333,6 +322,11 @@ public class GraphTuple {
         return toLocation;
     }//end getLocation
 
+    /**
+     * Sets the to location for this connection
+     *
+     * @param in The {@link GraphNode} to connect to
+     */
     public void setToLocation(GraphNode in) {
         toLocation = in;
     }//end setToLocation
@@ -346,6 +340,11 @@ public class GraphTuple {
         return fromLocation;
     }//end fromLocation
 
+    /**
+     * Sets the from location for this connection
+     *
+     * @param in The {@link GraphNode} to connect to
+     */
     public void setFromLocation(GraphNode in) {
         fromLocation = in;
     }//end setFromLocation
@@ -379,20 +378,37 @@ public class GraphTuple {
         return health;
     }//return getHealth
 
-    public void setHealth(int in) {
-        health = in;
+    /**
+     * Sets the remaining health for the connection. This value must be less
+     * than or equal to {@link GraphTuple#startHealth}.
+     *
+     * @param in The new value for the remaining health of this connection
+     * @return True if the new number is accepted, false if not
+     */
+    public boolean setHealth(int in) {
+        if (in <= startHealth) {
+            health = in;
+            return true;
+        }//end if
+        return false;
     }//end setHealth
 
     /**
      * Gets the probability (out of {@link GraphTuple#MUTATION_DIVISIOR) that the connection will mutate on
      * reproduction
      *
-     * @return The chance for mutation / {@link GraphTuple#MUTATION_DIVISIOR)
+     * @return The chance for mutation (out of {@link GraphTuple#MUTATION_DIVISIOR))
      */
     public int getMutatePercentage() {
         return mutatePercentage;
     }//end getMutatePercentage
 
+    /**
+     * Sets the probability (out of {@link GraphTuple#MUTATION_DIVISIOR) that the connection will mutate on
+     * reproduction
+     *
+     * @param in The chance for mutation (out of {@link GraphTuple#MUTATION_DIVISIOR))
+     */
     public void setMutatePercentage(int in) {
         mutatePercentage = in;
     }//end setMutatePercentage
@@ -406,6 +422,11 @@ public class GraphTuple {
         return startReproductionClock;
     }//end getStartReproductionClock
 
+    /**
+     * Sets the number of turns it takes for the connection to reproduce
+     *
+     * @param in The number of turns it takes for the connection to reproduce
+     */
     public void setStartReproductionClock(int in) {
         startReproductionClock = in;
     }//end setStartReproductionClock
@@ -421,7 +442,9 @@ public class GraphTuple {
     }//end getReproductionClock
 
     /**
-     * Sets the remaining number of turns for connection reproduction.
+     * Sets the remaining number of turns for connection reproduction. This
+     * number must be less than or equal to the
+     * {@link GraphTuple#startReproductionClock}.
      *
      * @param in The number of remaining turns for the connection to reproduce.
      * Cannot be higher than the value for startReproductionClock
@@ -432,9 +455,7 @@ public class GraphTuple {
             reproductionClock = in;
             return true;
         }//end if
-        else {
-            return false;
-        }//end else
+        return false;
     }//end setReproductionClock
 
     /**
@@ -457,7 +478,7 @@ public class GraphTuple {
     }//end getCurveDirection
 
     /**
-     * Sets the new value for curve direction
+     * Sets the new value for curve direction.
      *
      * @param in The new value for curve direction
      */
@@ -493,7 +514,7 @@ public class GraphTuple {
     }//end setCurveSeverity
 
     /**
-     * Returns if the connection is curved or not
+     * Returns if the connection is curved or not.
      *
      * @return The value of curved
      */
@@ -501,10 +522,22 @@ public class GraphTuple {
         return curved;
     }//end isCurve
 
+    /**
+     * Sets curved, the boolean determining if {@link GraphTuple}s should be
+     * drawn as curves.
+     *
+     * @param in The new value for curved
+     */
     public void setCurve(boolean in) {
         curved = in;
     }//end setCurve
 
+    /**
+     * Gets the color for the connection, based on its depthColorIndex, and
+     * DEPTH_COLOR_INTERVAL.
+     *
+     * @return The calculated color of the connection
+     */
     public Color getDepthColor() {
         int maxSegments = 255 / DEPTH_COLOR_INTERVAL;
         int segmentNumber = depthColorIndex / maxSegments;
@@ -514,27 +547,27 @@ public class GraphTuple {
         int green = 0;
         int blue = 0;
         switch (segmentNumber) {
-            case 0:
+            case 0:                             //Red -> Yellow
                 red = 255;
                 green = segmentValue;
                 break;
-            case 1:
+            case 1:                             //Yellow -> Green
                 red = 255 - segmentValue;
                 green = 255;
                 break;
-            case 2:
+            case 2:                             //Green -> Cyan
                 green = 255;
                 blue = segmentValue;
                 break;
-            case 3:
+            case 3:                             //Cyan -> Blue
                 green = 255 - segmentValue;
                 blue = 255;
                 break;
-            case 4:
+            case 4:                             //Blue -> Magenta
                 red = segmentValue;
                 blue = 255;
                 break;
-            case 5:
+            case 5:                             //Magenta -> Red
                 red = 255;
                 blue = 255 - segmentValue;
                 break;
@@ -542,11 +575,24 @@ public class GraphTuple {
         return new Color(red, green, blue);
     }//end getDepthColor
 
+    /**
+     * Returns the value of the depth-based color interval
+     *
+     * @return The value of DEPTH_COLOR_INTERVAL, which is always a factor of
+     * 255
+     */
     public static int getDepthBasedColorInterval() {
         return DEPTH_COLOR_INTERVAL;
     }//end getDepthBasedColorInterval
 
-    public static void setDepthBasedColorInterval(int in) {
+    /**
+     * Sets the value of the depth-based color interval
+     *
+     * @param in The new value of DEPTH_COLOR_INTERVAL, which must be a factor
+     * of 255
+     * @return True if the new value is accepted, false if not
+     */
+    public static boolean setDepthBasedColorInterval(int in) {
         int[] factors = {1, 3, 5, 15, 17, 51, 85, 255};
         boolean contains = false;
         for (int i = 0; i < factors.length && !contains; i++) {
@@ -556,9 +602,11 @@ public class GraphTuple {
         }//end for
         if (contains) {
             DEPTH_COLOR_INTERVAL = in;
+            return true;
         }//end if
         else {
             System.err.println(in + " is not a factor of 255!");
+            return false;
         }//end else
     }//end setDepthBasedColorInterval
 }//end GraphTuple
