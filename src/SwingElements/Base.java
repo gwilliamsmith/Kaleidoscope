@@ -63,7 +63,7 @@ public class Base extends JFrame {
     private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");           //Save menu
     private final JMenuItem toggleSaveInterval = new JMenuItem("Disable saving pictures on interval");      //Save menu
     private final JMenuItem togglePauseInterval = new JMenuItem("Enable pausing after interval picture");   //Save menu
-    
+
     private final DebugMenuForm debugMenu;
 
     private JSlider stepTimeSlider;
@@ -77,6 +77,24 @@ public class Base extends JFrame {
     public EventScheduler scheduler = new EventScheduler();                     //Event scheduler
 
     public boolean curveSwitcher = false;                                        //Handles determining if the curve toggle boolean should be switched between steps.
+
+    class testRunnable extends Thread {
+
+        Base ref = null;
+
+        public testRunnable(Base in) {
+            ref = in;
+        }//end constructor
+
+        @Override
+        public void run() {
+            while (true) {
+                if (ref != null && ref.isRunning()) {
+                    ref.getGraph().takeStep();
+                }//end if
+            }//end while
+        }//end run
+    }//end testRunnable class
 
     /**
      * Constructor for Base class. Determines grid dimensions, as well as the
@@ -114,13 +132,15 @@ public class Base extends JFrame {
         add(canvas);
 
         debugMenu = new DebugMenuForm(this);
-        
+
         stepTime = st;
         initializeStepTimer();
         //Takes steps on an interval
         timerListener = new TimerActionListener(this);
         timer = new Timer(stepTime, timerListener);
-
+        
+        new testRunnable(this).start();
+        
         painter = new Timer(1, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -320,14 +340,14 @@ public class Base extends JFrame {
         timer.stop();
         loop.setText("Run");
     }//end pause;
-    
-    public void showDebugMenu(){
+
+    public void showDebugMenu() {
         debugMenu.setVisible(true);
         debugMenu.toFront();
         debugMenu.requestFocus();
     }//end showDebugMenu
-    
-    public void hideDebugMenu(){
+
+    public void hideDebugMenu() {
         debugMenu.setVisible(false);
     }
 

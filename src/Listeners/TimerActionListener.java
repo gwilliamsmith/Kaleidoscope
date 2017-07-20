@@ -29,7 +29,7 @@ public class TimerActionListener implements ActionListener {
     public void actionPerformed(ActionEvent evt) {
         new Thread() {
             public void run() {
-                ref.getGraph().takeStep();
+                //ref.getGraph().takeStep();
             }
         }.start();
     }//actionPerformed
