@@ -9,13 +9,13 @@ import java.util.Random;
  */
 public class GraphTupleInfo {
 
-    public int startHealth;
-    public Color color;
-    public int mutationPercentage;
-    public int reproductionClock = 1;
-    public boolean edge;
-    public int family;
-    public int depthColorIndex;
+    public int startHealth;                                                     //The number of steps it will take this line to die
+    public Color color;                                                         //The color of the line
+    public int mutationPercentage;                                              //The chance(out of GraphTuple.MUTATION_DIVSIOR, that this line will mutate on reproduction
+    public int reproductionClock = 1;                                           //The number of turns it will take this line to reproduce
+    public boolean edge;                                                        //Determines if this line is an edge
+    public int family;                                                          //The family ID for this line
+    public int depthColorIndex;                                                 //The generation of this line (circular int that resets to 0 when (++depthColorIndex / (255 / GraphTuple.DEPTH_COLOR_INTERVAL) < 6) is true
 
     public GraphTupleInfo() {
         startHealth = 50;
@@ -120,11 +120,11 @@ public class GraphTupleInfo {
         Random rand = new Random();
         GraphTupleInfo out = new GraphTupleInfo();
         out.startHealth = rand.nextInt();
-        if (out.startHealth < 0) {
+        if (out.startHealth < 0) {                                              //Makes sure startHealth is > 0
             out.startHealth *= -1;
         }
         out.color = new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat());
-        out.mutationPercentage = rand.nextInt(10001);
+        out.mutationPercentage = rand.nextInt(GraphTuple.MUTATION_DIVISOR);                           
         out.reproductionClock = rand.nextInt(out.startHealth) + 1;
         out.family = ref.getGraph().newFamilyID();
         out.edge = false;

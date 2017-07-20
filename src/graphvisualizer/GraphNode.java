@@ -24,6 +24,8 @@ public class GraphNode extends Rectangle {
     private int regenRate;                                                  //The rate at which the node regenerates food
     private Color color;                                                    //The color of the node. Should only be one of the static color variables
 
+    private boolean updated = true;                                         //If true, the node should be drawn. If false, don't draw the node. Intended to help speed up the process
+
     /**
      * @param xloc The xLocation on the {@link Canvas} object
      * @param yloc The yLocation on the {@link Canvas} object
@@ -59,7 +61,7 @@ public class GraphNode extends Rectangle {
      * @return True if successful, false if not
      */
     public boolean connect(GraphNode to, GraphTupleInfo gti, int direction, double severity, boolean redundant) {
-        if (!isConnected(to)) {
+        if (!isConnected(to)) {                                                 //Only try connecting to a node if it's not already connected
             GraphTuple newConnection = new GraphTuple(to, this, gti);
             if (Canvas.curveEnabled) {
                 newConnection.generateCurve(direction, severity);
@@ -70,8 +72,13 @@ public class GraphNode extends Rectangle {
         }//end if
         return false;
     }//end connect
-    
-    public void addConnection(GraphTuple in){
+
+    /**
+     * Adds a connection to the node's list of connections.
+     *
+     * @param in The {@link GraphTuple} to add
+     */
+    public void addConnection(GraphTuple in) {
         connections.add(in);
     }//end addConnection
 
@@ -88,7 +95,7 @@ public class GraphNode extends Rectangle {
     public void print() {
         System.out.println("This node id: " + id);
         System.out.println("Connected ids: ");
-        for (int i=0;i<connections.size();i++) {
+        for (int i = 0; i < connections.size(); i++) {
             GraphTuple gt = connections.get(i);
             System.out.print(gt.getToLocation().id + " ");
         }//end for
@@ -124,7 +131,7 @@ public class GraphNode extends Rectangle {
      * @return True if target is in the adjacency list, false if not
      */
     public boolean isConnected(GraphNode target) {
-        for (int i=0;i<connections.size();i++) {
+        for (int i = 0; i < connections.size(); i++) {
             GraphTuple gt = connections.get(i);
             if (gt.getToLocation() == target) {
                 return true;
@@ -161,7 +168,7 @@ public class GraphNode extends Rectangle {
      * node. Returns null if no such connection exists
      */
     public GraphTuple getConnection(GraphNode gn) {
-        for (int i=0;i<connections.size();i++) {
+        for (int i = 0; i < connections.size(); i++) {
             GraphTuple gt = connections.get(i);
             if (gt.getToLocation() == gn) {
                 return gt;
@@ -193,8 +200,8 @@ public class GraphNode extends Rectangle {
     public void clearConnections() {
         for (int i = 0; i < connections.size(); i++) {
             GraphTuple gt = connections.get(i);
-                Base.graph.disconnect(gt.getFromLocation(),gt.getToLocation());
-                i--;
+            Base.graph.disconnect(gt.getFromLocation(), gt.getToLocation());
+            i--;
         }//end for
     }//end clearConnections
 
@@ -209,7 +216,7 @@ public class GraphNode extends Rectangle {
 
     /**
      * Compares the X values of the node, and the toLocation of its parent
-     * {@link GraphTuple}
+     * {@link GraphTuple}.
      *
      * @return The distance between the X values of the node and the toLocation
      * of its parent {@link GraphTuple}
@@ -231,7 +238,7 @@ public class GraphNode extends Rectangle {
 
     /**
      * Checks if the given node is adjacent to the node. Adjacent nodes are no
-     * more than one space away in any direction
+     * more than one space away in any direction.
      *
      * @param in The node to check for adjacency to
      * @return True if the given node is adjacent to the node, false if not
@@ -243,12 +250,12 @@ public class GraphNode extends Rectangle {
     }//end isAdjacentTo
 
     /**
-     * Reduces food amount by the number of connections involving this node
+     * Reduces food amount by the number of connections involving this node.
      *
      * @param graph The {@link Graph} object to check edges against
      */
     public void consume(Graph graph) {
-        for (int i=0;i<connections.size();i++) {
+        for (int i = 0; i < connections.size(); i++) {
             GraphTuple gt = connections.get(i);
             if (!gt.isEdge(graph)) {                    //Only non-edge connections should reduce node food count
                 food--;
@@ -265,7 +272,6 @@ public class GraphNode extends Rectangle {
     //////////////////////////////
     //     Setters/Getters      //
     //////////////////////////////
-    //TODO: Replace with Enum for color
     /**
      * Sets the color of the node, using a {@link Color} object. Should only use
      * the static color variables for {@link GraphNode}s
@@ -273,23 +279,29 @@ public class GraphNode extends Rectangle {
      * @param in The new color for the node
      */
     public void setColor(GraphNodeColors in) {
+        if (color == null || (color.equals(Color.WHITE) && !in.getColor().equals(Color.WHITE))) {
+            updated = true;
+        }//end if
         color = in.getColor();
     }//end setColor
 
     /**
      * Sets the color of the node, using RGB values. Should not be used unless
-     * necessary. Instead use static {@link GraphNode} Color variables
+     * necessary. Instead use static {@link GraphNode} Color variables.
      *
      * @param rin
      * @param bin
      * @param gin
      */
     public void setColor(int rin, int bin, int gin) {
+        if (color.equals(Color.WHITE) && !(new Color(rin, gin, bin)).equals(Color.WHITE)) {
+            updated = true;
+        }//end if
         color = new Color(rin, gin, bin);
     }//end setColor
 
     /**
-     * Gets the color of the node
+     * Gets the color of the node.
      *
      * @return The current color of the node
      */
@@ -298,7 +310,7 @@ public class GraphNode extends Rectangle {
     }//end getColor
 
     /**
-     * Gets the remaining amount of food for the node
+     * Gets the remaining amount of food for the node.
      *
      * @return The food remaining on the node
      */
@@ -308,7 +320,7 @@ public class GraphNode extends Rectangle {
 
     /**
      * Gets the I, or Y axis, location of the node in the {@link Graph} object
-     * matrix
+     * matrix.
      *
      * @return The I value for the node
      */
@@ -318,11 +330,30 @@ public class GraphNode extends Rectangle {
 
     /**
      * Gets the J, or X axis, location of the node in the {@link Graph} object
-     * matrix
+     * matrix.
      *
      * @return The J value for the node
      */
     public int getJLoc() {
         return jLoc;
     }//end getJLoc
+    
+    /**
+     * Returns if the node's graphics should be updated.
+     *
+     * @return The value of updated, which is true if the node needs to be
+     * re-drawn, and false if not
+     */
+    public boolean isUpdated() {
+        return updated;
+    }//end isUpdated
+
+    /**
+     * Sets updated to reflect if the node needs to be re-drawn
+     * 
+     * @param in The new value for updated
+     */
+    public void setUpdated(boolean in) {
+        updated = in;
+    }//end updated
 }//end GraphNode

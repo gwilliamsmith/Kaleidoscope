@@ -42,16 +42,18 @@ public class MyQueue<T> {
         front = front.next;
         length--;
         return out;
-}//end dequeue
+    }//end dequeue
 
-/**
- * @return True if the front of the queue is not null
- */
-public boolean hasFront() {
+    /**
+     * @return True if the front of the queue is not null
+     */
+    public boolean hasFront() {
         return front != null;
     }//end hasFront
 
-    /** Empties the queue */
+    /**
+     * Empties the queue
+     */
     public void empty() {
         front = null;
         length = 0;
@@ -67,6 +69,7 @@ public boolean hasFront() {
     //Does not check if the contents are equal, simply the objects referred to
     /**
      * Checks to see if data is contained within the queue
+     *
      * @param info The data to be checked against data in the queue
      * @return True if the data in question is in the queue
      */

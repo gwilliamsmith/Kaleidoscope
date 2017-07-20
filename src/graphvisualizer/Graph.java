@@ -17,9 +17,10 @@ public class Graph {
     public static boolean CONSUME = false;                                      //Determines if GraphNode food is consumed by connections
     public static boolean MUTATE_COLOR = true;                                  //Determines if, when mutation is possible, connections can MUTATE colors
     public static boolean MUTATE_HEALTH = true;                                 //Determines if, when mutation is possible, connections can MUTATE starting health
-    public static GrowthMode MODE = GrowthMode.REGULAR;
+    public static GrowthMode MODE = GrowthMode.REGULAR;                         //Enum determining how stepForward() behaves
 
     private ArrayList<FamilyAverageColorGradient> familyAverageColorGradients;  //FamilyAverageColorGradient objects, one for each family
+    //TODO: Maybe get rid of this?
     private final ArrayList<GraphNode> nodes = new ArrayList<>();               //The list of nodes contained in the graph
     private final GraphNode[][] matrix;                                         //The matrix of nodes
     private int idCount = 1;                                                    //The next node ID to be assigned
@@ -27,8 +28,8 @@ public class Graph {
     private Base ref;                                                           //The Base object, contining information about the runtime of the program
     private Camera camera;                                                      //The Camera object, used to take pictures of the grid when enabled
 
-    private GraphNode connectA;                                                 //The first node selected when creating a connection
-    private GraphNode connectB;                                                 //The second node selected when creating a connection
+    private GraphNode connectA;                                                 //The first node selected by the user when creating a connection
+    private GraphNode connectB;                                                 //The second node selected by the user when creating a connection
 
     //Line Place event variables
     private GraphNode lineEventNode1;                                           //The first node being considered for a line creation event
@@ -55,9 +56,9 @@ public class Graph {
 
     private String testName = "test16";                                         //Name of the test when gathering statistics
 
-    private boolean pictureSaveToggle = true;
+    private boolean pictureSaveToggle = true;                                   //Toggle determining if the the Camera should save a picture of the generated pattern when there is a big enough lull in line reproduction
 
-    private boolean picturePauseToggle = false;
+    private boolean picturePauseToggle = false;                                 //Toggle determining if the graph should pause after each picture is taken
 
     /**
      * @param r Number of rows in the matrix
@@ -84,6 +85,41 @@ public class Graph {
         }//end if
         ref.scheduler.checkSchedule(stepCount);
     }//end takeStep
+
+    /**
+     * Moves the {@link Graph} forward one step, each connection on it
+     * attempting to reproduce. Uses a {@link MyQueue} object to take in to
+     * account all lines that will reproduce, ensuring all of them have the
+     * opportunity to do so. Also reduces the remaining health of all
+     * connections, and the food on each node (if enabled).
+     */
+    public void stepForward() {
+        buildQueue();                                                           //Builds the queue of nodes, each of which houses a connection to reproduce
+        while (queue.hasFront()) {
+            GraphNode temp = queue.dequeue();
+            switch (MODE) {
+                case REGULAR:
+                    regularStep(temp);
+                    break;
+                case MUTATION:
+                    mutation(temp);
+                    break;
+                case DEPTH_BASED:
+                    depthStep(temp);
+                    break;
+                case GROWTH:
+                    growthStep(temp);
+                    break;
+            }//end switch
+        }//end while
+        if (TRIM) {
+            decayConnections();                                                 //Reduces the health of each non-edge connection
+        }//end if
+        if (CONSUME || MODE == GrowthMode.GROWTH) {
+            eat();                                                              //Connections eat the food on relevant nodes
+        }//end if
+        queue.empty();
+    }//end stepForward
 
     /**
      * Resets the grid. Removes all connections from all nodes and resets
@@ -123,9 +159,13 @@ public class Graph {
     /**
      * Connect method. Checks to ensure both nodes are in the Graph.
      *
-     * @param n1
-     * @param n2
-     * @param gti
+     * @param n1 The first node involved in the connection
+     * @param n2 The second node involved in the connection
+     * @param gti The {@link GraphTupleInfo} describing the connection to be
+     * made
+     * @param direction The direction of a curved connection
+     * @param severity The severity of a curved line
+     * @return True if biconnect is successful, false if not
      */
     public boolean biconnect(GraphNode n1, GraphNode n2, GraphTupleInfo gti, int direction, double severity) {
         //Only return true if both n1.connect() and n2.connect() are successful
@@ -134,6 +174,29 @@ public class Graph {
     }//end biconnect
 
     //TODO: Clean this up
+    /**
+     * Connects two nodes using their descriptions from a state save file.
+     *
+     * @param n1y The y index of the first node
+     * @param n1x The x index of the first node
+     * @param n2y The y index of the second node
+     * @param n2x The x index of the second node
+     * @param red The red RGB value for the connection to be made
+     * @param green The green RGB value for the connection to be made
+     * @param blue The blue RGB value for the connection to be made
+     * @param health The remaining health of the connection
+     * @param startHealth The starting health of the connection
+     * @param mutatePercentage The mutationPercentage value for the connection
+     * @param reproductionClock The number of turns remaining before the
+     * connection attempts to reproduce
+     * @param startReproductionClock The number of turns the connection must
+     * wait before attempting to reproduce
+     * @param edge Toggle determining if the connection is an edge
+     * @param curved Toggle determining if the connection is curved
+     * @param curveDirection Toggle determining the direction of the
+     * connection's curve
+     * @param curveSeverity The severity of the connection's curve
+     */
     public void createConnection(int n1y, int n1x, int n2y, int n2x, int red, int green, int blue, int health, int startHealth, int mutatePercentage, int reproductionClock, int startReproductionClock, boolean edge, boolean curved, int curveDirection, double curveSeverity) {
         GraphNode n1 = matrix[n1y][n1x];
         GraphNode n2 = matrix[n2y][n2x];
@@ -171,6 +234,12 @@ public class Graph {
         }//end if
     }//end creteConnections
 
+    /**
+     * Disconnects two nodes/
+     *
+     * @param n1 The first node to be disconnected
+     * @param n2 The second node to be disconnected
+     */
     public void disconnect(GraphNode n1, GraphNode n2) {
         if (n1.isConnected(n2) && n2.isConnected(n1)) {
             n1.severConnection(n2);
@@ -179,7 +248,7 @@ public class Graph {
     }//end disconnect
 
     /**
-     * Connects one node with any number of other nodes
+     * Connects one node with any number of other nodes.
      *
      * @param start The node to be connected to
      * @param targets The list of nodes to connect start to
@@ -204,7 +273,7 @@ public class Graph {
     }//end connector
 
     /**
-     * Connect one node to another
+     * Connect one node to another.
      *
      * @param start The first node to be connected
      * @param target The second node to be connected
@@ -214,15 +283,14 @@ public class Graph {
      */
     public boolean connector(GraphNode start, GraphNode target, GraphTupleInfo gti) {
         if (target != start && start.isAdjacentTo(target)) {
-            biconnect(start, target, gti, GraphTuple.generateCurveDirection(), GraphTuple.generateCurveSeverity());
-            return true;
+            return biconnect(start, target, gti, GraphTuple.generateCurveDirection(), GraphTuple.generateCurveSeverity());
         }//end if
         return false;
     }//end connectTo
 
     /**
      * Create a new family of lines, starting with a connection between two
-     * given nodes
+     * given nodes.
      *
      * @param node1 The first node to be connected
      * @param node2 The second node to be connected
@@ -256,6 +324,7 @@ public class Graph {
         outlineGrid();
     }//end initializeGrid
 
+    //TODO: Probably should clean this up, too...
     /**
      * Creates edge connections for the nodes at the edges of the matrix.
      */
@@ -309,17 +378,16 @@ public class Graph {
 
     //TODO: 
     //    Move picture taking to Event
-    //    Look into making this more efficent
     /**
      * Constructs the growth queue for line growth. Built beforehand so all
      * lines that should grow on a given step are given the opportunity
      */
     private void buildQueue() {
-        for (int i=0;i<matrix.length;i++) {
+        for (int i = 0; i < matrix.length; i++) {
             GraphNode[] matrix1 = matrix[i];
-            for (int j=0;j<matrix1.length;j++) {
+            for (int j = 0; j < matrix1.length; j++) {
                 GraphNode temp = matrix1[j];
-                if (temp.getNumberOfConnections() == 1) {                       //A node with only one connection indicates that that connection is eligible for growth
+                if (temp.getNumberOfConnections() == 1) {                       //A node with only one connection indicates that connection is eligible for growth
                     queue.enqueue(temp);
                 }//end if
             }//end for
@@ -330,8 +398,11 @@ public class Graph {
         }//end if
     }//end buildQueue
 
+    //TODO: Replace this with Event
+    /**
+     * Checks to see if the {@link Camera} should save a picture of the pattern.
+     */
     private void checkPicture() {
-        //Used for picture taking on an interval, replace it with an Event at some point
         if (noNewGrowth && !camera.isPictureTaken()) {                          //Only take a picture if there has been no growth, and the camera is ready
             if (cycleSteps <= 0) {
                 cycleSteps = stepCount;
@@ -354,20 +425,26 @@ public class Graph {
         }//end if
     }//end checkPicture
 
+    /**
+     * Turns all nodes white.
+     */
     public void whiteOutNodeColors() {
-        for (int i=0;i<matrix.length;i++) {
+        for (int i = 0; i < matrix.length; i++) {
             GraphNode[] matrix1 = matrix[i];
-            for (int j=0;j<matrix1.length;j++) {
+            for (int j = 0; j < matrix1.length; j++) {
                 GraphNode gn = matrix1[j];
                 gn.setColor(GraphNodeColors.WHITE);
             }//end for
         }//end for
     }//end whiteOutNodeColors
 
+    /**
+     * Resets the colors of all nodes
+     */
     public void resetNodeColors() {
-        for (int i=0;i<matrix.length;i++) {
+        for (int i = 0; i < matrix.length; i++) {
             GraphNode[] matrix1 = matrix[i];
-            for (int j=0;j<matrix1.length;j++) {
+            for (int j = 0; j < matrix1.length; j++) {
                 GraphNode gn = matrix1[j];
                 resetNodeColor(gn);
             }//end 
@@ -378,9 +455,9 @@ public class Graph {
      * Reduces the health of all non-edge connections
      */
     private void decayConnections() {
-        for (int i=0;i<matrix.length;i++) {
+        for (int i = 0; i < matrix.length; i++) {
             GraphNode[] matrix1 = matrix[i];
-            for (int j=0;j<matrix1.length;j++) {
+            for (int j = 0; j < matrix1.length; j++) {
                 GraphNode temp = matrix1[j];
                 for (int k = 0; k < temp.getNumberOfConnections(); k++) {
                     GraphTuple gt = temp.getConnection(k);
@@ -448,6 +525,12 @@ public class Graph {
         }//end if
     }//end mutateStep
 
+    /**
+     * Sets up the growth-eligible node for connection reproduction, generating
+     * new {@link GraphTupleInfo} objects for the next generation of lines.
+     *
+     * @param temp The node housing the connection to grow
+     */
     private void depthStep(GraphNode temp) {
         GraphTuple parent = temp.getParentLine();
         parent.setReproductionClock(parent.getReproductionClock() - 1);
@@ -455,7 +538,7 @@ public class Graph {
             Color newColor = parent.getDepthColor();
             GraphTupleInfo gti = parent.generateGTI();
             gti.color = newColor;
-            normalRules(temp, gti);                                             //Now that the setup has been done, actually have the connection reproduce
+            normalRules(temp, gti);                                             //Now that the setup has been done, actually have the connection reproduce using normalRules(line growth is unchanged)
             parent.resetReproductionClock();
         }//end if
     }//end depthStep
@@ -593,12 +676,12 @@ public class Graph {
     }//end normalRules
 
     /**
-     * Connections to each node consume food on each one
+     * Connections to each node consume food on each one.
      */
     private void eat() {
-        for (int i=0;i<matrix.length;i++) {
+        for (int i = 0; i < matrix.length; i++) {
             GraphNode[] matrix1 = matrix[i];
-            for (int j=0;j<matrix1.length;j++) {
+            for (int j = 0; j < matrix1.length; j++) {
                 GraphNode gn = matrix1[j];
                 if (gn.getNumberOfConnections() > 0) {
                     gn.consume(this);
@@ -608,56 +691,20 @@ public class Graph {
     }//end eat
 
     /**
-     * Removes all connections from all nodes in the {@link Graph}
+     * Removes all connections from all nodes in the {@link Graph}.
      */
     public void clearGrid() {
-        for (int i=0;i<matrix.length;i++) {
+        for (int i = 0; i < matrix.length; i++) {
             GraphNode[] matrix1 = matrix[i];
-            for (int j=0;j<matrix1.length;j++) {
+            for (int j = 0; j < matrix1.length; j++) {
                 GraphNode gn = matrix1[j];
                 gn.clearConnections();
                 resetNodeColor(gn);
             }//end for
         }//end for
-        outlineGrid();
+        outlineGrid();              //Re-outline the grid, since clearGrid() also removes the edges
     }//end clearGrid
 
-    /**
-     * Moves the {@link Graph} forward one step, each connection on it
-     * attempting to reproduce. Uses a {@link MyQueue} object to take in to
-     * account all lines that will reproduce, ensuring all of them have the
-     * opportunity to do so. Also reduces the remaining health of all
-     * connections, and the food on each node (if enabled).
-     */
-    public void stepForward() {
-        buildQueue();                                                           //Builds the queue of nodes, each of which houses a connection to reproduce
-        while (queue.hasFront()) {
-            GraphNode temp = queue.dequeue();
-            switch (MODE) {
-                case REGULAR:
-                    regularStep(temp);
-                    break;
-                case MUTATION:
-                    mutation(temp);
-                    break;
-                case DEPTH_BASED:
-                    depthStep(temp);
-                    break;
-                case GROWTH:
-                    growthStep(temp);
-                    break;
-            }//end switch
-        }//end while
-        if (TRIM) {
-            decayConnections();                                                 //Reduces the health of each non-edge connection
-        }//end if
-        if (CONSUME || MODE == GrowthMode.GROWTH) {
-            eat();                                                              //Connections eat the food on relevant nodes
-        }//end if
-        queue.empty();
-    }//end stepForward
-
-    //TODO: Change to enum for GraphNode color
     /**
      * Highlights a (@link GraphNode}, turning it a given color
      *
@@ -668,7 +715,6 @@ public class Graph {
         in.setColor(highlightColor);
     }//end highlightNode
 
-    //TODO: Change to enum for GraphNode color
     /**
      * Same as
      * {@link Graph#highlightNode(graphvisualizer.GraphNode, java.awt.Color)},
@@ -708,7 +754,6 @@ public class Graph {
         }//end if
     }//end highlightNodeAdjacents
 
-    //TODO: Change to enum for GraphNode color
     /**
      * Sets (or re-sets) the color of a given {@link GraphNode} and its adjacent
      * {@link GraphNode}s.
@@ -745,7 +790,6 @@ public class Graph {
         }//end if
     }//end resetNodeAdjacents
 
-    //TODO: Change to enum for GraphNode color
     /**
      * Sets (or re-sets) the color of a given {@link GraphNode}.
      *
@@ -892,6 +936,10 @@ public class Graph {
         }//end switch
     }//end generateSeeds
 
+    /**
+     * Seeds the graph placing one line on a grid with an odd number of rows and
+     * columns.
+     */
     private void oddOneSeed() {
         Random rand = new Random();
         int steps = rand.nextInt(matrix.length / 2) + 1;                //Determines the number of steps in from the edge to place the seed line(s)
@@ -923,6 +971,10 @@ public class Graph {
         }//end switch
     }//end oddOneSeed
 
+    /**
+     * Seeds the graph placing two lines on a grid with an odd number of rows
+     * and columns.
+     */
     private void oddTwoSeeds() {
         Random rand = new Random();
         int steps = rand.nextInt(matrix.length / 2) + 1;
@@ -944,6 +996,10 @@ public class Graph {
         }//end switch
     }//end oddTwoSeeds
 
+    /**
+     * Seeds the graph placing four lines on a grid with an odd number of rows
+     * and columns.
+     */
     private void oddFourSeeds() {
         Random rand = new Random();
         int steps = rand.nextInt(matrix.length / 2) + 1;
@@ -961,6 +1017,10 @@ public class Graph {
         }//end switch
     }//end oddFourSeeds
 
+    /**
+     * Seeds the graph placing eight lines on a grid with an odd number of rows
+     * and columns.
+     */
     private void oddEightSeeds() {
         Random rand = new Random();
         int steps = rand.nextInt(matrix.length / 2) + 1;
@@ -969,6 +1029,10 @@ public class Graph {
         findSeedNodes(new int[][]{{1, -1}, {-1, 1}, {1, 1}, {-1, -1}}, steps);      //Top-Left, Bottom-Right, Top-Right, Bottom-Left
     }///end oddEightSeeds
 
+    /**
+     * Seeds the graph placing one line on a grid with an even number of rows
+     * and columns.
+     */
     private void evenOneSeed() {
         Random rand = new Random();
         int steps = rand.nextInt(matrix.length / 2) + 1;                //Determines the number of steps in from the edge to place the seed line(s)
@@ -988,6 +1052,10 @@ public class Graph {
         }//end switch
     }//end evenOneSeed
 
+    /**
+     * Seeds the graph placing two lines on a grid with an even number of rows
+     * and columns.
+     */
     private void evenTwoSeeds() {
         Random rand = new Random();
         int steps = rand.nextInt(matrix.length / 2) + 1;
@@ -1003,6 +1071,10 @@ public class Graph {
         }//end switch
     }//end evenTwoSeeds
 
+    /**
+     * Seeds the graph placing four lines on a grid with an even number of rows
+     * and columns.
+     */
     private void evenFourSeeds() {
         Random rand = new Random();
         int steps = rand.nextInt(matrix.length / 2) + 1;
@@ -1476,22 +1548,52 @@ public class Graph {
         lineEventNode2 = in;
     }//end setLineEventNode1
 
+    /**
+     * Gets the value of the toggle determining if pictures should be saved on
+     * an interval.
+     *
+     * @return The value of pictureSaveToggle
+     */
     public boolean getPictureSaveToggle() {
         return pictureSaveToggle;
     }//end getPictureSaveToggle
 
+    /**
+     * Sets the value for the toggle determining if pictures should be saved on
+     * an interval.
+     *
+     * @param in The new value of pictureSaveToggle
+     */
     public void setPictureSaveToggle(boolean in) {
         pictureSaveToggle = in;
     }//end getPictureSaveToggle
 
+    /**
+     * Gets the value of the toggle determining if the graph should continue
+     * taking steps after taking a picture on an interval.
+     *
+     * @return The value of picturePauseToggle
+     */
     public boolean getPicturePauseToggle() {
         return picturePauseToggle;
     }//end getPictureSaveToggle
 
+    /**
+     * Sets the value for the toggle determining if the graph should continue
+     * taking steps after taking a picture on an interval.
+     *
+     * @param in The new value of picturePauseToggle
+     */
     public void setPicturePauseToggle(boolean in) {
         picturePauseToggle = in;
     }//end getPictureSaveToggle
 
+    /**
+     * Sets the growth mode of the graph. Translates an int to
+     * {@link GrowthMode}, and prints an error if the int is an invalid value.
+     *
+     * @param in The new growth mode for the graph
+     */
     public void setMode(int in) {
         switch (in) {
             case 0:
@@ -1511,6 +1613,12 @@ public class Graph {
         }//end switch
     }//end setMode
 
+    /**
+     * Returns an int corresponding to the {@link GrowthMode} for the graph.
+     *
+     * @return An integer corresponding to the {@link GrowthMode} the graph is
+     * currently running
+     */
     public int getMode() {
         int out = 0;
         switch (MODE) {
