@@ -2,9 +2,12 @@ package SwingElements;
 
 import graphvisualizer.GraphTuple;
 
+/**
+ * Form containing options for debug features.
+ */
 public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
 
-    Base ref;
+    Base ref;                                                                   //Base object, used for reference
 
     /**
      * Creates new form DebugMenuForm
@@ -19,7 +22,7 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
         BoundingRectangleCheckBox.setSelected(Canvas.DEBUG_BOUNDING_RECTANGLE);
         BoundingRectangleWidthTextField.setText(Integer.toString(Canvas.BOUNDING_RECTANGLE_WIDTH));
         BoundingRectangleHeightTextField.setText(Integer.toString(Canvas.BOUNDING_RECTANGLE_HEIGHT));
-        
+
     }//end constructor
 
     /**
@@ -245,6 +248,10 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action handler for the apply button. Checks the form, then updates any
+     * debug features according to what's on the form.
+     */
     private void ApplyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyButtonActionPerformed
         Canvas.DEBUG = DebugToggleCheckBox.isSelected();
         Canvas.DEBUG_GRID_LINES = GridLinesCheckBox.isSelected();
@@ -255,11 +262,14 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
         String heightText = BoundingRectangleHeightTextField.getText();
         Canvas.BOUNDING_RECTANGLE_WIDTH = isValidInteger(widthText) ? Integer.parseInt(widthText) : Canvas.BOUNDING_RECTANGLE_WIDTH;
         Canvas.BOUNDING_RECTANGLE_HEIGHT = isValidInteger(heightText) ? Integer.parseInt(heightText) : Canvas.BOUNDING_RECTANGLE_HEIGHT;
-        GraphTuple.setDepthBasedColorInterval(Integer.parseInt((String)DepthBasedColorIntervalComboBox.getSelectedItem()));
+        GraphTuple.setDepthBasedColorInterval(Integer.parseInt((String) DepthBasedColorIntervalComboBox.getSelectedItem()));
         this.hide();
     }//GEN-LAST:event_ApplyButtonActionPerformed
 
     @Override
+    /**
+     * Runs the form, setting it to be visible.
+     */
     public void run() {
         if (ref != null) {
             setVisible(true);
@@ -289,6 +299,13 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
     private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Checks a String to ensure that it is an integer with a value greater than
+     * zero.
+     *
+     * @param str The String to check
+     * @return True if the String is a valid integer, false if not
+     */
     public boolean isValidInteger(String str) {
         boolean out = false;
         try {
