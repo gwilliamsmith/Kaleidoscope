@@ -13,13 +13,12 @@ import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 /**
- * Initializes both the Graph and the Canvas. Attaches mouse and key listeners,
- * for user interaction.
- *
+ * Initializes both the {@link Graph} and the {@link Canvas}. Attaches mouse and
+ * key listeners, for user interaction.
  */
 public class Base extends JFrame {
 
-    public static Graph graph;                                                        //The grid
+    public static Graph graph;                                                  //The grid
 
     private Canvas canvas;                                                      //Canvas for displaying stuff
 
@@ -63,10 +62,10 @@ public class Base extends JFrame {
     private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");           //Save menu
     private final JMenuItem toggleSaveInterval = new JMenuItem("Disable saving pictures on interval");      //Save menu
     private final JMenuItem togglePauseInterval = new JMenuItem("Enable pausing after interval picture");   //Save menu
-    
-    private final DebugMenuForm debugMenu;
 
-    private JSlider stepTimeSlider;
+    private final DebugMenuForm debugMenu;                                      // The debug menu form
+
+    private JSlider stepTimeSlider;                                             //Slider that can control step timing
 
     private SettingsFileManipulator settingsManager;                            //Settings manager, reads the persistent settings in from the file
 
@@ -76,7 +75,7 @@ public class Base extends JFrame {
 
     public EventScheduler scheduler = new EventScheduler();                     //Event scheduler
 
-    public boolean curveSwitcher = false;                                        //Handles determining if the curve toggle boolean should be switched between steps.
+    public boolean curveSwitcher = false;                                       //Handles determining if the curve toggle boolean should be switched between steps.
 
     /**
      * Constructor for Base class. Determines grid dimensions, as well as the
@@ -114,7 +113,7 @@ public class Base extends JFrame {
         add(canvas);
 
         debugMenu = new DebugMenuForm(this);
-        
+
         stepTime = st;
         initializeStepTimer();
         //Takes steps on an interval
@@ -131,12 +130,15 @@ public class Base extends JFrame {
         //Repaints on an interval
     }//end constructor
 
+    /**
+     * Sets up the {@link JSlider} that can control the interval between steps.
+     */
     private void initializeStepTimer() {
         stepTimeSlider = new JSlider(1, 1000, stepTime);
         stepTimeSlider.addChangeListener(new SliderChangeListener((this)));
         stepTimeSlider.setMajorTickSpacing(100);
         stepTimeSlider.setMinorTickSpacing(1);
-        Hashtable<Integer, JLabel> sliderLabels = new Hashtable<>();
+        Hashtable<Integer, JLabel> sliderLabels = new Hashtable<>();            //This is obsolete, but it only exists to give the slider labels 
         sliderLabels.put(20, new JLabel("Faster"));
         sliderLabels.put(980, new JLabel("Slower"));
         stepTimeSlider.setLabelTable(sliderLabels);
@@ -273,18 +275,31 @@ public class Base extends JFrame {
         menuBar.add(calculateSizeMenu);
     }//end createMenuBar
 
+    /**
+     * Used to trigger the save picture action listener when the 's' key is
+     * pressed.
+     */
     public void triggerSaveAction() {
         savePicture.getActionListeners()[0].actionPerformed(null);
     }//end triggerSaveAction
 
+    /**
+     * Used to trigger the save state action listener when control-s is pressed.
+     */
     public void triggerSaveStateAction() {
         saveState.getActionListeners()[0].actionPerformed(null);
     }//end triggerSaveStateAction
 
+    /**
+     * Used to trigger the loop action listener when the spacebar is pressed.
+     */
     public void triggerLoop() {
         loop.getActionListeners()[0].actionPerformed(null);
     }//end triggerLoop
 
+    /**
+     * Used to trigger the white out grid action listener. Currently unused.
+     */
     public void triggerWhiteOutGrid() {
         whiteOutGrid.getActionListeners()[0].actionPerformed(null);
     }//end triggerWhiteOutGrid
@@ -320,16 +335,22 @@ public class Base extends JFrame {
         timer.stop();
         loop.setText("Run");
     }//end pause;
-    
-    public void showDebugMenu(){
+
+    /**
+     * Makes the debug menu visible, and pulls it to the front of the screen.
+     */
+    public void showDebugMenu() {
         debugMenu.setVisible(true);
         debugMenu.toFront();
         debugMenu.requestFocus();
     }//end showDebugMenu
-    
-    public void hideDebugMenu(){
+
+    /**
+     * Hides the debug menu.
+     */
+    public void hideDebugMenu() {
         debugMenu.setVisible(false);
-    }
+    }//end hideDebugMenu
 
     /**
      * Checks to see if the connection variable has been created.
@@ -340,10 +361,20 @@ public class Base extends JFrame {
         return conn == null;
     }//end checkConnection
 
+    /**
+     * Sets the text for the save on interval menu button.
+     *
+     * @param in The new text for the button
+     */
     public void setSaveIntervalToggleText(String in) {
         toggleSaveInterval.setText(in);
     }//end setSaveIntervalToggleText
 
+    /**
+     * Sets the text for the pause on interval menu button.
+     *
+     * @param in The new text for the button
+     */
     public void setPauseIntervalToggleText(String in) {
         togglePauseInterval.setText(in);
     }//end setSaveIntervalToggleText
@@ -488,10 +519,20 @@ public class Base extends JFrame {
         conn = in;
     }//end setConn
 
+    /**
+     * Gets the {@link JMenuItem} for toggling grid node colors.
+     *
+     * @return whiteOutGrid, the {@link JMenuItem} for toggling grid node colors
+     */
     public JMenuItem getWhiteOutGrid() {
         return whiteOutGrid;
     }//end getWhiteOutGrid
 
+    /**
+     * Sets the value for the step time slider
+     *
+     * @param location The new value for stepTime
+     */
     public void setStepTimeSliderLocation(int location) {
         stepTimeSlider.setValue(location);
     }//end setSliderLocation
