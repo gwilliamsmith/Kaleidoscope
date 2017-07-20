@@ -188,17 +188,19 @@ public class Canvas extends JPanel {
             public void run() {
                 for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
                     GraphNode gn = ref.getGraph().getGraphNodes().get(i);
-                    if (!gn.getColor().equals(Color.WHITE)) {
-                        g3.setColor(gn.getColor());
-                        /* Food isn't used right now, so this is commented out so as to reduce # of method calls
-                         if (gn.getFood() <= 0) {
-                         g2.setColor(Color.WHITE);
-                         }//end if
-                         */
-                        g3.fillRect(gn.x + pointSize / 2, gn.y + pointSize / 2, gn.height, gn.width);
+                    if (gn != null) {
+                        if (!gn.getColor().equals(Color.WHITE)) {
+                            g3.setColor(gn.getColor());
+                            /* Food isn't used right now, so this is commented out so as to reduce # of method calls
+                             if (gn.getFood() <= 0) {
+                             g2.setColor(Color.WHITE);
+                             }//end if
+                             */
+                            g3.fillRect(gn.x + pointSize / 2, gn.y + pointSize / 2, gn.height, gn.width);
+                        }//end if
                     }//end if
                 }//end for
-            }
+            }//end run
         });
     }//end drawNodes
 
@@ -214,21 +216,25 @@ public class Canvas extends JPanel {
             public void run() {
                 for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
                     GraphNode gn = ref.getGraph().getGraphNodes().get(i);
-                    for (int j = 0; j < gn.getNumberOfConnections(); j++) {
-                        GraphTuple gt = gn.getConnection(j);
-                        if (gt.isEdge(ref.getGraph()) || !curveEnabled) {
-                            if (!gt.redundant) {
-                                drawLine(g3, gt, false);
+                    if (gn != null) {
+                        for (int j = 0; j < gn.getNumberOfConnections(); j++) {
+                            GraphTuple gt = gn.getConnection(j);
+                            if (gt != null) {
+                                if (gt.isEdge(ref.getGraph()) || !curveEnabled) {
+                                    if (!gt.redundant) {
+                                        drawLine(g3, gt, false);
+                                    }//end if
+                                }//end if
+                                else {
+                                    if (!gt.redundant) {
+                                        drawCurve(g3, gt, false);
+                                    }//end if
+                                }//end else
                             }//end if
-                        }//end if
-                        else {
-                            if (!gt.redundant) {
-                                drawCurve(g3, gt, false);
-                            }//end if
-                        }//end else
-                    }//end for
+                        }//end for
+                    }//end if
                 }//end for
-            }
+            }//end run
         });
     }//end drawConnections
 
@@ -240,6 +246,7 @@ public class Canvas extends JPanel {
                 n1.y /*+ windowY * windowMultiplier*/ + n1.height / 2 + pointSize / 2,
                 n2.x /*+ windowX * windowMultiplier*/ + n2.width / 2 + pointSize / 2,
                 n2.y /*+ windowY * windowMultiplier*/ + n2.height / 2 + pointSize / 2);
+
     }//end drawLine
 
     private void drawCurve(Graphics2D g2, GraphTuple gt, boolean windowMod) {
