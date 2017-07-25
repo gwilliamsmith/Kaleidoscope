@@ -66,12 +66,13 @@ Kaleidoscope uses an implementation of a quque that I've written, to scan the `G
 
 Regular growth mode is the default growth mode, and the one used for geometric pattern creation. In regular growth mode, lines reproduce and die, but do not mutate, and so never change color or lifespan. In this mode (and modes built off of it like [Mutation](#mutation-growth-mode) and [Depth-Based Coloring](#depth-based-coloring-mode)), lines follow simple rules for reprouction (images to illustrate this coming as soon as I have them):
  
- * Only reproduce if the line does not touch any lines in the direction it is to reproduce.
- * If there is already a line where one would be created, that line is left alone, and is not overwritten.
- * If the line is a straight line, create two diagonal lines at each end, each pair forming a right angle.
- * If the line is a diagonal line, create two straight lines at each end, each pair forming a right angle.
- * Lines lose one health(lifespan) per step, including the step in which they were created.
- * If a line has no health(lifespan) remaining, it dies and disappears.
+* Only reproduce if a line does not touch any lines in the direction it is to reproduce.
+* If there is already a line where one would be created, that line is left alone, and is not overwritten.
+* A line that is able to reproduce, that line will create up to two lines at each end, each pair forming a right angle
+  * If the line is a straight line, create two diagonal lines at each end, each pair forming a right angle.
+  * If the line is a diagonal line, create two straight lines at each end, each pair forming a right angle.
+* Lines lose one health(lifespan) per step, including the step in which they were created.
+* If a line has no health(lifespan) remaining, it dies and disappears.
 
 ### Mutation Growth Mode
 ---
@@ -98,7 +99,7 @@ I've implemented a debug menu into Kaleidoscope, containing some features that m
 
 ## Contributing
 
-If you want to contribute, feel free to fork and make your own changes, and I'll review them myself. I'd be happy to have help or hear any constructive advice anyone has to offer. Make sure to take a look at [CONTRIBUTING.md](./CONTRIBUTING.md) before submitting a pull request, but do keep in mind that those are guidelines, not hard-and-fast rules. I can (and will) accept anything I feel is really good , even if it hasn't followed the proper guidelines.
+If you want to contribute, feel free to fork and make your own changes, and I'll review them myself. I'd be happy to have help or hear any constructive advice anyone has to offer. Make sure to take a look at [CONTRIBUTING.md](./CONTRIBUTING.md) before submitting a pull request, but do keep in mind that those are guidelines, not hard and fast rules. I can (and will) accept anything I feel is really good, even if it hasn't followed the proper guidelines.
 
 The issue tracker is [here](https://github.com/gwilliamsmith/GraphVisualizer/issues). If you run into a problem with Kaleidoscope and want it fixed, or want a good place to start, that's the place to look. Try not to open any duplicates issues, please.
 
