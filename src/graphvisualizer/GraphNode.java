@@ -68,7 +68,6 @@ public class GraphNode extends Rectangle {
                 newConnection.redundant = redundant;
             }//end if
             connections.add(newConnection);
-            updated = true;
             return true;
         }//end if
         return false;
@@ -81,7 +80,6 @@ public class GraphNode extends Rectangle {
      */
     public void addConnection(GraphTuple in) {
         connections.add(in);
-        updated = true;
     }//end addConnection
 
     /**
@@ -193,7 +191,6 @@ public class GraphNode extends Rectangle {
                 }//end if
             }//end for
         }//end if
-        updated = true;
     }//removeConnection
 
     /**
@@ -206,7 +203,6 @@ public class GraphNode extends Rectangle {
             Base.graph.disconnect(gt.getFromLocation(), gt.getToLocation());
             i--;
         }//end for
-        updated = true;
     }//end clearConnections
 
     /**
@@ -341,7 +337,7 @@ public class GraphNode extends Rectangle {
     public int getJLoc() {
         return jLoc;
     }//end getJLoc
-
+    
     /**
      * Returns if the node's graphics should be updated.
      *

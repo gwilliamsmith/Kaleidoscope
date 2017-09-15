@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
  */
 public class TimerActionListener implements ActionListener {
 
-    private Base ref;                                                           //Base object, used for reference
+    private final Base ref;                                                           //Base object, used for reference
 
     /**
      * Constructor.
@@ -27,9 +27,11 @@ public class TimerActionListener implements ActionListener {
      * {@link Graph#takeStep}. Also repaints the Canvas.
      */
     public void actionPerformed(ActionEvent evt) {
-        //if (ref.isRunning()) {
-            ref.getGraph().takeStep();
-        //}//end if
+        new Thread() {
+            public void run() {
+                ref.getGraph().takeStep();
+            }
+        }.start();
     }//actionPerformed
 
 }//end TimerActionListner

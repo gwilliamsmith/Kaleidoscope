@@ -32,7 +32,6 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
                     if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint())) {
                         if (gn != graph.getConnectA() && !gn.isConnected(graph.getConnectA())) {
                             graph.setConnectB(gn);
-                            gn.setUpdated(true);
                         }//end if
                         connect = false;
                         break;
@@ -65,7 +64,6 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
                     GraphNode gn = graph.getGraphNodes().get(i);
                     if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint())) {
                         graph.setConnectA(gn);
-                        gn.setUpdated(true);
                         connect = true;
                         graph.highlightNodeAdjacents(gn,GraphNodeColors.SELECTED_COLOR,GraphNodeColors.SELECTED_ADJACENT_COLOR);
                         break;
