@@ -45,21 +45,20 @@ public class BaseKeyListener implements KeyListener {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
                 ref.getGraph().takeStep();
-                break;
+                return;
             case KeyEvent.VK_SPACE:
                 ref.triggerLoop();
-                break;
+                return;
         }//end switch
         switch (e.getKeyChar()) {
             case 's':
                 ref.triggerSaveAction();
-                break;
+                return;
             case 'q':
                 ref.getCanvas().increaseZoomLevel();
-                break;
+                return;
             case 'a':
                 ref.getCanvas().decreaseZoomLevel();
-                break;
         }//end switch
     }//end keyPressed
 

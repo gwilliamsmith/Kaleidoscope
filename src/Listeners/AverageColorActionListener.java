@@ -8,6 +8,11 @@ public class AverageColorActionListener implements ActionListener {
 
     private Base ref;
 
+    /**
+     * Constructor.
+     *
+     * @param in {@link Base} object, used for reference.
+     */
     public AverageColorActionListener(Base in) {
         ref = in;
     }//end constructor
@@ -15,7 +20,7 @@ public class AverageColorActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (ref != null) {
-                ref.showAverageDisplay();
+            ref.showAverageDisplay();
         }//end if
     }//end actionPerformed
 
