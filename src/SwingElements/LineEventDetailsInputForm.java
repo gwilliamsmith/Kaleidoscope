@@ -551,7 +551,7 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame implements Run
     }//end checkTextField
 
     /**
-     * UPdates the contents of the Node2 selection combo box to fit nodes
+     * Updates the contents of the Node2 selection combo box to fit nodes
      * adjacent to the selected Node1.
      */
     private void updateNode2ComboBox() {
@@ -620,4 +620,4 @@ public class LineEventDetailsInputForm extends javax.swing.JFrame implements Run
             setVisible(true);
         }//end if
     }//end run
-}
+}//end LineEventDetailsInputForm class

@@ -9,10 +9,10 @@ import javax.swing.JTextField;
  */
 public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
 
-    private Base ref;                   //Used to access other objects as needed
-    private int c = 0;
-    private int r = 0;
-    private int st = 0;
+    private Base ref;                                                           //Used to access other objects as needed
+    private int c = 0;                                                          //The number of columns in the grid to be created
+    private int r = 0;                                                          //The number of rows in the grid to be created
+    private int st = 0;                                                         //The initial stepTime of the Base object to be created
 
     /**
      * Constructor.
@@ -150,20 +150,20 @@ public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
      * {@link Base} object with the validated input.
      */
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
-        int c = checkTextField(NumberOfColumnsTextField, "Columns");
-        int r = checkTextField(NumberOfRowsTextField, "Rows");
-        int st = checkTextField(StepTimeTextField, "Step Time");
-        if (c != -1 && r != -1 && st != -1) {
+        int newC = checkTextField(NumberOfColumnsTextField, "Columns");
+        int newR = checkTextField(NumberOfRowsTextField, "Rows");
+        int newSt = checkTextField(StepTimeTextField, "Step Time");
+        if (newC != -1 && newR != -1 && newSt != -1) {
             if (ref == null) {
-                new Base(c, r, st).setVisible(true);
+                new Base(newC, newR, newSt).setVisible(true);
             }
             else {
-                if(!(c == this.c && r == this.r)){
-                    ref.resizeGrid(c, r, st);
+                if(!(newC == this.c && newR == this.r)){
+                    ref.resizeGrid(newC, newR, newSt);
                 }//end if
                 else{
-                    if(st != this.st){
-                        ref.setStepTime(st);
+                    if(newSt != this.st){
+                        ref.setStepTime(newSt);
                     }//end if
                 }//end else
             }//end else

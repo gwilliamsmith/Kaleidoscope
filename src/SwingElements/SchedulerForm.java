@@ -12,14 +12,14 @@ import javax.swing.SwingUtilities;
  */
 public class SchedulerForm extends javax.swing.JFrame implements Runnable {
 
-    private Base ref;                                                   //Base object for accessing other needed objects
-    private EventScheduler scheduler;                                   //Event scheduler object
-    private EventDetailsInputForm createEventForm;                      //Form used to input information for most events
-    private LineEventDetailsInputForm createLineEventForm;              //Form used to input information for line creation events
-    private SavePictureEventDetailsForm savePictureEventDetailsForm;
+    private Base ref;                                                       //Base object for accessing other needed objects
+    private EventScheduler scheduler;                                       //Event scheduler object
+    private EventDetailsInputForm createEventForm;                          //Form used to input information for most events
+    private LineEventDetailsInputForm createLineEventForm;                  //Form used to input information for line creation events
+    private SavePictureEventDetailsForm savePictureEventDetailsForm;        //Form used to input information for picture saving events
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param in Reference {@link Base} object
      */
@@ -329,19 +329,7 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
             Event e = scheduler.getRepeatedEvents().get(list.getSelectedIndex());
-            if (e instanceof PlaceLineEvent) {
-                createLineEventForm = new LineEventDetailsInputForm(this, ref, (PlaceLineEvent) e);
-                SwingUtilities.invokeLater(createLineEventForm);
-                //createLineEventForm.setVisible(true);
-            }//end if
-            else if (e instanceof SavePictureEvent) {
-                savePictureEventDetailsForm = new SavePictureEventDetailsForm(this, (SavePictureEvent) e);
-                SwingUtilities.invokeLater(savePictureEventDetailsForm);
-            }//end else if
-            else {
-                createEventForm = new EventDetailsInputForm(this, e);
-                SwingUtilities.invokeLater(createEventForm);
-            }//end else 
+            eventRouter(e);
         }//end if
     }//GEN-LAST:event_RepeatEventListMouseClicked
 
@@ -353,19 +341,7 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
         JList list = (JList) evt.getSource();
         if (evt.getClickCount() == 2) {
             Event e = scheduler.getSingleEvents().get(list.getSelectedIndex());
-            if (e instanceof PlaceLineEvent) {
-                createLineEventForm = new LineEventDetailsInputForm(this, ref, (PlaceLineEvent) e);
-                SwingUtilities.invokeLater(createLineEventForm);
-                //createLineEventForm.setVisible(true);
-            }//end if
-            else if (e instanceof SavePictureEvent) {
-                savePictureEventDetailsForm = new SavePictureEventDetailsForm(this, (SavePictureEvent) e);
-                SwingUtilities.invokeLater(savePictureEventDetailsForm);
-            }//end else if
-            else {
-                createEventForm = new EventDetailsInputForm(this, e);
-                SwingUtilities.invokeLater(createEventForm);
-            }//end else 
+            eventRouter(e);
         }//end if
     }//GEN-LAST:event_SingleEventListMouseClicked
 
@@ -537,4 +513,25 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
             setVisible(true);
         }//end if
     }//end run
-}
+
+    /**
+     * Handles routing events to their proper input forms.
+     *
+     * @param e The event to rout to its input form
+     */
+    private void eventRouter(Event e) {
+        if (e instanceof PlaceLineEvent) {
+            createLineEventForm = new LineEventDetailsInputForm(this, ref, (PlaceLineEvent) e);
+            SwingUtilities.invokeLater(createLineEventForm);
+            //createLineEventForm.setVisible(true);
+        }//end if
+        else if (e instanceof SavePictureEvent) {
+            savePictureEventDetailsForm = new SavePictureEventDetailsForm(this, (SavePictureEvent) e);
+            SwingUtilities.invokeLater(savePictureEventDetailsForm);
+        }//end else if
+        else {
+            createEventForm = new EventDetailsInputForm(this, e);
+            SwingUtilities.invokeLater(createEventForm);
+        }//end else 
+    }//end eventRouter
+}//end SchedulerForm class
