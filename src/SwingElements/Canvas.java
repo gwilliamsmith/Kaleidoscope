@@ -37,13 +37,13 @@ public class Canvas extends JPanel {
 
     private BufferedImage gridPicture = null;                           //Picture of just the grid contents, not the entire window
 
-    private GraphTupleInfo gtiStorage = new GraphTupleInfo();           //Info for next line
+    private GraphTupleInfo gtiStorage = new GraphTupleInfo();           //Info for next line (should probably be moved to the Graph class)
 
     public static boolean curveEnabled = false;                         //Toggles drawing of lines or curves between nodes
 
-    private int curveMaxSeverity = spacing / 4;
+    private int curveMaxSeverity = spacing / 4;                         //The maximum curve for curved lines
 
-    private static final int MAX_ZOOM_LEVEL = 7;
+    private static final int MAX_ZOOM_LEVEL = 7;                        //The maximum amount of zoom the canvas can have
 
     public static boolean DEBUG = false;                                //Master toggle for debug features
 
@@ -55,8 +55,8 @@ public class Canvas extends JPanel {
     public static int BOUNDING_RECTANGLE_WIDTH = 2550;                  //Width of bounding rectangle
     public static int BOUNDING_RECTANGLE_HEIGHT = 2550;                 //Height of bounding rectangle
 
-    private int mouseX = 0;
-    private int mouseY = 0;
+    private int mouseX = 0;                                             //The mouse's x location
+    private int mouseY = 0;                                             //The mouse's y location
 
     /**
      * Constructor.
@@ -124,6 +124,11 @@ public class Canvas extends JPanel {
         drawConnections(g2, windowMod);
     }//end drawGrid
 
+    /**
+     * Draws enabled debug options.
+     *
+     * @param g2 The {@link Graphics 2D} object to do the drawing
+     */
     private void drawDebug(Graphics2D g2) {
         Stroke temp = g2.getStroke();
         g2.setStroke(new BasicStroke(1));
@@ -134,6 +139,11 @@ public class Canvas extends JPanel {
         g2.setStroke(temp);
     }//end drawDebug
 
+    /**
+     * Draws light-grey lines every five pixels, creating a grid.
+     *
+     * @param g2 The {@link Graphics 2D} object to do the drawing
+     */
     private void drawDebugGridLines(Graphics2D g2) {
         if (DEBUG_GRID_LINES) {
             for (int i = 0; i < getWidth(); i += 5) {
@@ -147,6 +157,11 @@ public class Canvas extends JPanel {
         }//end if
     }//end drawDebugGridLines
 
+    /**
+     * Draws red lines across the center of the window.
+     *
+     * @param g2 The {@link Graphics 2D} object to do the drawing
+     */
     private void drawDebugCenterLines(Graphics2D g2) {
         if (DEBUG_CENTER_LINES) {
             g2.setColor(Color.RED);
@@ -155,6 +170,11 @@ public class Canvas extends JPanel {
         }//end if
     }//end drawDebugCenterLines
 
+    /**
+     * Draws the bounding rectangle, according to it's given size.
+     *
+     * @param g2 The {@link Graphics 2D} object to do the drawing
+     */
     private void drawDebugBoundingRectangle(Graphics2D g2) {
         if (DEBUG_BOUNDING_RECTANGLE) {
             g2.setColor(Color.CYAN);
@@ -166,6 +186,12 @@ public class Canvas extends JPanel {
         }//end if
     }//end drawDebugBoundingRectangle
 
+    /**
+     * Draws the mouse's x and y coordinates on the screen in the lower left
+     * corner.
+     *
+     * @param g2 The {@link Graphics 2D} object to do the drawing
+     */
     private void drawDebugMouseCoordinates(Graphics2D g2) {
         if (DEBUG_MOUSE_COORDINATES) {
             g2.setColor(Color.black);
@@ -173,6 +199,13 @@ public class Canvas extends JPanel {
         }//end if
     }//end drawDebugMouseCoordinates
 
+    /**
+     * Draws the {@link GraphNode}s composing the grid.
+     *
+     * @param g2 The {@link Graphics 2D} object to do the drawing
+     * @param windowMod Boolean determining if the drawing should be offset by
+     * the user repositioning the grid - this will be removed soon
+     */
     private void drawNodes(Graphics2D g2, boolean windowMod) {
         int windowMultiplier = windowMod ? 1 : 0;
         for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
@@ -190,18 +223,25 @@ public class Canvas extends JPanel {
         }//end for
     }//end drawNodes
 
+    /**
+     * Draws the {@link GraphTuple}s describing the lines of the grid.
+     *
+     * @param g2 The {@link Graphics 2D} object to do the drawing
+     * @param windowMod Boolean determining if the drawing should be offset by
+     * the user repositioning the grid - this will be removed soon
+     */
     private void drawConnections(Graphics2D g2, boolean windowMod) {
         for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
             GraphNode gn = ref.getGraph().getGraphNodes().get(i);
             for (int j = 0; j < gn.getNumberOfConnections(); j++) {
                 GraphTuple gt = gn.getConnection(j);
                 if (gt.isEdge(ref.getGraph()) || !curveEnabled) {
-                    if (!gt.redundant) {
+                    if (!gt.redundant) {                                        //Only draw one line, if the line is not a redundant line (has inverted to/from locations as another line)
                         drawLine(g2, gt, windowMod);
                     }//end if
                 }//end if
                 else {
-                    if (!gt.redundant) {
+                    if (!gt.redundant) {                                        //Only draw one line, if the line is not a redundant line (has inverted to/from locations as another line)
                         drawCurve(g2, gt, windowMod);
                     }//end if
                 }//end else
@@ -209,6 +249,14 @@ public class Canvas extends JPanel {
         }//end for
     }//end drawConnections
 
+    /**
+     * Draws an individual {@link GraphTuple} line.
+     *
+     * @param g2 The {@link Graphics 2D} object to do the drawing
+     * @param gt The {@link GraphTuple} object to draw
+     * @param windowMod Boolean determining if the drawing should be offset by
+     * the user repositioning the grid - this will be removed soon
+     */
     private void drawLine(Graphics2D g2, GraphTuple gt, boolean windowMod) {
         int windowMultiplier = windowMod ? 1 : 0;
         g2.setColor(gt.getColor());
@@ -220,6 +268,15 @@ public class Canvas extends JPanel {
                 n2.y + windowY * windowMultiplier + n2.height / 2);
     }//end drawLine
 
+    //TODO: Clean this up
+    /**
+     * Draws an individual {@link GraphTuple} curve.
+     *
+     * @param g2 The {@link Graphics 2D} object to do the drawing
+     * @param gt The {@link GraphTuple} object to draw
+     * @param windowMod Boolean determining if the drawing should be offset by
+     * the user repositioning the grid - this will be removed soon
+     */
     private void drawCurve(Graphics2D g2, GraphTuple gt, boolean windowMod) {
         int windowMultiplier = windowMod ? 1 : 0;
         g2.setColor(gt.getColor());
@@ -364,7 +421,7 @@ public class Canvas extends JPanel {
      Clean this up:
      Use static variables for corner (Maybe an enum?)
      lineOffset can be done better
-     Implement logic for other corners
+     Implement logic for other corner
      */
     /**
      * Draws a given string in a corner, using an offset.
@@ -453,26 +510,42 @@ public class Canvas extends JPanel {
     }//end getWindowX
 
     /**
-     * Modifies windowX
+     * Modifies windowX.
      *
-     * @param mod
+     * @param mod The amount to change windowX by
      */
     public void modifyWindowX(int mod) {
         windowX = windowX + mod;
     }//end modifyWindowX
 
+    /**
+     * Resets windowX, so the grid is in its initial x-axis location.
+     */
     public void resetWindowX() {
         windowX = 0;
     }//end resetWindowX
 
+    /**
+     * Returns the current Y axis modifier for object drawing.
+     *
+     * @return The value of windowY
+     */
     public int getWindowY() {
         return windowY;
     }//end getWindowY
 
+    /**
+     * Modifies windowY.
+     *
+     * @param mod The amount to change windowY by
+     */
     public void modifyWindowY(int mod) {
         windowY = windowY + mod;
     }//end modifyWindowX
 
+    /**
+     * Resets windowY, so the grid is in its initial y-axis location.
+     */
     public void resetWindowY() {
         windowY = 0;
     }//end resetWindowY
@@ -503,10 +576,24 @@ public class Canvas extends JPanel {
         return tempColor;
     }//end getTempColor
 
+    /**
+     * Sets gtiStorage, the {@link GraphTupleInfo} object describing the next
+     * user-placed line.
+     *
+     * @param in The {@link GraphTupleInfo} object describing the next
+     * user-placed line
+     */
     public void setGtiStorage(GraphTupleInfo in) {
         gtiStorage = in;
     }//end setGtiStorage
 
+    /**
+     * Gets gtiStorage, the {@link GraphTupleInfo} object describing the next
+     * user-placed line.
+     *
+     * @return The {@link GraphTupleInfo} object describing the next user-placed
+     * line
+     */
     public GraphTupleInfo getGtiStorage() {
         return gtiStorage;
     }//end getGtiStorage
@@ -662,10 +749,22 @@ public class Canvas extends JPanel {
         curveEnabled = !curveEnabled;
     }//end toggleCurve
 
+    /**
+     * Sets the integer holding the mouse's x location for display in the debug
+     * menu.
+     *
+     * @param in The mouse's x location on screen
+     */
     public void setMouseX(int in) {
         mouseX = in;
     }//end setMouseX
 
+    /**
+     * Sets the integer holding the mouse's y location for display in the debug
+     * menu.
+     *
+     * @param in The mouse's y location on screen
+     */
     public void setMouseY(int in) {
         mouseY = in;
     }//end setMouseY

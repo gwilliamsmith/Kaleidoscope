@@ -520,7 +520,6 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
                 out = -1;
             }//end if
         } catch (NumberFormatException e) {
-            //JOptionPane.showMessageDialog(this, "You must enter a number!", title, JOptionPane.ERROR_MESSAGE);
             out = emptyValue;
         }//end tryCatch
         return out;
@@ -583,5 +582,4 @@ public class PropertiesSelectionForm extends javax.swing.JFrame implements Runna
             this.setVisible(true);
         }//end if
     }//end run
-
 }//end PropertiesSelectionForm

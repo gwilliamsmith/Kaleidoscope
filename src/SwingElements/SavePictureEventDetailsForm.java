@@ -6,6 +6,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+/**
+ * A form used to set up a {@link SavePictureEvent}.
+ */
 public class SavePictureEventDetailsForm extends javax.swing.JFrame implements Runnable {
 
     private SchedulerForm parent;
@@ -16,17 +19,25 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
     private SavePictureEvent temp = null;
 
     /**
-     * Creates new form SaveFieldEventDetailsForm
+     * Creates new form SaveFieldEventDetailsForm.
+     *
+     * @param parentIn {@link Base} object used for reference
      */
     public SavePictureEventDetailsForm(SchedulerForm parentIn) {
         parent = parentIn;
         initComponents();
     }//end constructor
 
+    /**
+     * Creates new form to edit given {@link SavePictureEvent}.
+     *
+     * @param parentIn {@link Base} object used for reference
+     * @param eventIn The {@link SavePictureEvent} to be edited
+     */
     public SavePictureEventDetailsForm(SchedulerForm parentIn, SavePictureEvent eventIn) {
         parent = parentIn;
         temp = eventIn;
-        
+
         initComponents();
 
         stepCount = temp.getStepTarget();
@@ -176,6 +187,9 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action handler for the create event button.
+     */
     private void CreateEventButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateEventButtonActionPerformed
         stepCount = checkTextField(TriggerStepTextField, "Trigger Step");
         eventName = EventNameTextField.getText();
@@ -196,6 +210,9 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
         }//end if
     }//GEN-LAST:event_CreateEventButtonActionPerformed
 
+    /**
+     * Action handler for the file location button.
+     */
     private void FileLocationBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileLocationBrowseButtonActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File("."));
@@ -253,4 +270,4 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
     private javax.swing.JTextField TriggerStepTextField;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
-}
+}//end SavePictureEventDetailsForm class

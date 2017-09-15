@@ -10,11 +10,11 @@ import javax.swing.JTextField;
  */
 public class EventDetailsInputForm extends javax.swing.JFrame implements Runnable {
 
-    private SchedulerForm ref;                                      //The SchedulerForm that generated the EventDetailsInputForm
-    public int stepCount;                                           //The step count at which to execute the event in question
-    public String eventName;                                        //The name of the event in question
-    public boolean repeat;                                          //Determines if the event is a repeat event or a single event
-    private Event temp;                                             //The event to be created/edited
+    private SchedulerForm ref;                                                  //The SchedulerForm that generated the EventDetailsInputForm
+    public int stepCount;                                                       //The step count at which to execute the event in question
+    public String eventName;                                                    //The name of the event in question
+    public boolean repeat;                                                      //Determines if the event is a repeat event or a single event
+    private Event temp;                                                         //The event to be created/edited
 
     /**
      * Constructor. Used when an event is being created.
@@ -227,4 +227,4 @@ public class EventDetailsInputForm extends javax.swing.JFrame implements Runnabl
             setVisible(true);
         }//end if
     }//end run
-}
+}//end EventDetailsInputForm class

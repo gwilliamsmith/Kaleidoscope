@@ -16,18 +16,23 @@ import javax.swing.DefaultListModel;
  */
 public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
 
-    Base ref;
+    Base ref;                                                                   //Base object, usef for reference
 
+    /**
+     * Constructor.
+     *
+     * @param in {@link Base} object, used for reference
+     */
     public CalculateSizeForm(Base in) {
         ref = in;
         initComponents();
         setTitle("Calculate Grid Size");
         BoundingSquareSizeTextField.setText(Integer.toString(Canvas.BOUNDING_RECTANGLE_WIDTH));
         updateNodeCountList();
-        if(findFactors(Integer.parseInt(BoundingSquareSizeTextField.getText())).contains(ref.getGraph().getMatrix().length)){
+        if (findEligibleNodeCounts(Integer.parseInt(BoundingSquareSizeTextField.getText())).contains(ref.getGraph().getMatrix().length)) {
             DefaultListModel model = (DefaultListModel) NodeCountList.getModel();
-            for(int i=0;i<model.getSize();i++){
-                if(Integer.parseInt((String) model.get(i)) == ref.getGraph().getMatrix().length){
+            for (int i = 0; i < model.getSize(); i++) {
+                if (Integer.parseInt((String) model.get(i)) == ref.getGraph().getMatrix().length) {
                     NodeCountList.setSelectedIndex(i);
                 }//end if
             }//end for
@@ -196,6 +201,10 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action handler for items on the NodeCountList. Updates the list of
+     * potential grid size settings when the user selects a node count.
+     */
     private void NodeCountListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_NodeCountListValueChanged
         NodeSizeSpacingList.clearSelection();
         if (!NodeCountList.isSelectionEmpty()) {
@@ -209,10 +218,19 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
         }//end if
     }//GEN-LAST:event_NodeCountListValueChanged
 
+    /**
+     * Action handler for BoundingSquareSizeTextField. Calls
+     * {@link CalculateSizeForm#updateNodeCountList()}.
+     */
     private void BoundingSquareSizeTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BoundingSquareSizeTextFieldKeyReleased
         updateNodeCountList();
     }//GEN-LAST:event_BoundingSquareSizeTextFieldKeyReleased
 
+    /**
+     * Action handler for the apply button. Parses grid sizing options, then
+     * resizes the grid to match. Will clear the grid if the node count is
+     * different from the current node count.
+     */
     private void ApplyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyButtonActionPerformed
         if (NodeCountList.getSelectedValue() != null && NodeSizeSpacingList.getSelectedValue() != null) {
             String count = (String) NodeCountList.getSelectedValue();
@@ -220,33 +238,38 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
             int nodeSize = 0;
             int nodeSpacing = 0;
             int nodes = Integer.parseInt(count);
-            Scanner scan  = new Scanner(sizing);
-            while(scan.hasNext()){
+            Scanner scan = new Scanner(sizing);
+            while (scan.hasNext()) {
                 String test = scan.next();
-                if(test.equals("size:")){
+                if (test.equals("size:")) {
                     String temp = scan.next();
-                    temp = temp.substring(0,temp.length()-1);
+                    temp = temp.substring(0, temp.length() - 1);
                     nodeSize = Integer.parseInt(temp);
                 }//end if
-                if(test.equals("Spacing:")){
+                if (test.equals("Spacing:")) {
                     nodeSpacing = Integer.parseInt(scan.next());
                 }//end if
             }//end while
             ref.getCanvas().setMinPointSize(nodeSize);
             ref.getCanvas().setMinSpacing(nodeSpacing);
             ref.getCanvas().setResized(true);
-            if(ref.getGraph().getMatrix().length != nodes){
+            if (ref.getGraph().getMatrix().length != nodes) {
                 ref.resizeGrid(nodes, nodes, ref.getStepTime());
             }//end if
             Canvas.BOUNDING_RECTANGLE_HEIGHT = Integer.parseInt(BoundingSquareSizeTextField.getText());
             Canvas.BOUNDING_RECTANGLE_WIDTH = Integer.parseInt(BoundingSquareSizeTextField.getText());
         }//end if
-        else {
-            System.out.println("Something isn't selected");
-        }//end else
     }//GEN-LAST:event_ApplyButtonActionPerformed
 
-    private ArrayList<Integer> findFactors(int in) {
+    /**
+     * Finds node counts that can have integer settings for a size of a given
+     * size.
+     *
+     * @param in The size of the square(in pixels) to fit a grid inside
+     * @return An {@link ArrayList} of integers, all of which are factors of in
+     * + 1
+     */
+    private ArrayList<Integer> findEligibleNodeCounts(int in) {
         ArrayList<Integer> factors = new ArrayList<>();
         for (int i = 1; i <= in; i++) {
             if (in % i == 0) {
@@ -254,7 +277,7 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
             }//end if
         }//end for
         return factors;
-    }//end findFactors
+    }//end findEligibleNodeCounts
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ApplyButton;
@@ -286,29 +309,49 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
     // End of variables declaration//GEN-END:variables
 
     @Override
+    /**
+     * Runs the form.
+     */
     public void run() {
         if (ref != null) {
             setVisible(true);
         }//end if
     }//end run
 
-    private void updateNodeCountList(){
+    /**
+     * Updates the list of eligible node counts after a user types a number.
+     * Does nothing if the user has not entered a number, or if the number is
+     * less than or equal to 0.
+     */
+    private void updateNodeCountList() {
         String text = BoundingSquareSizeTextField.getText();
         NodeCountList.clearSelection();
         NodeSizeSpacingList.clearSelection();
-        DefaultListModel temp = (DefaultListModel)NodeSizeSpacingList.getModel();
+        DefaultListModel temp = (DefaultListModel) NodeSizeSpacingList.getModel();
         temp.removeAllElements();
         try {
-            ArrayList<Integer> listItems = findFactors(Integer.parseInt(text));
-            DefaultListModel model = (DefaultListModel) (NodeCountList.getModel());
-            model.removeAllElements();
-            for (Integer i : listItems) {
-                model.addElement(Integer.toString(i));
-            }//end for
+            int test = Integer.parseInt(text);
+            if (test > 0) {
+                ArrayList<Integer> listItems = findEligibleNodeCounts(test);
+                DefaultListModel model = (DefaultListModel) (NodeCountList.getModel());
+                model.removeAllElements();
+                for (Integer i : listItems) {
+                    model.addElement(Integer.toString(i));
+                }//end for
+            }//end if
         } catch (NumberFormatException e) {
         }//end catch
     }//end updateNodeCountList
-    
+
+    /**
+     * Calculates valid node sizes and spacings for a square of a given side,
+     * with a given amount of nodes.
+     *
+     * @param rectangleSide The size of the square(in pixels) to test against
+     * @param nodes The number of nodes in a row or column to test for sizing
+     * @return A {@link HashMap} containing pairs of integers for node sizes and
+     * node spacings
+     */
     private HashMap<Integer, Integer> calculateNodeWidths(double rectangleSide, double nodes) {
         HashMap<Integer, Integer> out = new HashMap<>();
         double width;
@@ -324,5 +367,4 @@ public class CalculateSizeForm extends javax.swing.JFrame implements Runnable {
         }//end for
         return out;
     }//end calculateNodeWidths
-
-}
+}//end CalculateSizeForm class

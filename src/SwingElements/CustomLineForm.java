@@ -216,12 +216,12 @@ public class CustomLineForm extends javax.swing.JFrame implements Runnable {
      * Runs the form.
      */
     public void run() {
-        if (ref != null && parent == null) {
+        if (ref != null && parent == null) {                                    //If called by the Base, use the input from this form to construct the next line placed by the user
             store = ref.getCanvas().getGtiStorage();
             initComponents();
             this.setVisible(true);
         }//end if
-        else if (ref == null && parent != null) {
+        else if (ref == null && parent != null) {                               //If called by a LineEventDetailsForm, use the input from this form to describe the line to be placed by the event
             store = parent.gti;
             initComponents();
             this.setVisible(true);
