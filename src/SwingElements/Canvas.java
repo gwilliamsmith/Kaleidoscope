@@ -221,6 +221,7 @@ public class Canvas extends JPanel {
                          g2.setColor(Color.WHITE);
                          }//end if
                          */
+                        System.out.println(gn.x +" "+ gn.y);
                         g3.fillRect(gn.x + pointSize / 2, gn.y + pointSize / 2, gn.height, gn.width);
                     }//end if
                 }//end for

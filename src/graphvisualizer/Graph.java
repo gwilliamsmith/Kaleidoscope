@@ -316,7 +316,12 @@ public class Graph {
         int spacing = ref.getCanvas().getSpacing();
         for (int i = 0, ySpace = -(pointSize / 2); i < matrix.length; i++, ySpace += (spacing + pointSize)) {
             for (int j = 0, xSpace = -(pointSize / 2); j < matrix[i].length; j++, xSpace += (spacing + pointSize)) {
-                GraphNode temp = new GraphNode(xSpace, ySpace, pointSize, pointSize, newID(), i, j, CONSUME);
+                int modX = new Random().nextBoolean() ? 1 : -1;
+                int modY = new Random().nextBoolean() ? 1 : -1;
+                int displacementX = new Random().nextInt(26) * modX;
+                int displacementY = new Random().nextInt(26) * modY;
+                System.out.println((displacementX+xSpace) + " " + (displacementY+ySpace));
+                GraphNode temp = new GraphNode(xSpace+displacementX, ySpace+displacementY, pointSize, pointSize, newID(), i, j, CONSUME);
                 addNode(temp, i, j);
                 resetNodeColor(temp);
             }//end for
