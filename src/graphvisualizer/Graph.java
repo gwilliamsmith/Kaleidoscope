@@ -19,14 +19,14 @@ public class Graph {
     public static boolean MUTATE_HEALTH = true;                                 //Determines if, when mutation is possible, connections can MUTATE starting health
     public static GrowthMode MODE = GrowthMode.REGULAR;                         //Enum determining how stepForward() behaves
 
-    private ArrayList<FamilyAverageColorGradient> familyAverageColorGradients;  //FamilyAverageColorGradient objects, one for each family
+    private final ArrayList<FamilyAverageColorGradient> familyAverageColorGradients;  //FamilyAverageColorGradient objects, one for each family
     //TODO: Maybe get rid of this?
     private final ArrayList<GraphNode> nodes = new ArrayList<>();               //The list of nodes contained in the graph
     private final GraphNode[][] matrix;                                         //The matrix of nodes
     private int idCount = 1;                                                    //The next node ID to be assigned
     private final MyQueue<GraphNode> queue = new MyQueue<>();                   //The queue used to perform growth under the cellular automata rules
-    private Base ref;                                                           //The Base object, contining information about the runtime of the program
-    private Camera camera;                                                      //The Camera object, used to take pictures of the grid when enabled
+    private final Base ref;                                                     //The Base object, contining information about the runtime of the program
+    private final Camera camera;                                                //The Camera object, used to take pictures of the grid when enabled
 
     private GraphNode connectA;                                                 //The first node selected by the user when creating a connection
     private GraphNode connectB;                                                 //The second node selected by the user when creating a connection
@@ -94,7 +94,7 @@ public class Graph {
      * connections, and the food on each node (if enabled).
      */
     public void stepForward() {
-        buildQueue();                                                           //Builds the queue of nodes, each of which houses a connection to reproduce
+        buildQueue();                 //Builds the queue of nodes, each of which houses a connection to reproduce
         while (queue.hasFront()) {
             GraphNode temp = queue.dequeue();
             switch (MODE) {
@@ -113,10 +113,10 @@ public class Graph {
             }//end switch
         }//end while
         if (TRIM) {
-            decayConnections();                                                 //Reduces the health of each non-edge connection
+            decayConnections();         //Reduces the health of each non-edge connection
         }//end if
         if (CONSUME || MODE == GrowthMode.GROWTH) {
-            eat();                                                              //Connections eat the food on relevant nodes
+            eat();                     //Connections eat the food on relevant nodes
         }//end if
         queue.empty();
     }//end stepForward
@@ -165,7 +165,7 @@ public class Graph {
      * made
      * @param direction The direction of a curved connection
      * @param severity The severity of a curved line
-     * @return True if biconnect is successful, false if not
+     * @return True if successful, false if not
      */
     public boolean biconnect(GraphNode n1, GraphNode n2, GraphTupleInfo gti, int direction, double severity) {
         //Only return true if both n1.connect() and n2.connect() are successful
@@ -200,39 +200,50 @@ public class Graph {
     public void createConnection(int n1y, int n1x, int n2y, int n2x, int red, int green, int blue, int health, int startHealth, int mutatePercentage, int reproductionClock, int startReproductionClock, boolean edge, boolean curved, int curveDirection, double curveSeverity) {
         GraphNode n1 = matrix[n1y][n1x];
         GraphNode n2 = matrix[n2y][n2x];
-        GraphTuple gt1 = new GraphTuple();
-        GraphTuple gt2 = new GraphTuple();
+
         if (!n1.isConnected(n2) && !n2.isConnected(n1)) {
-            gt1.setToLocation(n2);
-            gt1.setFromLocation(n1);
-            gt1.setStartHealth(startHealth);
-            gt1.setHealth(health);
-            gt1.setMutatePercentage(mutatePercentage);
-            gt1.setReproductionClock(reproductionClock);
-            gt1.setStartReproductionClock(startReproductionClock);
-            gt1.setEdge(edge);
-            gt1.setCurve(curved);
-            gt1.setCurveDirection(curveDirection);
-            gt1.setCurveSeverity(curveSeverity);
-            gt1.redundant = false;
-            gt1.setColor(new Color(red, green, blue));
-            gt2.setToLocation(n1);
-            gt2.setFromLocation(n2);
-            gt2.setStartHealth(startHealth);
-            gt2.setHealth(health);
-            gt2.setMutatePercentage(mutatePercentage);
-            gt2.setReproductionClock(reproductionClock);
-            gt2.setStartReproductionClock(startReproductionClock);
-            gt2.setEdge(edge);
-            gt2.setCurve(curved);
-            gt2.setCurveDirection(curveDirection);
-            gt2.setCurveSeverity(curveSeverity);
-            gt2.redundant = true;
-            gt2.setColor(new Color(red, green, blue));
-            n1.addConnection(gt1);
-            n2.addConnection(gt2);
+            fillConnection(n1,n2, red, green, blue, health, startHealth, mutatePercentage, reproductionClock, startReproductionClock, edge, curved, curveDirection, curveSeverity);
+            fillConnection(n2,n1, red, green, blue, health, startHealth, mutatePercentage, reproductionClock, startReproductionClock, edge, curved, curveDirection, curveSeverity);
         }//end if
     }//end creteConnections
+
+    /**
+     * 
+     * @param n1 The from node (n1 ->n2)
+     * @param n2 The to node (n1 -> n2)
+     * @param red The red RGB value for the connection to be made
+     * @param green The green RGB value for the connection to be made
+     * @param blue The blue RGB value for the connection to be made
+     * @param health The remaining health of the connection
+     * @param startHealth The starting health of the connection
+     * @param mutatePercentage The mutationPercentage value for the connection
+     * @param reproductionClock The number of turns remaining before the
+     * connection attempts to reproduce
+     * @param startReproductionClock The number of turns the connection must
+     * wait before attempting to reproduce
+     * @param edge Toggle determining if the connection is an edge
+     * @param curved Toggle determining if the connection is curved
+     * @param curveDirection Toggle determining the direction of the
+     * connection's curve
+     * @param curveSeverity The severity of the connection's curve
+     */
+    public void fillConnection(GraphNode n1, GraphNode n2, int red, int green, int blue, int health, int startHealth, int mutatePercentage, int reproductionClock, int startReproductionClock, boolean edge, boolean curved, int curveDirection, double curveSeverity) {
+        GraphTuple gt = new GraphTuple();
+        gt.setToLocation(n2);
+        gt.setFromLocation(n1);
+        gt.setStartHealth(startHealth);
+        gt.setHealth(health);
+        gt.setMutatePercentage(mutatePercentage);
+        gt.setReproductionClock(reproductionClock);
+        gt.setStartReproductionClock(startReproductionClock);
+        gt.setEdge(edge);
+        gt.setCurve(curved);
+        gt.setCurveDirection(curveDirection);
+        gt.setCurveSeverity(curveSeverity);
+        gt.redundant = false;
+        gt.setColor(new Color(red, green, blue));
+        n1.addConnection(gt);
+    }//end fillConnection
 
     /**
      * Disconnects two nodes/
