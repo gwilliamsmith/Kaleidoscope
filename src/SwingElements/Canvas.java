@@ -2,7 +2,6 @@ package SwingElements;
 
 import Listeners.BaseKeyListener;
 import Listeners.CanvasMouseListener;
-import SwingElements.Canvas;
 import graphvisualizer.Graph;
 import graphvisualizer.GraphNode;
 import graphvisualizer.GraphTuple;
@@ -19,7 +18,7 @@ import javax.swing.SwingUtilities;
  */
 public class Canvas extends JPanel {
 
-    private Base ref;                                                   //Base object, used for access to other objects as needed
+    private final Base ref;                                                   //Base object, used for access to other objects as needed
     public int windowX = 0;                                             //X axis modifier for any screen objects that are not statically placed
     public int windowY = 0;                                             //Y axis modifier for any screen objects that are not statically placed
 

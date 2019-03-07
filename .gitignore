@@ -231,3 +231,6 @@ nbproject/private/private.properties
 *.ksf
 kaleidoscopesettings.ksf
 nbproject/build-impl.xml
+nbproject/build-impl.xml
+nbproject/genfiles.properties
+nbproject/private/private.properties
