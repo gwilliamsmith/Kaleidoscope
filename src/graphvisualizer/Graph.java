@@ -311,7 +311,7 @@ public class Graph {
     public void createNewFamily(GraphNode node1, GraphNode node2, GraphTupleInfo gti) {
         gti.family = newFamilyID();
         familyAverageColorGradients.add(new FamilyAverageColorGradient(gti.family));      //Adds a new FamilyAverageColorGradient to the list, so that this family's changes in average color can be tracked
-        if (MODE == GrowthMode.DEPTH_BASED) {
+        if (MODE == GrowthMode.DEPTH_BASED && !gti.edge) {
             gti.color = new Color(255, 0, 0);
         }//end if
         connector(node1, node2, gti);
