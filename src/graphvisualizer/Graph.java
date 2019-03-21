@@ -5,6 +5,7 @@ import SwingElements.FamilyAverageColorGradient;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -310,7 +311,7 @@ public class Graph {
     public void createNewFamily(GraphNode node1, GraphNode node2, GraphTupleInfo gti) {
         gti.family = newFamilyID();
         familyAverageColorGradients.add(new FamilyAverageColorGradient(gti.family));      //Adds a new FamilyAverageColorGradient to the list, so that this family's changes in average color can be tracked
-        if (MODE == GrowthMode.DEPTH_BASED) {
+        if (MODE == GrowthMode.DEPTH_BASED && !gti.edge) {
             gti.color = new Color(255, 0, 0);
         }//end if
         connector(node1, node2, gti);
@@ -907,7 +908,11 @@ public class Graph {
      * same amount of distance away from their respective edges. This only works
      * on square grids.
      */
-    public void generateSeeds() {
+    public void generateSeeds() {                                   // There has to be a better way to do this
+        if (seed1 && (!seed2 && !seed4 && !seed8) && seeded){       //Prevent creation of non-symmetrical seeds when one line seeds are the only option
+            JOptionPane.showMessageDialog(null, "More than one single line seed will result in asymetrical pictures!");
+            return;
+        }//end if
         Random rand = new Random();
         int seeds = rand.nextInt(9);
         boolean evenSwitch = ((matrix.length % 2) == 0) && ((matrix[0].length % 2) == 0);               //Checks to see if the matrix has an even # of rows and columns

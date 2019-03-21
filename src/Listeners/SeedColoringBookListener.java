@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
  */
 public class SeedColoringBookListener implements ActionListener {
 
-    private Base ref;                                                           //Base object, used for reference
+    private final Base ref;                                                           //Base object, used for reference
 
     /**
      * Constructor.

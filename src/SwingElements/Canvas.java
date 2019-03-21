@@ -9,6 +9,7 @@ import graphvisualizer.GraphTupleInfo;
 import java.awt.*;
 import java.awt.geom.QuadCurve2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -223,7 +224,7 @@ public class Canvas extends JPanel {
                         g3.fillRect(gn.x + pointSize / 2, gn.y + pointSize / 2, gn.height, gn.width);
                     }//end if
                 }//end for
-            }
+            }//end run
         });
     }//end drawNodes
 
@@ -237,11 +238,16 @@ public class Canvas extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                ArrayList<GraphTuple> edges = new ArrayList<>();
                 for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
                     GraphNode gn = ref.getGraph().getGraphNodes().get(i);
                     for (int j = 0; j < gn.getNumberOfConnections(); j++) {
                         GraphTuple gt = gn.getConnection(j);
-                        if (gt.isEdge(ref.getGraph()) || !curveEnabled) {
+                        if (gt.isEdge(ref.getGraph())){
+                            edges.add(gt);
+                            continue;
+                        }//end if
+                        if (!curveEnabled) {
                             if (!gt.redundant) {
                                 drawLine(g3, gt, false);
                             }//end if
@@ -253,7 +259,10 @@ public class Canvas extends JPanel {
                         }//end else
                     }//end for
                 }//end for
-            }
+                for(int i = 0; i<edges.size();i++){
+                    drawLine(g3, edges.get(i), false);
+                }//end for
+            }//end run
         });
     }//end drawConnections
 

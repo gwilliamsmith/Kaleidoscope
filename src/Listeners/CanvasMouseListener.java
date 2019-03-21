@@ -11,7 +11,7 @@ import javax.swing.SwingUtilities;
 
 public class CanvasMouseListener extends MouseAdapter implements MouseWheelListener, MouseMotionListener {
 
-    private Base ref;
+    private final Base ref;
     private int startY;
     private int startX;
     private GraphNode lastHovered;
