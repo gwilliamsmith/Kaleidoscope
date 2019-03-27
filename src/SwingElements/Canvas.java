@@ -194,7 +194,7 @@ public class Canvas extends JPanel {
     }//end drawDebugBoundingRectangle
 
     /**
-     * Draws the mouse's x and y coordinates on the screen in the lower left
+     * Draws the x and y coordinates of the mouse on the screen in the lower left
      * corner.
      *
      * @param g2 The {@link Graphics 2D} object to do the drawing
@@ -236,7 +236,7 @@ public class Canvas extends JPanel {
         int rows = ref.getGraph().getMatrix().length;
         edgeNodeImage = new BufferedImage((((columns) * pointSize) + ((columns - 1) * spacing) + pointSize / 2),
                 (((rows) * pointSize) + ((rows - 1) * spacing)), BufferedImage.TYPE_INT_ARGB);
-        final Graphics2D g3 = nodeImage.createGraphics();
+        final Graphics2D g3 = edgeNodeImage.createGraphics();
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -425,7 +425,6 @@ public class Canvas extends JPanel {
      * Produces a {@link BufferedImage} that is only as large as needed,
      * trimming excess whitespace from a given {@link BufferedImage}.
      *
-     * @param in The {@link BufferedImage} to be trimmed
      * @return The trimmed {@link BufferedImage}
      */
     public BufferedImage produceTrimmedImage() {
@@ -480,18 +479,21 @@ public class Canvas extends JPanel {
         g.setColor(Color.black);
         FontMetrics fontSize = g.getFontMetrics();
         int textWidth = fontSize.stringWidth(in);
-        if (corner == 1) {
-            g.drawString(in, 5, (fontSize.getHeight() * (lineOffset + 1)));
-        }//end if
-        else if (corner == 2) {
-
-        }//end else if
-        else if (corner == 3) {
-            g.drawString(in, 5, this.getHeight() - (fontSize.getHeight() * (lineOffset)) - 5);
-        }//end else if
-        else if (corner == 4) {
-            g.drawString(in, this.getWidth() - textWidth - 5, this.getHeight() - (fontSize.getHeight() * (lineOffset)) - 5);
-        }//end else if
+        switch (corner) {
+            case 1:
+                g.drawString(in, 5, (fontSize.getHeight() * (lineOffset + 1)));
+                break;
+            case 2:
+                break;
+            case 3:
+                g.drawString(in, 5, this.getHeight() - (fontSize.getHeight() * (lineOffset)) - 5);
+                break;
+            case 4:
+                g.drawString(in, this.getWidth() - textWidth - 5, this.getHeight() - (fontSize.getHeight() * (lineOffset)) - 5);
+                break;
+            default:
+                break;
+        }//end switch
     }//end drawString
 
     /**
