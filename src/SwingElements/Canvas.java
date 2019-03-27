@@ -61,6 +61,7 @@ public class Canvas extends JPanel {
 
     private BufferedImage nodeImage = null;
     private BufferedImage connnectionsImage = null;
+    private BufferedImage edgeNodeImage = null;
 
     ;
 
@@ -108,6 +109,7 @@ public class Canvas extends JPanel {
     private BufferedImage produceGridPicture() {
         drawNodes();
         drawConnections();
+        drawEdgeNodes();
         BufferedImage out = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
         Graphics2D g2 = out.createGraphics();
         resizeGrid();
@@ -129,6 +131,7 @@ public class Canvas extends JPanel {
         GraphNode firstNode = ref.getGraph().getGraphNodes().get(0);
         g2.drawImage(nodeImage, ((int) firstNode.getX() + windowX * (windowMod ? 1 : 0)), ((int) firstNode.getY() + windowY * (windowMod ? 1 : 0)), null);
         g2.drawImage(connnectionsImage, ((int) firstNode.getX() + windowX * (windowMod ? 1 : 0)), ((int) firstNode.getY() + windowY * (windowMod ? 1 : 0)), null);
+        g2.drawImage(edgeNodeImage, ((int) firstNode.getX() + windowX * (windowMod ? 1 : 0)), ((int) firstNode.getY() + windowY * (windowMod ? 1 : 0)), null);
     }//end drawGrid
 
     /**
@@ -215,6 +218,31 @@ public class Canvas extends JPanel {
                 for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
                     GraphNode gn = ref.getGraph().getGraphNodes().get(i);
                     if (!gn.getColor().equals(Color.WHITE)) {
+                        g3.setColor(gn.getColor());
+                        /* Food isn't used right now, so this is commented out so as to reduce # of method calls
+                         if (gn.getFood() <= 0) {
+                         g2.setColor(Color.WHITE);
+                         }//end if
+                         */
+                        g3.fillRect(gn.x + pointSize / 2, gn.y + pointSize / 2, gn.height, gn.width);
+                    }//end if
+                }//end for
+            }//end run
+        });
+    }//end drawNodes
+    
+    private void drawEdgeNodes() {
+        int columns = ref.getGraph().getMatrix()[0].length;
+        int rows = ref.getGraph().getMatrix().length;
+        edgeNodeImage = new BufferedImage((((columns) * pointSize) + ((columns - 1) * spacing) + pointSize / 2),
+                (((rows) * pointSize) + ((rows - 1) * spacing)), BufferedImage.TYPE_INT_ARGB);
+        final Graphics2D g3 = nodeImage.createGraphics();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
+                    GraphNode gn = ref.getGraph().getGraphNodes().get(i);
+                    if (!gn.getColor().equals(Color.WHITE) && ref.getGraph().nodeIsEdge(gn)) {
                         g3.setColor(gn.getColor());
                         /* Food isn't used right now, so this is commented out so as to reduce # of method calls
                          if (gn.getFood() <= 0) {
