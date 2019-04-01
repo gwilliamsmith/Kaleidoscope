@@ -1,4 +1,4 @@
-package Listeners;
+package Listeners.RightClickListeners;
 
 import SwingElements.Base;
 import java.awt.event.ActionEvent;

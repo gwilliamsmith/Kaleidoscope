@@ -272,7 +272,14 @@ public class Canvas extends JPanel {
                     for (int j = 0; j < gn.getNumberOfConnections(); j++) {
                         GraphTuple gt = gn.getConnection(j);
                         if (gt.isEdge(ref.getGraph())){
-                            edges.add(gt);
+                            if(ref.getGraph().nodeIsEdge(gt.getToLocation()) && ref.getGraph().nodeIsEdge(gt.getFromLocation())){
+                                edges.add(gt);
+                            }//end if
+                            else{
+                                if(ref.getShowUserEdges()){
+                                    edges.add(gt);
+                                }//end if
+                            }//end else
                             continue;
                         }//end if
                         if (!curveEnabled) {
