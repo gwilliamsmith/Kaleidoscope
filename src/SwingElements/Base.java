@@ -1,5 +1,9 @@
 package SwingElements;
 
+import Listeners.SaveListeners.*;
+import Listeners.PropertiesListeners.*;
+import Listeners.GridOptionListeners.*;
+import Listeners.RightClickListeners.*;
 import EventScheduler.EventScheduler;
 import Listeners.*;
 import graphvisualizer.Graph;
@@ -23,9 +27,9 @@ public class Base extends JFrame {
     private Canvas canvas;                                                      //Canvas for displaying stuff
 
     private Timer timer;                                                        //Takes steps on an interval
-    private TimerActionListener timerListener;                                  //Action listener for the Timer
+    private final TimerActionListener timerListener;                                  //Action listener for the Timer
 
-    private Timer painter;                                                      //Repaints the grid every millisecond
+    private final Timer painter;                                                      //Repaints the grid every millisecond
 
     private int stepTime;                                                       //Interval for repainting
 
@@ -50,6 +54,7 @@ public class Base extends JFrame {
     private final JMenuItem whiteOutGrid = new JMenuItem("Turn all grid points white");                     //Grid options menu
     private final JMenuItem centerGrid = new JMenuItem("Center the grid on the screen");                    //Grid options menu
     private final JMenuItem resetZoom = new JMenuItem("Reset zoom level");                                  //Grid options menu
+    private final JMenuItem toggleUserEdges = new JMenuItem("Hide user-placed edges");
 
     private final JMenuItem propertiesItem = new JMenuItem("Edit properties");                              //Properties menu
     private final JMenuItem customLine = new JMenuItem("Set properties for next line");                     //Properties menu
@@ -67,7 +72,7 @@ public class Base extends JFrame {
 
     private JSlider stepTimeSlider;                                             //Slider that can control step timing
 
-    private SettingsFileManipulator settingsManager;                            //Settings manager, reads the persistent settings in from the file
+    private final SettingsFileManipulator settingsManager;                      //Settings manager, reads the persistent settings in from the file
 
     private AverageColorDisplay averageDisplay = new AverageColorDisplay();     //Displays average color of all lines
 
@@ -76,6 +81,8 @@ public class Base extends JFrame {
     public EventScheduler scheduler = new EventScheduler();                     //Event scheduler
 
     public boolean curveSwitcher = false;                                       //Handles determining if the curve toggle boolean should be switched between steps.
+    
+    private boolean showUserEdges = true;                                       //Determines if user-placed edges should be drawn
 
     /**
      * Constructor for Base class. Determines grid dimensions, as well as the
@@ -220,6 +227,7 @@ public class Base extends JFrame {
         togglePauseInterval.addActionListener(new TogglePauseIntervalActionListener(this));
         resetZoom.addActionListener(new ResetZoomActionListener(this));
         calculateSizeMenu.addMouseListener(new CalculateSizeActionListener(this));
+        toggleUserEdges.addActionListener(new ToggleUserEdgesListener(this));
     }//end addMenuListeners
 
     /**
@@ -238,6 +246,7 @@ public class Base extends JFrame {
     private void createGridOptionsMenu() {
         gridOptions.add(reset);
         gridOptions.add(whiteOutGrid);
+        gridOptions.add(toggleUserEdges);
         gridOptions.add(centerGrid);
         gridOptions.add(resetZoom);
     }//end createGridOptionsMenu
@@ -378,6 +387,10 @@ public class Base extends JFrame {
     public void setPauseIntervalToggleText(String in) {
         togglePauseInterval.setText(in);
     }//end setSaveIntervalToggleText
+    
+    public void setToggleUserEdgesText(String in){
+        toggleUserEdges.setText(in);
+    }//end setToggleUserEdgesText
 
     /**
      * Returns the {@link Canvas} object
@@ -536,5 +549,13 @@ public class Base extends JFrame {
     public void setStepTimeSliderLocation(int location) {
         stepTimeSlider.setValue(location);
     }//end setSliderLocation
+    
+    public boolean getShowUserEdges(){
+        return showUserEdges;
+    }//end getShowUserEdges
+    
+    public void setShowUserEdges(boolean in){
+        showUserEdges = in;
+    }//end setShowUserEdges
 
 }//end Base class

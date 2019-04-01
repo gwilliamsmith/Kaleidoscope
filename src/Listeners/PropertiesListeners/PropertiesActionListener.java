@@ -1,4 +1,4 @@
-package Listeners;
+package Listeners.PropertiesListeners;
 
 import SwingElements.Base;
 import SwingElements.PropertiesSelectionForm;

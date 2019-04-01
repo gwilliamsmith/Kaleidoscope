@@ -1,4 +1,4 @@
-package Listeners;
+package Listeners.GridOptionListeners;
 
 import SwingElements.Base;
 import SwingElements.Canvas;
