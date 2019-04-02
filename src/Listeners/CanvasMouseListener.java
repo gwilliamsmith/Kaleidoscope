@@ -27,7 +27,7 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
         Graph graph = ref.getGraph();
         if (SwingUtilities.isLeftMouseButton(e)) {
             if (connect) {
-                for (int i=0;i<graph.getGraphNodes().size();i++) {
+                for (int i = 0; i < graph.getGraphNodes().size(); i++) {
                     GraphNode gn = graph.getGraphNodes().get(i);
                     if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint())) {
                         if (gn != graph.getConnectA() && !gn.isConnected(graph.getConnectA())) {
@@ -52,20 +52,23 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
                         else {
                             graph.createNewFamily(graph.getConnectA(), graph.getConnectB(), new GraphTupleInfo());
                         }//end else
-                    }//end else
+                    }//end else                    
                 }//end if
                 graph.resetNodeAdjacents(graph.getConnectA());
-                connect  = false;
-                graph.setConnectA(null);
-                graph.setConnectB(null);
+                if (!ref.isShiftDown()) {
+                    normalNodeReset();
+                }//end if                
+                else {
+                    shiftNodeReset();
+                }//end else
             }//end if
             else {
-                for (int i=0;i<graph.getGraphNodes().size();i++) {
+                for (int i = 0; i < graph.getGraphNodes().size(); i++) {
                     GraphNode gn = graph.getGraphNodes().get(i);
                     if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint())) {
                         graph.setConnectA(gn);
                         connect = true;
-                        graph.highlightNodeAdjacents(gn,GraphNodeColors.SELECTED_COLOR,GraphNodeColors.SELECTED_ADJACENT_COLOR);
+                        graph.highlightNodeAdjacents(gn, GraphNodeColors.SELECTED_COLOR, GraphNodeColors.SELECTED_ADJACENT_COLOR);
                         break;
                     }//end else
                 }//end for
@@ -103,13 +106,13 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
         GraphNode selected = null;
         canvas.setMouseX(e.getX());
         canvas.setMouseY(e.getY());
-        for (int i=0;i<graph.getGraphNodes().size();i++) {
+        for (int i = 0; i < graph.getGraphNodes().size(); i++) {
             GraphNode gn = graph.getGraphNodes().get(i);
             if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint()) && gn != lastHovered) {
                 selected = gn;
                 lastHovered = gn;
             }//end if
-            else if(gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint()) && gn == lastHovered){
+            else if (gn.mapMovement(canvas.getWindowX(), canvas.getWindowY()).contains(e.getPoint()) && gn == lastHovered) {
                 selected = gn;
             }//end else if
         }//end for
@@ -127,4 +130,22 @@ public class CanvasMouseListener extends MouseAdapter implements MouseWheelListe
         }//end else if
         canvas.setResized(true);
     }//end mouseWheelMoved
+
+    private void normalNodeReset() {
+        connect = false;
+        ref.getGraph().setConnectA(null);
+        ref.getGraph().setConnectB(null);
+    }//end normalNodeReset
+
+    private void shiftNodeReset() {
+        connect = true;
+        if (ref.getGraph().getConnectB() != null) {
+            ref.getGraph().setConnectA(ref.getGraph().getConnectB());
+            ref.getGraph().highlightNodeAdjacents(ref.getGraph().getConnectA(), GraphNodeColors.SELECTED_COLOR, GraphNodeColors.SELECTED_ADJACENT_COLOR);
+            ref.getGraph().setConnectB(null);
+        }//end if
+        else{
+            normalNodeReset();
+        }//end else
+    }//end shiftNodeReset
 }//end CanvasMouseListener

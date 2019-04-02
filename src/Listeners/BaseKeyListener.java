@@ -9,9 +9,9 @@ public class BaseKeyListener implements KeyListener {
 
     private int debugCount = 0;
 
-    private static int DEBUG_TOGGLE_COUNT = 5;
+    private static final int DEBUG_TOGGLE_COUNT = 5;
 
-    private Base ref;
+    private final Base ref;
 
     public BaseKeyListener(Base in) {
         ref = in;
@@ -35,12 +35,14 @@ public class BaseKeyListener implements KeyListener {
             return;
         }//end if
         if ((e.getKeyCode() == KeyEvent.VK_D) && ((e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) != 0)) {
-
             if (++debugCount == DEBUG_TOGGLE_COUNT) {
                 ref.showDebugMenu();
                 debugCount = 0;
             }//end if
             return;
+        }//end if
+        if((e.getModifiersEx() & KeyEvent.SHIFT_DOWN_MASK) != 0){
+            ref.setShiftDown(true);
         }//end if
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
@@ -49,15 +51,13 @@ public class BaseKeyListener implements KeyListener {
             case KeyEvent.VK_SPACE:
                 ref.triggerLoop();
                 return;
-        }//end switch
-        switch (e.getKeyChar()) {
-            case 's':
+            case KeyEvent.VK_S:
                 ref.triggerSaveAction();
                 return;
-            case 'q':
+            case KeyEvent.VK_Q:
                 ref.getCanvas().increaseZoomLevel();
                 return;
-            case 'a':
+            case KeyEvent.VK_A:
                 ref.getCanvas().decreaseZoomLevel();
         }//end switch
     }//end keyPressed
@@ -66,6 +66,9 @@ public class BaseKeyListener implements KeyListener {
     public void keyReleased(KeyEvent e) {
         if((e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) == 0){
             debugCount = 0;
+        }//end if
+        if((e.getModifiersEx() & KeyEvent.SHIFT_DOWN_MASK) == 0){
+            ref.setShiftDown(false);
         }//end if
     }//end keyReleased
 }//end BaseKeyListener
