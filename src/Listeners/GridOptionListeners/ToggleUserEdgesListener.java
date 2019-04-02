@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 public class ToggleUserEdgesListener implements ActionListener {
 
     private final Base ref;
-    private boolean state = false;
 
     public ToggleUserEdgesListener(Base in){
         ref = in;

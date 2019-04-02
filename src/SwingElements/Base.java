@@ -83,6 +83,8 @@ public class Base extends JFrame {
     public boolean curveSwitcher = false;                                       //Handles determining if the curve toggle boolean should be switched between steps.
     
     private boolean showUserEdges = true;                                       //Determines if user-placed edges should be drawn
+    
+    private boolean shiftDown = false;                                        //Is the shift key pressed?
 
     /**
      * Constructor for Base class. Determines grid dimensions, as well as the
@@ -557,5 +559,13 @@ public class Base extends JFrame {
     public void setShowUserEdges(boolean in){
         showUserEdges = in;
     }//end setShowUserEdges
+    
+    public boolean isShiftDown(){
+        return shiftDown;
+    }//end isShiftDown
+    
+    public void setShiftDown(boolean in){
+        shiftDown = in;
+    }//end setShiftDown
 
 }//end Base class
