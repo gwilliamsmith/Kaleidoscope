@@ -57,7 +57,7 @@ public class Graph {
 
     private String testName = "test16";                                         //Name of the test when gathering statistics
 
-    private boolean pictureSaveToggle = true;                                   //Toggle determining if the the Camera should save a picture of the generated pattern when there is a big enough lull in line reproduction
+    private boolean pictureSaveToggle = false;                                   //Toggle determining if the the Camera should save a picture of the generated pattern when there is a big enough lull in line reproduction
 
     private boolean picturePauseToggle = false;                                 //Toggle determining if the graph should pause after each picture is taken
 

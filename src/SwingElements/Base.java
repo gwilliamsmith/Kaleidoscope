@@ -65,7 +65,7 @@ public class Base extends JFrame {
     private final JMenuItem loadState = new JMenuItem("Load state");                                        //Save menu
     private final JMenuItem savePicture = new JMenuItem("Save picture");                                    //Save menu
     private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");           //Save menu
-    private final JMenuItem toggleSaveInterval = new JMenuItem("Disable saving pictures on interval");      //Save menu
+    private final JMenuItem toggleSaveInterval = new JMenuItem("Enable saving pictures on interval");      //Save menu
     private final JMenuItem togglePauseInterval = new JMenuItem("Enable pausing after interval picture");   //Save menu
 
     private final DebugMenuForm debugMenu;                                      // The debug menu form

@@ -12,19 +12,19 @@ import java.util.Random;
  */
 public class GraphNode extends Rectangle {
 
-    private final ArrayList<GraphTuple> connections = new ArrayList<>();    //Node-specific adjacency list. GraphTuple items hold both nodes, as well as other information
-    //  This node is the fromLocation, while the other node is the toLocation
-    private final int id;                                                   //Node ID #
-    private final int iLoc;                                                 //Y-axis coordinate
-    private final int jLoc;                                                 //X-axis coordinate
-    private int food;                                                       //The amount of food this node currently has
-    private final int foodVar = 10;                                         //The maximum amount of food the node can start with
-    private final int regenVar = 3;                                         //The maximum rate at which this the regenerates food each turn
-    private final int regenThreshold = 1;                                   //The minimum amount of food required for the node to regenerate food
-    private int regenRate;                                                  //The rate at which the node regenerates food
-    private Color color;                                                    //The color of the node. Should only be one of the static color variables
+    private final ArrayList<GraphTuple> connections = new ArrayList<>();        //Node-specific adjacency list. GraphTuple items hold both nodes, as well as other information
+                                                                                //  This node is the fromLocation, while the other node is the toLocation
+    private final int id;                                                       //Node ID #
+    private final int iLoc;                                                     //Y-axis coordinate
+    private final int jLoc;                                                     //X-axis coordinate
+    private int food;                                                           //The amount of food this node currently has
+    private final int foodVar = 10;                                             //The maximum amount of food the node can start with
+    private final int regenVar = 3;                                             //The maximum rate at which this the regenerates food each turn
+    private final int regenThreshold = 1;                                       //The minimum amount of food required for the node to regenerate food
+    private int regenRate;                                                      //The rate at which the node regenerates food
+    private Color color;                                                        //The color of the node. Should only be one of the static color variables
 
-    private boolean updated = true;                                         //If true, the node should be drawn. If false, don't draw the node. Intended to help speed up the process
+    private boolean updated = true;                                             //If true, the node should be drawn. If false, don't draw the node. Intended to help speed up the process
 
     /**
      * @param xloc The xLocation on the {@link Canvas} object

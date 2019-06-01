@@ -12,8 +12,8 @@ import java.util.Map;
  */
 public class SettingsFileManipulator extends GenericFileManipulator {
 
-    private File settingsFile;
-    private Base ref;
+    private final File settingsFile;
+    private final Base ref;
 
     /**
      * @param fileName the name of the settings file
