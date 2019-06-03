@@ -3,6 +3,7 @@ package SwingElements;
 import EventScheduler.Events.Event;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import java.util.Objects;
 
 /**
  * Form used to input the details for the creation/editing of most {@link Event}
@@ -11,8 +12,8 @@ import javax.swing.JTextField;
 public class EventDetailsInputForm extends javax.swing.JFrame implements Runnable {
 
     private SchedulerForm ref;                                                  //The SchedulerForm that generated the EventDetailsInputForm
-    public int stepCount;                                                       //The step count at which to execute the event in question
-    public String eventName;                                                    //The name of the event in question
+    int stepCount;                                                       //The step count at which to execute the event in question
+    String eventName;                                                    //The name of the event in question
     public boolean repeat;                                                      //Determines if the event is a repeat event or a single event
     private Event temp;                                                         //The event to be created/edited
 
@@ -22,7 +23,7 @@ public class EventDetailsInputForm extends javax.swing.JFrame implements Runnabl
      * @param in The {@link SchedulerForm} generating the
      * {@link EventDetailsInputForm}
      */
-    public EventDetailsInputForm(SchedulerForm in) {
+    EventDetailsInputForm(SchedulerForm in) {
         ref = in;
         initComponents();
         this.setTitle("Event Input Form");
@@ -35,7 +36,7 @@ public class EventDetailsInputForm extends javax.swing.JFrame implements Runnabl
      * {@link EventDetailsInputForm}
      * @param e The{@link Event} to be edited
      */
-    public EventDetailsInputForm(SchedulerForm in, Event e) {
+    EventDetailsInputForm(SchedulerForm in, Event e) {
         ref = in;
         temp = e;
         stepCount = e.getStepTarget();
@@ -57,19 +58,18 @@ public class EventDetailsInputForm extends javax.swing.JFrame implements Runnabl
      * and greater than 0.
      *
      * @param field The {@link JTextField} to be checked.
-     * @param title The title for the error message, should it be generated.
      * @return The final integer value after checking is performed
      */
-    private int checkTextField(JTextField field, String title) {
+    private int checkTextField(JTextField field) {
         int out;
         try {
             out = Integer.parseInt(field.getText());
             if (out <= 0) {
-                JOptionPane.showMessageDialog(this, "Enter a number greater than 0!", title, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Enter a number greater than 0!", "Trigger Step", JOptionPane.ERROR_MESSAGE);
                 out = -1;
             }//end if
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "You must enter a number!", title, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "You must enter a number!", "Trigger Step", JOptionPane.ERROR_MESSAGE);
             out = -1;
         }//end tryCatch
         return out;
@@ -84,33 +84,34 @@ public class EventDetailsInputForm extends javax.swing.JFrame implements Runnabl
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        EventNameLabel = new javax.swing.JLabel();
+        javax.swing.JLabel eventNameLabel = new javax.swing.JLabel();
         EventNameTextField = new javax.swing.JTextField();
-        TriggerStepLabel = new javax.swing.JLabel();
+        javax.swing.JLabel triggerStepLabel = new javax.swing.JLabel();
         TriggerStepTextField = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        RepeatEventLabel = new javax.swing.JLabel();
+        javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+        javax.swing.JLabel repeatEventLabel = new javax.swing.JLabel();
         RepeatEventComboBox = new javax.swing.JComboBox();
-        CreateEventButton = new javax.swing.JButton();
+        // Variables declaration - do not modify//GEN-BEGIN:variables
+        javax.swing.JButton createEventButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        EventNameLabel.setText("Event Name: ");
+        eventNameLabel.setText("Event Name: ");
 
         EventNameTextField.setMaximumSize(new java.awt.Dimension(100, 20));
         EventNameTextField.setMinimumSize(new java.awt.Dimension(100, 20));
         EventNameTextField.setPreferredSize(new java.awt.Dimension(100, 20));
 
-        TriggerStepLabel.setText("Trigger Step: ");
+        triggerStepLabel.setText("Trigger Step: ");
 
         TriggerStepTextField.setMaximumSize(new java.awt.Dimension(100, 23));
         TriggerStepTextField.setMinimumSize(new java.awt.Dimension(100, 23));
         TriggerStepTextField.setPreferredSize(new java.awt.Dimension(100, 23));
 
-        RepeatEventLabel.setText("Repeat Event? ");
-        RepeatEventLabel.setMaximumSize(new java.awt.Dimension(74, 23));
-        RepeatEventLabel.setMinimumSize(new java.awt.Dimension(74, 23));
-        RepeatEventLabel.setPreferredSize(new java.awt.Dimension(74, 23));
+        repeatEventLabel.setText("Repeat Event? ");
+        repeatEventLabel.setMaximumSize(new java.awt.Dimension(74, 23));
+        repeatEventLabel.setMinimumSize(new java.awt.Dimension(74, 23));
+        repeatEventLabel.setPreferredSize(new java.awt.Dimension(74, 23));
 
         RepeatEventComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Yes", "No" }));
         RepeatEventComboBox.setMaximumSize(new java.awt.Dimension(50, 23));
@@ -123,7 +124,7 @@ public class EventDetailsInputForm extends javax.swing.JFrame implements Runnabl
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(RepeatEventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(repeatEventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(RepeatEventComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103))
@@ -131,16 +132,12 @@ public class EventDetailsInputForm extends javax.swing.JFrame implements Runnabl
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(RepeatEventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(repeatEventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(RepeatEventComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        CreateEventButton.setText("Create Event");
-        CreateEventButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateEventButtonActionPerformed(evt);
-            }
-        });
+        createEventButton.setText("Create Event");
+        createEventButton.addActionListener(this::CreateEventButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,11 +147,11 @@ public class EventDetailsInputForm extends javax.swing.JFrame implements Runnabl
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(EventNameLabel)
+                        .addComponent(eventNameLabel)
                         .addGap(0, 0, 0)
                         .addComponent(EventNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(TriggerStepLabel)
+                        .addComponent(triggerStepLabel)
                         .addGap(0, 0, 0)
                         .addComponent(TriggerStepTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -162,7 +159,7 @@ public class EventDetailsInputForm extends javax.swing.JFrame implements Runnabl
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(136, 136, 136)
-                .addComponent(CreateEventButton)
+                .addComponent(createEventButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -170,14 +167,14 @@ public class EventDetailsInputForm extends javax.swing.JFrame implements Runnabl
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EventNameLabel)
+                    .addComponent(eventNameLabel)
                     .addComponent(EventNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TriggerStepLabel)
+                    .addComponent(triggerStepLabel)
                     .addComponent(TriggerStepTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CreateEventButton)
+                .addComponent(createEventButton)
                 .addGap(5, 5, 5))
         );
 
@@ -189,9 +186,9 @@ public class EventDetailsInputForm extends javax.swing.JFrame implements Runnabl
      * updates the event to be edited.
      */
     private void CreateEventButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateEventButtonActionPerformed
-        stepCount = checkTextField(TriggerStepTextField, "Trigger Step");
+        stepCount = checkTextField(TriggerStepTextField);
         eventName = EventNameTextField.getText();
-        repeat = RepeatEventComboBox.getSelectedItem().equals("Yes");
+        repeat = Objects.equals(RepeatEventComboBox.getSelectedItem(), "Yes");
         if (stepCount != -1) {
             if (temp == null) {
                 ref.generateEvent();
@@ -207,21 +204,12 @@ public class EventDetailsInputForm extends javax.swing.JFrame implements Runnabl
         }//end if
     }//GEN-LAST:event_CreateEventButtonActionPerformed
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CreateEventButton;
-    private javax.swing.JLabel EventNameLabel;
     private javax.swing.JTextField EventNameTextField;
     private javax.swing.JComboBox RepeatEventComboBox;
-    private javax.swing.JLabel RepeatEventLabel;
-    private javax.swing.JLabel TriggerStepLabel;
     private javax.swing.JTextField TriggerStepTextField;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
     @Override
-    /**
-     * Runs the form.
-     */
     public void run() {
         if (ref != null) {
             setVisible(true);
