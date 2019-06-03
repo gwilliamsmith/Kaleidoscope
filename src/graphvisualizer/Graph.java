@@ -18,7 +18,7 @@ public class Graph {
     public static boolean CONSUME = false;                                      //Determines if GraphNode food is consumed by connections
     public static boolean MUTATE_COLOR = true;                                  //Determines if, when mutation is possible, connections can MUTATE colors
     public static boolean MUTATE_HEALTH = true;                                 //Determines if, when mutation is possible, connections can MUTATE starting health
-    public static GrowthMode MODE = GrowthMode.REGULAR;                         //Enum determining how stepForward() behaves
+    private static GrowthMode MODE = GrowthMode.REGULAR;                         //Enum determining how stepForward() behaves
 
     private final ArrayList<FamilyAverageColorGradient> familyAverageColorGradients;  //FamilyAverageColorGradient objects, one for each family
     //TODO: Maybe get rid of this?
@@ -94,7 +94,7 @@ public class Graph {
      * opportunity to do so. Also reduces the remaining health of all
      * connections, and the food on each node (if enabled).
      */
-    public void stepForward() {
+    private void stepForward() {
         buildQueue();                 //Builds the queue of nodes, each of which houses a connection to reproduce
         while (queue.hasFront()) {
             GraphNode temp = queue.dequeue();
@@ -168,7 +168,7 @@ public class Graph {
      * @param severity The severity of a curved line
      * @return True if successful, false if not
      */
-    public boolean biconnect(GraphNode n1, GraphNode n2, GraphTupleInfo gti, int direction, double severity) {
+    private boolean biconnect(GraphNode n1, GraphNode n2, GraphTupleInfo gti, int direction, double severity) {
         //Only return true if both n1.connect() and n2.connect() are successful
         return n1.connect(n2, gti, direction, severity, false)
                 && n2.connect(n1, gti, direction, severity, true);
@@ -228,7 +228,7 @@ public class Graph {
      * connection's curve
      * @param curveSeverity The severity of the connection's curve
      */
-    public void fillConnection(GraphNode n1, GraphNode n2, int red, int green, int blue, int health, int startHealth, int mutatePercentage, int reproductionClock, int startReproductionClock, boolean edge, boolean curved, int curveDirection, double curveSeverity) {
+    private void fillConnection(GraphNode n1, GraphNode n2, int red, int green, int blue, int health, int startHealth, int mutatePercentage, int reproductionClock, int startReproductionClock, boolean edge, boolean curved, int curveDirection, double curveSeverity) {
         GraphTuple gt = new GraphTuple();
         gt.setToLocation(n2);
         gt.setFromLocation(n1);
@@ -252,7 +252,7 @@ public class Graph {
      * @param n1 The first node to be disconnected
      * @param n2 The second node to be disconnected
      */
-    public void disconnect(GraphNode n1, GraphNode n2) {
+    void disconnect(GraphNode n1, GraphNode n2) {
         if (n1.isConnected(n2) && n2.isConnected(n1)) {
             n1.severConnection(n2);
             n2.severConnection(n1);

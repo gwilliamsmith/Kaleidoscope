@@ -23,9 +23,6 @@ public class StepActionListener implements ActionListener {
     }//end constructor
 
     @Override
-    /**
-     * Method performed on trigger. Calls {@link Graph}.takeStep().
-     */
     public void actionPerformed(ActionEvent e) {
         ref.getGraph().takeStep();
     }//end actionPerformed

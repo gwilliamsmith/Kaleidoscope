@@ -27,9 +27,6 @@ public class SchedulerMenuActionListener implements MouseListener {
     }//end SchedulerMenuActionListener
 
     @Override
-    /**
-     * Event handler method, opens the scheduler window when triggered.
-     */
     public void mouseClicked(MouseEvent e) {
         SchedulerForm temp = new SchedulerForm(ref);
         SwingUtilities.invokeLater(temp);

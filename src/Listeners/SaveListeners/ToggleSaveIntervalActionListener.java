@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class ToggleSaveIntervalActionListener implements ActionListener{
 
-    Base ref;
+    private Base ref;
     
     public ToggleSaveIntervalActionListener(Base in){
         ref = in;

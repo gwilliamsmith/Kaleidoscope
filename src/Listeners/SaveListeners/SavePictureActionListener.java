@@ -28,11 +28,6 @@ public class SavePictureActionListener implements ActionListener {
     }//end constructor 
 
     @Override
-    /**
-     * Method performed on trigger. Opens a dialog for the user to name the
-     * picture to be created, as well as select a location for the file to be
-     * saved. Once both have been done, saves the picture.
-     */
     public void actionPerformed(ActionEvent e) {
         boolean tempRun = ref.isRunning();
         ref.pause();
@@ -41,13 +36,13 @@ public class SavePictureActionListener implements ActionListener {
         FileFilter imageFilter = new FileNameExtensionFilter("Image files", ImageIO.getReaderFileSuffixes());
         fileChooser.addChoosableFileFilter(imageFilter);
         int returnVal = fileChooser.showSaveDialog(ref);
-        if (returnVal == JFileChooser.APPROVE_OPTION && fileChooser.getSelectedFile().getName() != null) {
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             try {
                 ImageIO.write(ref.getCanvas().produceTrimmedImage(), "png", new File(fileChooser.getSelectedFile().getAbsolutePath() + ".png"));
             } catch (IOException ex) {
                 System.err.println("Error Saving file: " + fileChooser.getSelectedFile().getAbsolutePath() + ".png");
             }//end try catch block
-        }//end if
+        }
         if (tempRun) {
             ref.run();
         }//end if

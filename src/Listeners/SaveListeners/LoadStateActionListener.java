@@ -13,7 +13,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class LoadStateActionListener implements ActionListener {
 
-    Base ref;
+    private Base ref;
 
     public LoadStateActionListener(Base in) {
         ref = in;
@@ -136,11 +136,10 @@ public class LoadStateActionListener implements ActionListener {
      * @return A {@link ArrayList} containing all lines of text in the given
      * file, or null if {@link IOException} occurs
      */
-    public ArrayList<String> readFile(File file) {
+    private ArrayList<String> readFile(File file) {
         try (FileReader reader = new FileReader(file); BufferedReader br = new BufferedReader(reader)) {
             return gatherLines(br);
-        } catch (FileNotFoundException ex) {
-        } catch (IOException ex) {
+        } catch (IOException ignored) {
         }//end try catch
         return null;
     }//end readFile

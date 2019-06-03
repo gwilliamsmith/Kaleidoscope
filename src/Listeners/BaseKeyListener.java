@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 
 public class BaseKeyListener implements KeyListener {
 
-    private int debugCount = 0;
+    private int debugCount;
 
     private static final int DEBUG_TOGGLE_COUNT = 5;
 

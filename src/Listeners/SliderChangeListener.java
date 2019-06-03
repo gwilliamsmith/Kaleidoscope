@@ -7,7 +7,7 @@ import javax.swing.event.ChangeListener;
 
 public class SliderChangeListener implements ChangeListener {
 
-    Base ref;
+    private Base ref;
 
     public SliderChangeListener(Base in) {
         ref = in;

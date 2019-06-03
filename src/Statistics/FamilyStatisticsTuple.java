@@ -12,7 +12,7 @@ public class FamilyStatisticsTuple {
 
     private Graph field;                                                        //The Graph where all families can be found. Used for reference
 
-    public ArrayList<GraphTuple> familyMembers = new ArrayList<>();             //All members of the family to collect statistics for
+    public ArrayList<GraphTuple> familyMembers;             //All members of the family to collect statistics for
     public int familyID;                                                        //The ID number of the family
     public double averageLifespan;                                              //The average lifespan of the family in steps
     public double lifespanDeviation;                                            //The deviation in steps of the lifespan for the family from the mean

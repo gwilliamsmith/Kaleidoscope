@@ -24,11 +24,6 @@ public class ToggleDragActionListener implements ActionListener {
     }//end constructor
 
     @Override
-    /**
-     * Method performed on trigger. Flips the boolean determining if the grid
-     * can be repositioned via dragging the mouse, and updates the text on the
-     * menu button.
-     */
     public void actionPerformed(ActionEvent e) {
         Canvas canvas = ref.getCanvas();
         canvas.flipDrag();

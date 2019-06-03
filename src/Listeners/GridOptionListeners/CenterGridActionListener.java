@@ -24,11 +24,6 @@ public class CenterGridActionListener implements ActionListener {
     }//end constructor
 
     @Override
-    /**
-     * Method performed on trigger. Calculates the coordinates closest to the
-     * center of the window, then modifies the windowX and windowY
-     * {@link Canvas} variables to move the grid into the center of the window.
-     */
     public void actionPerformed(ActionEvent e) {
         Canvas canvas = ref.getCanvas();
         int halfColumns = ref.getGraph().getMatrix().length / 2;

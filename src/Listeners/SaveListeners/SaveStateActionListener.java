@@ -33,10 +33,6 @@ public class SaveStateActionListener implements ActionListener {
     }//end constructor
 
     @Override
-    /**
-     * Method performed on trigger. Pauses step auto-running, records the grid
-     * state, then returns the grid to its previous auto-run setting.
-     */
     public void actionPerformed(ActionEvent evt) {
         boolean tempRun = ref.isRunning();
         ref.pause();
@@ -53,8 +49,6 @@ public class SaveStateActionListener implements ActionListener {
     private void saveState() {
 
         GraphNode[][] refMatrix = ref.getGraph().getMatrix();
-        double itemsTotal = refMatrix.length * refMatrix[0].length;
-        double itemsDone = 0;
         Canvas canvas = ref.getCanvas();
         Graph graph = ref.getGraph();
 
@@ -63,7 +57,7 @@ public class SaveStateActionListener implements ActionListener {
         fileChooser.setDialogTitle("Save State");
         int returnVal = fileChooser.showSaveDialog(ref);
         String fileName = "";
-        if (returnVal == JFileChooser.APPROVE_OPTION && fileChooser.getSelectedFile().getName() != null) {
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             fileName = fileChooser.getSelectedFile().getAbsolutePath() + ".lsv";
         }//end if
         else if (returnVal == JFileChooser.CANCEL_OPTION) {
@@ -106,38 +100,35 @@ public class SaveStateActionListener implements ActionListener {
         globals.append("\n");
 
         //Seems magic, but is actually the number of global variables. Not likely to change
-        itemsTotal += 12;
-        itemsDone += 12;
 
         //Walk through matrix, record nodes, and connections w/ life totals
-        String connectionOutString = "";
+        StringBuilder connectionOutString = new StringBuilder();
         String nodeListOutString = refMatrix.length + " " + refMatrix[0].length + "\n";
         for (int i = 0; i < refMatrix.length; i++) {
             for (int j = 0; j < refMatrix[i].length; j++) {
-                String tempString = "";
+                StringBuilder tempString = new StringBuilder();
                 for (int k = 0; k < refMatrix[i][j].getNumberOfConnections(); k++) {
                     GraphTuple gt = refMatrix[i][j].getConnection(k);
                     GraphNode gn = gt.getToLocation();
                     GraphNode gn2 = gt.getFromLocation();
-                    tempString += gn.getILoc() + " "
-                            + gn.getJLoc() + " "
-                            + gn2.getILoc() + " "
-                            + gn2.getJLoc() + " "
-                            + gt.getRed() + " "
-                            + gt.getGreen() + " "
-                            + gt.getBlue() + " "
-                            + gt.getHealth() + " "
-                            + gt.getStartHealth() + " "
-                            + gt.getMutatePercentage() + " "
-                            + gt.getReproductionClock() + " "
-                            + gt.getStartReproductionClock() + " "
-                            + gt.isEdge(graph) + " "
-                            + gt.isCurve() + " "
-                            + gt.getCurveDirection() + " "
-                            + gt.getCurveSeverity() + "\n";
+                    tempString.append(gn.getILoc()).append(" ").
+                            append(gn.getJLoc()).append(" ").
+                            append(gn2.getILoc()).append(" ").
+                            append(gn2.getJLoc()).append(" ").
+                            append(gt.getRed()).append(" ").
+                            append(gt.getGreen()).append(" ").
+                            append(gt.getBlue()).append(" ").
+                            append(gt.getHealth()).append(" ").
+                            append(gt.getStartHealth()).append(" ").
+                            append(gt.getMutatePercentage()).append(" ").
+                            append(gt.getReproductionClock()).append(" ").
+                            append(gt.getStartReproductionClock()).append(" ").
+                            append(gt.isEdge(graph)).append(" ").
+                            append(gt.isCurve()).append(" ").
+                            append(gt.getCurveDirection()).append(" ").
+                            append(gt.getCurveSeverity()).append("\n");
                 }//end for
-                connectionOutString += tempString;
-                itemsDone++;
+                connectionOutString.append(tempString);
             }//end for
         }//end for
         PrintWriter writer = null;
@@ -146,7 +137,7 @@ public class SaveStateActionListener implements ActionListener {
             writer.print(nodeListOutString);
             writer.print(globals.toString());
             writer.print(connectionOutString);
-        } catch (FileNotFoundException | UnsupportedEncodingException ex) {
+        } catch (FileNotFoundException | UnsupportedEncodingException ignored) {
         } finally {
             if (writer != null) {
                 writer.close();

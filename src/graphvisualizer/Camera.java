@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * Captures images of the {@link Canvas} object, in the form of .jpg files
+ * Captures images of the {@link SwingElements.Canvas} object, in the form of .jpg files
  */
 public class Camera {
 
@@ -20,7 +20,7 @@ public class Camera {
      *
      * @param in The {@link Base} object, used for reference
      */
-    public Camera(Base in) {
+    Camera(Base in) {
         ref = in;
         pictureTaken = false;
     }//end constructor
@@ -29,7 +29,7 @@ public class Camera {
      * Captures a picture of the trimmed canvas. The picture is automatically 
      * named.
      */
-    public void takePicture() {
+    void takePicture() {
         try {
             if (ref.getBookDirectory() != null) {           //Creates a picture if a place to put it has been set
                 ImageIO.write(ref.getCanvas().produceTrimmedImage(), "png", new File(ref.getBookDirectory().getAbsolutePath() + "\\" + pictureCount++ + ".png"));
@@ -56,7 +56,7 @@ public class Camera {
      *
      * @return The value of pictureTaken
      */
-    public boolean isPictureTaken() {
+    boolean isPictureTaken() {
         return pictureTaken;
     }//end isPictureTaken
 
@@ -66,7 +66,7 @@ public class Camera {
      *
      * @param in The new value for pictureTaken
      */
-    public void setPictureTaken(boolean in) {
+    void setPictureTaken(boolean in) {
         pictureTaken = in;
     }//end setPictureTaken
 

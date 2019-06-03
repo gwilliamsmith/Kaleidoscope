@@ -23,10 +23,6 @@ public class SeedColoringBookListener implements ActionListener {
     }//end constructor
 
     @Override
-    /**
-     * Method performed on trigger. Calls {@link Graph}.generateSeeds(), and
-     * sets the seeded property to true.
-     */
     public void actionPerformed(ActionEvent e) {
         ref.getGraph().generateSeeds();
         ref.getGraph().setSeeded(true);
