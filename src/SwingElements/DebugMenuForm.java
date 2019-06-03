@@ -2,17 +2,19 @@ package SwingElements;
 
 import graphvisualizer.GraphTuple;
 
+import java.util.Objects;
+
 /**
  * Form containing options for debug features.
  */
 public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
 
-    Base ref;                                                                   //Base object, used for reference
+    private Base ref;                                                                   //Base object, used for reference
 
     /**
      * Creates new form DebugMenuForm
      */
-    public DebugMenuForm(Base in) {
+    DebugMenuForm(Base in) {
         ref = in;
         initComponents();
         DebugToggleCheckBox.setSelected(Canvas.DEBUG);
@@ -34,24 +36,25 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox();
-        jPanel1 = new javax.swing.JPanel();
+        javax.swing.JComboBox jComboBox1 = new javax.swing.JComboBox();
+        javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
         GridLinesCheckBox = new javax.swing.JCheckBox();
         MouseCoordinatesCheckBox = new javax.swing.JCheckBox();
-        BoundingRectangleWidthLabel = new javax.swing.JLabel();
+        javax.swing.JLabel boundingRectangleWidthLabel = new javax.swing.JLabel();
         BoundingRectangleWidthTextField = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        javax.swing.JPanel jPanel2 = new javax.swing.JPanel();
         CenterLinesCheckBox = new javax.swing.JCheckBox();
         BoundingRectangleCheckBox = new javax.swing.JCheckBox();
-        BoundingRectangleHeightLabel = new javax.swing.JLabel();
+        javax.swing.JLabel boundingRectangleHeightLabel = new javax.swing.JLabel();
         BoundingRectangleHeightTextField = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
-        DebugMenuLabel = new javax.swing.JLabel();
+        javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
+        javax.swing.JLabel debugMenuLabel = new javax.swing.JLabel();
         DebugToggleCheckBox = new javax.swing.JCheckBox();
-        jPanel4 = new javax.swing.JPanel();
-        ApplyButton = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        DepthBasedColorIntervalLabel = new javax.swing.JLabel();
+        javax.swing.JPanel jPanel4 = new javax.swing.JPanel();
+        // Variables declaration - do not modify//GEN-BEGIN:variables
+        javax.swing.JButton applyButton = new javax.swing.JButton();
+        javax.swing.JPanel jPanel6 = new javax.swing.JPanel();
+        javax.swing.JLabel depthBasedColorIntervalLabel = new javax.swing.JLabel();
         DepthBasedColorIntervalComboBox = new javax.swing.JComboBox();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -66,8 +69,8 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
 
         MouseCoordinatesCheckBox.setText("Mouse Coordinates");
 
-        BoundingRectangleWidthLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BoundingRectangleWidthLabel.setText("Bounding Rectangle Width");
+        boundingRectangleWidthLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        boundingRectangleWidthLabel.setText("Bounding Rectangle Width");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,7 +83,7 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
                         .addComponent(GridLinesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(MouseCoordinatesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                         .addComponent(BoundingRectangleWidthTextField))
-                    .addComponent(BoundingRectangleWidthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boundingRectangleWidthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -90,7 +93,7 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MouseCoordinatesCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BoundingRectangleWidthLabel)
+                .addComponent(boundingRectangleWidthLabel)
                 .addGap(7, 7, 7)
                 .addComponent(BoundingRectangleWidthTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 11, Short.MAX_VALUE))
@@ -103,8 +106,8 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
 
         BoundingRectangleCheckBox.setText("Bounding Rectangle");
 
-        BoundingRectangleHeightLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BoundingRectangleHeightLabel.setText("Bounding Rectangle Height");
+        boundingRectangleHeightLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        boundingRectangleHeightLabel.setText("Bounding Rectangle Height");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -117,7 +120,7 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
                         .addComponent(CenterLinesCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BoundingRectangleCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                         .addComponent(BoundingRectangleHeightTextField))
-                    .addComponent(BoundingRectangleHeightLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boundingRectangleHeightLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -127,17 +130,17 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BoundingRectangleCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BoundingRectangleHeightLabel)
+                .addComponent(boundingRectangleHeightLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(BoundingRectangleHeightTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        DebugMenuLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DebugMenuLabel.setText("Debug Menu");
-        DebugMenuLabel.setMaximumSize(new java.awt.Dimension(85, 23));
-        DebugMenuLabel.setMinimumSize(new java.awt.Dimension(85, 23));
-        DebugMenuLabel.setPreferredSize(new java.awt.Dimension(85, 23));
+        debugMenuLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        debugMenuLabel.setText("Debug Menu");
+        debugMenuLabel.setMaximumSize(new java.awt.Dimension(85, 23));
+        debugMenuLabel.setMinimumSize(new java.awt.Dimension(85, 23));
+        debugMenuLabel.setPreferredSize(new java.awt.Dimension(85, 23));
 
         DebugToggleCheckBox.setText(" Debug On?");
         DebugToggleCheckBox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -153,28 +156,24 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
                 .addGap(132, 132, 132)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(DebugToggleCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(DebugMenuLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(debugMenuLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(132, 132, 132))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(DebugMenuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(debugMenuLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addComponent(DebugToggleCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel4.setPreferredSize(new java.awt.Dimension(220, 23));
 
-        ApplyButton.setText("Apply");
-        ApplyButton.setMaximumSize(new java.awt.Dimension(60, 23));
-        ApplyButton.setMinimumSize(new java.awt.Dimension(60, 23));
-        ApplyButton.setPreferredSize(new java.awt.Dimension(60, 23));
-        ApplyButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ApplyButtonActionPerformed(evt);
-            }
-        });
+        applyButton.setText("Apply");
+        applyButton.setMaximumSize(new java.awt.Dimension(60, 23));
+        applyButton.setMinimumSize(new java.awt.Dimension(60, 23));
+        applyButton.setPreferredSize(new java.awt.Dimension(60, 23));
+        applyButton.addActionListener(evt -> ApplyButtonActionPerformed());
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -182,15 +181,15 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(140, 140, 140)
-                .addComponent(ApplyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(applyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ApplyButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(applyButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        DepthBasedColorIntervalLabel.setText("Depth-Based Coloring Interval");
+        depthBasedColorIntervalLabel.setText("Depth-Based Coloring Interval");
 
         DepthBasedColorIntervalComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "3", "5", "15", "17", "51", "85", "255" }));
 
@@ -200,7 +199,7 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(84, 84, 84)
-                .addComponent(DepthBasedColorIntervalLabel)
+                .addComponent(depthBasedColorIntervalLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DepthBasedColorIntervalComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
@@ -210,7 +209,7 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DepthBasedColorIntervalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(depthBasedColorIntervalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DepthBasedColorIntervalComboBox))
                 .addGap(0, 0, 0))
         );
@@ -252,7 +251,7 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
      * Action handler for the apply button. Checks the form, then updates any
      * debug features according to what's on the form.
      */
-    private void ApplyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyButtonActionPerformed
+    private void ApplyButtonActionPerformed() {//GEN-FIRST:event_ApplyButtonActionPerformed
         Canvas.DEBUG = DebugToggleCheckBox.isSelected();
         Canvas.DEBUG_GRID_LINES = GridLinesCheckBox.isSelected();
         Canvas.DEBUG_CENTER_LINES = CenterLinesCheckBox.isSelected();
@@ -262,41 +261,24 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
         String heightText = BoundingRectangleHeightTextField.getText();
         Canvas.BOUNDING_RECTANGLE_WIDTH = isValidInteger(widthText) ? Integer.parseInt(widthText) : Canvas.BOUNDING_RECTANGLE_WIDTH;
         Canvas.BOUNDING_RECTANGLE_HEIGHT = isValidInteger(heightText) ? Integer.parseInt(heightText) : Canvas.BOUNDING_RECTANGLE_HEIGHT;
-        GraphTuple.setDepthBasedColorInterval(Integer.parseInt((String) DepthBasedColorIntervalComboBox.getSelectedItem()));
-        this.hide();
+        GraphTuple.setDepthBasedColorInterval(Integer.parseInt((String) Objects.requireNonNull(DepthBasedColorIntervalComboBox.getSelectedItem())));
+        this.dispose();
     }//GEN-LAST:event_ApplyButtonActionPerformed
 
     @Override
-    /**
-     * Runs the form, setting it to be visible.
-     */
     public void run() {
         if (ref != null) {
             setVisible(true);
         }//end if
     }//end run
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ApplyButton;
-    private javax.swing.JButton ApplyButton1;
     private javax.swing.JCheckBox BoundingRectangleCheckBox;
-    private javax.swing.JLabel BoundingRectangleHeightLabel;
     private javax.swing.JTextField BoundingRectangleHeightTextField;
-    private javax.swing.JLabel BoundingRectangleWidthLabel;
     private javax.swing.JTextField BoundingRectangleWidthTextField;
     private javax.swing.JCheckBox CenterLinesCheckBox;
-    private javax.swing.JLabel DebugMenuLabel;
     private javax.swing.JCheckBox DebugToggleCheckBox;
     private javax.swing.JComboBox DepthBasedColorIntervalComboBox;
-    private javax.swing.JLabel DepthBasedColorIntervalLabel;
     private javax.swing.JCheckBox GridLinesCheckBox;
     private javax.swing.JCheckBox MouseCoordinatesCheckBox;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -306,12 +288,12 @@ public class DebugMenuForm extends javax.swing.JFrame implements Runnable {
      * @param str The String to check
      * @return True if the String is a valid integer, false if not
      */
-    public boolean isValidInteger(String str) {
+    private boolean isValidInteger(String str) {
         boolean out = false;
         try {
             int test = Integer.parseInt(str);
             out = test > 0;
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }//end try catch
         return out;

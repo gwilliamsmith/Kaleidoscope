@@ -8,13 +8,11 @@ import EventScheduler.EventScheduler;
 import Listeners.*;
 import graphvisualizer.Graph;
 import graphvisualizer.SettingsFileManipulator;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.io.File;
 import java.sql.Connection;
 import java.util.Hashtable;
 import javax.swing.*;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 /**
  * Initializes both the {@link Graph} and the {@link Canvas}. Attaches mouse and
@@ -27,9 +25,7 @@ public class Base extends JFrame {
     private Canvas canvas;                                                      //Canvas for displaying stuff
 
     private Timer timer;                                                        //Takes steps on an interval
-    private final TimerActionListener timerListener;                                  //Action listener for the Timer
-
-    private final Timer painter;                                                      //Repaints the grid every millisecond
+    private final TimerActionListener timerListener;                            //Action listener for the Timer
 
     private int stepTime;                                                       //Interval for repainting
 
@@ -129,12 +125,8 @@ public class Base extends JFrame {
         timerListener = new TimerActionListener(this);
         timer = new Timer(stepTime, timerListener);
 
-        painter = new Timer(1, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                canvas.repaint();
-            }
-        });
+        //Repaints the grid every millisecond
+        Timer painter = new Timer(1, e -> canvas.repaint());
         painter.start();
         //Repaints on an interval
     }//end constructor
@@ -182,7 +174,7 @@ public class Base extends JFrame {
     /**
      * Changes the color of the AverageColorDisplay
      */
-    public void updateAverageColor() {
+    void updateAverageColor() {
         if (averageDisplay.isVisible()) {
             averageDisplay.updateColor(graph.getAverageColor());
         }//end if
@@ -471,7 +463,7 @@ public class Base extends JFrame {
      *
      * @param in The location
      */
-    public void setBookDirectory(File in) {
+    void setBookDirectory(File in) {
         bookDirectory = in;
     }//end setBookDirectory
 
@@ -499,7 +491,7 @@ public class Base extends JFrame {
      * @return The {@link SettingsFileManipulator} object created at
      * initialization
      */
-    public SettingsFileManipulator getSettingsManager() {
+    SettingsFileManipulator getSettingsManager() {
         return settingsManager;
     }//end getSettingsManager
 
