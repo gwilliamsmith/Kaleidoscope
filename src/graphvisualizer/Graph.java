@@ -579,7 +579,9 @@ public class Graph {
                 }//end if
             }//end if
         }//end if
-        connector(current, next, current.getParentLine().generateGTI());
+        if(next != null) {
+            connector(current, next, current.getParentLine().generateGTI());
+        }//end if
     }//end growthStep
 
     /**
