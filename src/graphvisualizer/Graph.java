@@ -2,6 +2,7 @@ package graphvisualizer;
 
 import SwingElements.Base;
 import SwingElements.FamilyAverageColorGradient;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
@@ -62,10 +63,10 @@ public class Graph {
     private boolean picturePauseToggle = false;                                 //Toggle determining if the graph should pause after each picture is taken
 
     /**
-     * @param r Number of rows in the matrix
-     * @param c Number of columns in the matric
+     * @param r  Number of rows in the matrix
+     * @param c  Number of columns in the matric
      * @param in The {@link Base} object to refer to for finding runtime
-     * variables
+     *           variables
      */
     public Graph(int r, int c, Base in) {
         matrix = new GraphNode[c][r];
@@ -149,8 +150,8 @@ public class Graph {
      * Adds a node to both the list of nodes, and the matrix
      *
      * @param gn The node to be added
-     * @param i The I, or y-axis, location in the matrix
-     * @param j The J, or x-axis, location in the matrix
+     * @param i  The I, or y-axis, location in the matrix
+     * @param j  The J, or x-axis, location in the matrix
      */
     private void addNode(GraphNode gn, int i, int j) {
         nodes.add(gn);
@@ -160,12 +161,12 @@ public class Graph {
     /**
      * Connect method. Checks to ensure both nodes are in the Graph.
      *
-     * @param n1 The first node involved in the connection
-     * @param n2 The second node involved in the connection
-     * @param gti The {@link GraphTupleInfo} describing the connection to be
-     * made
+     * @param n1        The first node involved in the connection
+     * @param n2        The second node involved in the connection
+     * @param gti       The {@link GraphTupleInfo} describing the connection to be
+     *                  made
      * @param direction The direction of a curved connection
-     * @param severity The severity of a curved line
+     * @param severity  The severity of a curved line
      * @return True if successful, false if not
      */
     private boolean biconnect(GraphNode n1, GraphNode n2, GraphTupleInfo gti, int direction, double severity) {
@@ -175,58 +176,58 @@ public class Graph {
     }//end biconnect
 
     //TODO: Clean this up
+
     /**
      * Connects two nodes using their descriptions from a state save file.
      *
-     * @param n1y The y index of the first node
-     * @param n1x The x index of the first node
-     * @param n2y The y index of the second node
-     * @param n2x The x index of the second node
-     * @param red The red RGB value for the connection to be made
-     * @param green The green RGB value for the connection to be made
-     * @param blue The blue RGB value for the connection to be made
-     * @param health The remaining health of the connection
-     * @param startHealth The starting health of the connection
-     * @param mutatePercentage The mutationPercentage value for the connection
-     * @param reproductionClock The number of turns remaining before the
-     * connection attempts to reproduce
+     * @param n1y                    The y index of the first node
+     * @param n1x                    The x index of the first node
+     * @param n2y                    The y index of the second node
+     * @param n2x                    The x index of the second node
+     * @param red                    The red RGB value for the connection to be made
+     * @param green                  The green RGB value for the connection to be made
+     * @param blue                   The blue RGB value for the connection to be made
+     * @param health                 The remaining health of the connection
+     * @param startHealth            The starting health of the connection
+     * @param mutatePercentage       The mutationPercentage value for the connection
+     * @param reproductionClock      The number of turns remaining before the
+     *                               connection attempts to reproduce
      * @param startReproductionClock The number of turns the connection must
-     * wait before attempting to reproduce
-     * @param edge Toggle determining if the connection is an edge
-     * @param curved Toggle determining if the connection is curved
-     * @param curveDirection Toggle determining the direction of the
-     * connection's curve
-     * @param curveSeverity The severity of the connection's curve
+     *                               wait before attempting to reproduce
+     * @param edge                   Toggle determining if the connection is an edge
+     * @param curved                 Toggle determining if the connection is curved
+     * @param curveDirection         Toggle determining the direction of the
+     *                               connection's curve
+     * @param curveSeverity          The severity of the connection's curve
      */
     public void createConnection(int n1y, int n1x, int n2y, int n2x, int red, int green, int blue, int health, int startHealth, int mutatePercentage, int reproductionClock, int startReproductionClock, boolean edge, boolean curved, int curveDirection, double curveSeverity) {
         GraphNode n1 = matrix[n1y][n1x];
         GraphNode n2 = matrix[n2y][n2x];
 
         if (!n1.isConnected(n2) && !n2.isConnected(n1)) {
-            fillConnection(n1,n2, red, green, blue, health, startHealth, mutatePercentage, reproductionClock, startReproductionClock, edge, curved, curveDirection, curveSeverity);
-            fillConnection(n2,n1, red, green, blue, health, startHealth, mutatePercentage, reproductionClock, startReproductionClock, edge, curved, curveDirection, curveSeverity);
+            fillConnection(n1, n2, red, green, blue, health, startHealth, mutatePercentage, reproductionClock, startReproductionClock, edge, curved, curveDirection, curveSeverity);
+            fillConnection(n2, n1, red, green, blue, health, startHealth, mutatePercentage, reproductionClock, startReproductionClock, edge, curved, curveDirection, curveSeverity);
         }//end if
     }//end creteConnections
 
     /**
-     * 
-     * @param n1 The from node (n1 ->n2)
-     * @param n2 The to node (n1 -> n2)
-     * @param red The red RGB value for the connection to be made
-     * @param green The green RGB value for the connection to be made
-     * @param blue The blue RGB value for the connection to be made
-     * @param health The remaining health of the connection
-     * @param startHealth The starting health of the connection
-     * @param mutatePercentage The mutationPercentage value for the connection
-     * @param reproductionClock The number of turns remaining before the
-     * connection attempts to reproduce
+     * @param n1                     The from node (n1 ->n2)
+     * @param n2                     The to node (n1 -> n2)
+     * @param red                    The red RGB value for the connection to be made
+     * @param green                  The green RGB value for the connection to be made
+     * @param blue                   The blue RGB value for the connection to be made
+     * @param health                 The remaining health of the connection
+     * @param startHealth            The starting health of the connection
+     * @param mutatePercentage       The mutationPercentage value for the connection
+     * @param reproductionClock      The number of turns remaining before the
+     *                               connection attempts to reproduce
      * @param startReproductionClock The number of turns the connection must
-     * wait before attempting to reproduce
-     * @param edge Toggle determining if the connection is an edge
-     * @param curved Toggle determining if the connection is curved
-     * @param curveDirection Toggle determining the direction of the
-     * connection's curve
-     * @param curveSeverity The severity of the connection's curve
+     *                               wait before attempting to reproduce
+     * @param edge                   Toggle determining if the connection is an edge
+     * @param curved                 Toggle determining if the connection is curved
+     * @param curveDirection         Toggle determining the direction of the
+     *                               connection's curve
+     * @param curveSeverity          The severity of the connection's curve
      */
     private void fillConnection(GraphNode n1, GraphNode n2, int red, int green, int blue, int health, int startHealth, int mutatePercentage, int reproductionClock, int startReproductionClock, boolean edge, boolean curved, int curveDirection, double curveSeverity) {
         GraphTuple gt = new GraphTuple();
@@ -262,9 +263,9 @@ public class Graph {
     /**
      * Connects one node with any number of other nodes.
      *
-     * @param start The node to be connected to
+     * @param start   The node to be connected to
      * @param targets The list of nodes to connect start to
-     * @param gti The {@link GraphTupleInfo} object describing the connection
+     * @param gti     The {@link GraphTupleInfo} object describing the connection
      * @return An array of booleans. True indicates that the connection was
      * successful, false indicates an unsuccessful connection
      */
@@ -287,9 +288,9 @@ public class Graph {
     /**
      * Connect one node to another.
      *
-     * @param start The first node to be connected
+     * @param start  The first node to be connected
      * @param target The second node to be connected
-     * @param gti The {@link GraphTupleInfo} object describing the connection
+     * @param gti    The {@link GraphTupleInfo} object describing the connection
      * @return True if the connection is successful, false if the connection is
      * unsuccessful
      */
@@ -306,7 +307,7 @@ public class Graph {
      *
      * @param node1 The first node to be connected
      * @param node2 The second node to be connected
-     * @param gti The {@link GraphTupleInfo} object describing the connection
+     * @param gti   The {@link GraphTupleInfo} object describing the connection
      */
     public void createNewFamily(GraphNode node1, GraphNode node2, GraphTupleInfo gti) {
         gti.family = newFamilyID();
@@ -337,6 +338,7 @@ public class Graph {
     }//end initializeGrid
 
     //TODO: Probably should clean this up, too...
+
     /**
      * Creates edge connections for the nodes at the edges of the matrix.
      */
@@ -390,6 +392,7 @@ public class Graph {
 
     //TODO: 
     //    Move picture taking to Event
+
     /**
      * Constructs the growth queue for line growth. Built beforehand so all
      * lines that should grow on a given step are given the opportunity
@@ -411,6 +414,7 @@ public class Graph {
     }//end buildQueue
 
     //TODO: Replace this with Event
+
     /**
      * Checks to see if the {@link Camera} should save a picture of the pattern.
      */
@@ -556,6 +560,7 @@ public class Graph {
     }//end depthStep
 
     //TODO: Simplify/clean this method
+
     /**
      * Connection reproduces towards the adjacent node with the greatest amount
      * of food left. Currently un-optimized, and rarely used.
@@ -652,8 +657,8 @@ public class Graph {
      * Create new connections, as children of a parent.
      *
      * @param start The node housing the connection to reproduce
-     * @param gti The {@link GraphTupleInfo} object describing the traits of the
-     * new connection
+     * @param gti   The {@link GraphTupleInfo} object describing the traits of the
+     *              new connection
      */
     private void normalRules(GraphNode start, GraphTupleInfo gti) {
         int xCompare = start.compareX();
@@ -661,30 +666,17 @@ public class Graph {
         int iLoc = start.getILoc();
         int jLoc = start.getJLoc();
 
-        if (xCompare == 1 && yCompare == 1) {
-            connector(start, new GraphNode[]{matrix[iLoc][jLoc + 1], matrix[iLoc + 1][jLoc]}, gti);
+        if (xCompare != 0 && yCompare != 0) {
+            connector(start, new GraphNode[]{matrix[iLoc][jLoc + xCompare], matrix[iLoc + yCompare][jLoc]}, gti);
         }//end if
-        else if (xCompare == -1 && yCompare == 1) {
-            connector(start, new GraphNode[]{matrix[iLoc][jLoc - 1], matrix[iLoc + 1][jLoc]}, gti);
-        }//end else if
-        else if (xCompare == 1 && yCompare == -1) {
-            connector(start, new GraphNode[]{matrix[iLoc][jLoc + 1], matrix[iLoc - 1][jLoc]}, gti);
-        }//end else if
-        else if (xCompare == -1 && yCompare == -1) {
-            connector(start, new GraphNode[]{matrix[iLoc][jLoc - 1], matrix[iLoc - 1][jLoc]}, gti);
-        }//end else if
-        else if (xCompare == 0 && yCompare == 1) {
-            connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc - 1], matrix[iLoc + 1][jLoc + 1]}, gti);
-        }//end else if
-        else if (xCompare == 1 && yCompare == 0) {
-            connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc + 1], matrix[iLoc - 1][jLoc + 1]}, gti);
-        }//end else if
-        else if (xCompare == -1 && yCompare == 0) {
-            connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc - 1], matrix[iLoc - 1][jLoc - 1]}, gti);
-        }//end else if
-        else if (xCompare == 0 && yCompare == -1) {
-            connector(start, new GraphNode[]{matrix[iLoc - 1][jLoc - 1], matrix[iLoc - 1][jLoc + 1]}, gti);
-        }//end else if
+        else {
+            if (xCompare == 0 && yCompare != 0) {
+                connector(start, new GraphNode[]{matrix[iLoc + yCompare][jLoc + 1], matrix[iLoc + yCompare][jLoc - 1]}, gti);
+            }//end if
+            else if (xCompare != 0) {
+                connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc + xCompare], matrix[iLoc - 1][jLoc + xCompare]}, gti);
+            }//end else if
+        }//end else
     }//end normalRules
 
     /**
@@ -720,7 +712,7 @@ public class Graph {
     /**
      * Highlights a (@link GraphNode}, turning it a given color
      *
-     * @param in The node to be highlighted
+     * @param in             The node to be highlighted
      * @param highlightColor The new color for the given node
      */
     public void highlightNode(GraphNode in, GraphNodeColors highlightColor) {
@@ -732,9 +724,9 @@ public class Graph {
      * {@link Graph#highlightNode(graphvisualizer.GraphNode, java.awt.Color)},
      * but also changes the color of nodes adjacent to the given node.
      *
-     * @param in The node to be highlighted
+     * @param in             The node to be highlighted
      * @param selectionColor The color for the given node
-     * @param adjacentColor The color for nodes adjacent to the given node
+     * @param adjacentColor  The color for nodes adjacent to the given node
      */
     public void highlightNodeAdjacents(GraphNode in, GraphNodeColors selectionColor, GraphNodeColors adjacentColor) {
         in.setColor(selectionColor);
@@ -909,7 +901,7 @@ public class Graph {
      * on square grids.
      */
     public void generateSeeds() {                                   // There has to be a better way to do this
-        if (seed1 && (!seed2 && !seed4 && !seed8) && seeded){       //Prevent creation of non-symmetrical seeds when one line seeds are the only option
+        if (seed1 && (!seed2 && !seed4 && !seed8) && seeded) {       //Prevent creation of non-symmetrical seeds when one line seeds are the only option
             JOptionPane.showMessageDialog(null, "More than one single line seed will result in asymetrical pictures!");
             return;
         }//end if
@@ -1102,8 +1094,8 @@ public class Graph {
     /**
      * Finds nodes on lines of symmetry for coloring book seeding.
      *
-     * @param mods An array of pairs of mods. mods[][0] is the y modifier,
-     * mods[][1] is the x modifier.
+     * @param mods  An array of pairs of mods. mods[][0] is the y modifier,
+     *              mods[][1] is the x modifier.
      * @param steps The number of nodes in from the edge
      */
     private void findSeedNodes(int[][] mods, int steps) {
@@ -1154,11 +1146,12 @@ public class Graph {
     }//end pullFamily
 
     //This may not belong here
+
     /**
      * Adds a new color to the gradient of colors for a given family of lines.
      *
      * @param familyID The ID of the family in question
-     * @param colorIn The color to be added to the family color gradient
+     * @param colorIn  The color to be added to the family color gradient
      */
     public void updateFamilyColorGradient(int familyID, Color colorIn) {
         familyAverageColorGradients.get(familyID).addNewColor(colorIn);
@@ -1166,6 +1159,7 @@ public class Graph {
     }//end updateFamilyColorGradient
 
     //This may not belong here
+
     /**
      * Displays the color gradient for a given family of lines.
      *
@@ -1206,6 +1200,7 @@ public class Graph {
     }//end getAverageColor
 
     //Note: this won't be accurate if the matrix isn't rectangular
+
     /**
      * Gets the width of a rectangular {@link GraphNode} matrix.
      *
@@ -1216,6 +1211,7 @@ public class Graph {
     }//end getGraphWidth
 
     //Note: this won't be accurate if the matrix isn't rectangular
+
     /**
      * Gets the height of a rectangular {@link GraphNode} matrix.
      *
