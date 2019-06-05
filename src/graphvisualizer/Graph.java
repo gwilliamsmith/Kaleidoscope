@@ -560,97 +560,26 @@ public class Graph {
     }//end depthStep
 
     //TODO: Simplify/clean this method
-        //I can use teh adjacent nodes function to do this
+    //I can use teh adjacent nodes function to do this
 
     /**
      * Connection reproduces towards the adjacent node with the greatest amount
      * of food left. Currently un-optimized, and rarely used.
      *
-     * @param temp The node housing the connection in question
+     * @param current The node housing the connection in question
      */
-    private void growthStep(GraphNode temp) {
-        GraphNode target = null;
-        int greatestFood = 0;
-        ArrayList<GraphNode> sameNodes = new ArrayList<>();
-        int iLoc = temp.getILoc();
-        int jLoc = temp.getJLoc();
-        if (jLoc > 0 && iLoc > 0 && jLoc < matrix[0].length - 1 && iLoc < matrix.length - 1) {
-            //Top Left Check
-            if (matrix[iLoc - 1][jLoc - 1] != temp && matrix[iLoc - 1][jLoc - 1].getFood() > greatestFood && matrix[iLoc - 1][jLoc - 1].getFood() > 0) {
-                greatestFood = matrix[iLoc - 1][jLoc - 1].getFood();
-                target = matrix[iLoc - 1][jLoc - 1];
-            }//end if
-            //Top Middle Check
-            if (matrix[iLoc - 1][jLoc] != temp && matrix[iLoc - 1][jLoc].getFood() > greatestFood) {
-                greatestFood = matrix[iLoc - 1][jLoc].getFood();
-                target = matrix[iLoc - 1][jLoc];
-            }//end if
-            else if (matrix[iLoc - 1][jLoc] != temp && matrix[iLoc - 1][jLoc].getFood() > greatestFood && matrix[iLoc - 1][jLoc].getFood() > 0) {
-                sameNodes.add(matrix[iLoc - 1][jLoc]);
-            }//end else if
-            //Top Right Check
-            if (matrix[iLoc - 1][jLoc + 1] != temp && matrix[iLoc - 1][jLoc + 1].getFood() > greatestFood && matrix[iLoc - 1][jLoc + 1].getFood() > 0) {
-                greatestFood = matrix[iLoc - 1][jLoc + 1].getFood();
-                target = matrix[iLoc - 1][jLoc + 1];
-                sameNodes.clear();
-            }//end if
-            else if (matrix[iLoc - 1][jLoc + 1] != temp && matrix[iLoc - 1][jLoc + 1].getFood() > greatestFood && matrix[iLoc - 1][jLoc + 1].getFood() > 0) {
-                sameNodes.add(matrix[iLoc - 1][jLoc + 1]);
-            }//end else if
-            //Middle Left Check
-            if (matrix[iLoc][jLoc - 1] != temp && matrix[iLoc][jLoc - 1].getFood() > greatestFood && matrix[iLoc][jLoc - 1].getFood() > 0) {
-                greatestFood = matrix[iLoc][jLoc - 1].getFood();
-                target = matrix[iLoc][jLoc - 1];
-                sameNodes.clear();
-            }//end if
-            else if (matrix[iLoc][jLoc - 1] != temp && matrix[iLoc][jLoc - 1].getFood() > greatestFood && matrix[iLoc][jLoc - 1].getFood() > 0) {
-                sameNodes.add(matrix[iLoc][jLoc - 1]);
-            }//end else if
-            //Middle Right Check
-            if (matrix[iLoc][jLoc + 1] != temp && matrix[iLoc][jLoc + 1].getFood() > greatestFood && matrix[iLoc][jLoc + 1].getFood() > 0) {
-                greatestFood = matrix[iLoc][jLoc + 1].getFood();
-                target = matrix[iLoc][jLoc - 1];
-                sameNodes.clear();
-            }//end if
-            else if (matrix[iLoc][jLoc + 1] != temp && matrix[iLoc][jLoc + 1].getFood() > greatestFood && matrix[iLoc][jLoc + 1].getFood() > 0) {
-                sameNodes.add(matrix[iLoc][jLoc + 1]);
-            }//end else if
-            //Bottom Left Check
-            if (matrix[iLoc + 1][jLoc - 1] != temp) {
-                if (matrix[iLoc + 1][jLoc - 1].getFood() > greatestFood && matrix[iLoc + 1][jLoc - 1].getFood() > 0) {
-                    greatestFood = matrix[iLoc + 1][jLoc - 1].getFood();
-                    target = matrix[iLoc + 1][jLoc - 1];
-                    sameNodes.clear();
+    private void growthStep(GraphNode current) {
+        GraphNode next = null;
+        ArrayList<GraphNode> targets = findAdjacentNodes(current);
+        if (!targets.isEmpty()) {
+            next = targets.get(0);
+            for (int i = 0; i < targets.size(); i++) {
+                if (targets.get(i).getFood() > next.getFood()) {
+                    next = targets.get(i);
                 }//end if
             }//end if
-            else if (matrix[iLoc + 1][jLoc - 1] != temp && matrix[iLoc + 1][jLoc - 1].getFood() > greatestFood && matrix[iLoc + 1][jLoc - 1].getFood() > 0) {
-                sameNodes.add(matrix[iLoc + 1][jLoc - 1]);
-            }//end else if
-            //Bottom Middle Check
-            if (matrix[iLoc + 1][jLoc] != temp && matrix[iLoc + 1][jLoc].getFood() > greatestFood && matrix[iLoc + 1][jLoc].getFood() > 0) {
-                greatestFood = matrix[iLoc + 1][jLoc].getFood();
-                target = matrix[iLoc + 1][jLoc];
-                sameNodes.clear();
-            }//end if
-            else if (matrix[iLoc + 1][jLoc] != temp && matrix[iLoc + 1][jLoc].getFood() > greatestFood && matrix[iLoc + 1][jLoc].getFood() > 0) {
-                sameNodes.add(matrix[iLoc + 1][jLoc]);
-            }//end else if
-            //Bottom Left Check
-            if (matrix[iLoc + 1][jLoc + 1] != temp && matrix[iLoc + 1][jLoc + 1].getFood() > greatestFood && matrix[iLoc + 1][jLoc + 1].getFood() > 0) {
-                target = matrix[iLoc + 1][jLoc + 1];
-                sameNodes.clear();
-            }//end if
-            else if (matrix[iLoc + 1][jLoc + 1] != temp && matrix[iLoc + 1][jLoc + 1].getFood() > greatestFood && matrix[iLoc + 1][jLoc - +1].getFood() > 0) {
-                sameNodes.add(matrix[iLoc + 1][jLoc + 1]);
-            }//end else if
-            //Check to see if there are nodes in the list of possible targets
-            if (sameNodes.isEmpty()) {
-                connector(temp, target, temp.getParentLine().generateGTI());
-            }//end if
-            else {
-                connector(temp, sameNodes.get(0), temp.getParentLine().generateGTI());
-            }//end else
         }//end if
+        connector(current, next, current.getParentLine().generateGTI());
     }//end growthStep
 
     /**
@@ -720,10 +649,7 @@ public class Graph {
     }//end highlightNode
 
     /**
-     * Same as
-     * {@link Graph#highlightNode(graphvisualizer.GraphNode, java.awt.Color)},
-     * but also changes the color of nodes adjacent to the given node.
-     *
+     * Same as highlightNode, but also changes the color of nodes adjacent to the given node.
      * @param in             The node to be highlighted
      * @param selectionColor The color for the given node
      * @param adjacentColor  The color for nodes adjacent to the given node
