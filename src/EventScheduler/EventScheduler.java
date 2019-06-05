@@ -64,10 +64,9 @@ public class EventScheduler {
         for (int i = 0; i < events.size(); i++) {
             Event e = events.get(i);
             if (e.getRepeat()) {
-                StringBuilder item = new StringBuilder(e.getEventName());
-                item.append(" - ");
-                item.append(e.getStepTarget());
-                out.add(item.toString());
+                String item = e.getEventName() + " - " +
+                        e.getStepTarget();
+                out.add(item);
             }//end if
         }//end for
         return out;
@@ -78,10 +77,9 @@ public class EventScheduler {
         for(int i=0;i<events.size();i++){
             Event e = events.get(i);
             if (!e.getRepeat()) {
-                StringBuilder item = new StringBuilder(e.getEventName());
-                item.append(" - ");
-                item.append(e.getStepTarget());
-                out.add(item.toString());
+                String item = e.getEventName() + " - " +
+                        e.getStepTarget();
+                out.add(item);
             }//end if
         }//end for
         return out;

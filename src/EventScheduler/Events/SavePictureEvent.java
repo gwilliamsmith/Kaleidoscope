@@ -5,7 +5,7 @@ import SwingElements.Base;
 
 public class SavePictureEvent extends Event{
     
-    private String pictureLocation = "";
+    private String pictureLocation;
     private int pictureCount = 0;
     
     public SavePictureEvent(int stepTargetIn, String eventNameIn, boolean repeatIn, Base in, String location) {

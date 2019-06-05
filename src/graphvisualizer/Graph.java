@@ -269,7 +269,7 @@ public class Graph {
      * @return An array of booleans. True indicates that the connection was
      * successful, false indicates an unsuccessful connection
      */
-    public boolean[] connector(GraphNode start, GraphNode[] targets, GraphTupleInfo gti) {
+    private boolean[] connector(GraphNode start, GraphNode[] targets, GraphTupleInfo gti) {
         boolean[] out = new boolean[targets.length];
         int outIndex = 0;
         int direction = GraphTuple.generateCurveDirection();
@@ -560,6 +560,7 @@ public class Graph {
     }//end depthStep
 
     //TODO: Simplify/clean this method
+        //I can use teh adjacent nodes function to do this
 
     /**
      * Connection reproduces towards the adjacent node with the greatest amount
@@ -583,7 +584,6 @@ public class Graph {
             if (matrix[iLoc - 1][jLoc] != temp && matrix[iLoc - 1][jLoc].getFood() > greatestFood) {
                 greatestFood = matrix[iLoc - 1][jLoc].getFood();
                 target = matrix[iLoc - 1][jLoc];
-                sameNodes.clear();
             }//end if
             else if (matrix[iLoc - 1][jLoc] != temp && matrix[iLoc - 1][jLoc].getFood() > greatestFood && matrix[iLoc - 1][jLoc].getFood() > 0) {
                 sameNodes.add(matrix[iLoc - 1][jLoc]);
@@ -697,7 +697,7 @@ public class Graph {
     /**
      * Removes all connections from all nodes in the {@link Graph}.
      */
-    public void clearGrid() {
+    private void clearGrid() {
         for (int i = 0; i < matrix.length; i++) {
             GraphNode[] matrix1 = matrix[i];
             for (int j = 0; j < matrix1.length; j++) {
@@ -799,7 +799,7 @@ public class Graph {
      *
      * @param in The node to be re-colored
      */
-    public void resetNodeColor(GraphNode in) {
+    private void resetNodeColor(GraphNode in) {
         if (nodeIsMiddle(in)) {
             in.setColor(GraphNodeColors.DEFAULT_MIDDLE_COLOR);
         }//end if
@@ -857,7 +857,7 @@ public class Graph {
      * @return True if the given {@link GraphNode} is in the middle row or
      * column of the {@link Graph}, false if not
      */
-    public boolean nodeIsMiddle(GraphNode in) {
+    private boolean nodeIsMiddle(GraphNode in) {
         return (in.getILoc() == matrix.length / 2 || in.getJLoc() == matrix[0].length / 2);
     }//end nodeIsMidde
 
@@ -890,7 +890,7 @@ public class Graph {
      *
      * @return The family ID for the new {@link GraphTuple}
      */
-    public int newFamilyID() {
+    int newFamilyID() {
         familyCount++;
         return familyCount;
     }//end new FamilyID
@@ -1635,7 +1635,6 @@ public class Graph {
         int out = 0;
         switch (MODE) {
             case REGULAR:
-                out = 0;
                 break;
             case MUTATION:
                 out = 1;
@@ -1646,6 +1645,8 @@ public class Graph {
             case GROWTH:
                 out = 3;
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + MODE);
         }//end switch
         return out;
     }//end getMode

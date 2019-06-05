@@ -28,8 +28,7 @@ public class MyQueue<T> {
             while (current.next != null) {
                 current = current.next;
             }//end while
-            QueueNode<T> temp = new QueueNode<>(input);
-            current.next = temp;
+            current.next = new QueueNode<>(input);
             length++;
         }//end else
     }//end enqueue

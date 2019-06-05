@@ -15,7 +15,7 @@ public class GraphTupleInfo {
     public int reproductionClock = 1;                                           //The number of turns it will take this line to reproduce
     public boolean edge;                                                        //Determines if this line is an edge
     public int family;                                                          //The family ID for this line
-    public int depthColorIndex;                                                 //The generation of this line (circular int that resets to 0 when (++depthColorIndex / (255 / GraphTuple.DEPTH_COLOR_INTERVAL) < 6) is true
+    int depthColorIndex;                                                 //The generation of this line (circular int that resets to 0 when (++depthColorIndex / (255 / GraphTuple.DEPTH_COLOR_INTERVAL) < 6) is true
 
     public GraphTupleInfo() {
         startHealth = 50;

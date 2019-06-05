@@ -61,7 +61,7 @@ public class GraphTuple {
      * @return {@link GraphTupleInfo} containing the base information about this
      * connection
      */
-    public GraphTupleInfo generateGTI() {
+    GraphTupleInfo generateGTI() {
         GraphTupleInfo out = new GraphTupleInfo(this.startHealth, this.color, this.mutatePercentage, this.startReproductionClock);
         out.family = this.family;
         //Resets the depthColorIndex once it's reached pure red again
@@ -77,7 +77,7 @@ public class GraphTuple {
      * {@link GraphTupleInfo} on
      * @return A new {@link GraphTupleInfo} with slightly different traits
      */
-    public GraphTupleInfo generateMutatedGti(GraphTuple parent) {
+    GraphTupleInfo generateMutatedGti(GraphTuple parent) {
         Random rand = new Random();
         GraphTupleInfo out = new GraphTupleInfo(generateMutatedHealth(rand),
                 generateMutatedColor(rand),
@@ -188,14 +188,14 @@ public class GraphTuple {
     /**
      * Resets the reproduction clock of this connection to its starting value
      */
-    public void resetReproductionClock() {
+    void resetReproductionClock() {
         reproductionClock = startReproductionClock;
     }//end resetReproductionClock
 
     /**
      * Decrements connection health by the decay rate
      */
-    public void decay() {
+    void decay() {
         health -= decayRate;
     }//end decay
 
@@ -203,7 +203,7 @@ public class GraphTuple {
      * Creates new values describing the curve of the connection, and sets
      * curved to true.
      */
-    public void generateCurve(int direction, double severity) {
+    void generateCurve(int direction, double severity) {
         curveDirecton = direction;
         curveSeverity = severity;
         curved = true;
@@ -212,7 +212,7 @@ public class GraphTuple {
     /**
      * Generates a new direction value for curveDirection.
      */
-    public static int generateCurveDirection() {
+    static int generateCurveDirection() {
         Random rand = new Random();
         boolean direction = rand.nextBoolean();
         return direction ? 1 : 0;
@@ -221,7 +221,7 @@ public class GraphTuple {
     /**
      * Generates a new value for curve severity, ranging from .1 to 1.0.
      */
-    public static double generateCurveSeverity() {
+    static double generateCurveSeverity() {
         return Math.random() + .1;
     }//end generateCurveSeverity
 
@@ -298,7 +298,7 @@ public class GraphTuple {
      *
      * @param in The new value for edge
      */
-    public void setEdge(boolean in) {
+    void setEdge(boolean in) {
         edge = in;
     }//end setEdge
 
@@ -307,7 +307,7 @@ public class GraphTuple {
      *
      * @return True if connection health > 0
      */
-    public boolean isAlive() {
+    boolean isAlive() {
         return (health > 0);
     }//return isAlive
 
@@ -325,7 +325,7 @@ public class GraphTuple {
      *
      * @param in The {@link GraphNode} to connect to
      */
-    public void setToLocation(GraphNode in) {
+    void setToLocation(GraphNode in) {
         toLocation = in;
     }//end setToLocation
 
@@ -343,7 +343,7 @@ public class GraphTuple {
      *
      * @param in The {@link GraphNode} to connect to
      */
-    public void setFromLocation(GraphNode in) {
+    void setFromLocation(GraphNode in) {
         fromLocation = in;
     }//end setFromLocation
 
@@ -363,7 +363,7 @@ public class GraphTuple {
      *
      * @param in The value for startHealth
      */
-    public void setStartHealth(int in) {
+    void setStartHealth(int in) {
         startHealth = in;
     }//end setStartHealth
 
@@ -381,14 +381,11 @@ public class GraphTuple {
      * than or equal to {@link GraphTuple#startHealth}.
      *
      * @param in The new value for the remaining health of this connection
-     * @return True if the new number is accepted, false if not
      */
-    public boolean setHealth(int in) {
+    void setHealth(int in) {
         if (in <= startHealth) {
             health = in;
-            return true;
         }//end if
-        return false;
     }//end setHealth
 
     /**
@@ -407,7 +404,7 @@ public class GraphTuple {
      *
      * @param in The chance for mutation (out of {@link GraphTuple#MUTATION_DIVISIOR))
      */
-    public void setMutatePercentage(int in) {
+    void setMutatePercentage(int in) {
         mutatePercentage = in;
     }//end setMutatePercentage
 
@@ -425,7 +422,7 @@ public class GraphTuple {
      *
      * @param in The number of turns it takes for the connection to reproduce
      */
-    public void setStartReproductionClock(int in) {
+    void setStartReproductionClock(int in) {
         startReproductionClock = in;
     }//end setStartReproductionClock
 
@@ -446,14 +443,11 @@ public class GraphTuple {
      *
      * @param in The number of remaining turns for the connection to reproduce.
      * Cannot be higher than the value for startReproductionClock
-     * @return True if the value is accepted, false if not.
      */
-    public boolean setReproductionClock(int in) {
+    void setReproductionClock(int in) {
         if (in <= startReproductionClock) {
             reproductionClock = in;
-            return true;
         }//end if
-        return false;
     }//end setReproductionClock
 
     /**
@@ -480,7 +474,7 @@ public class GraphTuple {
      *
      * @param in The new value for curve direction
      */
-    public void setCurveDirection(int in) {
+    void setCurveDirection(int in) {
         if (in < -1) {
             in = -1;
         }//end if
@@ -504,7 +498,7 @@ public class GraphTuple {
      *
      * @param in The percentage of the full curve to be reached
      */
-    public void setCurveSeverity(double in) {
+    void setCurveSeverity(double in) {
         if (in > 1) {
             in = 1;
         }//end if
@@ -526,7 +520,7 @@ public class GraphTuple {
      *
      * @param in The new value for curved
      */
-    public void setCurve(boolean in) {
+    void setCurve(boolean in) {
         curved = in;
     }//end setCurve
 
@@ -536,7 +530,7 @@ public class GraphTuple {
      *
      * @return The calculated color of the connection
      */
-    public Color getDepthColor() {
+    Color getDepthColor() {
         int maxSegments = 255 / DEPTH_COLOR_INTERVAL;
         int segmentNumber = depthColorIndex / maxSegments;
         int segmentStep = depthColorIndex % maxSegments;
@@ -588,9 +582,8 @@ public class GraphTuple {
      *
      * @param in The new value of DEPTH_COLOR_INTERVAL, which must be a factor
      * of 255
-     * @return True if the new value is accepted, false if not
      */
-    public static boolean setDepthBasedColorInterval(int in) {
+    public static void setDepthBasedColorInterval(int in) {
         int[] factors = {1, 3, 5, 15, 17, 51, 85, 255};
         boolean contains = false;
         for (int i = 0; i < factors.length && !contains; i++) {
@@ -600,11 +593,9 @@ public class GraphTuple {
         }//end for
         if (contains) {
             DEPTH_COLOR_INTERVAL = in;
-            return true;
         }//end if
         else {
             System.err.println(in + " is not a factor of 255!");
-            return false;
         }//end else
     }//end setDepthBasedColorInterval
 }//end GraphTuple

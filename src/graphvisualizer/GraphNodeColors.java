@@ -25,7 +25,7 @@ public enum GraphNodeColors {
      *
      * @param in The color to associate with an enum value
      */
-    private GraphNodeColors(Color in) {
+    GraphNodeColors(Color in) {
         color = in;
     }//end GraphNodeColors constructor
 
