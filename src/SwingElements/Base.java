@@ -75,8 +75,6 @@ public class Base extends JFrame {
     private static Connection conn = null;                                      //MySQL connection variable
 
     public EventScheduler scheduler = new EventScheduler();                     //Event scheduler
-
-    public boolean curveSwitcher = false;                                       //Handles determining if the curve toggle boolean should be switched between steps.
     
     private boolean showUserEdges = true;                                       //Determines if user-placed edges should be drawn
     

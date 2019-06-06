@@ -146,7 +146,7 @@ public class Graph {
     }//end refreshSeed
 
     /**
-     * Adds a node to both the list of nodes, and the matrix
+     * Adds a node to the matrix
      *
      * @param gn The node to be added
      * @param i  The I, or y-axis, location in the matrix
@@ -610,32 +610,10 @@ public class Graph {
      */
     public void highlightNodeAdjacents(GraphNode in, GraphNodeColors selectionColor, GraphNodeColors adjacentColor) {
         in.setColor(selectionColor);
-        int iLoc = in.getILoc();
-        int jLoc = in.getJLoc();
-        if (iLoc > 0) {
-            matrix[iLoc - 1][jLoc].setColor(adjacentColor);
-            if (jLoc > 0) {
-                matrix[iLoc - 1][jLoc - 1].setColor(adjacentColor);
-            }//end if
-            if (jLoc < matrix[iLoc].length - 1) {
-                matrix[iLoc - 1][jLoc + 1].setColor(adjacentColor);
-            }//end if
-        }//end if
-        if (iLoc < matrix.length - 1) {
-            matrix[iLoc + 1][jLoc].setColor(adjacentColor);
-            if (jLoc > 0) {
-                matrix[iLoc + 1][jLoc - 1].setColor(adjacentColor);
-            }//end if
-            if (jLoc < matrix[iLoc].length - 1) {
-                matrix[iLoc + 1][jLoc + 1].setColor(adjacentColor);
-            }//end if
-        }//end if
-        if (jLoc > 0) {
-            matrix[iLoc][jLoc - 1].setColor(adjacentColor);
-        }//end if
-        if (jLoc < matrix[iLoc].length - 1) {
-            matrix[iLoc][jLoc + 1].setColor(adjacentColor);
-        }//end if
+        ArrayList<GraphNode> adjacentNodes = findAdjacentNodes(in);
+        for(int i = 0; i<adjacentNodes.size();i++){
+            adjacentNodes.get(i).setColor(adjacentColor);
+        }//end for
     }//end highlightNodeAdjacents
 
     /**
@@ -646,32 +624,10 @@ public class Graph {
      */
     public void resetNodeAdjacents(GraphNode in) {
         resetNodeColor(in);
-        int iLoc = in.getILoc();
-        int jLoc = in.getJLoc();
-        if (iLoc > 0) {
-            resetNodeColor(matrix[iLoc - 1][jLoc]);
-            if (jLoc > 0) {
-                resetNodeColor(matrix[iLoc - 1][jLoc - 1]);
-            }//end if
-            if (jLoc < matrix[iLoc].length - 1) {
-                resetNodeColor(matrix[iLoc - 1][jLoc + 1]);
-            }//end if
-        }//end if
-        if (iLoc < matrix.length - 1) {
-            resetNodeColor(matrix[iLoc + 1][jLoc]);
-            if (jLoc > 0) {
-                resetNodeColor(matrix[iLoc + 1][jLoc - 1]);
-            }//end if
-            if (jLoc < matrix[iLoc].length - 1) {
-                resetNodeColor(matrix[iLoc + 1][jLoc + 1]);
-            }//end if
-        }//end if
-        if (jLoc > 0) {
-            resetNodeColor(matrix[iLoc][jLoc - 1]);
-        }//end if
-        if (jLoc < matrix[iLoc].length - 1) {
-            resetNodeColor(matrix[iLoc][jLoc + 1]);
-        }//end if
+        ArrayList<GraphNode> adjacentNodes = findAdjacentNodes(in);
+        for(int i = 0; i<adjacentNodes.size();i++){
+            resetNodeColor(adjacentNodes.get(i));
+        }//end for
     }//end resetNodeAdjacents
 
     /**
@@ -1040,8 +996,6 @@ public class Graph {
         familyAverageColorGradients.get(familyID).refresh();
     }//end updateFamilyColorGradient
 
-    //This may not belong here
-
     /**
      * Displays the color gradient for a given family of lines.
      *
@@ -1113,13 +1067,6 @@ public class Graph {
     public GraphNode[][] getMatrix() {
         return matrix;
     }//end getMatrix
-
-    /**
-     * Gets an {@link ArrayList} of all {@link GraphNode}s present in the graph
-     *
-     * @return The {@link ArrayList} containing all {@link GraphNode}s in the
-     * graph
-     */
 
     /**
      * Gets a node at specific xy coordinates in the matrix.
