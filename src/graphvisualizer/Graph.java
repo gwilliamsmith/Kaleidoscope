@@ -55,7 +55,7 @@ public class Graph {
 
     private GraphNode lastHovered;                                              //The node the mouse is hovering over. For displaying its coordinates on the canvas. (Maybe move to CanvasMouseListener?)
 
-    private String testName = "test16";                                         //Name of the test when gathering statistics
+    private String testName = "No test";                                         //Name of the test when gathering statistics
 
     private boolean pictureSaveToggle = false;                                   //Toggle determining if the the Camera should save a picture of the generated pattern when there is a big enough lull in line reproduction
 

@@ -7,10 +7,13 @@ import Listeners.RightClickListeners.*;
 import EventScheduler.EventScheduler;
 import Listeners.*;
 import graphvisualizer.Graph;
+import graphvisualizer.GraphTuple;
+import graphvisualizer.GraphTupleInfo;
 import graphvisualizer.SettingsFileManipulator;
 
 import java.io.File;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import javax.swing.*;
 
@@ -78,7 +81,9 @@ public class Base extends JFrame {
     
     private boolean showUserEdges = true;                                       //Determines if user-placed edges should be drawn
     
-    private boolean shiftDown = false;                                        //Is the shift key pressed?
+    private boolean shiftDown = false;                                          //Is the shift key pressed?
+
+    private ArrayList<GraphTupleInfo> customLineHistory = new ArrayList<>();
 
     /**
      * Constructor for Base class. Determines grid dimensions, as well as the
@@ -557,5 +562,18 @@ public class Base extends JFrame {
     public void setShiftDown(boolean in){
         shiftDown = in;
     }//end setShiftDown
+
+    public void addToCustomLineHistory(GraphTupleInfo gti){
+        customLineHistory.add(gti);
+    }//end addToLineHistory
+
+    public void removeFromCustomLineHistory(GraphTupleInfo gti){
+        for(int i=0;i<customLineHistory.size();i++){
+            if(customLineHistory.get(i).equals(gti)){
+                customLineHistory.remove(i);
+                return;
+            }//end if
+        }//end for
+    }
 
 }//end Base class
