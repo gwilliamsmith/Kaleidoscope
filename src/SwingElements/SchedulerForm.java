@@ -418,7 +418,6 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
                             createEventForm.repeat,
                             ref));
                     break;
-                //TODO: Add ability to tune this
                 case "Generate Random Line":
                     ref.scheduler.addEvent(new GenerateRandomLineEvent(
                             createEventForm.stepCount,

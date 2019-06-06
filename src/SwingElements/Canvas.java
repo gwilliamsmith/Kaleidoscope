@@ -426,11 +426,6 @@ public class Canvas extends JPanel {
         }//end if
     }//end resizeGrid
 
-    /*
-     TODO: Clean this up
-     TODO: Use static variables for corner (Maybe an enum?)
-     TODO: lineOffset can be done better (keep track of how many lines are displayed?)
-     */
     /**
      * Draws a given string in a corner, using an offset.
      *

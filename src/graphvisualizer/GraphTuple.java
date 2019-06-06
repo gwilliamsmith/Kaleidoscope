@@ -11,7 +11,7 @@ public class GraphTuple {
     private static int DEPTH_COLOR_INTERVAL = 1;                                //The amount of color to change from generation to generation in depth-based coloring mode
     private int depthColorIndex = 0;                                            //The depth-based coloring index. Resets to 0 when (++depthColorIndex / (255 / DEPTH_COLOR_INTERVAL) < 6) is true
 
-    public static int MUTATION_DIVISOR = 20000;                                 //The maximum value for mutation percentage. TODO: make this editable, and find a reason why I made it 20000
+    public static int MUTATION_DIVISOR = 20000;                                 //The maximum value for mutation percentage.
 
     private GraphNode toLocation;                                               //The node this line connects to
     private GraphNode fromLocation;                                             //The node housing the object
