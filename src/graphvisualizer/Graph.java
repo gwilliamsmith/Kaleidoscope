@@ -321,7 +321,7 @@ public class Graph {
     /**
      * Performs all actions required to set up the grid upon initialization of
      * the {@link Graph} itself. This method creates the required number of
-     * {@link GraphNode} objects, and places them on the {@link Canvas} at the
+     * {@link GraphNode} objects, and places them on the {@link SwingElements.Canvas} at the
      * appropriate coordinates
      */
     public void initializeGrid() {
@@ -337,61 +337,26 @@ public class Graph {
         outlineGrid();
     }//end initializeGrid
 
-    //TODO: Probably should clean this up, too...
-
     /**
      * Creates edge connections for the nodes at the edges of the matrix.
      */
     private void outlineGrid() {
         GraphTupleInfo gti = new GraphTupleInfo(50, Color.BLACK, 0, 1);
-        for (int modi = 0; modi < matrix.length; modi++) {                      //Looks through the left and right edges of a rectangular grid
-            if (matrix[0].length > 0) {                                         //Ensures that the node matrix has at least one column
-                GraphNode temp1 = matrix[modi][0];                              // The node from the left edge of the rectangle
-                int i1 = temp1.getILoc();
-                int j1 = temp1.getJLoc();
-                GraphNode temp2 = matrix[matrix.length - 1 - modi][matrix[0].length - 1];     //The node from the right edge of the rectangle
-                int i2 = temp2.getILoc();
-                int j2 = temp2.getJLoc();
-                if (modi == 0) {                                                //Case for first node on the left edge, and last node on the right edge
-                    connector(temp1, new GraphNode[]{matrix[i1 + 1][j1], matrix[i1][j1 + 1]}, gti);
-                    connector(temp2, new GraphNode[]{matrix[i2 - 1][j2], matrix[i2][j2 - 1]}, gti);
-                }//end if
-                else if (modi == matrix.length - 1) {                             //Case for last node on the left edge, and first node on the left edge
-                    connector(temp1, new GraphNode[]{matrix[i1 - 1][j1], matrix[i1][j1 + 1]}, gti);
-                    connector(temp2, new GraphNode[]{matrix[i2 + 1][j2], matrix[i2][j2 - 1]}, gti);
-                }//end else if
-                else {                                                          //All middle nodes on the left and right edges
-                    connector(temp1, new GraphNode[]{matrix[i1 + 1][j1], matrix[i1 - 1][j1]}, gti);
-                    connector(temp2, new GraphNode[]{matrix[i2 + 1][j2], matrix[i2 - 1][j2]}, gti);
-                }//end else
-            }//end if
+        GraphNode one;
+        GraphNode two;
+        for (int leftRightIndex = 0; leftRightIndex < matrix.length - 1; leftRightIndex++) {
+            System.out.println(leftRightIndex);
+            connector(matrix[0][leftRightIndex], matrix[0][leftRightIndex + 1], gti);
+            connector(matrix[matrix[0].length-1][leftRightIndex],matrix[matrix[0].length-1][leftRightIndex+1],gti);
         }//end for
-        for (int modj = 0; modj < matrix[0].length; modj++) {                   //Looks through top and bottom edges of a rectangular grid
-            if (matrix.length > 0) {                                            //Ensures that there is at least one row in the node matrix
-                GraphNode temp1 = matrix[0][modj];                              //The node from the top edge of the rectangle
-                int i1 = temp1.getILoc();
-                int j1 = temp1.getJLoc();
-                GraphNode temp2 = matrix[matrix.length - 1][matrix[0].length - 1 - modj];       //The node from the bottom edge of the rectangle
-                int i2 = temp2.getILoc();
-                int j2 = temp2.getJLoc();
-                if (modj == 0) {                                                //Case for the first node of the top edge, and the last node of the bottom edge
-                    connector(temp1, new GraphNode[]{matrix[i1][j1 + 1], matrix[i1 + 1][j1]}, gti);
-                    connector(temp2, new GraphNode[]{matrix[i2][j2 - 1], matrix[i2 - 1][j2]}, gti);
-                }//end if
-                else if (modj == matrix[0].length - 1) {                          //Case for the lase node of the top edge, and the first node of the bottom edge
-                    connector(temp1, new GraphNode[]{matrix[i1][j1 - 1], matrix[i1 + 1][j1]}, gti);
-                    connector(temp2, new GraphNode[]{matrix[i2][j2 + 1], matrix[i2 - 1][j2]}, gti);
-                }//end else if
-                else {                                                          //All middle nodes on the top and bottom edges
-                    connector(temp1, new GraphNode[]{matrix[i1][j1 + 1], matrix[i1][j1 - 1]}, gti);
-                    connector(temp2, new GraphNode[]{matrix[i2][j2 + 1], matrix[i2][j2 - 1]}, gti);
-                }//end else
-            }//end if
+        for(int topBottomIndex = 0; topBottomIndex< matrix[0].length-1;topBottomIndex++){
+            connector(matrix[topBottomIndex][0], matrix[topBottomIndex+1][0], gti);
+            connector(matrix[topBottomIndex][matrix.length-1], matrix[topBottomIndex+1][matrix.length-1], gti);
         }//end for
+
     }//end outlineGrid
 
-    //TODO: 
-    //    Move picture taking to Event
+    //TODO: Move picture taking to Event
 
     /**
      * Constructs the growth queue for line growth. Built beforehand so all
@@ -559,9 +524,6 @@ public class Graph {
         }//end if
     }//end depthStep
 
-    //TODO: Simplify/clean this method
-    //I can use teh adjacent nodes function to do this
-
     /**
      * Connection reproduces towards the adjacent node with the greatest amount
      * of food left. Currently un-optimized, and rarely used.
@@ -579,7 +541,7 @@ public class Graph {
                 }//end if
             }//end if
         }//end if
-        if(next != null) {
+        if (next != null) {
             connector(current, next, current.getParentLine().generateGTI());
         }//end if
     }//end growthStep
@@ -652,6 +614,7 @@ public class Graph {
 
     /**
      * Same as highlightNode, but also changes the color of nodes adjacent to the given node.
+     *
      * @param in             The node to be highlighted
      * @param selectionColor The color for the given node
      * @param adjacentColor  The color for nodes adjacent to the given node
