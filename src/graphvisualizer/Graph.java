@@ -175,8 +175,6 @@ public class Graph {
                 && n2.connect(n1, gti, direction, severity, true);
     }//end biconnect
 
-    //TODO: Clean this up
-
     /**
      * Connects two nodes using their descriptions from a state save file.
      *
@@ -354,8 +352,6 @@ public class Graph {
 
     }//end outlineGrid
 
-    //TODO: Move picture taking to Event
-
     /**
      * Constructs the growth queue for line growth. Built beforehand so all
      * lines that should grow on a given step are given the opportunity
@@ -375,8 +371,6 @@ public class Graph {
             checkPicture();
         }//end if
     }//end buildQueue
-
-    //TODO: Replace this with Event
 
     /**
      * Checks to see if the {@link Camera} should save a picture of the pattern.
