@@ -308,7 +308,6 @@ public class Canvas extends JPanel {
                 n2.y /*+ windowY * windowMultiplier*/ + n2.height / 2 + pointSize / 2);
     }//end drawLine
 
-    //TODO: Clean this up
     /**
      * Draws an individual {@link GraphTuple} curve.
      *  @param g2 The {@link Graphics 2D} object to do the drawing
@@ -428,11 +427,9 @@ public class Canvas extends JPanel {
     }//end resizeGrid
 
     /*
-     TODO:
-     Clean this up:
-     Use static variables for corner (Maybe an enum?)
-     lineOffset can be done better
-     Implement logic for other corner
+     TODO: Clean this up
+     TODO: Use static variables for corner (Maybe an enum?)
+     TODO: lineOffset can be done better (keep track of how many lines are displayed?)
      */
     /**
      * Draws a given string in a corner, using an offset.
@@ -452,6 +449,7 @@ public class Canvas extends JPanel {
                 g.drawString(in, 5, (fontSize.getHeight() * (lineOffset + 1)));
                 break;
             case 2:
+                g.drawString(in, this.getWidth() - textWidth - 5, (fontSize.getHeight() * (lineOffset + 1)));
                 break;
             case 3:
                 g.drawString(in, 5, this.getHeight() - (fontSize.getHeight() * (lineOffset)) - 5);

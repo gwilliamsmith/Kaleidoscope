@@ -1,6 +1,3 @@
-/*TODO:
- Break up saveState()
- */
 package Listeners.SaveListeners;
 
 import SwingElements.Base;
@@ -64,46 +61,60 @@ public class SaveStateActionListener implements ActionListener {
             return;
         }//end saveState
 
-        //Record global variable states
-        StringBuilder globals = new StringBuilder("Spacing:");
-        globals.append(canvas.getMinSpacing());
-        globals.append("\n");
-        globals.append("Point size:");
-        globals.append(canvas.getMinPointSize());
-        globals.append("\n");
-        globals.append("Step count:");
-        globals.append(graph.getStepCount());
-        globals.append("\n");
-        globals.append("Step time:");
-        globals.append(ref.getStepTime());
-        globals.append("\n");
-        globals.append("Zoom level:");
-        globals.append(canvas.getZoomLevel());
-        globals.append("\n");
-        globals.append("Cycle base:");
-        globals.append(graph.getCycleBase());
-        globals.append("\n");
-        globals.append("Cycle count:");
-        globals.append(graph.getCycleCount());
-        globals.append("\n");
-        globals.append("Trim:");
-        globals.append(Graph.TRIM);
-        globals.append("\n");
-        globals.append("Mutate Color:");
-        globals.append(Graph.MUTATE_COLOR);
-        globals.append("\n");
-        globals.append("Mutate Health:");
-        globals.append(Graph.MUTATE_HEALTH);
-        globals.append("\n");
-        globals.append("Growth Type:");
-        globals.append(graph.getMode());
-        globals.append("\n");
-
-        //Seems magic, but is actually the number of global variables. Not likely to change
-
         //Walk through matrix, record nodes, and connections w/ life totals
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter(fileName, "UTF-8");
+            writer.print(refMatrix.length + " " + refMatrix[0].length + "\n");
+            writer.print(writeGlobalString(canvas,graph));
+            writer.print(writeConnectonString(graph));
+        } catch (FileNotFoundException | UnsupportedEncodingException ignored) {
+        } finally {
+            if (writer != null) {
+                writer.close();
+                System.out.println("Done Saving");
+            }//end if
+        }//end try-catch-finally
+    }//end saveState
+
+    private String writeGlobalString(Canvas canvas, Graph graph){
+        return "Spacing:" + canvas.getMinSpacing() +
+                "\n" +
+                "Point size:" +
+                canvas.getMinPointSize() +
+                "\n" +
+                "Step count:" +
+                graph.getStepCount() +
+                "\n" +
+                "Step time:" +
+                ref.getStepTime() +
+                "\n" +
+                "Zoom level:" +
+                canvas.getZoomLevel() +
+                "\n" +
+                "Cycle base:" +
+                graph.getCycleBase() +
+                "\n" +
+                "Cycle count:" +
+                graph.getCycleCount() +
+                "\n" +
+                "Trim:" +
+                Graph.TRIM +
+                "\n" +
+                "Mutate Color:" +
+                Graph.MUTATE_COLOR +
+                "\n" +
+                "Mutate Health:" +
+                Graph.MUTATE_HEALTH +
+                "\n" +
+                "Growth Type:" +
+                graph.getMode() +
+                "\n";
+    }//end writeGlobalString
+
+    private String writeConnectonString(Graph graph){
+        GraphNode[][] refMatrix = ref.getGraph().getMatrix();
         StringBuilder connectionOutString = new StringBuilder();
-        String nodeListOutString = refMatrix.length + " " + refMatrix[0].length + "\n";
         for (int i = 0; i < refMatrix.length; i++) {
             for (int j = 0; j < refMatrix[i].length; j++) {
                 StringBuilder tempString = new StringBuilder();
@@ -131,18 +142,6 @@ public class SaveStateActionListener implements ActionListener {
                 connectionOutString.append(tempString);
             }//end for
         }//end for
-        PrintWriter writer = null;
-        try {
-            writer = new PrintWriter(fileName, "UTF-8");
-            writer.print(nodeListOutString);
-            writer.print(globals.toString());
-            writer.print(connectionOutString);
-        } catch (FileNotFoundException | UnsupportedEncodingException ignored) {
-        } finally {
-            if (writer != null) {
-                writer.close();
-                System.out.println("Done Saving");
-            }//end if
-        }//end try-catch-finally
-    }//end saveState
+        return connectionOutString.toString();
+    }//end writeConnectionString
 }//end TimerActionListner

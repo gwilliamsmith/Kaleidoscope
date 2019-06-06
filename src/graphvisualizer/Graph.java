@@ -342,8 +342,6 @@ public class Graph {
      */
     private void outlineGrid() {
         GraphTupleInfo gti = new GraphTupleInfo(50, Color.BLACK, 0, 1);
-        GraphNode one;
-        GraphNode two;
         for (int leftRightIndex = 0; leftRightIndex < matrix.length - 1; leftRightIndex++) {
             System.out.println(leftRightIndex);
             connector(matrix[0][leftRightIndex], matrix[0][leftRightIndex + 1], gti);
