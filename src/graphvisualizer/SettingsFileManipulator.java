@@ -12,8 +12,8 @@ import java.util.Map;
  */
 public class SettingsFileManipulator extends GenericFileManipulator {
 
-    private File settingsFile;
-    private Base ref;
+    private final File settingsFile;
+    private final Base ref;
 
     /**
      * @param fileName the name of the settings file
@@ -96,22 +96,21 @@ public class SettingsFileManipulator extends GenericFileManipulator {
         Canvas canvas = ref.getCanvas();
         Graph graph = ref.getGraph();
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(settingsFile.getCanonicalPath(), false)))) {
-            out.println("Min Spacing:" + Integer.toString(canvas.getMinSpacing()));
-            out.println("Min Point Size:" + Integer.toString(canvas.getMinPointSize()));
-            out.println("Zoom Level:" + Integer.toString(canvas.getZoomLevel()));
-            out.println("Trim:" + Boolean.toString(Graph.TRIM));
-            out.println("Consume:" + Boolean.toString(Graph.CONSUME));
-            out.println("Mode Type:" + Integer.toString(graph.getMode()));
-            out.println("Mutate Color:" + Boolean.toString(Graph.MUTATE_COLOR));
-            out.println("Mutate Health:" + Boolean.toString(Graph.MUTATE_HEALTH));
-            out.println("Seed1:" + Boolean.toString(graph.getSeed1()));
-            out.println("Seed2:" + Boolean.toString(graph.getSeed2()));
-            out.println("Seed4:" + Boolean.toString(graph.getSeed4()));
-            out.println("Seed8:" + Boolean.toString(graph.getSeed8()));
+            out.println("Min Spacing:" + canvas.getMinSpacing());
+            out.println("Min Point Size:" + canvas.getMinPointSize());
+            out.println("Zoom Level:" + canvas.getZoomLevel());
+            out.println("Trim:" + Graph.TRIM);
+            out.println("Consume:" + Graph.CONSUME);
+            out.println("Mode Type:" + graph.getMode());
+            out.println("Mutate Color:" + Graph.MUTATE_COLOR);
+            out.println("Mutate Health:" + Graph.MUTATE_HEALTH);
+            out.println("Seed1:" + graph.getSeed1());
+            out.println("Seed2:" + graph.getSeed2());
+            out.println("Seed4:" + graph.getSeed4());
+            out.println("Seed8:" + graph.getSeed8());
             //out.println("File Location:" + ref.getBookDirectory().getAbsolutePath());
             out.flush();
-        } catch (FileNotFoundException ex) {
-        } catch (IOException ex) {
+        } catch (IOException ignored) {
         }//end try catch
     }//end writeSettings
 

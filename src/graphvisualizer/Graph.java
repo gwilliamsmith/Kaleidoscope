@@ -2,6 +2,7 @@ package graphvisualizer;
 
 import SwingElements.Base;
 import SwingElements.FamilyAverageColorGradient;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,7 +19,7 @@ public class Graph {
     public static boolean CONSUME = false;                                      //Determines if GraphNode food is consumed by connections
     public static boolean MUTATE_COLOR = true;                                  //Determines if, when mutation is possible, connections can MUTATE colors
     public static boolean MUTATE_HEALTH = true;                                 //Determines if, when mutation is possible, connections can MUTATE starting health
-    public static GrowthMode MODE = GrowthMode.REGULAR;                         //Enum determining how stepForward() behaves
+    private static GrowthMode MODE = GrowthMode.REGULAR;                         //Enum determining how stepForward() behaves
 
     private final ArrayList<FamilyAverageColorGradient> familyAverageColorGradients;  //FamilyAverageColorGradient objects, one for each family
     //TODO: Maybe get rid of this?
@@ -57,15 +58,15 @@ public class Graph {
 
     private String testName = "test16";                                         //Name of the test when gathering statistics
 
-    private boolean pictureSaveToggle = true;                                   //Toggle determining if the the Camera should save a picture of the generated pattern when there is a big enough lull in line reproduction
+    private boolean pictureSaveToggle = false;                                   //Toggle determining if the the Camera should save a picture of the generated pattern when there is a big enough lull in line reproduction
 
     private boolean picturePauseToggle = false;                                 //Toggle determining if the graph should pause after each picture is taken
 
     /**
-     * @param r Number of rows in the matrix
-     * @param c Number of columns in the matric
+     * @param r  Number of rows in the matrix
+     * @param c  Number of columns in the matric
      * @param in The {@link Base} object to refer to for finding runtime
-     * variables
+     *           variables
      */
     public Graph(int r, int c, Base in) {
         matrix = new GraphNode[c][r];
@@ -94,7 +95,7 @@ public class Graph {
      * opportunity to do so. Also reduces the remaining health of all
      * connections, and the food on each node (if enabled).
      */
-    public void stepForward() {
+    private void stepForward() {
         buildQueue();                 //Builds the queue of nodes, each of which houses a connection to reproduce
         while (queue.hasFront()) {
             GraphNode temp = queue.dequeue();
@@ -149,8 +150,8 @@ public class Graph {
      * Adds a node to both the list of nodes, and the matrix
      *
      * @param gn The node to be added
-     * @param i The I, or y-axis, location in the matrix
-     * @param j The J, or x-axis, location in the matrix
+     * @param i  The I, or y-axis, location in the matrix
+     * @param j  The J, or x-axis, location in the matrix
      */
     private void addNode(GraphNode gn, int i, int j) {
         nodes.add(gn);
@@ -160,75 +161,73 @@ public class Graph {
     /**
      * Connect method. Checks to ensure both nodes are in the Graph.
      *
-     * @param n1 The first node involved in the connection
-     * @param n2 The second node involved in the connection
-     * @param gti The {@link GraphTupleInfo} describing the connection to be
-     * made
+     * @param n1        The first node involved in the connection
+     * @param n2        The second node involved in the connection
+     * @param gti       The {@link GraphTupleInfo} describing the connection to be
+     *                  made
      * @param direction The direction of a curved connection
-     * @param severity The severity of a curved line
+     * @param severity  The severity of a curved line
      * @return True if successful, false if not
      */
-    public boolean biconnect(GraphNode n1, GraphNode n2, GraphTupleInfo gti, int direction, double severity) {
+    private boolean biconnect(GraphNode n1, GraphNode n2, GraphTupleInfo gti, int direction, double severity) {
         //Only return true if both n1.connect() and n2.connect() are successful
         return n1.connect(n2, gti, direction, severity, false)
                 && n2.connect(n1, gti, direction, severity, true);
     }//end biconnect
 
-    //TODO: Clean this up
     /**
      * Connects two nodes using their descriptions from a state save file.
      *
-     * @param n1y The y index of the first node
-     * @param n1x The x index of the first node
-     * @param n2y The y index of the second node
-     * @param n2x The x index of the second node
-     * @param red The red RGB value for the connection to be made
-     * @param green The green RGB value for the connection to be made
-     * @param blue The blue RGB value for the connection to be made
-     * @param health The remaining health of the connection
-     * @param startHealth The starting health of the connection
-     * @param mutatePercentage The mutationPercentage value for the connection
-     * @param reproductionClock The number of turns remaining before the
-     * connection attempts to reproduce
+     * @param n1y                    The y index of the first node
+     * @param n1x                    The x index of the first node
+     * @param n2y                    The y index of the second node
+     * @param n2x                    The x index of the second node
+     * @param red                    The red RGB value for the connection to be made
+     * @param green                  The green RGB value for the connection to be made
+     * @param blue                   The blue RGB value for the connection to be made
+     * @param health                 The remaining health of the connection
+     * @param startHealth            The starting health of the connection
+     * @param mutatePercentage       The mutationPercentage value for the connection
+     * @param reproductionClock      The number of turns remaining before the
+     *                               connection attempts to reproduce
      * @param startReproductionClock The number of turns the connection must
-     * wait before attempting to reproduce
-     * @param edge Toggle determining if the connection is an edge
-     * @param curved Toggle determining if the connection is curved
-     * @param curveDirection Toggle determining the direction of the
-     * connection's curve
-     * @param curveSeverity The severity of the connection's curve
+     *                               wait before attempting to reproduce
+     * @param edge                   Toggle determining if the connection is an edge
+     * @param curved                 Toggle determining if the connection is curved
+     * @param curveDirection         Toggle determining the direction of the
+     *                               connection's curve
+     * @param curveSeverity          The severity of the connection's curve
      */
     public void createConnection(int n1y, int n1x, int n2y, int n2x, int red, int green, int blue, int health, int startHealth, int mutatePercentage, int reproductionClock, int startReproductionClock, boolean edge, boolean curved, int curveDirection, double curveSeverity) {
         GraphNode n1 = matrix[n1y][n1x];
         GraphNode n2 = matrix[n2y][n2x];
 
         if (!n1.isConnected(n2) && !n2.isConnected(n1)) {
-            fillConnection(n1,n2, red, green, blue, health, startHealth, mutatePercentage, reproductionClock, startReproductionClock, edge, curved, curveDirection, curveSeverity);
-            fillConnection(n2,n1, red, green, blue, health, startHealth, mutatePercentage, reproductionClock, startReproductionClock, edge, curved, curveDirection, curveSeverity);
+            fillConnection(n1, n2, red, green, blue, health, startHealth, mutatePercentage, reproductionClock, startReproductionClock, edge, curved, curveDirection, curveSeverity);
+            fillConnection(n2, n1, red, green, blue, health, startHealth, mutatePercentage, reproductionClock, startReproductionClock, edge, curved, curveDirection, curveSeverity);
         }//end if
     }//end creteConnections
 
     /**
-     * 
-     * @param n1 The from node (n1 ->n2)
-     * @param n2 The to node (n1 -> n2)
-     * @param red The red RGB value for the connection to be made
-     * @param green The green RGB value for the connection to be made
-     * @param blue The blue RGB value for the connection to be made
-     * @param health The remaining health of the connection
-     * @param startHealth The starting health of the connection
-     * @param mutatePercentage The mutationPercentage value for the connection
-     * @param reproductionClock The number of turns remaining before the
-     * connection attempts to reproduce
+     * @param n1                     The from node (n1 ->n2)
+     * @param n2                     The to node (n1 -> n2)
+     * @param red                    The red RGB value for the connection to be made
+     * @param green                  The green RGB value for the connection to be made
+     * @param blue                   The blue RGB value for the connection to be made
+     * @param health                 The remaining health of the connection
+     * @param startHealth            The starting health of the connection
+     * @param mutatePercentage       The mutationPercentage value for the connection
+     * @param reproductionClock      The number of turns remaining before the
+     *                               connection attempts to reproduce
      * @param startReproductionClock The number of turns the connection must
-     * wait before attempting to reproduce
-     * @param edge Toggle determining if the connection is an edge
-     * @param curved Toggle determining if the connection is curved
-     * @param curveDirection Toggle determining the direction of the
-     * connection's curve
-     * @param curveSeverity The severity of the connection's curve
+     *                               wait before attempting to reproduce
+     * @param edge                   Toggle determining if the connection is an edge
+     * @param curved                 Toggle determining if the connection is curved
+     * @param curveDirection         Toggle determining the direction of the
+     *                               connection's curve
+     * @param curveSeverity          The severity of the connection's curve
      */
-    public void fillConnection(GraphNode n1, GraphNode n2, int red, int green, int blue, int health, int startHealth, int mutatePercentage, int reproductionClock, int startReproductionClock, boolean edge, boolean curved, int curveDirection, double curveSeverity) {
+    private void fillConnection(GraphNode n1, GraphNode n2, int red, int green, int blue, int health, int startHealth, int mutatePercentage, int reproductionClock, int startReproductionClock, boolean edge, boolean curved, int curveDirection, double curveSeverity) {
         GraphTuple gt = new GraphTuple();
         gt.setToLocation(n2);
         gt.setFromLocation(n1);
@@ -252,7 +251,7 @@ public class Graph {
      * @param n1 The first node to be disconnected
      * @param n2 The second node to be disconnected
      */
-    public void disconnect(GraphNode n1, GraphNode n2) {
+    void disconnect(GraphNode n1, GraphNode n2) {
         if (n1.isConnected(n2) && n2.isConnected(n1)) {
             n1.severConnection(n2);
             n2.severConnection(n1);
@@ -262,13 +261,13 @@ public class Graph {
     /**
      * Connects one node with any number of other nodes.
      *
-     * @param start The node to be connected to
+     * @param start   The node to be connected to
      * @param targets The list of nodes to connect start to
-     * @param gti The {@link GraphTupleInfo} object describing the connection
+     * @param gti     The {@link GraphTupleInfo} object describing the connection
      * @return An array of booleans. True indicates that the connection was
      * successful, false indicates an unsuccessful connection
      */
-    public boolean[] connector(GraphNode start, GraphNode[] targets, GraphTupleInfo gti) {
+    private boolean[] connector(GraphNode start, GraphNode[] targets, GraphTupleInfo gti) {
         boolean[] out = new boolean[targets.length];
         int outIndex = 0;
         int direction = GraphTuple.generateCurveDirection();
@@ -287,9 +286,9 @@ public class Graph {
     /**
      * Connect one node to another.
      *
-     * @param start The first node to be connected
+     * @param start  The first node to be connected
      * @param target The second node to be connected
-     * @param gti The {@link GraphTupleInfo} object describing the connection
+     * @param gti    The {@link GraphTupleInfo} object describing the connection
      * @return True if the connection is successful, false if the connection is
      * unsuccessful
      */
@@ -306,7 +305,7 @@ public class Graph {
      *
      * @param node1 The first node to be connected
      * @param node2 The second node to be connected
-     * @param gti The {@link GraphTupleInfo} object describing the connection
+     * @param gti   The {@link GraphTupleInfo} object describing the connection
      */
     public void createNewFamily(GraphNode node1, GraphNode node2, GraphTupleInfo gti) {
         gti.family = newFamilyID();
@@ -320,7 +319,7 @@ public class Graph {
     /**
      * Performs all actions required to set up the grid upon initialization of
      * the {@link Graph} itself. This method creates the required number of
-     * {@link GraphNode} objects, and places them on the {@link Canvas} at the
+     * {@link GraphNode} objects, and places them on the {@link SwingElements.Canvas} at the
      * appropriate coordinates
      */
     public void initializeGrid() {
@@ -336,60 +335,23 @@ public class Graph {
         outlineGrid();
     }//end initializeGrid
 
-    //TODO: Probably should clean this up, too...
     /**
      * Creates edge connections for the nodes at the edges of the matrix.
      */
     private void outlineGrid() {
         GraphTupleInfo gti = new GraphTupleInfo(50, Color.BLACK, 0, 1);
-        for (int modi = 0; modi < matrix.length; modi++) {                      //Looks through the left and right edges of a rectangular grid
-            if (matrix[0].length > 0) {                                         //Ensures that the node matrix has at least one column
-                GraphNode temp1 = matrix[modi][0];                              // The node from the left edge of the rectangle
-                int i1 = temp1.getILoc();
-                int j1 = temp1.getJLoc();
-                GraphNode temp2 = matrix[matrix.length - 1 - modi][matrix[0].length - 1];     //The node from the right edge of the rectangle
-                int i2 = temp2.getILoc();
-                int j2 = temp2.getJLoc();
-                if (modi == 0) {                                                //Case for first node on the left edge, and last node on the right edge
-                    connector(temp1, new GraphNode[]{matrix[i1 + 1][j1], matrix[i1][j1 + 1]}, gti);
-                    connector(temp2, new GraphNode[]{matrix[i2 - 1][j2], matrix[i2][j2 - 1]}, gti);
-                }//end if
-                else if (modi == matrix.length - 1) {                             //Case for last node on the left edge, and first node on the left edge
-                    connector(temp1, new GraphNode[]{matrix[i1 - 1][j1], matrix[i1][j1 + 1]}, gti);
-                    connector(temp2, new GraphNode[]{matrix[i2 + 1][j2], matrix[i2][j2 - 1]}, gti);
-                }//end else if
-                else {                                                          //All middle nodes on the left and right edges
-                    connector(temp1, new GraphNode[]{matrix[i1 + 1][j1], matrix[i1 - 1][j1]}, gti);
-                    connector(temp2, new GraphNode[]{matrix[i2 + 1][j2], matrix[i2 - 1][j2]}, gti);
-                }//end else
-            }//end if
+        for (int leftRightIndex = 0; leftRightIndex < matrix.length - 1; leftRightIndex++) {
+            System.out.println(leftRightIndex);
+            connector(matrix[0][leftRightIndex], matrix[0][leftRightIndex + 1], gti);
+            connector(matrix[matrix[0].length-1][leftRightIndex],matrix[matrix[0].length-1][leftRightIndex+1],gti);
         }//end for
-        for (int modj = 0; modj < matrix[0].length; modj++) {                   //Looks through top and bottom edges of a rectangular grid
-            if (matrix.length > 0) {                                            //Ensures that there is at least one row in the node matrix
-                GraphNode temp1 = matrix[0][modj];                              //The node from the top edge of the rectangle
-                int i1 = temp1.getILoc();
-                int j1 = temp1.getJLoc();
-                GraphNode temp2 = matrix[matrix.length - 1][matrix[0].length - 1 - modj];       //The node from the bottom edge of the rectangle
-                int i2 = temp2.getILoc();
-                int j2 = temp2.getJLoc();
-                if (modj == 0) {                                                //Case for the first node of the top edge, and the last node of the bottom edge
-                    connector(temp1, new GraphNode[]{matrix[i1][j1 + 1], matrix[i1 + 1][j1]}, gti);
-                    connector(temp2, new GraphNode[]{matrix[i2][j2 - 1], matrix[i2 - 1][j2]}, gti);
-                }//end if
-                else if (modj == matrix[0].length - 1) {                          //Case for the lase node of the top edge, and the first node of the bottom edge
-                    connector(temp1, new GraphNode[]{matrix[i1][j1 - 1], matrix[i1 + 1][j1]}, gti);
-                    connector(temp2, new GraphNode[]{matrix[i2][j2 + 1], matrix[i2 - 1][j2]}, gti);
-                }//end else if
-                else {                                                          //All middle nodes on the top and bottom edges
-                    connector(temp1, new GraphNode[]{matrix[i1][j1 + 1], matrix[i1][j1 - 1]}, gti);
-                    connector(temp2, new GraphNode[]{matrix[i2][j2 + 1], matrix[i2][j2 - 1]}, gti);
-                }//end else
-            }//end if
+        for(int topBottomIndex = 0; topBottomIndex< matrix[0].length-1;topBottomIndex++){
+            connector(matrix[topBottomIndex][0], matrix[topBottomIndex+1][0], gti);
+            connector(matrix[topBottomIndex][matrix.length-1], matrix[topBottomIndex+1][matrix.length-1], gti);
         }//end for
+
     }//end outlineGrid
 
-    //TODO: 
-    //    Move picture taking to Event
     /**
      * Constructs the growth queue for line growth. Built beforehand so all
      * lines that should grow on a given step are given the opportunity
@@ -410,7 +372,6 @@ public class Graph {
         }//end if
     }//end buildQueue
 
-    //TODO: Replace this with Event
     /**
      * Checks to see if the {@link Camera} should save a picture of the pattern.
      */
@@ -555,96 +516,25 @@ public class Graph {
         }//end if
     }//end depthStep
 
-    //TODO: Simplify/clean this method
     /**
      * Connection reproduces towards the adjacent node with the greatest amount
      * of food left. Currently un-optimized, and rarely used.
      *
-     * @param temp The node housing the connection in question
+     * @param current The node housing the connection in question
      */
-    private void growthStep(GraphNode temp) {
-        GraphNode target = null;
-        int greatestFood = 0;
-        ArrayList<GraphNode> sameNodes = new ArrayList<>();
-        int iLoc = temp.getILoc();
-        int jLoc = temp.getJLoc();
-        if (jLoc > 0 && iLoc > 0 && jLoc < matrix[0].length - 1 && iLoc < matrix.length - 1) {
-            //Top Left Check
-            if (matrix[iLoc - 1][jLoc - 1] != temp && matrix[iLoc - 1][jLoc - 1].getFood() > greatestFood && matrix[iLoc - 1][jLoc - 1].getFood() > 0) {
-                greatestFood = matrix[iLoc - 1][jLoc - 1].getFood();
-                target = matrix[iLoc - 1][jLoc - 1];
-            }//end if
-            //Top Middle Check
-            if (matrix[iLoc - 1][jLoc] != temp && matrix[iLoc - 1][jLoc].getFood() > greatestFood) {
-                greatestFood = matrix[iLoc - 1][jLoc].getFood();
-                target = matrix[iLoc - 1][jLoc];
-                sameNodes.clear();
-            }//end if
-            else if (matrix[iLoc - 1][jLoc] != temp && matrix[iLoc - 1][jLoc].getFood() > greatestFood && matrix[iLoc - 1][jLoc].getFood() > 0) {
-                sameNodes.add(matrix[iLoc - 1][jLoc]);
-            }//end else if
-            //Top Right Check
-            if (matrix[iLoc - 1][jLoc + 1] != temp && matrix[iLoc - 1][jLoc + 1].getFood() > greatestFood && matrix[iLoc - 1][jLoc + 1].getFood() > 0) {
-                greatestFood = matrix[iLoc - 1][jLoc + 1].getFood();
-                target = matrix[iLoc - 1][jLoc + 1];
-                sameNodes.clear();
-            }//end if
-            else if (matrix[iLoc - 1][jLoc + 1] != temp && matrix[iLoc - 1][jLoc + 1].getFood() > greatestFood && matrix[iLoc - 1][jLoc + 1].getFood() > 0) {
-                sameNodes.add(matrix[iLoc - 1][jLoc + 1]);
-            }//end else if
-            //Middle Left Check
-            if (matrix[iLoc][jLoc - 1] != temp && matrix[iLoc][jLoc - 1].getFood() > greatestFood && matrix[iLoc][jLoc - 1].getFood() > 0) {
-                greatestFood = matrix[iLoc][jLoc - 1].getFood();
-                target = matrix[iLoc][jLoc - 1];
-                sameNodes.clear();
-            }//end if
-            else if (matrix[iLoc][jLoc - 1] != temp && matrix[iLoc][jLoc - 1].getFood() > greatestFood && matrix[iLoc][jLoc - 1].getFood() > 0) {
-                sameNodes.add(matrix[iLoc][jLoc - 1]);
-            }//end else if
-            //Middle Right Check
-            if (matrix[iLoc][jLoc + 1] != temp && matrix[iLoc][jLoc + 1].getFood() > greatestFood && matrix[iLoc][jLoc + 1].getFood() > 0) {
-                greatestFood = matrix[iLoc][jLoc + 1].getFood();
-                target = matrix[iLoc][jLoc - 1];
-                sameNodes.clear();
-            }//end if
-            else if (matrix[iLoc][jLoc + 1] != temp && matrix[iLoc][jLoc + 1].getFood() > greatestFood && matrix[iLoc][jLoc + 1].getFood() > 0) {
-                sameNodes.add(matrix[iLoc][jLoc + 1]);
-            }//end else if
-            //Bottom Left Check
-            if (matrix[iLoc + 1][jLoc - 1] != temp) {
-                if (matrix[iLoc + 1][jLoc - 1].getFood() > greatestFood && matrix[iLoc + 1][jLoc - 1].getFood() > 0) {
-                    greatestFood = matrix[iLoc + 1][jLoc - 1].getFood();
-                    target = matrix[iLoc + 1][jLoc - 1];
-                    sameNodes.clear();
+    private void growthStep(GraphNode current) {
+        GraphNode next = null;
+        ArrayList<GraphNode> targets = findAdjacentNodes(current);
+        if (!targets.isEmpty()) {
+            next = targets.get(0);
+            for (int i = 0; i < targets.size(); i++) {
+                if (targets.get(i).getFood() > next.getFood()) {
+                    next = targets.get(i);
                 }//end if
             }//end if
-            else if (matrix[iLoc + 1][jLoc - 1] != temp && matrix[iLoc + 1][jLoc - 1].getFood() > greatestFood && matrix[iLoc + 1][jLoc - 1].getFood() > 0) {
-                sameNodes.add(matrix[iLoc + 1][jLoc - 1]);
-            }//end else if
-            //Bottom Middle Check
-            if (matrix[iLoc + 1][jLoc] != temp && matrix[iLoc + 1][jLoc].getFood() > greatestFood && matrix[iLoc + 1][jLoc].getFood() > 0) {
-                greatestFood = matrix[iLoc + 1][jLoc].getFood();
-                target = matrix[iLoc + 1][jLoc];
-                sameNodes.clear();
-            }//end if
-            else if (matrix[iLoc + 1][jLoc] != temp && matrix[iLoc + 1][jLoc].getFood() > greatestFood && matrix[iLoc + 1][jLoc].getFood() > 0) {
-                sameNodes.add(matrix[iLoc + 1][jLoc]);
-            }//end else if
-            //Bottom Left Check
-            if (matrix[iLoc + 1][jLoc + 1] != temp && matrix[iLoc + 1][jLoc + 1].getFood() > greatestFood && matrix[iLoc + 1][jLoc + 1].getFood() > 0) {
-                target = matrix[iLoc + 1][jLoc + 1];
-                sameNodes.clear();
-            }//end if
-            else if (matrix[iLoc + 1][jLoc + 1] != temp && matrix[iLoc + 1][jLoc + 1].getFood() > greatestFood && matrix[iLoc + 1][jLoc - +1].getFood() > 0) {
-                sameNodes.add(matrix[iLoc + 1][jLoc + 1]);
-            }//end else if
-            //Check to see if there are nodes in the list of possible targets
-            if (sameNodes.isEmpty()) {
-                connector(temp, target, temp.getParentLine().generateGTI());
-            }//end if
-            else {
-                connector(temp, sameNodes.get(0), temp.getParentLine().generateGTI());
-            }//end else
+        }//end if
+        if (next != null) {
+            connector(current, next, current.getParentLine().generateGTI());
         }//end if
     }//end growthStep
 
@@ -652,8 +542,8 @@ public class Graph {
      * Create new connections, as children of a parent.
      *
      * @param start The node housing the connection to reproduce
-     * @param gti The {@link GraphTupleInfo} object describing the traits of the
-     * new connection
+     * @param gti   The {@link GraphTupleInfo} object describing the traits of the
+     *              new connection
      */
     private void normalRules(GraphNode start, GraphTupleInfo gti) {
         int xCompare = start.compareX();
@@ -661,30 +551,17 @@ public class Graph {
         int iLoc = start.getILoc();
         int jLoc = start.getJLoc();
 
-        if (xCompare == 1 && yCompare == 1) {
-            connector(start, new GraphNode[]{matrix[iLoc][jLoc + 1], matrix[iLoc + 1][jLoc]}, gti);
+        if (xCompare != 0 && yCompare != 0) {
+            connector(start, new GraphNode[]{matrix[iLoc][jLoc + xCompare], matrix[iLoc + yCompare][jLoc]}, gti);
         }//end if
-        else if (xCompare == -1 && yCompare == 1) {
-            connector(start, new GraphNode[]{matrix[iLoc][jLoc - 1], matrix[iLoc + 1][jLoc]}, gti);
-        }//end else if
-        else if (xCompare == 1 && yCompare == -1) {
-            connector(start, new GraphNode[]{matrix[iLoc][jLoc + 1], matrix[iLoc - 1][jLoc]}, gti);
-        }//end else if
-        else if (xCompare == -1 && yCompare == -1) {
-            connector(start, new GraphNode[]{matrix[iLoc][jLoc - 1], matrix[iLoc - 1][jLoc]}, gti);
-        }//end else if
-        else if (xCompare == 0 && yCompare == 1) {
-            connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc - 1], matrix[iLoc + 1][jLoc + 1]}, gti);
-        }//end else if
-        else if (xCompare == 1 && yCompare == 0) {
-            connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc + 1], matrix[iLoc - 1][jLoc + 1]}, gti);
-        }//end else if
-        else if (xCompare == -1 && yCompare == 0) {
-            connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc - 1], matrix[iLoc - 1][jLoc - 1]}, gti);
-        }//end else if
-        else if (xCompare == 0 && yCompare == -1) {
-            connector(start, new GraphNode[]{matrix[iLoc - 1][jLoc - 1], matrix[iLoc - 1][jLoc + 1]}, gti);
-        }//end else if
+        else {
+            if (xCompare == 0 && yCompare != 0) {
+                connector(start, new GraphNode[]{matrix[iLoc + yCompare][jLoc + 1], matrix[iLoc + yCompare][jLoc - 1]}, gti);
+            }//end if
+            else if (xCompare != 0) {
+                connector(start, new GraphNode[]{matrix[iLoc + 1][jLoc + xCompare], matrix[iLoc - 1][jLoc + xCompare]}, gti);
+            }//end else if
+        }//end else
     }//end normalRules
 
     /**
@@ -705,7 +582,7 @@ public class Graph {
     /**
      * Removes all connections from all nodes in the {@link Graph}.
      */
-    public void clearGrid() {
+    private void clearGrid() {
         for (int i = 0; i < matrix.length; i++) {
             GraphNode[] matrix1 = matrix[i];
             for (int j = 0; j < matrix1.length; j++) {
@@ -720,7 +597,7 @@ public class Graph {
     /**
      * Highlights a (@link GraphNode}, turning it a given color
      *
-     * @param in The node to be highlighted
+     * @param in             The node to be highlighted
      * @param highlightColor The new color for the given node
      */
     public void highlightNode(GraphNode in, GraphNodeColors highlightColor) {
@@ -728,13 +605,11 @@ public class Graph {
     }//end highlightNode
 
     /**
-     * Same as
-     * {@link Graph#highlightNode(graphvisualizer.GraphNode, java.awt.Color)},
-     * but also changes the color of nodes adjacent to the given node.
+     * Same as highlightNode, but also changes the color of nodes adjacent to the given node.
      *
-     * @param in The node to be highlighted
+     * @param in             The node to be highlighted
      * @param selectionColor The color for the given node
-     * @param adjacentColor The color for nodes adjacent to the given node
+     * @param adjacentColor  The color for nodes adjacent to the given node
      */
     public void highlightNodeAdjacents(GraphNode in, GraphNodeColors selectionColor, GraphNodeColors adjacentColor) {
         in.setColor(selectionColor);
@@ -807,7 +682,7 @@ public class Graph {
      *
      * @param in The node to be re-colored
      */
-    public void resetNodeColor(GraphNode in) {
+    private void resetNodeColor(GraphNode in) {
         if (nodeIsMiddle(in)) {
             in.setColor(GraphNodeColors.DEFAULT_MIDDLE_COLOR);
         }//end if
@@ -865,7 +740,7 @@ public class Graph {
      * @return True if the given {@link GraphNode} is in the middle row or
      * column of the {@link Graph}, false if not
      */
-    public boolean nodeIsMiddle(GraphNode in) {
+    private boolean nodeIsMiddle(GraphNode in) {
         return (in.getILoc() == matrix.length / 2 || in.getJLoc() == matrix[0].length / 2);
     }//end nodeIsMidde
 
@@ -898,7 +773,7 @@ public class Graph {
      *
      * @return The family ID for the new {@link GraphTuple}
      */
-    public int newFamilyID() {
+    int newFamilyID() {
         familyCount++;
         return familyCount;
     }//end new FamilyID
@@ -909,7 +784,7 @@ public class Graph {
      * on square grids.
      */
     public void generateSeeds() {                                   // There has to be a better way to do this
-        if (seed1 && (!seed2 && !seed4 && !seed8) && seeded){       //Prevent creation of non-symmetrical seeds when one line seeds are the only option
+        if (seed1 && (!seed2 && !seed4 && !seed8) && seeded) {       //Prevent creation of non-symmetrical seeds when one line seeds are the only option
             JOptionPane.showMessageDialog(null, "More than one single line seed will result in asymetrical pictures!");
             return;
         }//end if
@@ -1102,8 +977,8 @@ public class Graph {
     /**
      * Finds nodes on lines of symmetry for coloring book seeding.
      *
-     * @param mods An array of pairs of mods. mods[][0] is the y modifier,
-     * mods[][1] is the x modifier.
+     * @param mods  An array of pairs of mods. mods[][0] is the y modifier,
+     *              mods[][1] is the x modifier.
      * @param steps The number of nodes in from the edge
      */
     private void findSeedNodes(int[][] mods, int steps) {
@@ -1154,11 +1029,12 @@ public class Graph {
     }//end pullFamily
 
     //This may not belong here
+
     /**
      * Adds a new color to the gradient of colors for a given family of lines.
      *
      * @param familyID The ID of the family in question
-     * @param colorIn The color to be added to the family color gradient
+     * @param colorIn  The color to be added to the family color gradient
      */
     public void updateFamilyColorGradient(int familyID, Color colorIn) {
         familyAverageColorGradients.get(familyID).addNewColor(colorIn);
@@ -1166,6 +1042,7 @@ public class Graph {
     }//end updateFamilyColorGradient
 
     //This may not belong here
+
     /**
      * Displays the color gradient for a given family of lines.
      *
@@ -1206,6 +1083,7 @@ public class Graph {
     }//end getAverageColor
 
     //Note: this won't be accurate if the matrix isn't rectangular
+
     /**
      * Gets the width of a rectangular {@link GraphNode} matrix.
      *
@@ -1216,6 +1094,7 @@ public class Graph {
     }//end getGraphWidth
 
     //Note: this won't be accurate if the matrix isn't rectangular
+
     /**
      * Gets the height of a rectangular {@link GraphNode} matrix.
      *
@@ -1639,7 +1518,6 @@ public class Graph {
         int out = 0;
         switch (MODE) {
             case REGULAR:
-                out = 0;
                 break;
             case MUTATION:
                 out = 1;
@@ -1650,6 +1528,8 @@ public class Graph {
             case GROWTH:
                 out = 3;
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + MODE);
         }//end switch
         return out;
     }//end getMode

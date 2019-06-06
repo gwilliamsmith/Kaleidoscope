@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class TogglePauseIntervalActionListener implements ActionListener {
 
-    Base ref;
+    private Base ref;
 
     public TogglePauseIntervalActionListener(Base in) {
         ref = in;

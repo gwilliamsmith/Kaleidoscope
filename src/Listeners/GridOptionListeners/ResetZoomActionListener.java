@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class ResetZoomActionListener implements ActionListener{
 
-    Base ref;
+    private Base ref;
     
     public ResetZoomActionListener(Base in){
         ref = in;

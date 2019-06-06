@@ -9,16 +9,13 @@ import javax.swing.SwingUtilities;
 
 public class CalculateSizeActionListener implements MouseListener{
     
-    Base ref;
+    private Base ref;
     
     public CalculateSizeActionListener(Base in){
         ref = in;
     }//end constructor
 
     @Override
-    /**
-     * Event handler method, opens the scheduler window when triggered.
-     */
     public void mouseClicked(MouseEvent e) {
         CalculateSizeForm form = new CalculateSizeForm(ref);
         SwingUtilities.invokeLater(form);

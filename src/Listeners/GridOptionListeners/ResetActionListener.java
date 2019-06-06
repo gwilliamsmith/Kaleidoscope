@@ -22,11 +22,6 @@ public class ResetActionListener implements ActionListener {
     }//end constructor
 
     @Override
-    /**
-     * Method performed on trigger. Pauses step auto-running, then clears all
-     * lines from the grid, and resets the nodes back to their original state,
-     * in the event that they've changed.
-     */
     public void actionPerformed(ActionEvent e) {
         ref.pause();
         ref.getGraph().reset();

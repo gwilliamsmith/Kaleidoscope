@@ -23,10 +23,6 @@ public class FolderSelectActionListener implements ActionListener {
     }//end constructor
 
     @Override
-    /**
-     * Method performed on trigger. Creates a new
-     * {@link FolderSelectFileChooser}.
-     */
     public void actionPerformed(ActionEvent e) {
         new FolderSelectFileChooser(ref, false).setVisible(true);
     }//enc actionPerformed

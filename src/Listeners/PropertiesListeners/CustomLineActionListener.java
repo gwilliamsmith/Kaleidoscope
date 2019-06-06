@@ -25,10 +25,6 @@ public class CustomLineActionListener implements ActionListener {
     }//end constructor
 
     @Override
-    /**
-     * Method performed on trigger. Creates a new {@link CustomLineForm} to
-     * input details of a new custom line.
-     */
     public void actionPerformed(ActionEvent e) {
         ref.getCanvas().setGtiStorage(new GraphTupleInfo());
         SwingUtilities.invokeLater(new CustomLineForm(ref));

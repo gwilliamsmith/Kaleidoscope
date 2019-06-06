@@ -22,16 +22,8 @@ public class TimerActionListener implements ActionListener {
     }//end constructor
 
     @Override
-    /**
-     * Method performed on trigger. If auto-running is enabled, performs
-     * {@link Graph#takeStep}. Also repaints the Canvas.
-     */
     public void actionPerformed(ActionEvent evt) {
-        new Thread() {
-            public void run() {
-                ref.getGraph().takeStep();
-            }
-        }.start();
+        new Thread(() -> ref.getGraph().takeStep()).start();
     }//actionPerformed
 
 }//end TimerActionListner

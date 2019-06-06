@@ -12,19 +12,19 @@ import java.util.Random;
  */
 public class GraphNode extends Rectangle {
 
-    private final ArrayList<GraphTuple> connections = new ArrayList<>();    //Node-specific adjacency list. GraphTuple items hold both nodes, as well as other information
-    //  This node is the fromLocation, while the other node is the toLocation
-    private final int id;                                                   //Node ID #
-    private final int iLoc;                                                 //Y-axis coordinate
-    private final int jLoc;                                                 //X-axis coordinate
-    private int food;                                                       //The amount of food this node currently has
-    private final int foodVar = 10;                                         //The maximum amount of food the node can start with
-    private final int regenVar = 3;                                         //The maximum rate at which this the regenerates food each turn
-    private final int regenThreshold = 1;                                   //The minimum amount of food required for the node to regenerate food
-    private int regenRate;                                                  //The rate at which the node regenerates food
-    private Color color;                                                    //The color of the node. Should only be one of the static color variables
+    private final ArrayList<GraphTuple> connections = new ArrayList<>();        //Node-specific adjacency list. GraphTuple items hold both nodes, as well as other information
+                                                                                //  This node is the fromLocation, while the other node is the toLocation
+    private final int id;                                                       //Node ID #
+    private final int iLoc;                                                     //Y-axis coordinate
+    private final int jLoc;                                                     //X-axis coordinate
+    private int food;                                                           //The amount of food this node currently has
+    private final int foodVar = 10;                                             //The maximum amount of food the node can start with
+    private final int regenVar = 3;                                             //The maximum rate at which this the regenerates food each turn
+    private final int regenThreshold = 1;                                       //The minimum amount of food required for the node to regenerate food
+    private int regenRate;                                                      //The rate at which the node regenerates food
+    private Color color;                                                        //The color of the node. Should only be one of the static color variables
 
-    private boolean updated = true;                                         //If true, the node should be drawn. If false, don't draw the node. Intended to help speed up the process
+    private boolean updated = true;                                             //If true, the node should be drawn. If false, don't draw the node. Intended to help speed up the process
 
     /**
      * @param xloc The xLocation on the {@link Canvas} object
@@ -60,7 +60,7 @@ public class GraphNode extends Rectangle {
      * @param gti The {@link GraphTupleInfo} to get connection information from
      * @return True if successful, false if not
      */
-    public boolean connect(GraphNode to, GraphTupleInfo gti, int direction, double severity, boolean redundant) {
+    boolean connect(GraphNode to, GraphTupleInfo gti, int direction, double severity, boolean redundant) {
         if (!isConnected(to)) {                                                 //Only try connecting to a node if it's not already connected
             GraphTuple newConnection = new GraphTuple(to, this, gti);
             if (Canvas.curveEnabled) {
@@ -78,14 +78,14 @@ public class GraphNode extends Rectangle {
      *
      * @param in The {@link GraphTuple} to add
      */
-    public void addConnection(GraphTuple in) {
+    void addConnection(GraphTuple in) {
         connections.add(in);
     }//end addConnection
 
     /**
      * Regenerates food on this node
      */
-    public void regenFood() {
+    private void regenFood() {
         food += regenRate;
     }//end regenFood
 
@@ -145,7 +145,7 @@ public class GraphNode extends Rectangle {
      *
      * @return The first {@link GraphTuple} object in the adjacency list.
      */
-    public GraphTuple getParentLine() {
+    GraphTuple getParentLine() {
         return connections.get(0);
     }//end getParentLine
 
@@ -182,7 +182,7 @@ public class GraphNode extends Rectangle {
      *
      * @param gn The node to sever the connection with
      */
-    public void severConnection(GraphNode gn) {
+    void severConnection(GraphNode gn) {
         if (isConnected(gn)) {
             for (int i = 0; i < connections.size(); i++) {
                 if (connections.get(i).getToLocation() == gn) {                 //Uses toLocation because the node calling severConnection is always the fromLocation
@@ -197,7 +197,7 @@ public class GraphNode extends Rectangle {
      * Removes all connections from the node, and removes the node from the
      * adjacency lists of all connected nodes
      */
-    public void clearConnections() {
+    void clearConnections() {
         for (int i = 0; i < connections.size(); i++) {
             GraphTuple gt = connections.get(i);
             Base.graph.disconnect(gt.getFromLocation(), gt.getToLocation());
@@ -221,7 +221,7 @@ public class GraphNode extends Rectangle {
      * @return The distance between the X values of the node and the toLocation
      * of its parent {@link GraphTuple}
      */
-    public int compareX() {
+    int compareX() {
         return jLoc - getParentLine().getToLocation().getJLoc();
     }//end compareX
 
@@ -232,7 +232,7 @@ public class GraphNode extends Rectangle {
      * @return The distance between the Y values of the node and the toLocation
      * of its parent {@link GraphTuple}
      */
-    public int compareY() {
+    int compareY() {
         return iLoc - getParentLine().getToLocation().getILoc();
     }//end compareX
 
@@ -243,7 +243,7 @@ public class GraphNode extends Rectangle {
      * @param in The node to check for adjacency to
      * @return True if the given node is adjacent to the node, false if not
      */
-    public boolean isAdjacentTo(GraphNode in) {
+    boolean isAdjacentTo(GraphNode in) {
         int i = Math.abs(in.getILoc() - iLoc);
         int j = Math.abs(in.getJLoc() - jLoc);
         return ((i == 1 && j == 1) || (i == 1 && j == 0) || (i == 0 && j == 1));
@@ -254,7 +254,7 @@ public class GraphNode extends Rectangle {
      *
      * @param graph The {@link Graph} object to check edges against
      */
-    public void consume(Graph graph) {
+    void consume(Graph graph) {
         for (int i = 0; i < connections.size(); i++) {
             GraphTuple gt = connections.get(i);
             if (!gt.isEdge(graph)) {                    //Only non-edge connections should reduce node food count
@@ -314,7 +314,7 @@ public class GraphNode extends Rectangle {
      *
      * @return The food remaining on the node
      */
-    public int getFood() {
+    int getFood() {
         return food;
     }//end getFood
 

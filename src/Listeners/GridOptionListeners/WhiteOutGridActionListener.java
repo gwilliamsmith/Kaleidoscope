@@ -24,10 +24,6 @@ public class WhiteOutGridActionListener implements ActionListener {
     }//end constructor
 
     @Override
-    /**
-     * Method performed on trigger. Iterates through all graph nodes and sets
-     * their color to white.
-     */
     public void actionPerformed(ActionEvent e) {
         if (!toggle) {
             ref.getGraph().whiteOutNodeColors();

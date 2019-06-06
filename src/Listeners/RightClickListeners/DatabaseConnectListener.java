@@ -25,11 +25,6 @@ public class DatabaseConnectListener implements ActionListener {
     }//end constructor
 
     @Override
-    /**
-     * Method performed on trigger. Checks to ensure that the driver is
-     * accessible, then attempts to connect to the local mySQL server. If
-     * successful, tells the program which database to use.
-     */
     public void actionPerformed(ActionEvent e) {
         try {
             Class.forName("com.mysql.jdbc.Driver");

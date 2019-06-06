@@ -1,6 +1,3 @@
-/*TODO:
- Break up saveState()
- */
 package Listeners.SaveListeners;
 
 import SwingElements.Base;
@@ -33,10 +30,6 @@ public class SaveStateActionListener implements ActionListener {
     }//end constructor
 
     @Override
-    /**
-     * Method performed on trigger. Pauses step auto-running, records the grid
-     * state, then returns the grid to its previous auto-run setting.
-     */
     public void actionPerformed(ActionEvent evt) {
         boolean tempRun = ref.isRunning();
         ref.pause();
@@ -53,8 +46,6 @@ public class SaveStateActionListener implements ActionListener {
     private void saveState() {
 
         GraphNode[][] refMatrix = ref.getGraph().getMatrix();
-        double itemsTotal = refMatrix.length * refMatrix[0].length;
-        double itemsDone = 0;
         Canvas canvas = ref.getCanvas();
         Graph graph = ref.getGraph();
 
@@ -63,90 +54,21 @@ public class SaveStateActionListener implements ActionListener {
         fileChooser.setDialogTitle("Save State");
         int returnVal = fileChooser.showSaveDialog(ref);
         String fileName = "";
-        if (returnVal == JFileChooser.APPROVE_OPTION && fileChooser.getSelectedFile().getName() != null) {
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
             fileName = fileChooser.getSelectedFile().getAbsolutePath() + ".lsv";
         }//end if
         else if (returnVal == JFileChooser.CANCEL_OPTION) {
             return;
         }//end saveState
 
-        //Record global variable states
-        StringBuilder globals = new StringBuilder("Spacing:");
-        globals.append(canvas.getMinSpacing());
-        globals.append("\n");
-        globals.append("Point size:");
-        globals.append(canvas.getMinPointSize());
-        globals.append("\n");
-        globals.append("Step count:");
-        globals.append(graph.getStepCount());
-        globals.append("\n");
-        globals.append("Step time:");
-        globals.append(ref.getStepTime());
-        globals.append("\n");
-        globals.append("Zoom level:");
-        globals.append(canvas.getZoomLevel());
-        globals.append("\n");
-        globals.append("Cycle base:");
-        globals.append(graph.getCycleBase());
-        globals.append("\n");
-        globals.append("Cycle count:");
-        globals.append(graph.getCycleCount());
-        globals.append("\n");
-        globals.append("Trim:");
-        globals.append(Graph.TRIM);
-        globals.append("\n");
-        globals.append("Mutate Color:");
-        globals.append(Graph.MUTATE_COLOR);
-        globals.append("\n");
-        globals.append("Mutate Health:");
-        globals.append(Graph.MUTATE_HEALTH);
-        globals.append("\n");
-        globals.append("Growth Type:");
-        globals.append(graph.getMode());
-        globals.append("\n");
-
-        //Seems magic, but is actually the number of global variables. Not likely to change
-        itemsTotal += 12;
-        itemsDone += 12;
-
         //Walk through matrix, record nodes, and connections w/ life totals
-        String connectionOutString = "";
-        String nodeListOutString = refMatrix.length + " " + refMatrix[0].length + "\n";
-        for (int i = 0; i < refMatrix.length; i++) {
-            for (int j = 0; j < refMatrix[i].length; j++) {
-                String tempString = "";
-                for (int k = 0; k < refMatrix[i][j].getNumberOfConnections(); k++) {
-                    GraphTuple gt = refMatrix[i][j].getConnection(k);
-                    GraphNode gn = gt.getToLocation();
-                    GraphNode gn2 = gt.getFromLocation();
-                    tempString += gn.getILoc() + " "
-                            + gn.getJLoc() + " "
-                            + gn2.getILoc() + " "
-                            + gn2.getJLoc() + " "
-                            + gt.getRed() + " "
-                            + gt.getGreen() + " "
-                            + gt.getBlue() + " "
-                            + gt.getHealth() + " "
-                            + gt.getStartHealth() + " "
-                            + gt.getMutatePercentage() + " "
-                            + gt.getReproductionClock() + " "
-                            + gt.getStartReproductionClock() + " "
-                            + gt.isEdge(graph) + " "
-                            + gt.isCurve() + " "
-                            + gt.getCurveDirection() + " "
-                            + gt.getCurveSeverity() + "\n";
-                }//end for
-                connectionOutString += tempString;
-                itemsDone++;
-            }//end for
-        }//end for
         PrintWriter writer = null;
         try {
             writer = new PrintWriter(fileName, "UTF-8");
-            writer.print(nodeListOutString);
-            writer.print(globals.toString());
-            writer.print(connectionOutString);
-        } catch (FileNotFoundException | UnsupportedEncodingException ex) {
+            writer.print(refMatrix.length + " " + refMatrix[0].length + "\n");
+            writer.print(writeGlobalString(canvas,graph));
+            writer.print(writeConnectonString(graph));
+        } catch (FileNotFoundException | UnsupportedEncodingException ignored) {
         } finally {
             if (writer != null) {
                 writer.close();
@@ -154,4 +76,72 @@ public class SaveStateActionListener implements ActionListener {
             }//end if
         }//end try-catch-finally
     }//end saveState
+
+    private String writeGlobalString(Canvas canvas, Graph graph){
+        return "Spacing:" + canvas.getMinSpacing() +
+                "\n" +
+                "Point size:" +
+                canvas.getMinPointSize() +
+                "\n" +
+                "Step count:" +
+                graph.getStepCount() +
+                "\n" +
+                "Step time:" +
+                ref.getStepTime() +
+                "\n" +
+                "Zoom level:" +
+                canvas.getZoomLevel() +
+                "\n" +
+                "Cycle base:" +
+                graph.getCycleBase() +
+                "\n" +
+                "Cycle count:" +
+                graph.getCycleCount() +
+                "\n" +
+                "Trim:" +
+                Graph.TRIM +
+                "\n" +
+                "Mutate Color:" +
+                Graph.MUTATE_COLOR +
+                "\n" +
+                "Mutate Health:" +
+                Graph.MUTATE_HEALTH +
+                "\n" +
+                "Growth Type:" +
+                graph.getMode() +
+                "\n";
+    }//end writeGlobalString
+
+    private String writeConnectonString(Graph graph){
+        GraphNode[][] refMatrix = ref.getGraph().getMatrix();
+        StringBuilder connectionOutString = new StringBuilder();
+        for (int i = 0; i < refMatrix.length; i++) {
+            for (int j = 0; j < refMatrix[i].length; j++) {
+                StringBuilder tempString = new StringBuilder();
+                for (int k = 0; k < refMatrix[i][j].getNumberOfConnections(); k++) {
+                    GraphTuple gt = refMatrix[i][j].getConnection(k);
+                    GraphNode gn = gt.getToLocation();
+                    GraphNode gn2 = gt.getFromLocation();
+                    tempString.append(gn.getILoc()).append(" ").
+                            append(gn.getJLoc()).append(" ").
+                            append(gn2.getILoc()).append(" ").
+                            append(gn2.getJLoc()).append(" ").
+                            append(gt.getRed()).append(" ").
+                            append(gt.getGreen()).append(" ").
+                            append(gt.getBlue()).append(" ").
+                            append(gt.getHealth()).append(" ").
+                            append(gt.getStartHealth()).append(" ").
+                            append(gt.getMutatePercentage()).append(" ").
+                            append(gt.getReproductionClock()).append(" ").
+                            append(gt.getStartReproductionClock()).append(" ").
+                            append(gt.isEdge(graph)).append(" ").
+                            append(gt.isCurve()).append(" ").
+                            append(gt.getCurveDirection()).append(" ").
+                            append(gt.getCurveSeverity()).append("\n");
+                }//end for
+                connectionOutString.append(tempString);
+            }//end for
+        }//end for
+        return connectionOutString.toString();
+    }//end writeConnectionString
 }//end TimerActionListner

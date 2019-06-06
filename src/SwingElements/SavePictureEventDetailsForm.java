@@ -2,6 +2,7 @@ package SwingElements;
 
 import EventScheduler.Events.SavePictureEvent;
 import java.io.File;
+import java.util.Objects;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -12,8 +13,8 @@ import javax.swing.JTextField;
 public class SavePictureEventDetailsForm extends javax.swing.JFrame implements Runnable {
 
     private SchedulerForm parent;
-    public int stepCount;
-    public String eventName;
+    int stepCount;
+    String eventName;
     public boolean repeat;
     public String location = ".";
     private SavePictureEvent temp = null;
@@ -23,7 +24,7 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
      *
      * @param parentIn {@link Base} object used for reference
      */
-    public SavePictureEventDetailsForm(SchedulerForm parentIn) {
+    SavePictureEventDetailsForm(SchedulerForm parentIn) {
         parent = parentIn;
         initComponents();
     }//end constructor
@@ -34,7 +35,7 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
      * @param parentIn {@link Base} object used for reference
      * @param eventIn The {@link SavePictureEvent} to be edited
      */
-    public SavePictureEventDetailsForm(SchedulerForm parentIn, SavePictureEvent eventIn) {
+    SavePictureEventDetailsForm(SchedulerForm parentIn, SavePictureEvent eventIn) {
         parent = parentIn;
         temp = eventIn;
 
@@ -64,22 +65,23 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        EventNameLabel = new javax.swing.JLabel();
-        TriggerStepLabel = new javax.swing.JLabel();
+        javax.swing.JLabel eventNameLabel = new javax.swing.JLabel();
+        javax.swing.JLabel triggerStepLabel = new javax.swing.JLabel();
         EventNameTextField = new javax.swing.JTextField();
         TriggerStepTextField = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        RepeatEventLabel = new javax.swing.JLabel();
+        javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+        javax.swing.JLabel repeatEventLabel = new javax.swing.JLabel();
         RepeatEventComboBox = new javax.swing.JComboBox();
-        CreateEventButton = new javax.swing.JButton();
+        // Variables declaration - do not modify//GEN-BEGIN:variables
+        javax.swing.JButton createEventButton = new javax.swing.JButton();
         FileLocationTextField = new javax.swing.JTextField();
-        FileLocationBrowseButton = new javax.swing.JButton();
+        javax.swing.JButton fileLocationBrowseButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        EventNameLabel.setText("Event Name: ");
+        eventNameLabel.setText("Event Name: ");
 
-        TriggerStepLabel.setText("Trigger Step: ");
+        triggerStepLabel.setText("Trigger Step: ");
 
         EventNameTextField.setMaximumSize(new java.awt.Dimension(100, 20));
         EventNameTextField.setMinimumSize(new java.awt.Dimension(100, 20));
@@ -89,10 +91,10 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
         TriggerStepTextField.setMinimumSize(new java.awt.Dimension(100, 23));
         TriggerStepTextField.setPreferredSize(new java.awt.Dimension(100, 23));
 
-        RepeatEventLabel.setText("Repeat Event? ");
-        RepeatEventLabel.setMaximumSize(new java.awt.Dimension(74, 23));
-        RepeatEventLabel.setMinimumSize(new java.awt.Dimension(74, 23));
-        RepeatEventLabel.setPreferredSize(new java.awt.Dimension(74, 23));
+        repeatEventLabel.setText("Repeat Event? ");
+        repeatEventLabel.setMaximumSize(new java.awt.Dimension(74, 23));
+        repeatEventLabel.setMinimumSize(new java.awt.Dimension(74, 23));
+        repeatEventLabel.setPreferredSize(new java.awt.Dimension(74, 23));
 
         RepeatEventComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Yes", "No" }));
         RepeatEventComboBox.setMaximumSize(new java.awt.Dimension(50, 23));
@@ -105,7 +107,7 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(RepeatEventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(repeatEventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(RepeatEventComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103))
@@ -113,26 +115,18 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(RepeatEventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(repeatEventLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(RepeatEventComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        CreateEventButton.setText("Create Event");
-        CreateEventButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CreateEventButtonActionPerformed(evt);
-            }
-        });
+        createEventButton.setText("Create Event");
+        createEventButton.addActionListener(this::CreateEventButtonActionPerformed);
 
         FileLocationTextField.setText(new File("").getAbsolutePath()
         );
 
-        FileLocationBrowseButton.setText("Browse");
-        FileLocationBrowseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FileLocationBrowseButtonActionPerformed(evt);
-            }
-        });
+        fileLocationBrowseButton.setText("Browse");
+        fileLocationBrowseButton.addActionListener(this::FileLocationBrowseButtonActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,24 +138,24 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(EventNameLabel)
+                                .addComponent(eventNameLabel)
                                 .addGap(0, 0, 0)
                                 .addComponent(EventNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(TriggerStepLabel)
+                                .addComponent(triggerStepLabel)
                                 .addGap(0, 0, 0)
                                 .addComponent(TriggerStepTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
-                        .addComponent(CreateEventButton)
+                        .addComponent(createEventButton)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(FileLocationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FileLocationBrowseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(fileLocationBrowseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -169,18 +163,18 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EventNameLabel)
+                    .addComponent(eventNameLabel)
                     .addComponent(EventNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TriggerStepLabel)
+                    .addComponent(triggerStepLabel)
                     .addComponent(TriggerStepTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FileLocationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FileLocationBrowseButton))
+                    .addComponent(fileLocationBrowseButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(CreateEventButton)
+                .addComponent(createEventButton)
                 .addContainerGap())
         );
 
@@ -191,9 +185,9 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
      * Action handler for the create event button.
      */
     private void CreateEventButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateEventButtonActionPerformed
-        stepCount = checkTextField(TriggerStepTextField, "Trigger Step");
+        stepCount = checkTextField(TriggerStepTextField);
         eventName = EventNameTextField.getText();
-        repeat = RepeatEventComboBox.getSelectedItem().equals("Yes");
+        repeat = Objects.equals(RepeatEventComboBox.getSelectedItem(), "Yes");
         if (stepCount != -1) {
             if (temp == null) {
                 parent.generateEvent();
@@ -226,9 +220,6 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
     }//GEN-LAST:event_FileLocationBrowseButtonActionPerformed
 
     @Override
-    /**
-     * Runs the form.
-     */
     public void run() {
         if (parent != null) {
             setVisible(true);
@@ -240,34 +231,26 @@ public class SavePictureEventDetailsForm extends javax.swing.JFrame implements R
      * and greater than 0.
      *
      * @param field The {@link JTextField} to be checked.
-     * @param title The title for the error message, should it be generated.
      * @return The final integer value after checking is performed
      */
-    private int checkTextField(JTextField field, String title) {
+    private int checkTextField(JTextField field) {
         int out;
         try {
             out = Integer.parseInt(field.getText());
             if (out <= 0) {
-                JOptionPane.showMessageDialog(this, "Enter a number greater than 0!", title, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Enter a number greater than 0!", "Trigger Step", JOptionPane.ERROR_MESSAGE);
                 out = -1;
             }//end if
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "You must enter a number!", title, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "You must enter a number!", "Trigger Step", JOptionPane.ERROR_MESSAGE);
             out = -1;
         }//end tryCatch
         return out;
     }//end checkTextField
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CreateEventButton;
-    private javax.swing.JLabel EventNameLabel;
     private javax.swing.JTextField EventNameTextField;
-    private javax.swing.JButton FileLocationBrowseButton;
     private javax.swing.JTextField FileLocationTextField;
     private javax.swing.JComboBox RepeatEventComboBox;
-    private javax.swing.JLabel RepeatEventLabel;
-    private javax.swing.JLabel TriggerStepLabel;
     private javax.swing.JTextField TriggerStepTextField;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }//end SavePictureEventDetailsForm class
