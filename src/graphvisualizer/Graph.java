@@ -22,8 +22,7 @@ public class Graph {
     private static GrowthMode MODE = GrowthMode.REGULAR;                         //Enum determining how stepForward() behaves
 
     private final ArrayList<FamilyAverageColorGradient> familyAverageColorGradients;  //FamilyAverageColorGradient objects, one for each family
-    //TODO: Maybe get rid of this?
-    private final ArrayList<GraphNode> nodes = new ArrayList<>();               //The list of nodes contained in the graph
+
     private final GraphNode[][] matrix;                                         //The matrix of nodes
     private int idCount = 1;                                                    //The next node ID to be assigned
     private final MyQueue<GraphNode> queue = new MyQueue<>();                   //The queue used to perform growth under the cellular automata rules
@@ -154,7 +153,6 @@ public class Graph {
      * @param j  The J, or x-axis, location in the matrix
      */
     private void addNode(GraphNode gn, int i, int j) {
-        nodes.add(gn);
         matrix[i][j] = gn;
     }//end add
 
@@ -341,13 +339,12 @@ public class Graph {
     private void outlineGrid() {
         GraphTupleInfo gti = new GraphTupleInfo(50, Color.BLACK, 0, 1);
         for (int leftRightIndex = 0; leftRightIndex < matrix.length - 1; leftRightIndex++) {
-            System.out.println(leftRightIndex);
             connector(matrix[0][leftRightIndex], matrix[0][leftRightIndex + 1], gti);
-            connector(matrix[matrix[0].length-1][leftRightIndex],matrix[matrix[0].length-1][leftRightIndex+1],gti);
+            connector(matrix[matrix[0].length - 1][leftRightIndex], matrix[matrix[0].length - 1][leftRightIndex + 1], gti);
         }//end for
-        for(int topBottomIndex = 0; topBottomIndex< matrix[0].length-1;topBottomIndex++){
-            connector(matrix[topBottomIndex][0], matrix[topBottomIndex+1][0], gti);
-            connector(matrix[topBottomIndex][matrix.length-1], matrix[topBottomIndex+1][matrix.length-1], gti);
+        for (int topBottomIndex = 0; topBottomIndex < matrix[0].length - 1; topBottomIndex++) {
+            connector(matrix[topBottomIndex][0], matrix[topBottomIndex + 1][0], gti);
+            connector(matrix[topBottomIndex][matrix.length - 1], matrix[topBottomIndex + 1][matrix.length - 1], gti);
         }//end for
 
     }//end outlineGrid
@@ -1017,12 +1014,14 @@ public class Graph {
      */
     public ArrayList<GraphTuple> pullFamily(int familyID) {
         ArrayList<GraphTuple> family = new ArrayList<>();
-        for (GraphNode gn : nodes) {
-            for (int i = 0; i < gn.getNumberOfConnections(); i++) {
-                GraphTuple gt = gn.getConnection(i);
-                if (gt.getFamily() == familyID) {
-                    family.add(gt);
-                }//end if
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                for (int k = 0; k < matrix[i][j].getNumberOfConnections(); k++) {
+                    GraphTuple gt = matrix[i][j].getConnection(k);
+                    if (gt.getFamily() == familyID) {
+                        family.add(gt);
+                    }//end if
+                }//end for
             }//end for
         }//end for
         return family;
@@ -1062,15 +1061,17 @@ public class Graph {
         int greenVal = 0;
         int blueVal = 0;
         int numOfConnections = 0;
-        for (GraphNode gn : nodes) {
-            for (int i = 0; i < gn.getNumberOfConnections(); i++) {
-                GraphTuple gt = gn.getConnection(i);
-                if (!gt.isEdge(this)) {
-                    redVal += gt.getRed();
-                    greenVal += gt.getGreen();
-                    blueVal += gt.getBlue();
-                    numOfConnections++;
-                }//end if
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                for (int k = 0; i < matrix[i][j].getNumberOfConnections(); i++) {
+                    GraphTuple gt = matrix[i][j].getConnection(i);
+                    if (!gt.isEdge(this)) {
+                        redVal += gt.getRed();
+                        greenVal += gt.getGreen();
+                        blueVal += gt.getBlue();
+                        numOfConnections++;
+                    }//end if
+                }//end for
             }//end for
         }//end for
         if (numOfConnections > 0) {
@@ -1119,9 +1120,6 @@ public class Graph {
      * @return The {@link ArrayList} containing all {@link GraphNode}s in the
      * graph
      */
-    public ArrayList<GraphNode> getGraphNodes() {
-        return nodes;
-    }//end getGraphNodes
 
     /**
      * Gets a node at specific xy coordinates in the matrix.
