@@ -6,6 +6,7 @@ import graphvisualizer.Graph;
 import graphvisualizer.GraphNode;
 import graphvisualizer.GraphTuple;
 import graphvisualizer.GraphTupleInfo;
+
 import java.awt.*;
 import java.awt.geom.QuadCurve2D;
 import java.awt.image.BufferedImage;
@@ -126,7 +127,7 @@ public class Canvas extends JPanel {
         if (DEBUG) {
             drawDebug(g2);
         }//end if
-        GraphNode firstNode = ref.getGraph().getGraphNodes().get(0);
+        GraphNode firstNode = ref.getGraph().getMatrix()[0][0];
         g2.drawImage(nodeImage, ((int) firstNode.getX() + windowX * (windowMod ? 1 : 0)), ((int) firstNode.getY() + windowY * (windowMod ? 1 : 0)), null);
         g2.drawImage(connnectionsImage, ((int) firstNode.getX() + windowX * (windowMod ? 1 : 0)), ((int) firstNode.getY() + windowY * (windowMod ? 1 : 0)), null);
         g2.drawImage(edgeNodeImage, ((int) firstNode.getX() + windowX * (windowMod ? 1 : 0)), ((int) firstNode.getY() + windowY * (windowMod ? 1 : 0)), null);
@@ -212,21 +213,23 @@ public class Canvas extends JPanel {
         final Graphics2D g3 = nodeImage.createGraphics();
         //end run
         SwingUtilities.invokeLater(() -> {
-            for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
-                GraphNode gn = ref.getGraph().getGraphNodes().get(i);
-                if (!gn.getColor().equals(Color.WHITE)) {
-                    g3.setColor(gn.getColor());
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    GraphNode gn = ref.getGraph().getMatrix()[i][j];
+                    if (!gn.getColor().equals(Color.WHITE)) {
+                        g3.setColor(gn.getColor());
                     /* Food isn't used right now, so this is commented out so as to reduce # of method calls
                      if (gn.getFood() <= 0) {
                      g2.setColor(Color.WHITE);
                      }//end if
                      */
-                    g3.fillRect(gn.x + pointSize / 2, gn.y + pointSize / 2, gn.width, gn.height);
-                }//end if
+                        g3.fillRect(gn.x + pointSize / 2, gn.y + pointSize / 2, gn.width, gn.height);
+                    }//end if
+                }//end for
             }//end for
         });
     }//end drawNodes
-    
+
     private void drawEdgeNodes() {
         int columns = ref.getGraph().getMatrix()[0].length;
         int rows = ref.getGraph().getMatrix().length;
@@ -235,17 +238,19 @@ public class Canvas extends JPanel {
         final Graphics2D g3 = edgeNodeImage.createGraphics();
         //end run
         SwingUtilities.invokeLater(() -> {
-            for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
-                GraphNode gn = ref.getGraph().getGraphNodes().get(i);
-                if (!gn.getColor().equals(Color.WHITE) && ref.getGraph().nodeIsEdge(gn)) {
-                    g3.setColor(gn.getColor());
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    GraphNode gn = ref.getGraph().getMatrix()[i][j];
+                    if (!gn.getColor().equals(Color.WHITE) && ref.getGraph().nodeIsEdge(gn)) {
+                        g3.setColor(gn.getColor());
                     /* Food isn't used right now, so this is commented out so as to reduce # of method calls
                      if (gn.getFood() <= 0) {
                      g2.setColor(Color.WHITE);
                      }//end if
                      */
-                    g3.fillRect(gn.x + pointSize / 2, gn.y + pointSize / 2, gn.width, gn.height);
-                }//end if
+                        g3.fillRect(gn.x + pointSize / 2, gn.y + pointSize / 2, gn.width, gn.height);
+                    }//end if
+                }//end for
             }//end for
         });
     }//end drawNodes
@@ -260,34 +265,36 @@ public class Canvas extends JPanel {
         //end run
         SwingUtilities.invokeLater(() -> {
             ArrayList<GraphTuple> edges = new ArrayList<>();
-            for (int i = 0; i < ref.getGraph().getGraphNodes().size(); i++) {
-                GraphNode gn = ref.getGraph().getGraphNodes().get(i);
-                for (int j = 0; j < gn.getNumberOfConnections(); j++) {
-                    GraphTuple gt = gn.getConnection(j);
-                    if (gt.isEdge(ref.getGraph())){
-                        if(ref.getGraph().nodeIsEdge(gt.getToLocation()) && ref.getGraph().nodeIsEdge(gt.getFromLocation())){
-                            edges.add(gt);
-                        }//end if
-                        else{
-                            if(ref.getShowUserEdges()){
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    GraphNode gn = ref.getGraph().getMatrix()[i][j];
+                    for (int k = 0; k < gn.getNumberOfConnections(); k++) {
+                        GraphTuple gt = gn.getConnection(k);
+                        if (gt.isEdge(ref.getGraph())) {
+                            if (ref.getGraph().nodeIsEdge(gt.getToLocation()) && ref.getGraph().nodeIsEdge(gt.getFromLocation())) {
                                 edges.add(gt);
                             }//end if
+                            else {
+                                if (ref.getShowUserEdges()) {
+                                    edges.add(gt);
+                                }//end if
+                            }//end else
+                            continue;
+                        }//end if
+                        if (!curveEnabled) {
+                            if (!gt.redundant) {
+                                drawLine(g3, gt);
+                            }//end if
+                        }//end if
+                        else {
+                            if (!gt.redundant) {
+                                drawCurve(g3, gt);
+                            }//end if
                         }//end else
-                        continue;
-                    }//end if
-                    if (!curveEnabled) {
-                        if (!gt.redundant) {
-                            drawLine(g3, gt);
-                        }//end if
-                    }//end if
-                    else {
-                        if (!gt.redundant) {
-                            drawCurve(g3, gt);
-                        }//end if
-                    }//end else
+                    }//end for
                 }//end for
             }//end for
-            for(int i = 0; i<edges.size();i++){
+            for (int i = 0; i < edges.size(); i++) {
                 drawLine(g3, edges.get(i));
             }//end for
         });
@@ -295,7 +302,8 @@ public class Canvas extends JPanel {
 
     /**
      * Draws an individual {@link GraphTuple} line.
-     *  @param g2 The {@link Graphics 2D} object to do the drawing
+     *
+     * @param g2 The {@link Graphics 2D} object to do the drawing
      * @param gt The {@link GraphTuple} object to draw
      */
     private void drawLine(Graphics2D g2, GraphTuple gt) {
@@ -310,57 +318,58 @@ public class Canvas extends JPanel {
 
     /**
      * Draws an individual {@link GraphTuple} curve.
-     *  @param g2 The {@link Graphics 2D} object to do the drawing
-     *  @param gt The {@link GraphTuple} object to draw
+     *
+     * @param g2 The {@link Graphics 2D} object to do the drawing
+     * @param gt The {@link GraphTuple} object to draw
      */
     private void drawCurve(Graphics2D g2, GraphTuple gt) {
         g2.setColor(gt.getColor());
-        QuadCurve2D curve = createCurve(gt.getFromLocation(),gt.getToLocation(),gt.getCurveDirection(),gt.getCurveSeverity());
+        QuadCurve2D curve = createCurve(gt.getFromLocation(), gt.getToLocation(), gt.getCurveDirection(), gt.getCurveSeverity());
         g2.draw(curve);
     }//end drawCurve
 
-    private QuadCurve2D createCurve(GraphNode from, GraphNode to, int curveDirection, double curveSeverity){
-        double x1 = (double)from.width/2 + (double)pointSize/2;
-        double x2 = (double)to.width/2 + (double)pointSize/2;
-        double y1 = (double)from.height/2 + (double)pointSize/2;
-        double y2 = (double)to.height/2 + (double)pointSize/2;
+    private QuadCurve2D createCurve(GraphNode from, GraphNode to, int curveDirection, double curveSeverity) {
+        double x1 = (double) from.width / 2 + (double) pointSize / 2;
+        double x2 = (double) to.width / 2 + (double) pointSize / 2;
+        double y1 = (double) from.height / 2 + (double) pointSize / 2;
+        double y2 = (double) to.height / 2 + (double) pointSize / 2;
         double ctrlx = 0;
         double ctrly = 0;
         int xdif = from.getJLoc() - to.getJLoc();
         int ydif = from.getILoc() - from.getJLoc();
-        if(xdif == 0 || ydif == 0){
-            if(xdif == 0){
-                ctrlx = from.x + (curveDirection * curveSeverity * curveMaxSeverity) + ((double)pointSize / 2);
-                ctrly = from.y + ((-1 * ydif) * curveMaxSeverity) + ((double)pointSize / 2);
+        if (xdif == 0 || ydif == 0) {
+            if (xdif == 0) {
+                ctrlx = from.x + (curveDirection * curveSeverity * curveMaxSeverity) + ((double) pointSize / 2);
+                ctrly = from.y + ((-1 * ydif) * curveMaxSeverity) + ((double) pointSize / 2);
             }//end if
-            if(ydif == 0){
-                ctrlx = from.x + ((-1 * xdif) * curveMaxSeverity) + ((double)pointSize / 2);
+            if (ydif == 0) {
+                ctrlx = from.x + ((-1 * xdif) * curveMaxSeverity) + ((double) pointSize / 2);
                 ctrly = from.y + (curveDirection * curveSeverity * curveMaxSeverity) + ((double) pointSize / 2);
             }//end if
         }//end if
-        else{
-            if (xdif == ydif){
-                if(xdif == 1){
-                    ctrlx = from.x - (curveDirection * curveSeverity * curveMaxSeverity) + ((double)pointSize / 2);
+        else {
+            if (xdif == ydif) {
+                if (xdif == 1) {
+                    ctrlx = from.x - (curveDirection * curveSeverity * curveMaxSeverity) + ((double) pointSize / 2);
                     ctrly = from.y + (curveDirection * curveSeverity * curveMaxSeverity) + ((double) pointSize / 2);
                 }//end if
-                else if(xdif == -1){
-                    ctrlx = from.x + (curveDirection * curveSeverity * curveMaxSeverity) + ((double)pointSize / 2);
+                else if (xdif == -1) {
+                    ctrlx = from.x + (curveDirection * curveSeverity * curveMaxSeverity) + ((double) pointSize / 2);
                     ctrly = from.y - (curveDirection * curveSeverity * curveMaxSeverity) + ((double) pointSize / 2);
                 }//end else uf
             }//end if
-            else{
-                if(xdif == 1){
-                    ctrlx = from.x + (curveDirection * curveSeverity * curveMaxSeverity) + ((double)pointSize / 2);
+            else {
+                if (xdif == 1) {
+                    ctrlx = from.x + (curveDirection * curveSeverity * curveMaxSeverity) + ((double) pointSize / 2);
                     ctrly = from.y + (curveDirection * curveSeverity * curveMaxSeverity) + ((double) pointSize / 2);
                 }//end if
-                else{
-                    ctrlx = from.x - (curveDirection * curveSeverity * curveMaxSeverity) + ((double)pointSize / 2);
+                else {
+                    ctrlx = from.x - (curveDirection * curveSeverity * curveMaxSeverity) + ((double) pointSize / 2);
                     ctrly = from.y - (curveDirection * curveSeverity * curveMaxSeverity) + ((double) pointSize / 2);
                 }//end else
             }//end else
         }//end else
-        return new QuadCurve2D.Double(x1,y1,ctrlx,ctrly,x2,y2);
+        return new QuadCurve2D.Double(x1, y1, ctrlx, ctrly, x2, y2);
     }//end QuadCurve2D
 
     /**
@@ -429,11 +438,11 @@ public class Canvas extends JPanel {
     /**
      * Draws a given string in a corner, using an offset.
      *
-     * @param in The string to be drawn
+     * @param in         The string to be drawn
      * @param lineOffset The offset for the line to be drawn
-     * @param corner The corner to draw the string in (1-Top left, 2-top right,
-     * 3-bottom left, 4-bottom right)
-     * @param g The {@link Graphics} object drawing the screen
+     * @param corner     The corner to draw the string in (1-Top left, 2-top right,
+     *                   3-bottom left, 4-bottom right)
+     * @param g          The {@link Graphics} object drawing the screen
      */
     private void drawString(String in, int lineOffset, int corner, Graphics g) {
         g.setColor(Color.black);
@@ -588,7 +597,7 @@ public class Canvas extends JPanel {
      * user-placed line.
      *
      * @param in The {@link GraphTupleInfo} object describing the next
-     * user-placed line
+     *           user-placed line
      */
     public void setGtiStorage(GraphTupleInfo in) {
         gtiStorage = in;
