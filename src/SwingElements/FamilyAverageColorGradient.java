@@ -31,6 +31,7 @@ public class FamilyAverageColorGradient extends javax.swing.JFrame implements Ru
             super.paint(g);
             this.setBackground(Color.WHITE);
             for (int i = 0; i < colors.size(); i++) {
+                //TODO: Don't draw colors that aren't visible
                 g.setColor(colors.get(i));
                 g.fillRect(i * 2 + windowX, 0, 2, 1000);
             }//end for
@@ -72,6 +73,7 @@ public class FamilyAverageColorGradient extends javax.swing.JFrame implements Ru
 
         });
         canvas.addMouseMotionListener(new MouseMotionListener() {
+            //TODO: Disable left motion when at the beginning of the gradient.
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {

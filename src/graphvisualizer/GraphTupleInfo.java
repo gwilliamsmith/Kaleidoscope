@@ -110,6 +110,7 @@ public class GraphTupleInfo {
         depthColorIndex = depthColorIndexIn;
     }//end constructor
 
+    //TODO: Add in ability to tune this
     /**
      * Generates a {@link GraphTupleInfo} containing random line genes
      * @param ref The {@link Base} for which the random {@link GraphTupleInfo} will be created
