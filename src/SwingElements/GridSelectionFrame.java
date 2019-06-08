@@ -201,5 +201,5 @@ public class GridSelectionFrame extends javax.swing.JFrame implements Runnable {
         if (ref != null) {
             this.setVisible(true);
         }//end if
-    }//end run 
+    }//end run
 }//end GridSelectionFrame
