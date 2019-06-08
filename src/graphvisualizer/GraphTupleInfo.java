@@ -132,7 +132,7 @@ public class GraphTupleInfo {
     }//end generateRandomGTI
 
     public String toString(){
-        return (startHealth + "," + mutationPercentage + "," + reproductionClock + "," + cycleBase + "," + edge + "," + color.toString());
+        return (startHealth + "," + mutationPercentage + "," + reproductionClock + "," + cycleBase + "," + edge + ",[" + color.getRed() + "," + color.getGreen() + "," + color.getBlue() + "]");
     }//end toString
 
 }//end GraphTupleInfo class
