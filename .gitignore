@@ -247,3 +247,8 @@ nbproject/genfiles.properties
 nbproject/build-impl.xml
 nbproject/private/private.properties
 .idea/uiDesigner.xml
+out/production/Kaleidoscope/META-INF/Kaleidoscope.kotlin_module
+nbproject/project.properties
+*.properties
+nbproject/genfiles.properties
+nbproject/build-impl.xml
