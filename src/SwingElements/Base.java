@@ -1,21 +1,26 @@
 package SwingElements;
 
-import Listeners.SaveListeners.*;
-import Listeners.PropertiesListeners.*;
-import Listeners.GridOptionListeners.*;
-import Listeners.RightClickListeners.*;
 import EventScheduler.EventScheduler;
 import Listeners.*;
+import Listeners.GridOptionListeners.*;
+import Listeners.PropertiesListeners.CustomLineActionListener;
+import Listeners.PropertiesListeners.PropertiesActionListener;
+import Listeners.PropertiesListeners.SeedColoringBookListener;
+import Listeners.PropertiesListeners.ToggleDragActionListener;
+import Listeners.RightClickListeners.AverageColorActionListener;
+import Listeners.RightClickListeners.DatabaseConnectListener;
+import Listeners.RightClickListeners.LoopActionListener;
+import Listeners.RightClickListeners.StepActionListener;
+import Listeners.SaveListeners.*;
 import graphvisualizer.Graph;
-import graphvisualizer.GraphTuple;
 import graphvisualizer.GraphTupleInfo;
 import graphvisualizer.SettingsFileManipulator;
 
+import javax.swing.*;
 import java.io.File;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import javax.swing.*;
 
 /**
  * Initializes both the {@link Graph} and the {@link Canvas}. Attaches mouse and
