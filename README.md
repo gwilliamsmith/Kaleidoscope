@@ -33,11 +33,11 @@ While running, Kaleidoscope currently runs two important threads:
 
 ## The [Graph](./src/graphvisualizer/Graph.java)
 
-The Graph class is the most important class within Kaleidoscope, being the class that handles the logic running the cellular automaton. Currently, the main parts of the Graph are a matrix of [`GraphNode`](./src/graphvisualizer)s that make up the grid, and a selection of flags that control how the cellular automaton runs. Additionally, there is an ArrayList containing all nodes in the matrix (this will probably change soon, I'm not a huge fan of that structure anymore).
+The Graph class is the most important class within Kaleidoscope, being the class that handles the logic running the cellular automaton. Currently, the main parts of the Graph are a matrix of [`GraphNode`](./src/graphvisualizer)s that make up the grid, and a selection of flags that control how the cellular automaton runs.
 
 ### [`GraphNode`](./src/graphvisualizer/GraphNode.java)s and [`GraphTuple`](./src.graphvisualizer/GraphTuple)s
 
-The nodes that make up the grid and the lines that connect two nodes, `GraphNode`s and `GraphTuple`s are also highly important parts of what makes Kaleidoscope run. While more simple than the `Graph` class, the `GraphNode` and `GraphTuple` classes contain the logic that allows both to be displayed, and to connect to each other. Unlike many graph implementations, in Kaleidoscope, the nodes in the graph are what store connections between nodes. On a `GraphNode`, this is an ArrayList of `GraphTuple`s called `connections`. This structure is used so that it is easy to iterate through `GraphTuple`s connecting to the node in question. 
+The nodes that make up the grid and the lines that connect two nodes, `GraphNode`s and `GraphTuple`s are also highly important parts of what makes Kaleidoscope run. While more simple than the `Graph` class, the `GraphNode` and `GraphTuple` classes contain the logic that allows both to be displayed, and to connect to each other.
 
 `GraphTuple`s serve two purposes: describing the connections between nodes, and generating genetic information to pass down to newly created lines. `GraphTuple`s can be asked to simply provide their current genetic information, or mutated genetic information, which will mutate the lifespan and the color of the child line, if those options are enabled. Additionally, there are `GraphTuple`s that can be designated as edges. Edge `GraphTuple`s do not have their lifespan reduced with each step of the automaton, and also do not reproduce.
 
