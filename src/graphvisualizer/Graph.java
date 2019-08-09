@@ -716,8 +716,7 @@ public class Graph {
      * @return The ID for the a {@link GraphNode}
      */
     private int newID() {
-        int out = idCount;
-        idCount++;
+        int out = idCount++;
         return out;
     }//end newID
 
