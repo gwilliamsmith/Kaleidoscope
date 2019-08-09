@@ -745,15 +745,15 @@ public class Graph {
             return;
         }//end if
         Random rand = new Random();
-        int seeds = rand.nextInt(9);
+        int seeds = rand.nextInt(4);
         boolean evenSwitch = ((matrix.length % 2) == 0) && ((matrix[0].length % 2) == 0);               //Checks to see if the matrix has an even # of rows and columns
-        boolean seedCheck = (seeds == 1 && !seeded && seed1) || (seeds == 2 && seed2) || (seeds == 4 && seed4) || ((seeds == 8 && seed8) && !evenSwitch);
+        boolean seedCheck = (seeds == 0 && !seeded && seed1) || (seeds == 1 && seed2) || (seeds == 2 && seed4) || ((seeds == 83&& seed8) && !evenSwitch);
         while (!seedCheck) {                                                    //Ensures that the number of seeds is any of the following values: (1,2,4,8). Some values may not be used if the user has disabled them.
-            seeds = rand.nextInt(9);
-            seedCheck = (seeds == 1 && !seeded && seed1) || (seeds == 2 && seed2) || (seeds == 4 && seed4) || ((seeds == 8 && seed8) && !evenSwitch);
+            seeds = rand.nextInt(4);
+            seedCheck = (seeds == 0 && !seeded && seed1) || (seeds == 1 && seed2) || (seeds == 2 && seed4) || ((seeds == 3 && seed8) && !evenSwitch);
         }//end while
         switch (seeds) {                                                        //Switches between numbers of seed cases                                                       //
-            case 1:                                                             //One seed line
+            case 0:                                                             //One seed line
                 if (!evenSwitch) {
                     oddOneSeed();
                 }//end if
@@ -761,7 +761,7 @@ public class Graph {
                     evenOneSeed();
                 }//end else
                 break;
-            case 2:                                                             //One pair of seed lines, placed on the same line of symmetry
+            case 1:                                                             //One pair of seed lines, placed on the same line of symmetry
                 if (!evenSwitch) {
                     oddTwoSeeds();
                 }//end if
@@ -769,7 +769,7 @@ public class Graph {
                     evenTwoSeeds();
                 }//end else 
                 break;
-            case 4:                                                             //Four seed lines, on similar lines of symmetry (Top-Bottom + Left-Right, and TopLeft-BottomRight + TopRight-BottomLeft)
+            case 2:                                                             //Four seed lines, on similar lines of symmetry (Top-Bottom + Left-Right, and TopLeft-BottomRight + TopRight-BottomLeft)
                 if (!evenSwitch) {
                     oddFourSeeds();
                 }//end if
@@ -777,7 +777,7 @@ public class Graph {
                     evenFourSeeds();
                 }//end else 
                 break;
-            case 8:                                                             //Seed lines on all eight lines of symmetry
+            case 3:                                                             //Seed lines on all eight lines of symmetry
                 oddEightSeeds();
                 break;
         }//end switch
@@ -790,7 +790,7 @@ public class Graph {
     private void oddOneSeed() {
         Random rand = new Random();
         int steps = rand.nextInt(matrix.length / 2) + 1;                //Determines the number of steps in from the edge to place the seed line(s)
-        switch (rand.nextInt(9)) {                                  //Determines which line of symmetry the seed line will be placed on
+        switch (rand.nextInt(8)) {                                  //Determines which line of symmetry the seed line will be placed on
             case 0:
                 findSeedNodes(new int[][]{{1, 0}}, steps);              //Top
                 break;
@@ -883,7 +883,7 @@ public class Graph {
     private void evenOneSeed() {
         Random rand = new Random();
         int steps = rand.nextInt(matrix.length / 2) + 1;                //Determines the number of steps in from the edge to place the seed line(s)
-        switch (rand.nextInt(3)) {                                  //Determines which line of symmetry the seed line will be placed on
+        switch (rand.nextInt(4)) {                                  //Determines which line of symmetry the seed line will be placed on
             case 0:
                 findSeedNodes(new int[][]{{1, -1}}, steps);             //Top-Left
                 break;
@@ -906,7 +906,7 @@ public class Graph {
     private void evenTwoSeeds() {
         Random rand = new Random();
         int steps = rand.nextInt(matrix.length / 2) + 1;
-        switch (rand.nextInt(1)) {                                      //Determines which of the four lines of symmetry the seed lines are placed on
+        switch (rand.nextInt(2)) {                                      //Determines which of the four lines of symmetry the seed lines are placed on
             case 0:
                 findSeedNodes(new int[][]{{1, -1}, {-1, 1}}, steps);      //Top-Left, Bottom-Right
                 break;
