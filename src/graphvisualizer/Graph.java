@@ -465,7 +465,7 @@ public class Graph {
      */
     private void regularStep(GraphNode temp) {                                  //Maybe come up with a new name for this?
         GraphTuple parent = temp.getParentLine();
-        parent.setReproductionClock(parent.getReproductionClock() - 1);
+        parent.age();
         if (parent.getReproductionClock() <= 0 && !parent.isEdge(this)) {       //Connections should only reproduce if their reproduction clock is 0, and it's not an edge connection
             GraphTupleInfo gti = parent.generateGTI();
             normalRules(temp, gti);                                             //Now that the setup has been done, actually have the connection reproduce
@@ -481,7 +481,7 @@ public class Graph {
      */
     private void mutateStep(GraphNode temp) {
         GraphTuple parent = temp.getParentLine();
-        parent.setReproductionClock(parent.getReproductionClock() - 1);
+        parent.age();
         if (parent.getReproductionClock() <= 0) {
             GraphTupleInfo gti;
             if (MODE == GrowthMode.MUTATION) {
@@ -503,7 +503,7 @@ public class Graph {
      */
     private void depthStep(GraphNode temp) {
         GraphTuple parent = temp.getParentLine();
-        parent.setReproductionClock(parent.getReproductionClock() - 1);
+        parent.age();
         if (parent.getReproductionClock() <= 0 && !parent.isEdge(this)) {       //Connections should only reproduce if their reproduction clock is 0, and it's not an edge connection
             Color newColor = parent.getDepthColor();
             GraphTupleInfo gti = parent.generateGTI();
@@ -521,17 +521,21 @@ public class Graph {
      */
     private void growthStep(GraphNode current) {
         GraphNode next = null;
-        ArrayList<GraphNode> targets = findAdjacentNodes(current);
-        if (!targets.isEmpty()) {
-            next = targets.get(0);
-            for (int i = 0; i < targets.size(); i++) {
-                if (targets.get(i).getFood() > next.getFood()) {
-                    next = targets.get(i);
+        GraphTuple parent = current.getParentLine();
+        parent.age();
+        if(parent.getReproductionClock() <= 0 && !parent.isEdge((this))) {
+            ArrayList<GraphNode> targets = findAdjacentNodes(current);
+            if (!targets.isEmpty()) {
+                next = targets.get(0);
+                for (int i = 0; i < targets.size(); i++) {
+                    if (targets.get(i).getFood() > next.getFood()) {
+                        next = targets.get(i);
+                    }//end if
                 }//end if
             }//end if
-        }//end if
-        if (next != null) {
-            connector(current, next, current.getParentLine().generateGTI());
+            if (next != null) {
+                connector(current, next, current.getParentLine().generateGTI());
+            }//end if
         }//end if
     }//end growthStep
 
