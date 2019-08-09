@@ -81,9 +81,6 @@ public class Canvas extends JPanel {
     }//end constructor
 
     @Override
-    /*
-      Overridden paint method from {@link JPanel).
-     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(producePicture(), 0, 0, null);

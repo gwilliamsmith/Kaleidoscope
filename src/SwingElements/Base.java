@@ -1,18 +1,26 @@
 package SwingElements;
 
-import Listeners.SaveListeners.*;
-import Listeners.PropertiesListeners.*;
-import Listeners.GridOptionListeners.*;
-import Listeners.RightClickListeners.*;
 import EventScheduler.EventScheduler;
 import Listeners.*;
+import Listeners.GridOptionListeners.*;
+import Listeners.PropertiesListeners.CustomLineActionListener;
+import Listeners.PropertiesListeners.PropertiesActionListener;
+import Listeners.PropertiesListeners.SeedColoringBookListener;
+import Listeners.PropertiesListeners.ToggleDragActionListener;
+import Listeners.RightClickListeners.AverageColorActionListener;
+import Listeners.RightClickListeners.DatabaseConnectListener;
+import Listeners.RightClickListeners.LoopActionListener;
+import Listeners.RightClickListeners.StepActionListener;
+import Listeners.SaveListeners.*;
 import graphvisualizer.Graph;
+import graphvisualizer.GraphTupleInfo;
 import graphvisualizer.SettingsFileManipulator;
 
+import javax.swing.*;
 import java.io.File;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Hashtable;
-import javax.swing.*;
 
 /**
  * Initializes both the {@link Graph} and the {@link Canvas}. Attaches mouse and
@@ -21,66 +29,48 @@ import javax.swing.*;
 public class Base extends JFrame {
 
     public static Graph graph;                                                  //The grid
-
-    private Canvas canvas;                                                      //Canvas for displaying stuff
-
-    private Timer timer;                                                        //Takes steps on an interval
+    private static Connection conn = null;                                      //MySQL connection variable
     private final TimerActionListener timerListener;                            //Action listener for the Timer
-
-    private int stepTime;                                                       //Interval for repainting
-
-    private File bookDirectory;                                                 //Folder location where generated pictures are to be saved
-
     private final JPopupMenu rightClickMenu = new JPopupMenu();                 //Right-Click Menu
-
     private final JMenuBar menuBar = new JMenuBar();                            //Menu Bar
-
     private final JMenu gridOptions = new JMenu("Grid Options");                //Menu Bar Items
     private final JMenu propertiesMenu = new JMenu("Properties");
     private final JMenu save = new JMenu("Save");
     private final JMenu schedulerMenu = new JMenu("Scheduler");
     private final JMenu calculateSizeMenu = new JMenu("Calculate grid size");
-
     private final JMenuItem step = new JMenuItem("Step forward");                                           //Right-click button
-    private final JMenuItem loop = new JMenuItem("Run");                                                    //Right-click button   
+    private final JMenuItem loop = new JMenuItem("Run");                                                    //Right-click button
     private final JMenuItem averageColor = new JMenuItem("Show average connection color");                  //Right-click button
-    private final JMenuItem databaseConnect = new JMenuItem("Connect to local database");                   //Right-click button  
-
+    private final JMenuItem databaseConnect = new JMenuItem("Connect to local database");                   //Right-click button
     private final JMenuItem reset = new JMenuItem("Reset grid");                                            //Grid options menu
     private final JMenuItem whiteOutGrid = new JMenuItem("Turn all grid points white");                     //Grid options menu
     private final JMenuItem centerGrid = new JMenuItem("Center the grid on the screen");                    //Grid options menu
     private final JMenuItem resetZoom = new JMenuItem("Reset zoom level");                                  //Grid options menu
     private final JMenuItem toggleUserEdges = new JMenuItem("Hide user-placed edges");
-
     private final JMenuItem propertiesItem = new JMenuItem("Edit properties");                              //Properties menu
     private final JMenuItem customLine = new JMenuItem("Set properties for next line");                     //Properties menu
     private final JMenuItem seedColoringBook = new JMenuItem("Set up starting coloring book seed");         //Properties menu
     private final JMenuItem toggleDrag = new JMenuItem("Disable drag to reposition");                       //Properties menu
-
     private final JMenuItem saveState = new JMenuItem("Save state");                                        //Save menu
     private final JMenuItem loadState = new JMenuItem("Load state");                                        //Save menu
     private final JMenuItem savePicture = new JMenuItem("Save picture");                                    //Save menu
     private final JMenuItem folderSelect = new JMenuItem("Choose folder to save book images in");           //Save menu
     private final JMenuItem toggleSaveInterval = new JMenuItem("Enable saving pictures on interval");      //Save menu
     private final JMenuItem togglePauseInterval = new JMenuItem("Enable pausing after interval picture");   //Save menu
-
     private final DebugMenuForm debugMenu;                                      // The debug menu form
-
-    private JSlider stepTimeSlider;                                             //Slider that can control step timing
-
     private final SettingsFileManipulator settingsManager;                      //Settings manager, reads the persistent settings in from the file
-
-    private AverageColorDisplay averageDisplay = new AverageColorDisplay();     //Displays average color of all lines
-
-    private static Connection conn = null;                                      //MySQL connection variable
-
     public EventScheduler scheduler = new EventScheduler();                     //Event scheduler
-
-    public boolean curveSwitcher = false;                                       //Handles determining if the curve toggle boolean should be switched between steps.
-    
+    private Canvas canvas;                                                      //Canvas for displaying stuff
+    private Timer timer;                                                        //Takes steps on an interval
+    private int stepTime;                                                       //Interval for repainting
+    private File bookDirectory;                                                 //Folder location where generated pictures are to be saved
+    private JSlider stepTimeSlider;                                             //Slider that can control step timing
+    private AverageColorDisplay averageDisplay = new AverageColorDisplay();     //Displays average color of all lines
     private boolean showUserEdges = true;                                       //Determines if user-placed edges should be drawn
     
-    private boolean shiftDown = false;                                        //Is the shift key pressed?
+    private boolean shiftDown = false;                                          //Is the shift key pressed?
+
+    private ArrayList<GraphTupleInfo> customLineHistory = new ArrayList<>();
 
     /**
      * Constructor for Base class. Determines grid dimensions, as well as the
@@ -132,6 +122,15 @@ public class Base extends JFrame {
     }//end constructor
 
     /**
+     * Checks to see if the connection variable has been created.
+     *
+     * @return True if the connection has been set, false if not
+     */
+    public static boolean checkConnection() {
+        return conn == null;
+    }//end checkConnection
+
+    /**
      * Sets up the {@link JSlider} that can control the interval between steps.
      */
     private void initializeStepTimer() {
@@ -139,7 +138,7 @@ public class Base extends JFrame {
         stepTimeSlider.addChangeListener(new SliderChangeListener((this)));
         stepTimeSlider.setMajorTickSpacing(100);
         stepTimeSlider.setMinorTickSpacing(1);
-        Hashtable<Integer, JLabel> sliderLabels = new Hashtable<>();            //This is obsolete, but it only exists to give the slider labels 
+        Hashtable<Integer, JLabel> sliderLabels = new Hashtable<>();            //This is obsolete, but it only exists to give the slider labels
         sliderLabels.put(20, new JLabel("Faster"));
         sliderLabels.put(980, new JLabel("Slower"));
         stepTimeSlider.setLabelTable(sliderLabels);
@@ -356,15 +355,6 @@ public class Base extends JFrame {
     }//end hideDebugMenu
 
     /**
-     * Checks to see if the connection variable has been created.
-     *
-     * @return True if the connection has been set, false if not
-     */
-    public static boolean checkConnection() {
-        return conn == null;
-    }//end checkConnection
-
-    /**
      * Sets the text for the save on interval menu button.
      *
      * @param in The new text for the button
@@ -559,5 +549,19 @@ public class Base extends JFrame {
     public void setShiftDown(boolean in){
         shiftDown = in;
     }//end setShiftDown
+
+    public void addToCustomLineHistory(GraphTupleInfo gti){
+        if(customLineHistory.size() < 2) {
+            customLineHistory.add(gti);
+        }//end if
+        else{
+            customLineHistory.add(gti);
+            customLineHistory.remove(0);
+        }//end else
+    }//end addToLineHistory
+
+    public ArrayList<GraphTupleInfo> getCustomLineHistory(){
+        return customLineHistory;
+    }//end getCustomLineHistory
 
 }//end Base class

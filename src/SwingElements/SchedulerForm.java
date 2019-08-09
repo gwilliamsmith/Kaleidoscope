@@ -42,24 +42,23 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
         RepeatEventList = new javax.swing.JList();
-        javax.swing.JScrollPane jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         SingleEventList = new javax.swing.JList();
-        javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
-        javax.swing.JPanel jPanel4 = new javax.swing.JPanel();
-        javax.swing.JPanel jPanel2 = new javax.swing.JPanel();
-        javax.swing.JLabel eventTypeLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        EventTypeLabel = new javax.swing.JLabel();
         CreateEventComboBox = new javax.swing.JComboBox();
-        javax.swing.JPanel jPanel3 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         CreateEventButton = new javax.swing.JButton();
-        javax.swing.JPanel jPanel5 = new javax.swing.JPanel();
-        javax.swing.JButton deleteSelectedEventsButton = new javax.swing.JButton();
-        javax.swing.JPanel jPanel6 = new javax.swing.JPanel();
-        // Variables declaration - do not modify//GEN-BEGIN:variables
-        javax.swing.JButton clearEventsButton = new javax.swing.JButton();
-        javax.swing.JLabel repeatEventListLabel = new javax.swing.JLabel();
-        javax.swing.JLabel singleEventListLabel = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        DeleteSelectedEventsButton = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        ClearEventsButton = new javax.swing.JButton();
+        RepeatEventListLabel = new javax.swing.JLabel();
+        SingleEventListLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(700, 300));
@@ -90,11 +89,11 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
         jPanel2.setMinimumSize(new java.awt.Dimension(300, 23));
         jPanel2.setPreferredSize(new java.awt.Dimension(300, 23));
 
-        eventTypeLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        eventTypeLabel.setText("Event Type:");
-        eventTypeLabel.setMaximumSize(new java.awt.Dimension(25, 23));
-        eventTypeLabel.setMinimumSize(new java.awt.Dimension(25, 23));
-        eventTypeLabel.setPreferredSize(new java.awt.Dimension(25, 23));
+        EventTypeLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        EventTypeLabel.setText("Event Type:");
+        EventTypeLabel.setMaximumSize(new java.awt.Dimension(25, 23));
+        EventTypeLabel.setMinimumSize(new java.awt.Dimension(25, 23));
+        EventTypeLabel.setPreferredSize(new java.awt.Dimension(25, 23));
 
         CreateEventComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Gather Statistics", "Output Statistics", "Run", "Pause", "Refresh Seed", "Reset Grid", "Place Line", "Generate Random Line", "Save Picture" }));
         CreateEventComboBox.setMaximumSize(new java.awt.Dimension(140, 23));
@@ -104,21 +103,21 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(eventTypeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(CreateEventComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(EventTypeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(CreateEventComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50))
         );
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(eventTypeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CreateEventComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(EventTypeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(CreateEventComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel3.setMaximumSize(new java.awt.Dimension(300, 23));
@@ -129,147 +128,159 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
         CreateEventButton.setMaximumSize(new java.awt.Dimension(200, 23));
         CreateEventButton.setMinimumSize(new java.awt.Dimension(200, 23));
         CreateEventButton.setPreferredSize(new java.awt.Dimension(200, 23));
-        CreateEventButton.addActionListener(this::CreateEventButtonActionPerformed);
+        CreateEventButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateEventButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(CreateEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91))
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(CreateEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(91, 91, 91))
         );
         jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(CreateEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(CreateEventButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel5.setMinimumSize(new java.awt.Dimension(300, 23));
 
-        deleteSelectedEventsButton.setText("Delete Selected Events");
-        deleteSelectedEventsButton.setMaximumSize(new java.awt.Dimension(200, 23));
-        deleteSelectedEventsButton.setMinimumSize(new java.awt.Dimension(200, 23));
-        deleteSelectedEventsButton.setPreferredSize(new java.awt.Dimension(200, 23));
-        deleteSelectedEventsButton.addActionListener(this::DeleteSelectedEventsButtonActionPerformed);
+        DeleteSelectedEventsButton.setText("Delete Selected Events");
+        DeleteSelectedEventsButton.setMaximumSize(new java.awt.Dimension(200, 23));
+        DeleteSelectedEventsButton.setMinimumSize(new java.awt.Dimension(200, 23));
+        DeleteSelectedEventsButton.setPreferredSize(new java.awt.Dimension(200, 23));
+        DeleteSelectedEventsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteSelectedEventsButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(deleteSelectedEventsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(DeleteSelectedEventsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(deleteSelectedEventsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(DeleteSelectedEventsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jPanel6.setMaximumSize(new java.awt.Dimension(300, 23));
         jPanel6.setMinimumSize(new java.awt.Dimension(300, 23));
         jPanel6.setPreferredSize(new java.awt.Dimension(300, 23));
 
-        clearEventsButton.setText("Clear Events");
-        clearEventsButton.setMaximumSize(new java.awt.Dimension(200, 23));
-        clearEventsButton.setMinimumSize(new java.awt.Dimension(200, 23));
-        clearEventsButton.setPreferredSize(new java.awt.Dimension(200, 23));
-        clearEventsButton.addActionListener(this::ClearEventsButtonActionPerformed);
+        ClearEventsButton.setText("Clear Events");
+        ClearEventsButton.setMaximumSize(new java.awt.Dimension(200, 23));
+        ClearEventsButton.setMinimumSize(new java.awt.Dimension(200, 23));
+        ClearEventsButton.setPreferredSize(new java.awt.Dimension(200, 23));
+        ClearEventsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearEventsButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(clearEventsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(ClearEventsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(clearEventsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(ClearEventsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(96, 96, 96))
         );
 
-        repeatEventListLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        repeatEventListLabel.setText("Repeating Events");
+        RepeatEventListLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        RepeatEventListLabel.setText("Repeating Events");
 
-        singleEventListLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        singleEventListLabel.setText("Single Events");
+        SingleEventListLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SingleEventListLabel.setText("Single Events");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(repeatEventListLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(singleEventListLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(RepeatEventListLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(SingleEventListLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(repeatEventListLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(singleEventListLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(RepeatEventListLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(SingleEventListLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, 0)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -285,31 +296,29 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
         String selected = (String) CreateEventComboBox.getSelectedItem();
         createEventForm = null;
         createLineEventForm = null;
-        if (selected != null) {
-            switch (selected) {
-                case "Gather Statistics":
-                case "Output Statistics":
-                case "Run":
-                case "Pause":
-                case "Refresh Grid":
-                case "Refresh Seed":
-                case "Reset Grid":
-                case "Generate Random Line":
-                    createEventForm = new EventDetailsInputForm(this);
-                    createEventForm.run();
-                    break;
-                case "Place Line":
-                    createLineEventForm = new LineEventDetailsInputForm(this, ref);
-                    createLineEventForm.run();
-                    break;
-                case "Save Picture":
-                    savePictureEventDetailsForm = new SavePictureEventDetailsForm(this);
-                    savePictureEventDetailsForm.run();
-                    break;
-                default:
-                    System.err.println("Invalid CreateEventComboBox option selected!");
-            }//end switch
-        }
+        switch (selected) {
+            case "Gather Statistics":
+            case "Output Statistics":
+            case "Run":
+            case "Pause":
+            case "Refresh Grid":
+            case "Refresh Seed":
+            case "Reset Grid":
+            case "Generate Random Line":
+                createEventForm = new EventDetailsInputForm(this);
+                createEventForm.run();
+                break;
+            case "Place Line":
+                createLineEventForm = new LineEventDetailsInputForm(this, ref);
+                createLineEventForm.run();
+                break;
+            case "Save Picture":
+                savePictureEventDetailsForm = new SavePictureEventDetailsForm(this);
+                savePictureEventDetailsForm.run();
+                break;
+            default:
+                System.err.println("Invalid CreateEventComboBox option selected!");
+        }//end switch
     }//GEN-LAST:event_CreateEventButtonActionPerformed
 
     /**
@@ -372,81 +381,80 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
      * this form. Gathers information from the forms created by
      * {@link SchedulerForm#CreateEventButton}.
      */
-    void generateEvent() {
+    public void generateEvent() {
         String selected = (String) CreateEventComboBox.getSelectedItem();
-        if (selected != null) {
-            switch (selected) {
-                case "Gather Statistics":
-                    ref.scheduler.addEvent(new GatherStatisticsEvent(
-                            createEventForm.stepCount,
-                            createEventForm.eventName,
-                            createEventForm.repeat,
-                            ref));
-                    break;
-                case "Output Statistics":
-                    ref.scheduler.addEvent(new OutputStatisticsEvent(
-                            createEventForm.stepCount,
-                            createEventForm.eventName,
-                            createEventForm.repeat,
-                            ref));
-                    break;
-                case "Run":
-                    ref.scheduler.addEvent(new RunEvent(
-                            createEventForm.stepCount,
-                            createEventForm.eventName,
-                            createEventForm.repeat,
-                            ref));
-                    break;
-                case "Pause":
-                    ref.scheduler.addEvent(new PauseEvent(
-                            createEventForm.stepCount,
-                            createEventForm.eventName,
-                            createEventForm.repeat,
-                            ref));
-                    break;
-                case "Refresh Seed":
-                    ref.scheduler.addEvent(new RefreshSeedEvent(
-                            createEventForm.stepCount,
-                            createEventForm.eventName,
-                            createEventForm.repeat,
-                            ref));
-                    break;
-                case "Reset Grid":
-                    ref.scheduler.addEvent(new ResetGridEvent(
-                            createEventForm.stepCount,
-                            createEventForm.eventName,
-                            createEventForm.repeat,
-                            ref));
-                    break;
-                case "Generate Random Line":
-                    ref.scheduler.addEvent(new GenerateRandomLineEvent(
-                            createEventForm.stepCount,
-                            createEventForm.eventName,
-                            createEventForm.repeat,
-                            ref));
-                    break;
-                case "Place Line":
-                    ref.scheduler.addEvent(new PlaceLineEvent(
-                            createLineEventForm.stepCount,
-                            createLineEventForm.eventName,
-                            createLineEventForm.repeat,
-                            ref,
-                            createLineEventForm.selectedNode1,
-                            createLineEventForm.selectedNode2,
-                            createLineEventForm.gti));
-                    break;
-                case "Save Picture":
-                    ref.scheduler.addEvent(new SavePictureEvent(
-                            savePictureEventDetailsForm.stepCount,
-                            savePictureEventDetailsForm.eventName,
-                            savePictureEventDetailsForm.repeat,
-                            ref,
-                            savePictureEventDetailsForm.location));
-                    break;
-                default:
-                    System.err.println("Invalid CreateEventComboBox option selected!");
-            }//end switch
-        }
+        switch (selected) {
+            case "Gather Statistics":
+                ref.scheduler.addEvent(new GatherStatisticsEvent(
+                        createEventForm.stepCount,
+                        createEventForm.eventName,
+                        createEventForm.repeat,
+                        ref));
+                break;
+            case "Output Statistics":
+                ref.scheduler.addEvent(new OutputStatisticsEvent(
+                        createEventForm.stepCount,
+                        createEventForm.eventName,
+                        createEventForm.repeat,
+                        ref));
+                break;
+            case "Run":
+                ref.scheduler.addEvent(new RunEvent(
+                        createEventForm.stepCount,
+                        createEventForm.eventName,
+                        createEventForm.repeat,
+                        ref));
+                break;
+            case "Pause":
+                ref.scheduler.addEvent(new PauseEvent(
+                        createEventForm.stepCount,
+                        createEventForm.eventName,
+                        createEventForm.repeat,
+                        ref));
+                break;
+            case "Refresh Seed":
+                ref.scheduler.addEvent(new RefreshSeedEvent(
+                        createEventForm.stepCount,
+                        createEventForm.eventName,
+                        createEventForm.repeat,
+                        ref));
+                break;
+            case "Reset Grid":
+                ref.scheduler.addEvent(new ResetGridEvent(
+                        createEventForm.stepCount,
+                        createEventForm.eventName,
+                        createEventForm.repeat,
+                        ref));
+                break;
+            //TODO: Add ability to tune this
+            case "Generate Random Line":
+                ref.scheduler.addEvent(new GenerateRandomLineEvent(
+                        createEventForm.stepCount,
+                        createEventForm.eventName,
+                        createEventForm.repeat,
+                        ref));
+                break;
+            case "Place Line":
+                ref.scheduler.addEvent(new PlaceLineEvent(
+                        createLineEventForm.stepCount,
+                        createLineEventForm.eventName,
+                        createLineEventForm.repeat,
+                        ref,
+                        createLineEventForm.selectedNode1,
+                        createLineEventForm.selectedNode2,
+                        createLineEventForm.gti));
+                break;
+            case "Save Picture":
+                ref.scheduler.addEvent(new SavePictureEvent(
+                        savePictureEventDetailsForm.stepCount,
+                        savePictureEventDetailsForm.eventName,
+                        savePictureEventDetailsForm.repeat,
+                        ref,
+                        savePictureEventDetailsForm.location));
+                break;
+            default:
+                System.err.println("Invalid CreateEventComboBox option selected!");
+        }//end switch
         updateRepeatEventList();
         updateSingleEventList();
     }//end generateBaseEvent
@@ -464,7 +472,7 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
      * Looks for repeat events in the {@link EventScheduler}, and displays them
      * in the {@link JList} for repeat events.
      */
-    final void updateRepeatEventList() {
+    public final void updateRepeatEventList() {
         RepeatEventList.setListData(scheduler.getRepeatedEventsDisplayList().toArray());
     }//end updateRepeatEventList
 
@@ -472,17 +480,34 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
      * Looks for single events in the {@link EventScheduler}, and displays them
      * in the {@link JList} for single events.
      */
-    final void updateSingleEventList() {
+    public final void updateSingleEventList() {
         SingleEventList.setListData(scheduler.getSingleEventsDisplayList().toArray());
     }//end updateRepeatEventList
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ClearEventsButton;
     private javax.swing.JButton CreateEventButton;
     private javax.swing.JComboBox CreateEventComboBox;
+    private javax.swing.JButton DeleteSelectedEventsButton;
+    private javax.swing.JLabel EventTypeLabel;
     private javax.swing.JList RepeatEventList;
+    private javax.swing.JLabel RepeatEventListLabel;
     private javax.swing.JList SingleEventList;
+    private javax.swing.JLabel SingleEventListLabel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
     @Override
+    /**
+     * Runs the form.
+     */
     public void run() {
         if (ref != null) {
             setVisible(true);
@@ -507,6 +532,6 @@ public class SchedulerForm extends javax.swing.JFrame implements Runnable {
         else {
             createEventForm = new EventDetailsInputForm(this, e);
             SwingUtilities.invokeLater(createEventForm);
-        }//end else 
+        }//end else
     }//end eventRouter
 }//end SchedulerForm class

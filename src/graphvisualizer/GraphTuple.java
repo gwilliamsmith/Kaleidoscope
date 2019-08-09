@@ -199,6 +199,10 @@ public class GraphTuple {
         health -= decayRate;
     }//end decay
 
+    void age(){
+        reproductionClock--;
+    }//end age
+
     /**
      * Creates new values describing the curve of the connection, and sets
      * curved to true.
